@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>ts中keyof的使用</title>
+      <link href="ts%E4%B8%ADkeyof%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+      <url>ts%E4%B8%ADkeyof%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h2 id="映射类型"><a href="#映射类型" class="headerlink" title="映射类型"></a>映射类型</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getProperty</span>&lt;<span class="title">T</span>, <span class="title">K</span> <span class="title">extends</span> <span class="title">keyof</span> <span class="title">T</span>&gt;(<span class="params">obj: T, key: K</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> obj[key];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person: Person = &#123;</span><br><span class="line">  age: <span class="number">21</span>,</span><br><span class="line">  name: <span class="string">"Tobias"</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// name is a property of person</span></span><br><span class="line"><span class="comment">// --&gt; no error</span></span><br><span class="line"><span class="keyword">const</span> name = getProperty(person, <span class="string">"name"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// gender is not a property of person</span></span><br><span class="line"><span class="comment">// --&gt; error</span></span><br><span class="line"><span class="keyword">const</span> gender = getProperty(person, <span class="string">"gender"</span>);</span><br></pre></td></tr></table></figure><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">type Optional&lt;T&gt; = &#123;</span><br><span class="line">  [K <span class="keyword">in</span> keyof T]?: T[K]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person: Optional&lt;Person&gt; = &#123;</span><br><span class="line">  name: <span class="string">"Tobias"</span></span><br><span class="line">  <span class="comment">// notice how I do not have to specify an age,</span></span><br><span class="line">  <span class="comment">// since age is now of type 'number?' and is therefor optional</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><a href="https://mariusschulz.com/blog/mapped-types-in-typescript#modeling-object-freeze-with-mapped-types" target="_blank" rel="external nofollow noopener noreferrer">映射类型</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> typescript </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>nest中TypeORM的使用</title>
       <link href="nest%E4%B8%ADTypeORM%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
       <url>nest%E4%B8%ADTypeORM%E7%9A%84%E4%BD%BF%E7%94%A8/</url>

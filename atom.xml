@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.wjc66.cn/"/>
-  <updated>2021-03-30T06:41:31.676Z</updated>
+  <updated>2021-04-12T01:43:31.417Z</updated>
   <id>https://www.wjc66.cn/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ts中keyof的使用</title>
+    <link href="https://www.wjc66.cn/ts%E4%B8%ADkeyof%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>https://www.wjc66.cn/ts%E4%B8%ADkeyof%E7%9A%84%E4%BD%BF%E7%94%A8/</id>
+    <published>2021-04-12T01:41:50.000Z</published>
+    <updated>2021-04-12T01:43:31.417Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="映射类型"><a href="#映射类型" class="headerlink" title="映射类型"></a>映射类型</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getProperty</span>&lt;<span class="title">T</span>, <span class="title">K</span> <span class="title">extends</span> <span class="title">keyof</span> <span class="title">T</span>&gt;(<span class="params">obj: T, key: K</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> obj[key];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person: Person = &#123;</span><br><span class="line">  age: <span class="number">21</span>,</span><br><span class="line">  name: <span class="string">"Tobias"</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// name is a property of person</span></span><br><span class="line"><span class="comment">// --&gt; no error</span></span><br><span class="line"><span class="keyword">const</span> name = getProperty(person, <span class="string">"name"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// gender is not a property of person</span></span><br><span class="line"><span class="comment">// --&gt; error</span></span><br><span class="line"><span class="keyword">const</span> gender = getProperty(person, <span class="string">"gender"</span>);</span><br></pre></td></tr></table></figure><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">type Optional&lt;T&gt; = &#123;</span><br><span class="line">  [K <span class="keyword">in</span> keyof T]?: T[K]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person: Optional&lt;Person&gt; = &#123;</span><br><span class="line">  name: <span class="string">"Tobias"</span></span><br><span class="line">  <span class="comment">// notice how I do not have to specify an age,</span></span><br><span class="line">  <span class="comment">// since age is now of type 'number?' and is therefor optional</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><a href="https://mariusschulz.com/blog/mapped-types-in-typescript#modeling-object-freeze-with-mapped-types" target="_blank" rel="external nofollow noopener noreferrer">映射类型</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;映射类型&quot;&gt;&lt;a href=&quot;#映射类型&quot; class=&quot;headerlink&quot; title=&quot;映射类型&quot;&gt;&lt;/a&gt;映射类型&lt;/h2&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;
+      
+    
+    </summary>
+    
+    
+    
+      <category term="typescript" scheme="https://www.wjc66.cn/tags/typescript/"/>
+    
+  </entry>
   
   <entry>
     <title>nest中TypeORM的使用</title>
@@ -508,33 +532,6 @@
     
     
       <category term="docker" scheme="https://www.wjc66.cn/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>sessionStorage和localStorage的使用</title>
-    <link href="https://www.wjc66.cn/sessionStorage%E5%92%8ClocalStorage%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-    <id>https://www.wjc66.cn/sessionStorage%E5%92%8ClocalStorage%E7%9A%84%E4%BD%BF%E7%94%A8/</id>
-    <published>2020-11-23T01:53:06.000Z</published>
-    <updated>2021-03-16T12:34:16.365Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p><code>sessionStorage 浏览器关闭时自动销毁</code></p><p><code>localStorage 存储在浏览器中，无期限</code></p><h2 id="sessionStorage用法-一般用于浏览器刷新缓存vuex"><a href="#sessionStorage用法-一般用于浏览器刷新缓存vuex" class="headerlink" title="sessionStorage用法 (一般用于浏览器刷新缓存vuex)"></a>sessionStorage用法 (一般用于浏览器刷新缓存vuex)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 保存或设置数据到sessionStorage</span><br><span class="line">    sessionStorage.setItem(<span class="string">'key'</span>,<span class="string">'value'</span>)</span><br><span class="line">    </span><br><span class="line">// 获取某个sessionStorage</span><br><span class="line">    sessionStorage.getItem(<span class="string">'key'</span>)</span><br><span class="line">    </span><br><span class="line">// 从sessionStorage删除某个保存的数据</span><br><span class="line">    sessionStorage.removeItem(<span class="string">'key'</span>)</span><br><span class="line">    </span><br><span class="line">// 从sessionStorage删除所有保存的数据</span><br><span class="line">    sessionStorage.clear();</span><br></pre></td></tr></table></figure><h2 id="localStorage用法"><a href="#localStorage用法" class="headerlink" title="localStorage用法"></a>localStorage用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 保存或设置数据到localStorage</span><br><span class="line">    localStorage.setItem(<span class="string">'key'</span>,<span class="string">'value'</span>)</span><br><span class="line">    </span><br><span class="line">// 获取某个localStorage</span><br><span class="line">    localStorage.getItem(<span class="string">'key'</span>)</span><br><span class="line">    </span><br><span class="line">// 从localStorage删除某个保存的数据</span><br><span class="line">    localStorage.removeItem(<span class="string">'key'</span>)</span><br><span class="line">    </span><br><span class="line">// 从localStorage删除所有保存的数据</span><br><span class="line">    localStorage.clear();</span><br></pre></td></tr></table></figure><p>vuex在页面刷新后，store中的状态将被重新初始化，赋值的数据丢失, 所以在页面刷新或离开之前将store中的数据保存到sessionStorage 或 localStorage中，在页面重新加载后再将数据取出，通过vuex的$store.replaceState 将数据替换到store中</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">app.vue:</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">created</span></span> () &#123;</span><br><span class="line"> </span><br><span class="line">     //在页面加载时读取sessionStorage里的状态信息</span><br><span class="line">     <span class="keyword">if</span> (sessionStorage.getItem(<span class="string">"storedata"</span>) ) &#123;</span><br><span class="line">         this.<span class="variable">$store</span>.replaceState(Object.assign(&#123;&#125;, this.<span class="variable">$store</span>.state,JSON.parse(sessionStorage.getItem(<span class="string">"storedata"</span>))))</span><br><span class="line">     &#125;</span><br><span class="line">    //在页面刷新时将vuex里的信息保存到sessionStorage里</span><br><span class="line">    window.addEventListener(<span class="string">"beforeunload"</span>,()=&gt;&#123;</span><br><span class="line">        sessionStorage.setItem(<span class="string">"storedata"</span>,JSON.stringify(this.<span class="variable">$store</span>.state))</span><br><span class="line">    &#125;);     // 兼容iphone手机</span><br><span class="line">    window.addEventListener(<span class="string">"pagehide"</span>,()=&gt;&#123;</span><br><span class="line">         sessionStorage.setItem(<span class="string">"storedata"</span>,JSON.stringify(this.<span class="variable">$store</span>.state))</span><br><span class="line">    &#125;);</span><br><span class="line">   &#125;,</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;区别&quot;&gt;&lt;a href=&quot;#区别&quot; class=&quot;headerlink&quot; title=&quot;区别&quot;&gt;&lt;/a&gt;区别&lt;/h2&gt;&lt;p&gt;&lt;code&gt;sessionStorage 浏览器关闭时自动销毁&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;localStorage 存储在浏览
-      
-    
-    </summary>
-    
-    
-    
-      <category term="vue" scheme="https://www.wjc66.cn/tags/vue/"/>
-    
-      <category term="前端" scheme="https://www.wjc66.cn/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
