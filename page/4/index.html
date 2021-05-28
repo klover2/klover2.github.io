@@ -20,7 +20,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="笔记">
-<meta property="og:url" content="https://www.wjc66.cn/page/4/index.html">
+<meta property="og:url" content="https://blog.wjc66.cn/page/4/index.html">
 <meta property="og:site_name" content="笔记">
 <meta property="article:author" content="w-klover">
 <meta name="twitter:card" content="summary">
@@ -283,7 +283,7 @@
     #homeImgUrl{
       width: 100%;
       height: 460px;
-      background-image: url('https://img-blog.csdnimg.cn/20210325145912216.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center');
+      background-image: url('https://img-blog.csdnimg.cn/20210528105643660.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70');
       background-size: cover;
       /* background-attachment:fixed; */
     }
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">690字</span>
+      <span class="post-count">749字</span>
     </span>
   </span>
 
@@ -381,9 +381,12 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">SELECT json_array_elements(<span class="string">"statusLog"</span>)-&gt;<span class="string">'status'</span> AS status <span class="keyword">from</span> apply WHERE id = <span class="string">'adf7eabf-1230-4378-8789-c81b6ac3af55'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// https://blog.csdn.net/liangrui1988/article/details/54708391?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-2.control&amp;dist_request_id=&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-2.control</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="count-if-使用"><a href="#count-if-使用" class="headerlink" title="count if 使用"></a>count if 使用</h2><p><code>select count(status = &#39;Active&#39; OR null) from account</code></p>
-<h2 id="sun-if-使用"><a href="#sun-if-使用" class="headerlink" title="sun if 使用"></a>sun if 使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select(`cast(<span class="string">"sum"</span> ( CASE q.<span class="string">"status"</span> WHEN <span class="string">'Frozen'</span> THEN 1 ELSE 0 END ) as <span class="built_in">integer</span>)`, <span class="string">'frozenQbitCardCount'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="sun-if-使用"><a href="#sun-if-使用" class="headerlink" title="sun if 使用"></a>sun if 使用</h2><p>语法 <code>case then 条件 then (可以是数据库字段名 | 数字) ELSE 0 END</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select(`cast(<span class="string">"sum"</span> ( CASE q.<span class="string">"status"</span> WHEN <span class="string">'Frozen'</span> THEN 1 ELSE 0 END ) as <span class="built_in">integer</span>)`, <span class="string">'frozenQbitCardCount'</span>)</span><br></pre></td></tr></table></figure>
 
 <p><code>SELECT cast(&quot;sum&quot; ( CASE &quot;status&quot; WHEN &#39;Frozen&#39; THEN 1 ELSE 0 END ) as integer) AS count FROM account</code></p>
+<p><code>SELECT SUM(CASE WHEN type = &#39;QbitCardAccountRechargeQbitCardGroup&#39; THEN &quot;recipientCost&quot; ELSE 0 END) AS money from &quot;Transaction&quot;</code></p>
+<p><code>SELECT count(case when type = &#39;QbitCardAccountRechargeQbitCardGroup&#39; then 1 end) as total from &quot;Transaction&quot;</code></p>
 <h2 id="increment-数据库字段自增（自减一样）"><a href="#increment-数据库字段自增（自减一样）" class="headerlink" title="increment 数据库字段自增（自减一样）"></a>increment 数据库字段自增（自减一样）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">await this.accountExtendRepo</span><br><span class="line">      .createQueryBuilder()</span><br><span class="line">      .update()</span><br><span class="line">      .<span class="built_in">set</span>(&#123;</span><br><span class="line">        qbitCardCountLimit: () =&gt; &#123;</span><br><span class="line">          <span class="built_in">return</span> `<span class="string">"qbitCardCountLimit"</span> + <span class="variable">$&#123;data.qbitCardCountLimit&#125;</span>`;</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;)</span><br><span class="line">      .<span class="built_in">where</span>(&#123;</span><br><span class="line">        accountId: data.subAccountId,</span><br><span class="line">      &#125;)</span><br><span class="line">      .execute();</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE <span class="string">"accountExtend"</span> SET <span class="string">"qbitCardCountLimit"</span> = <span class="string">"qbitCardCountLimit"</span> + 10, <span class="string">"version"</span> = <span class="string">"version"</span> + 1 WHERE <span class="string">"accountId"</span> = <span class="variable">$1</span> -- PARAMETERS: [<span class="string">"cd459ae2-3f4c-4505-a984-d14c2a85c734"</span>]</span><br></pre></td></tr></table></figure>

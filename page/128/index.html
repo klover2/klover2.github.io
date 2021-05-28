@@ -20,7 +20,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="笔记">
-<meta property="og:url" content="https://www.wjc66.cn/page/128/index.html">
+<meta property="og:url" content="https://blog.wjc66.cn/page/128/index.html">
 <meta property="og:site_name" content="笔记">
 <meta property="article:author" content="w-klover">
 <meta name="twitter:card" content="summary">
@@ -283,7 +283,7 @@
     #homeImgUrl{
       width: 100%;
       height: 460px;
-      background-image: url('https://img-blog.csdnimg.cn/20210325145912216.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center');
+      background-image: url('https://img-blog.csdnimg.cn/20210528105643660.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70');
       background-size: cover;
       /* background-attachment:fixed; */
     }
@@ -358,8 +358,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p>环境centos<br>环境要求<br>nodejs（7.6+)<br>mongodb（2.6+）(<a href="https://www.wjc66.cn/docker安装mongo/">docker安装mongo</a>)<br>pm2 (npm i pm2 -g)<br>nginx</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mkdir yapi</span><br><span class="line"><span class="built_in">cd</span> yapi</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/YMFE/yapi.git vendors </span><br><span class="line">cp vendors/config_example.json ./config.json</span><br><span class="line"><span class="built_in">cd</span> vendors</span><br><span class="line">// 解决如下，注意一定要带上--unsafe-perm，否则安装可能不会成功</span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br><span class="line">npm install --production --registry https://registry.npm.taobao.org --unsafe-perm</span><br><span class="line">//安装程序会初始化数据库索引和管理员账号，管理员账号名可在 config.json 配置</span><br><span class="line">// 注意数据库的配置不然 初始化用户失败（对应的数据库账号和密码就是在docker安装mongo中可读写用户）</span><br><span class="line">npm run install-server</span><br><span class="line">// 后台运行yapi，否则关闭窗口后，yapi退出运行</span><br><span class="line">node server/app.js  &gt;/dev/null 2&gt;&amp;1 &amp;</span><br><span class="line">或者 </span><br><span class="line">node server/app.js 启动</span><br><span class="line">// 最好用pm2管理</span><br><span class="line">pm2 start server/app.js --name yapi</span><br></pre></td></tr></table></figure>
+              <p>环境 centos<br>环境要求<br>nodejs（7.6+)<br>mongodb（2.6+）(<a href="https://blog.wjc66.cn/docker安装mongo/">docker 安装 mongo</a>)<br>pm2 (npm i pm2 -g)<br>nginx</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mkdir yapi</span><br><span class="line"><span class="built_in">cd</span> yapi</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/YMFE/yapi.git vendors</span><br><span class="line">cp vendors/config_example.json ./config.json</span><br><span class="line"><span class="built_in">cd</span> vendors</span><br><span class="line">// 解决如下，注意一定要带上--unsafe-perm，否则安装可能不会成功</span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br><span class="line">npm install --production --registry https://registry.npm.taobao.org --unsafe-perm</span><br><span class="line">//安装程序会初始化数据库索引和管理员账号，管理员账号名可在 config.json 配置</span><br><span class="line">// 注意数据库的配置不然 初始化用户失败（对应的数据库账号和密码就是在docker安装mongo中可读写用户）</span><br><span class="line">npm run install-server</span><br><span class="line">// 后台运行yapi，否则关闭窗口后，yapi退出运行</span><br><span class="line">node server/app.js  &gt;/dev/null 2&gt;&amp;1 &amp;</span><br><span class="line">或者</span><br><span class="line">node server/app.js 启动</span><br><span class="line">// 最好用pm2管理</span><br><span class="line">pm2 start server/app.js --name yapi</span><br></pre></td></tr></table></figure>
           
       
     </div>

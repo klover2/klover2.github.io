@@ -15,15 +15,15 @@
 
 
 
-<meta name="description" content="环境centos环境要求nodejs（7.6+)mongodb（2.6+）(docker安装mongo)pm2 (npm i pm2 -g)nginx 1234567891011121314151617mkdir yapicd yapigit clone https:&#x2F;&#x2F;github.com&#x2F;YMFE&#x2F;yapi.git vendors cp vendors&#x2F;config_example.json">
+<meta name="description" content="环境 centos环境要求nodejs（7.6+)mongodb（2.6+）(docker 安装 mongo)pm2 (npm i pm2 -g)nginx 1234567891011121314151617mkdir yapicd yapigit clone https:&#x2F;&#x2F;github.com&#x2F;YMFE&#x2F;yapi.git vendorscp vendors&#x2F;config_example.jso">
 <meta property="og:type" content="article">
 <meta property="og:title" content="搭建yapi服务">
-<meta property="og:url" content="https://www.wjc66.cn/%E6%90%AD%E5%BB%BAyapi%E6%9C%8D%E5%8A%A1/index.html">
+<meta property="og:url" content="https://blog.wjc66.cn/%E6%90%AD%E5%BB%BAyapi%E6%9C%8D%E5%8A%A1/index.html">
 <meta property="og:site_name" content="笔记">
-<meta property="og:description" content="环境centos环境要求nodejs（7.6+)mongodb（2.6+）(docker安装mongo)pm2 (npm i pm2 -g)nginx 1234567891011121314151617mkdir yapicd yapigit clone https:&#x2F;&#x2F;github.com&#x2F;YMFE&#x2F;yapi.git vendors cp vendors&#x2F;config_example.json">
+<meta property="og:description" content="环境 centos环境要求nodejs（7.6+)mongodb（2.6+）(docker 安装 mongo)pm2 (npm i pm2 -g)nginx 1234567891011121314151617mkdir yapicd yapigit clone https:&#x2F;&#x2F;github.com&#x2F;YMFE&#x2F;yapi.git vendorscp vendors&#x2F;config_example.jso">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2020042214012683.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70">
 <meta property="article:published_time" content="2020-04-23T05:20:34.000Z">
-<meta property="article:modified_time" content="2021-03-16T12:34:16.330Z">
+<meta property="article:modified_time" content="2021-05-28T02:54:21.160Z">
 <meta property="article:author" content="w-klover">
 <meta property="article:tag" content="yapi">
 <meta name="twitter:card" content="summary">
@@ -353,14 +353,15 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>环境centos<br>环境要求<br>nodejs（7.6+)<br>mongodb（2.6+）(<a href="https://www.wjc66.cn/docker安装mongo/">docker安装mongo</a>)<br>pm2 (npm i pm2 -g)<br>nginx</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mkdir yapi</span><br><span class="line"><span class="built_in">cd</span> yapi</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/YMFE/yapi.git vendors </span><br><span class="line">cp vendors/config_example.json ./config.json</span><br><span class="line"><span class="built_in">cd</span> vendors</span><br><span class="line">// 解决如下，注意一定要带上--unsafe-perm，否则安装可能不会成功</span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br><span class="line">npm install --production --registry https://registry.npm.taobao.org --unsafe-perm</span><br><span class="line">//安装程序会初始化数据库索引和管理员账号，管理员账号名可在 config.json 配置</span><br><span class="line">// 注意数据库的配置不然 初始化用户失败（对应的数据库账号和密码就是在docker安装mongo中可读写用户）</span><br><span class="line">npm run install-server</span><br><span class="line">// 后台运行yapi，否则关闭窗口后，yapi退出运行</span><br><span class="line">node server/app.js  &gt;/dev/null 2&gt;&amp;1 &amp;</span><br><span class="line">或者 </span><br><span class="line">node server/app.js 启动</span><br><span class="line">// 最好用pm2管理</span><br><span class="line">pm2 start server/app.js --name yapi</span><br></pre></td></tr></table></figure>
+        <p>环境 centos<br>环境要求<br>nodejs（7.6+)<br>mongodb（2.6+）(<a href="https://blog.wjc66.cn/docker安装mongo/">docker 安装 mongo</a>)<br>pm2 (npm i pm2 -g)<br>nginx</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mkdir yapi</span><br><span class="line"><span class="built_in">cd</span> yapi</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/YMFE/yapi.git vendors</span><br><span class="line">cp vendors/config_example.json ./config.json</span><br><span class="line"><span class="built_in">cd</span> vendors</span><br><span class="line">// 解决如下，注意一定要带上--unsafe-perm，否则安装可能不会成功</span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br><span class="line">npm install --production --registry https://registry.npm.taobao.org --unsafe-perm</span><br><span class="line">//安装程序会初始化数据库索引和管理员账号，管理员账号名可在 config.json 配置</span><br><span class="line">// 注意数据库的配置不然 初始化用户失败（对应的数据库账号和密码就是在docker安装mongo中可读写用户）</span><br><span class="line">npm run install-server</span><br><span class="line">// 后台运行yapi，否则关闭窗口后，yapi退出运行</span><br><span class="line">node server/app.js  &gt;/dev/null 2&gt;&amp;1 &amp;</span><br><span class="line">或者</span><br><span class="line">node server/app.js 启动</span><br><span class="line">// 最好用pm2管理</span><br><span class="line">pm2 start server/app.js --name yapi</span><br></pre></td></tr></table></figure>
+
 <a id="more"></a>
 
-<p>启动后，默认管理员账号名：”<a href="mailto:admin@admin.com" rel="external nofollow noopener noreferrer" target="_blank">admin@admin.com</a>“，密码：”ymfe.org”，这个可以在config.json文件中修改，修改后，重启服务即可。</p>
-<p>访问ip+3000（最好关闭防火墙或者开放3000端口访问）<br>我这里用了代理<br><img src="https://img-blog.csdnimg.cn/2020042214012683.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>修改密码点击右边头像的个人中心修改就好</p>
-<p>yapi的使用<br>具体使用可以参考官方的文档，yapi教程 <a href="https://yapi.ymfe.org/documents/index.html" target="_blank" rel="external nofollow noopener noreferrer">https://yapi.ymfe.org/documents/index.html</a> ，打完收工。</p>
-<p>出现的问题：<br>我用的是nginx 代理，需要放置域名根目录下访问，不然静态文件读取不了</p>
+<p>启动后，默认管理员账号名：”<a href="mailto:admin@admin.com" rel="external nofollow noopener noreferrer" target="_blank">admin@admin.com</a>“，密码：”ymfe.org”，这个可以在 config.json 文件中修改，修改后，重启服务即可。</p>
+<p>访问 ip+3000（最好关闭防火墙或者开放 3000 端口访问）<br>我这里用了代理<br><img src="https://img-blog.csdnimg.cn/2020042214012683.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>修改密码点击右边头像的个人中心修改就好</p>
+<p>yapi 的使用<br>具体使用可以参考官方的文档，yapi 教程 <a href="https://yapi.ymfe.org/documents/index.html" target="_blank" rel="external nofollow noopener noreferrer">https://yapi.ymfe.org/documents/index.html</a> ，打完收工。</p>
+<p>出现的问题：<br>我用的是 nginx 代理，需要放置域名根目录下访问，不然静态文件读取不了</p>
 
       
     </div>
@@ -372,10 +373,10 @@
         <p><span>本文标题:</span><a href="/%E6%90%AD%E5%BB%BAyapi%E6%9C%8D%E5%8A%A1/">搭建yapi服务</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">w-klover</a></p>
         <p><span>发布时间:</span>2020-04-23, 13:20:34</p>
-        <p><span>最后更新:</span>2021-03-16, 20:34:16</p>
+        <p><span>最后更新:</span>2021-05-28, 10:54:21</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/%E6%90%AD%E5%BB%BAyapi%E6%9C%8D%E5%8A%A1/" title="搭建yapi服务">https://www.wjc66.cn/%E6%90%AD%E5%BB%BAyapi%E6%9C%8D%E5%8A%A1/</a>
-            <span class="copy-path" data-clipboard-text="原文: https://www.wjc66.cn/%E6%90%AD%E5%BB%BAyapi%E6%9C%8D%E5%8A%A1/　　作者: w-klover" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/%E6%90%AD%E5%BB%BAyapi%E6%9C%8D%E5%8A%A1/" title="搭建yapi服务">https://blog.wjc66.cn/%E6%90%AD%E5%BB%BAyapi%E6%9C%8D%E5%8A%A1/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://blog.wjc66.cn/%E6%90%AD%E5%BB%BAyapi%E6%9C%8D%E5%8A%A1/　　作者: w-klover" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <!-- <p>

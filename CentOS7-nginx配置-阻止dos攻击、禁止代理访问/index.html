@@ -18,7 +18,7 @@
 <meta name="description" content="如何设置能限制某个IP某一时间段的访问次数是一个让人头疼的问题，特别面对恶意的ddos攻击的时候。其中CC攻击（Challenge Collapsar）是DDOS（分布式拒绝服务）的一种，也是一种常见的网站攻击方法，攻击者通过代理服务器或者肉鸡向向受害主机不停地发大量数据包，造成对方服务器资源耗尽，一直到宕机崩溃。cc攻击一般就是使用有限的ip数对服务器频繁发送数据来达到攻击的目的，nginx可以">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS7-nginx配置,阻止dos攻击、禁止代理访问">
-<meta property="og:url" content="https://www.wjc66.cn/CentOS7-nginx%E9%85%8D%E7%BD%AE-%E9%98%BB%E6%AD%A2dos%E6%94%BB%E5%87%BB%E3%80%81%E7%A6%81%E6%AD%A2%E4%BB%A3%E7%90%86%E8%AE%BF%E9%97%AE/index.html">
+<meta property="og:url" content="https://blog.wjc66.cn/CentOS7-nginx%E9%85%8D%E7%BD%AE-%E9%98%BB%E6%AD%A2dos%E6%94%BB%E5%87%BB%E3%80%81%E7%A6%81%E6%AD%A2%E4%BB%A3%E7%90%86%E8%AE%BF%E9%97%AE/index.html">
 <meta property="og:site_name" content="笔记">
 <meta property="og:description" content="如何设置能限制某个IP某一时间段的访问次数是一个让人头疼的问题，特别面对恶意的ddos攻击的时候。其中CC攻击（Challenge Collapsar）是DDOS（分布式拒绝服务）的一种，也是一种常见的网站攻击方法，攻击者通过代理服务器或者肉鸡向向受害主机不停地发大量数据包，造成对方服务器资源耗尽，一直到宕机崩溃。cc攻击一般就是使用有限的ip数对服务器频繁发送数据来达到攻击的目的，nginx可以">
 <meta property="article:published_time" content="2020-10-09T03:02:07.000Z">
@@ -376,8 +376,8 @@
         <p><span>发布时间:</span>2020-10-09, 11:02:07</p>
         <p><span>最后更新:</span>2021-03-16, 20:34:16</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/CentOS7-nginx%E9%85%8D%E7%BD%AE-%E9%98%BB%E6%AD%A2dos%E6%94%BB%E5%87%BB%E3%80%81%E7%A6%81%E6%AD%A2%E4%BB%A3%E7%90%86%E8%AE%BF%E9%97%AE/" title="CentOS7-nginx配置,阻止dos攻击、禁止代理访问">https://www.wjc66.cn/CentOS7-nginx%E9%85%8D%E7%BD%AE-%E9%98%BB%E6%AD%A2dos%E6%94%BB%E5%87%BB%E3%80%81%E7%A6%81%E6%AD%A2%E4%BB%A3%E7%90%86%E8%AE%BF%E9%97%AE/</a>
-            <span class="copy-path" data-clipboard-text="原文: https://www.wjc66.cn/CentOS7-nginx%E9%85%8D%E7%BD%AE-%E9%98%BB%E6%AD%A2dos%E6%94%BB%E5%87%BB%E3%80%81%E7%A6%81%E6%AD%A2%E4%BB%A3%E7%90%86%E8%AE%BF%E9%97%AE/　　作者: w-klover" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/CentOS7-nginx%E9%85%8D%E7%BD%AE-%E9%98%BB%E6%AD%A2dos%E6%94%BB%E5%87%BB%E3%80%81%E7%A6%81%E6%AD%A2%E4%BB%A3%E7%90%86%E8%AE%BF%E9%97%AE/" title="CentOS7-nginx配置,阻止dos攻击、禁止代理访问">https://blog.wjc66.cn/CentOS7-nginx%E9%85%8D%E7%BD%AE-%E9%98%BB%E6%AD%A2dos%E6%94%BB%E5%87%BB%E3%80%81%E7%A6%81%E6%AD%A2%E4%BB%A3%E7%90%86%E8%AE%BF%E9%97%AE/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://blog.wjc66.cn/CentOS7-nginx%E9%85%8D%E7%BD%AE-%E9%98%BB%E6%AD%A2dos%E6%94%BB%E5%87%BB%E3%80%81%E7%A6%81%E6%AD%A2%E4%BB%A3%E7%90%86%E8%AE%BF%E9%97%AE/　　作者: w-klover" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <!-- <p>
