@@ -413,6 +413,9 @@
 <li>还可以指定端口启动<br><code>docker run -d -p 5601:5601 --name kibana -e ELASTICSEARCH_HOSTS=http://172.17.0.3:9200 docker.io/kibana:7.9.0</code></li>
 </ol>
 <p>启动特别慢 要等久点</p>
+<h2 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h2><p>运行一段时间 访问 Kibana 显示 Data too large 问题</p>
+<p>解决<br>使用 potman 发送请求<br>put <a href="https://127.0.0.1:9200/_cluster/settings" target="_blank" rel="external nofollow noopener noreferrer">https://127.0.0.1:9200/_cluster/settings</a> (参数格式 application/json)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"persistent"</span> : &#123;</span><br><span class="line">		<span class="string">"indices.breaker.fielddata.limit"</span> : <span class="string">"40%"</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
