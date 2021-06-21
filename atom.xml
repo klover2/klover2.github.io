@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.wjc66.cn/"/>
-  <updated>2021-06-19T12:35:29.730Z</updated>
+  <updated>2021-06-21T12:53:03.531Z</updated>
   <id>https://blog.wjc66.cn/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>linux环境下安装elasticsearch</title>
+    <link href="https://blog.wjc66.cn/linux%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%AE%89%E8%A3%85elasticsearch/"/>
+    <id>https://blog.wjc66.cn/linux%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%AE%89%E8%A3%85elasticsearch/</id>
+    <published>2021-06-21T12:32:57.000Z</published>
+    <updated>2021-06-21T12:53:03.531Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>1.ElasticSearch 下载地址：</p><p><code>https://www.elastic.co/downloads/elasticsearch</code>（最新 es）</p><p>如果你想要下载其他版本请访问<code>https://www.elastic.co/cn/downloads/past-releases#elasticsearch</code></p><p>我这里选择的是 7.12.0<br>进入/home 文件夹下（最好不要放在 root 下，会报错）<br>下载命令<br><code>wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.12.0-linux-x86_64.tar.gz</code></p><a id="more"></a><h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><p><code>tar -xzvf elasticsearch-7.12.0-linux-x86_64.tar.gz</code></p><h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><p>adduser elasticsearch（回车 按照提示输入两次密码，其他的直接回车）</p><h2 id="赋予权限"><a href="#赋予权限" class="headerlink" title="赋予权限"></a>赋予权限</h2><p>chown -R elasticsearch elasticsearch-7.12.0<br>可以使用（ll 命令查看）</p><h2 id="进入新用户"><a href="#进入新用户" class="headerlink" title="进入新用户"></a>进入新用户</h2><p>su elasticsearch</p><h2 id="配置-elasticsearch-自带-jdk"><a href="#配置-elasticsearch-自带-jdk" class="headerlink" title="配置 elasticsearch 自带 jdk"></a>配置 elasticsearch 自带 jdk</h2><p>修改 bin 下 elasticsearch-env 文件<br><code>vim elasticsearch-env</code><br><img src="https://img-blog.csdnimg.cn/20210621204459266.png" alt="在这里插入图片描述"></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">elif</span> [ ! -z <span class="string">"<span class="variable">$JAVA_HOME</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">  <span class="comment"># fallback to JAVA_HOME</span></span><br><span class="line">  <span class="comment"># 取消警告</span></span><br><span class="line">  <span class="comment"># echo "warning: usage of JAVA_HOME is deprecated, use ES_JAVA_HOME" &gt;&amp;2</span></span><br><span class="line">  JAVA=<span class="string">"/home/elasticsearch/elasticsearch-7.12.0/jdk/bin/java"</span></span><br><span class="line">  JAVA_TYPE=<span class="string">"JAVA_HOME"</span></span><br></pre></td></tr></table></figure><p>保存就好</p><h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>在 bin 下<br><code>./elasticsearch</code> 或者<br>后台启动 <code>./elasticsearch -d</code></p><p>检测是否正常启动<br>lsof -i:9200<br>curl 127.0.0.1:9200</p><h2 id="其他配置（可以不用配置）"><a href="#其他配置（可以不用配置）" class="headerlink" title="其他配置（可以不用配置）"></a>其他配置（可以不用配置）</h2><p>配置让外网访问<br>vim config/elasticsearch.yml<br><code>network.host: 0.0.0.0</code></p><h2 id="遇到的错误"><a href="#遇到的错误" class="headerlink" title="遇到的错误"></a>遇到的错误</h2><ol><li><p>could not find java in JAVA_HOME at ￥ ELASTIC_HOME/jdk//bin/java<br>这是 jdk 版本问题</p></li><li><p>Error: Could not find or load main class org.elasticsearch.tools.java_version_checker.JavaVersionCh</p></li></ol><p>把 elasticsearch 目录换到不属于 root 目录的其他目录就行了</p><ol start="3"><li><img src="https://img-blog.csdnimg.cn/20210621203731298.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>不能使用 root 用户启动</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;下载&quot;&gt;&lt;a href=&quot;#下载&quot; class=&quot;headerlink&quot; title=&quot;下载&quot;&gt;&lt;/a&gt;下载&lt;/h2&gt;&lt;p&gt;1.ElasticSearch 下载地址：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;https://www.elastic.co/downloads/elasticsearch&lt;/code&gt;（最新 es）&lt;/p&gt;
+&lt;p&gt;如果你想要下载其他版本请访问&lt;code&gt;https://www.elastic.co/cn/downloads/past-releases#elasticsearch&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;我这里选择的是 7.12.0&lt;br&gt;进入/home 文件夹下（最好不要放在 root 下，会报错）&lt;br&gt;下载命令&lt;br&gt;&lt;code&gt;wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.12.0-linux-x86_64.tar.gz&lt;/code&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="Elasticsearch" scheme="https://blog.wjc66.cn/tags/Elasticsearch/"/>
+    
+  </entry>
   
   <entry>
     <title>windows10环境下安装elasticsearch</title>
@@ -503,32 +527,6 @@
     
     
       <category term="docker" scheme="https://blog.wjc66.cn/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CentOS7配置代理</title>
-    <link href="https://blog.wjc66.cn/CentOS7%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/"/>
-    <id>https://blog.wjc66.cn/CentOS7%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/</id>
-    <published>2020-12-30T06:14:02.000Z</published>
-    <updated>2021-03-16T12:34:16.366Z</updated>
-    
-    <content type="html"><![CDATA[<ol><li><p>通过修改/etc/profile文件来实现</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#打开profile文件</span></span><br><span class="line">vim /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="comment">#添加Proxy代理信息（其中username和password根据需要填写，若无则不填写）</span></span><br><span class="line">http_proxy = http://username:password@proxy_ip:port/</span><br><span class="line">https_proxy = http://username:password@proxy_ip:port/</span><br><span class="line">ftp_proxy = http://username:password@proxy_ip:port/</span><br><span class="line"><span class="built_in">export</span> http_proxy</span><br><span class="line"><span class="built_in">export</span> https_proxy</span><br><span class="line"><span class="built_in">export</span> ftp_proxy</span><br><span class="line"></span><br><span class="line"><span class="comment">#生效配置</span></span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure></li><li><p>yum代理设置</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#打开yum.conf文件</span></span><br><span class="line">vim /etc/yum.conf</span><br><span class="line"></span><br><span class="line"><span class="comment">#添加Proxy代理信息</span></span><br><span class="line">proxy = http://username:password@proxy_ip:port/</span><br></pre></td></tr></table></figure></li><li><p>wget代理设置</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#打开/wgetrc文件</span></span><br><span class="line">vim /etc/wgetrc</span><br><span class="line"></span><br><span class="line"><span class="comment">#修改Proxy代理信息</span></span><br><span class="line">http_proxy=http://username:password@proxy_ip:port/</span><br><span class="line">ftp_proxy=http://username:password@proxy_ip:port/</span><br></pre></td></tr></table></figure></li></ol><p>重启服务器 <code>reboot</code></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;通过修改/etc/profile文件来实现&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span
-      
-    
-    </summary>
-    
-    
-    
-      <category term="翻墙" scheme="https://blog.wjc66.cn/tags/%E7%BF%BB%E5%A2%99/"/>
     
   </entry>
   
