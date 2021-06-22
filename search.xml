@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>linux系统中限制了用户可以watch文件变更的最大数</title>
+      <link href="linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E9%99%90%E5%88%B6%E4%BA%86%E7%94%A8%E6%88%B7%E5%8F%AF%E4%BB%A5watch%E6%96%87%E4%BB%B6%E5%8F%98%E6%9B%B4%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0/"/>
+      <url>linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E9%99%90%E5%88%B6%E4%BA%86%E7%94%A8%E6%88%B7%E5%8F%AF%E4%BB%A5watch%E6%96%87%E4%BB%B6%E5%8F%98%E6%9B%B4%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0/</url>
+      
+        <content type="html"><![CDATA[<p>启动或者编译报<br>System limit for number of file watchers reached</p><p>原因：<br>linux 系统中限制了用户可以 watch 文件变更的最大数，因此需要通过 sysctl.conf 进行更改数值</p><p>临时限额增加可以设置新的指令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo sysctl fs.inotify.max_user_watches = 524288</span><br><span class="line">$ sudo sysctl -p</span><br></pre></td></tr></table></figure><p>永久增加限额</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> fs.inotify.max_user_watches = 524288 | sudo tee -a /etc/sysctl.conf</span><br><span class="line">$ sudo sysctl -p</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>linux环境下安装elasticsearch</title>
       <link href="linux%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%AE%89%E8%A3%85elasticsearch/"/>
       <url>linux%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%AE%89%E8%A3%85elasticsearch/</url>
