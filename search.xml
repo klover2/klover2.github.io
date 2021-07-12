@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>nestjs单元测试</title>
+      <link href="nestjs%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"/>
+      <url>nestjs%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</url>
+      
+        <content type="html"><![CDATA[<h2 id="出现的问题"><a href="#出现的问题" class="headerlink" title="出现的问题"></a>出现的问题</h2><ol><li>You are trying to <code>import</code> a file after the Jest environment has been torn down.<br>或者 TypeError: Right-hand side of ‘instanceof’ is not an object</li></ol><p>在最外层加上 <code>jest.useFakeTimers();</code></p><ol start="2"><li>Timeout - Async callback was not invoked within the 5000 ms timeout specified by jest.setTimeout.Timeout - Async callback was not invoked within the 5000 ms timeout specified by jest.setTimeout.Error:</li></ol><p>超时错误<br>在最外层加上 <code>jest.setTimeout(1000000);</code></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> nestjs </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>nodejs下载文件遇到内存超出导致pm2重启</title>
       <link href="nodejs%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E9%81%87%E5%88%B0%E5%86%85%E5%AD%98%E8%B6%85%E5%87%BA%E5%AF%BC%E8%87%B4pm2%E9%87%8D%E5%90%AF/"/>
       <url>nodejs%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E9%81%87%E5%88%B0%E5%86%85%E5%AD%98%E8%B6%85%E5%87%BA%E5%AF%BC%E8%87%B4pm2%E9%87%8D%E5%90%AF/</url>
