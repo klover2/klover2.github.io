@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="w-klover">
+
+
+
+<meta name="description" content="Session 和 cookie 的区别 cookie保存在客户端，未设置存储时间的cookie,关闭浏览器会话cookie就会被删除；设置了存储时间的cookie会保存在用户设备的磁盘中直到过期，同时cookie在客户端可以伪造，不是十分安全，敏感数据不容易保存。session保存在服务器端，存在在IIS的进程开辟的内存中，而session会过多消耗服务器资源，所以尽量少使用session。 s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP与TCP&#x2F;IP20连问">
+<meta property="og:url" content="https://blog.wjc66.cn/HTTP%E4%B8%8ETCP-IP20%E8%BF%9E%E9%97%AE/index.html">
+<meta property="og:site_name" content="笔记">
+<meta property="og:description" content="Session 和 cookie 的区别 cookie保存在客户端，未设置存储时间的cookie,关闭浏览器会话cookie就会被删除；设置了存储时间的cookie会保存在用户设备的磁盘中直到过期，同时cookie在客户端可以伪造，不是十分安全，敏感数据不容易保存。session保存在服务器端，存在在IIS的进程开辟的内存中，而session会过多消耗服务器资源，所以尽量少使用session。 s">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200728145354260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200728150055240.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200728160415169.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200728170029745.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200728170125543.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200728170114874.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200728172805445.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200728173039585.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2020-07-29T01:48:43.000Z">
+<meta property="article:modified_time" content="2021-09-23T07:24:47.878Z">
+<meta property="article:author" content="w-klover">
+<meta property="article:tag" content="面试题">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200728145354260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="笔记" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/assets/icn.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>HTTP与TCP/IP20连问 | 笔记</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/assets/me.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">w-klover</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">以每一个问题为目标，每解决一个问题给自己及时反馈</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload>
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class="no-result">No results found <i class="fa fa-spinner fa-pulse"></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/guestbook">留言</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" href="https://github.com/klover2" target="_blank" rel="external nofollow noopener noreferrer" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" href="https://blog.csdn.net/weixin_43110609" target="_blank" rel="external nofollow noopener noreferrer" title="CSDN"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitLab/" rel="tag">GitLab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IP%E8%8E%B7%E5%8F%96%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE/" rel="tag">IP获取地理位置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSCode/" rel="tag">VSCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crypto/" rel="tag">crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/decimal-js/" rel="tag">decimal.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/element/" rel="tag">element</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%A4%84%E7%90%86/" rel="tag">get请求参数处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitpages/" rel="tag">gitpages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homebrew/" rel="tag">homebrew</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip/" rel="tag">ip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iview/" rel="tag">iview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iviewui/" rel="tag">iviewui</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jwt/" rel="tag">jwt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka-node/" rel="tag">kafka-node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/" rel="tag">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa-ratelimit/" rel="tag">koa-ratelimit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kue/" rel="tag">kue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongo/" rel="tag">mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nestjs/" rel="tag">nestjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-schedule/" rel="tag">node-schedule</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ocr/" rel="tag">ocr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oss/" rel="tag">oss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/polipo/" rel="tag">polipo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/privoxy/" rel="tag">privoxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/puppeteer/" rel="tag">puppeteer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/request/" rel="tag">request</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rinetd%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" rel="tag">rinetd端口转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sequelize/" rel="tag">sequelize</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/" rel="tag">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/" rel="tag">socket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssr/" rel="tag">ssr</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/superagent/" rel="tag">superagent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/typeorm/" rel="tag">typeorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows10/" rel="tag">windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/" rel="tag">xss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yapi/" rel="tag">yapi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yelee/" rel="tag">yelee</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="tag">位运算符</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%8D%E5%AF%86%E7%99%BB%E9%99%86%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">免密登陆服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%91%E5%B8%83npm%E6%8F%92%E4%BB%B6/" rel="tag">发布npm插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%AF%E5%8A%A8%E9%9D%99%E6%80%81%E8%AE%BF%E9%97%AE%E6%9C%8D%E5%8A%A1/" rel="tag">启动静态访问服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E5%8F%91/" rel="tag">并发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/" rel="tag">微信公众号</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%93%E5%8D%B0%E6%9C%BA/" rel="tag">打印机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA/" rel="tag">磁盘分区</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BA%BF/" rel="tag">网线</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BF%BB%E5%A2%99/" rel="tag">翻墙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%B2%E7%81%AB%E5%A2%99/" rel="tag">防火墙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag">阿里云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE/" rel="tag">高德地图</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/klover2" target="_blank" rel="external nofollow noopener noreferrer">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.csdn.net/weixin_43110609" target="_blank" rel="external nofollow noopener noreferrer">Csdn</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">nodejs 代码搬运工</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">w-klover</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/assets/me.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">w-klover</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">以每一个问题为目标，每解决一个问题给自己及时反馈</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/guestbook">留言</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/klover2" title="GitHub" rel="external nofollow noopener noreferrer"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="https://blog.csdn.net/weixin_43110609" title="CSDN" rel="external nofollow noopener noreferrer"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
+</nav>
+      <div class="body-wrap">
+        
+  
+
+
+<article id="post-HTTP与TCP-IP20连问" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/HTTP%E4%B8%8ETCP-IP20%E8%BF%9E%E9%97%AE/" class="article-date">
+      <time datetime="2020-07-29T01:48:43.000Z" itemprop="datePublished">2020-07-29</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      HTTP与TCP/IP20连问
+    </h1>
+  
+
+        
+          <!-- <a href="/HTTP%E4%B8%8ETCP-IP20%E8%BF%9E%E9%97%AE/" class="archive-article-date">
+      <time datetime="2020-07-29T01:48:43.000Z" itemprop="datePublished">2020-07-29</time>
+</a>
+
+ -->
+          <!-- 需要添加的位置 -->
+          <!-- 开始添加字数统计-->
+          
+            <div style="margin-top:10px;margin-bottom:30px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-keyboard-o"></i>
+      <span class="post-meta-item-text">  字数统计: </span>
+      <span class="post-count">6.1k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="fa fa-hourglass-half"></i>
+      <span class="post-meta-item-text">  阅读时长: </span>
+      <span class="post-count">21分</span>
+    </span>
+  </span>
+</div>
+            
+          <!-- 添加完成 -->
+  
+          
+         
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Session-和-cookie-的区别"><a href="#Session-和-cookie-的区别" class="headerlink" title="Session 和 cookie 的区别"></a>Session 和 cookie 的区别</h2><ol>
+<li>cookie保存在客户端，未设置存储时间的cookie,关闭浏览器会话cookie就会被删除；设置了存储时间的cookie会保存在用户设备的磁盘中直到过期，同时cookie在客户端可以伪造，不是十分安全，敏感数据不容易保存。session保存在服务器端，存在在IIS的进程开辟的内存中，而session会过多消耗服务器资源，所以尽量少使用session。</li>
+<li>session是服务器用来跟踪用户的一种手段，每个session都有一个唯一标识sessionID。当服务器端生成一个session时就会向客户端发送一个cookie保存到客户端。这个cookie保存的是session的sessionID,这样才能保证客户端发起请求后，用户能够与服务器端成千上万的session进行匹配，同时也保证了不同的页面之间传值的正确性。</li>
+<li>存储数据类型不同：session能够存储任意的java对象，cookie只能存储string类型的对象。</li>
+<li>大于10k的数据，不要用到cookies</li>
+</ol>
+<a id="more"></a>
+
+<h2 id="TCP三次握手和四次挥手的流程，断开连接如果只有两次握手，会出现什么。"><a href="#TCP三次握手和四次挥手的流程，断开连接如果只有两次握手，会出现什么。" class="headerlink" title="TCP三次握手和四次挥手的流程，断开连接如果只有两次握手，会出现什么。"></a>TCP三次握手和四次挥手的流程，断开连接如果只有两次握手，会出现什么。</h2><ol>
+<li>TCP三次握手：为了对每次发送的数据量进行跟踪与协商，确保数据段的发送和接收同步，根据所接收到的数据量从而确认数据发送、接收完毕后何时撤销联系，并建立虚连接。<br><code>第一次握手：</code>建立连接时，客户端发送syn（synchronize sequence numbers:同步序列编号）包（seq=j）到服务器，并进入SYN_SEND(请求连接)状态，等待服务器确认。<br><code>第二次握手：</code>服务器接收到syn包，必须确认客户的SYN(ack =j+1)(ack:确认字符，表示发来的数据已确认接收无误)，同时自己也发送一个syn包（seq=k）,即SYN+Ack包，此时服务器进入SYN_RECV(发送ack)状态。<br><code>第三次握手：</code>客户端搜到服务器发送的SYN+ACK包，向服务器发送确认包ACK(ack=k+1),包发送完毕，客户端与服务器进入ESTABLISHED(TCP连接成功)状态，完成三次握手。<br><img src="https://img-blog.csdnimg.cn/20200728145354260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>TCP四次挥手（连接终止协议，性质为终止协议）：<br><code>第一次挥手：</code>TCP客户端发送一个FIN+ACK+SEQ,用来传输关闭客户端到服务器的数据。进入FIN_WAIT1状态。<br><code>第二次挥手：</code>服务器收到FIN,被动发送一个ACK(SEQ+1),进入CLOSE_WAIT状态，客户端收到服务器端发送的ack,进入FIN_WAIT2状态。<br><code>第三次挥手：</code>服务器关闭客户端连接，发送一个FIN+ACK+SEQ给客户端。进入LAST_ACK状态。<br><code>第四次挥手：</code>客户端发送ACK(ACK=SQE序号+1)报文确认，客户端今天TIME_WAIT状态。服务器收到ACK进入close状态。<br><img src="https://img-blog.csdnimg.cn/20200728150055240.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>由于TCP连接时双向的，因此每个方向都需要单独进行关闭，原则是当一方完成它的数据发送任务后就能发一个FIN来终止这个方向的连接。收到一个FIN只意味着这一个方向没有数据流动，一个TCP连接到一个FIN后仍能发送数据。首次执行FIN的一方主动关闭，另外一方则执行被动关闭。当只握手两次时，就只会关闭主动发起的一端，另一个仍能发送数据<h2 id="TIME-WAIT-和-CLOSE-WAIT的区别"><a href="#TIME-WAIT-和-CLOSE-WAIT的区别" class="headerlink" title="TIME_WAIT 和 CLOSE_WAIT的区别"></a>TIME_WAIT 和 CLOSE_WAIT的区别</h2></li>
+<li>CLOSE_WAIT:等待关闭，是被动关闭连接形成的，也是第二次挥手产生的状态。也就是当对方close一个socket后发送FIN报文给自己，系统会回应一个ACK报文给对方，此时进入close_wait状态。接着我们需要考虑的事情是查看是否还有数据发送给对方，如果没有就可以close这个连接，发送FIN给对方，也既关闭连接，所以在close_wait状态时，需要查看自己是否需要关闭连接。</li>
+<li>TIME_WAIT:是主动关闭连接方式形成的，表示收到了对方的FIN报文，并发送ACK报文，等待2MSL(maximum segment lifetime:报文最大生存时间)约4分钟时间进入close状态。主要是防止最后一个ACK丢失，由于TIME_WAIT等待时间较长，因此server端尽量减少关闭。</li>
+</ol>
+<h2 id="为什么需要-TIME-WAIT-状态"><a href="#为什么需要-TIME-WAIT-状态" class="headerlink" title="为什么需要 TIME_WAIT 状态"></a>为什么需要 TIME_WAIT 状态</h2><p>假设最终的ACK丢失，服务器将重新发送FIN，客户端必须维护TCP状态信息以便可以重发最终的ACK,否则发送RST结果server认为发生错误。TCP实现必须靠的是终止两端的连接（双工关闭），client必须进入TIME_WAIT状态，因为最终的ACK可能发送失败。</p>
+<h2 id="为什么-TIME-WAIT-状态要保持-2MSL-这么长时间"><a href="#为什么-TIME-WAIT-状态要保持-2MSL-这么长时间" class="headerlink" title="为什么 TIME_WAIT 状态要保持 2MSL 这么长时间"></a>为什么 TIME_WAIT 状态要保持 2MSL 这么长时间</h2><p>如果TIME_WAIT状态保存时间不足2MSL,第一个连接可以正常关闭，但是有相同的第二个连接出现，第一个连接重复报文到达，就会干扰第二个连接。TCP必须防止某个连接的重复报文在连接终止后出现，所以让TIME_WAIT状态等待时间大于2MSL,连接响应方向上的TCP报文要么完全响应完毕，要么被丢弃。建立第二次连接时，就不会混淆。</p>
+<h2 id="说说你知道的几种-HTTP-响应吗"><a href="#说说你知道的几种-HTTP-响应吗" class="headerlink" title="说说你知道的几种 HTTP 响应吗"></a>说说你知道的几种 HTTP 响应吗</h2><ol>
+<li>200 ok：表示客户端请求成功</li>
+<li>400 Bad Request 语义错误：不能被当前服务器理解。</li>
+<li>401 Unanthorized: 当前请求需要用户验证。</li>
+<li>403 Forbidden: 服务器收到消息，但是拒绝提供服务器。（一般请求oss图片资源会出现，需要配置代理）</li>
+<li>404 Not Found: 请求资源不存在。</li>
+<li>408 Request Timeout:请求超时，客户端没有在服务器预备等待的时间内完成发送。</li>
+<li>500 Internal server Error: 服务器发送不可预期的错误。</li>
+<li>503 server Unavailable: 由于临时的服务器维护或过载，服务器当前不能出来请求，此状态是临时的，可恢复。</li>
+</ol>
+<h2 id="当你用浏览器打开一个链接的时候，计算机做了哪些工作步骤"><a href="#当你用浏览器打开一个链接的时候，计算机做了哪些工作步骤" class="headerlink" title="当你用浏览器打开一个链接的时候，计算机做了哪些工作步骤"></a>当你用浏览器打开一个链接的时候，计算机做了哪些工作步骤</h2><ol>
+<li>解析域名</li>
+<li>发起tcp的3次握手</li>
+<li>建立TCP请求后发起HTTP请求</li>
+<li>服务器响应HTTP请求</li>
+<li>浏览器得到html代码，进行解析和处理json数据，并请求html代码中的静态资源（js, css,图片等）</li>
+<li>浏览器对网页进行渲染</li>
+</ol>
+<h2 id="TCP-IP-如何保证可靠性，说说-TCP-头的结构"><a href="#TCP-IP-如何保证可靠性，说说-TCP-头的结构" class="headerlink" title="TCP/IP 如何保证可靠性，说说 TCP 头的结构"></a>TCP/IP 如何保证可靠性，说说 TCP 头的结构</h2><ol>
+<li><p>三次握手</p>
+</li>
+<li><p>将数据截断为合理的长度。应用数据被分割成TCP认为最为合适发送的数据块</p>
+</li>
+<li><p>超时重发</p>
+</li>
+<li><p>对于收到的请求，给与确认响应</p>
+</li>
+<li><p>如果校验出现数据包错误，则丢弃报文段，不响应</p>
+</li>
+<li><p>对失序数据进行重新拍序，发送于客户端</p>
+</li>
+<li><p>能够丢弃重复数据</p>
+</li>
+<li><p>流量控制。TCP连接的两端都有缓存大小控制，接收端只允许发送自己缓存剩余大小的数据，有效防止缓存溢出</p>
+</li>
+<li><p>拥塞控制。当网络阻塞时，减少数据的发送<br><img src="https://img-blog.csdnimg.cn/20200728160415169.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>【TCP头结构】：</p>
+</li>
+</ol>
+<ul>
+<li><code>源端口（source port）16位的字段</code>，定义了发送这个保文段的主机中应用程序的端口号。</li>
+<li><code>目的端口（destination port）16位的字段</code>，定义了接收这个报文段的主机中应用程序的端口号。</li>
+<li><code>序列号（sequence number）32位的字段</code>，定义了指派给本报文段第一个数据字节的编号。为了保证连接性，要发送的每一个字节都要编号，序号可以告诉终点，报文段中的第一个字节是这个序列中的哪一个字节。在建立连接时，双方使用各自的随机数生成器生产一个初始序号（inital squence number,ISN）,通常两个方向的ISN是不同的。</li>
+<li><code>确认号（acknowledgment nimber） 32位字段</code>定义了报文段的接收方期望从对方接收的字节编码。如果报文段的接收方成功地接收了对方发来的编号为x的字节，那么它就返回x+ 1作为确认号。确认可以和数据捎带一起发送</li>
+<li><code>头部长度（Hlen）这个4个字段</code>指出TCP段的头部长度，以32位字段来衡量，头部长度并不规定，也可以根据选项字段中设置的参数改变</li>
+<li><code>保留（reserved）这个保留字段占用6位</code>，它可以保留提供将来使用</li>
+<li><code>URG紧急数据</code>（urgent data） 这是一条紧急信息</li>
+<li><code>ack</code> 确认已收到段</li>
+<li><code>PSH请求</code>在缓冲区尚未填满时发生消息，注意TCP可以等待缓冲区填满之后在发送段，如果需要立即传送，应用程序必须利用push参数来通知协议</li>
+<li><code>RET</code>申请重置连接</li>
+<li><code>SYN</code>此消息用于建立连接时同步传输数据的计时器</li>
+<li><code>FIN</code>改属性申明发送端以及发送别传输数据的最后一个字节</li>
+<li><code>窗口大小（window）16位字段</code>，这个字段定义的是TCP的窗口大小，以字节为单位。窗口最大长度是65535字节，这个值通常被称为接收窗口（rwnd）,并由接收方来决定。这种情况下，发送方必须是服从接收方的指示</li>
+<li><code>校验和（checksum）16为字段</code>包含的是检验和，检验和是差错控制的手动之一</li>
+<li><code>紧急指针（urgent point）该字段占用2字节</code>，与URG代码位一起使用并且申明及时使存着缓冲区溢出也必须紧急接收的数据末端，因此，如果有些数据需要不按照顺序被送往目的应用程序，那么发送端的应用程序必须利用紧急数据参数通知TCP</li>
+<li><code>选项（option）</code> 改字段会变长且可以忽略，他的最大长度为3个字节，用于解决一下辅助任务，比如选择最大段长，选项可以位于TCP头部的末端，最大长度是8的倍数</li>
+<li><code>填充（padding）</code> 该字段长度不固定，这是一个用于补充头部字段使得它的长度为32位字节的整数倍的一个伪字段9</li>
+</ul>
+<h2 id="如何理解HTTP协议的无状态性"><a href="#如何理解HTTP协议的无状态性" class="headerlink" title="如何理解HTTP协议的无状态性"></a>如何理解HTTP协议的无状态性</h2><p>HTTP协议是无状态的，指的是http协议对于事务处理是没有记忆功能，服务器不知道客户端是什么状态。相当于打开一个服务器上的网页与上一次打开这个服务器上的网页之间没有任何联系。HTTP是一个无状态的面向连接的协议，无状态不代表HTTP不能保持TCP连接，更不能代表HTTP使用的是UDP协议（无连接）</p>
+<h2 id="简述-Http-请求-get-和-post-的区别以及数据包格式"><a href="#简述-Http-请求-get-和-post-的区别以及数据包格式" class="headerlink" title="简述 Http 请求 get 和 post 的区别以及数据包格式"></a>简述 Http 请求 get 和 post 的区别以及数据包格式</h2><ol>
+<li>get 请求可以被缓存，post不行</li>
+<li>get请求会被浏览器历史记录中保存，post不行</li>
+<li>get请求可以收藏到书签中，post不行</li>
+<li>get请求不应在处理敏感数据时候使用，post可以</li>
+<li>get请求有长度限制，post没有</li>
+<li>post不限制提交的数据类型，所有post可以提交文件到服务器</li>
+</ol>
+<p>数据包格式 == TCP头结构</p>
+<table>
+<thead>
+<tr>
+<th>IE</th>
+<th>URL最大限制是2083个字节，Path长度最大是2048字节（Get请求）。</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Firefox</td>
+<td>65536</td>
+</tr>
+<tr>
+<td>Safari</td>
+<td>80000以上</td>
+</tr>
+<tr>
+<td>Opera</td>
+<td>190000字节以上</td>
+</tr>
+<tr>
+<td>Chrome</td>
+<td>8182字节</td>
+</tr>
+<tr>
+<td>Apache Server</td>
+<td>8192字节</td>
+</tr>
+<tr>
+<td>IIS</td>
+<td>16384字节</td>
+</tr>
+<tr>
+<td>Perl HTTP::Daemon</td>
+<td>至少8000字节</td>
+</tr>
+</tbody></table>
+<h2 id="HTTP-有哪些-method"><a href="#HTTP-有哪些-method" class="headerlink" title="HTTP 有哪些 method"></a>HTTP 有哪些 method</h2><ul>
+<li>get:获取资源</li>
+<li>post:表单提交</li>
+<li>HEAD:获取报头信息，HEAD方法与get方法类似，但是并不会返回响应主体</li>
+<li>put和patch:更新资源，put对于后台来说是一个完整的资源对象，他包含了对象的所有字段，patch对于后台来说patch方法的参数只包含我们需要修改的资源对象的字段</li>
+<li>delete:删除资源</li>
+<li>options:获取目标资源所支持的通信选项，使用options方法对服务器发起请求，以检查服务器支持哪些http方法</li>
+</ul>
+<h2 id="简述-HTTP-请求的报文格式"><a href="#简述-HTTP-请求的报文格式" class="headerlink" title="简述 HTTP 请求的报文格式"></a>简述 HTTP 请求的报文格式</h2><p>客户端与服务端通信时传输的内容我们称为报文<br>客户端发送给服务器的称为请求报文，服务器发送给客户端的称为响应报文<br><img src="https://img-blog.csdnimg.cn/20200728170029745.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200728170125543.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20200728170114874.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="HTTP-的长连接是什么意思"><a href="#HTTP-的长连接是什么意思" class="headerlink" title="HTTP 的长连接是什么意思"></a>HTTP 的长连接是什么意思</h2><p>长连接是指客户端与服务端建立连接后，不会因完成了一次请求后，它们之间的连接主动关闭。后续的读写操作会继续使,用这个链接。如果一个连接两小时内都没有任何动作，服务器会向客户端发送一个探测报文段、根据客户端主机相应探测4个客 户端状态，①、客户端正常时，且服务器可达。此时客户端TCP响应正常，服务器将定时器复位。②、客户端已经崩溃，并且关闭或正在重启，客户端不能响应TCP，服务器将无法收到客户端对探测器的响应。服务器总共发送10个这样的探测，每间隔75秒。如服务器没有收到任何响应，他就认为客户端已经关闭并终止连接。③客户端崩溃，但已重启。服务器将对其保持探测响应，这个响应是一个复位，使得服务器终止这个连接。④客户机正常运行，但是服务器,不可达。这种与②类似。<br>由上可以看出，长连接可以省去较多的TCP建立和关闭操作，减少浪费，节约时间。对于频繁请求资源的客户端适合使用,长连接。在长连接的应用场景下，client端一般不会主动关闭连接，当client与server之间的连接一直不关闭，随着客,户端连接越来越多，server会保持过多连接。这时候server端需要采取一些策略，如关闭一些长时间没有请求发生的连接，这样可以避免一些恶意连接导致server端服务受损；如果条件允许则可以限制每个客户端的最大长连接数，这样可以完全避免恶意的客户端拖垮整体后端服务，例如：数据库的连接用长连接。</p>
+<h2 id="HTTPS-的加密方式是什么，讲讲整个加密解密流程"><a href="#HTTPS-的加密方式是什么，讲讲整个加密解密流程" class="headerlink" title="HTTPS 的加密方式是什么，讲讲整个加密解密流程"></a>HTTPS 的加密方式是什么，讲讲整个加密解密流程</h2><p>加密方式：<br>【1】<code>对称密码算法：</code>指加密和解密使用相同的密钥，速度高，可加密内容较大，用来加密会话过程中的消,息，典型算法DES、AES、RC5、IDEA（分组加密)RC4。<br>【2】<code>非对称密码算法：</code>又称为公钥加密算法，是指加密和解密使用不同的密钥，加密速度较慢，但能提供更好的身份认证技术，用来加密对称加密的密钥（公开的密钥用于加密，私有的密钥用于解密）典型的法RSA、 DSA 、DH.<br>【3】<code>散列算法：</code>将文件内容通过此算法加密变成固定长度的值（散列值），这个过程可以使用密钥也可以不使用。这种散列变化是不可逆的，也就是说不能从散列值编程原文，因此散列变化通道常用语验证原文是否被篡改。典型的算法,MD5、SHA BASE64、CRC等<br>注意：SSL协议在建立链路时 ，SSL首先对对称加密的密钥进行对公加密，链路建立好之后，SSL对传输内容使用对称加密.SSL加密过程：参考15问题图7双向认证：单向认证作为了解加密过程简化流程<br><img src="https://img-blog.csdnimg.cn/20200728172805445.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>第三步：客户端使用服务端返回的信息验证服务器的合法性，包括：<br>1）、证书是否过期<br>2）、发布服务器证书的CA是否可靠。<br>3）、返回的公钥是否能正确解开返回证书中的数字签名。<br>4）、服务器证书上的域名是否和服务器实际域名相匹配。</p>
+<h2 id="Http-和-Https-的三次握手有什么区别"><a href="#Http-和-Https-的三次握手有什么区别" class="headerlink" title="Http 和 Https 的三次握手有什么区别"></a>Http 和 Https 的三次握手有什么区别</h2><p>https在http的基础上加入了ssl/TSL协议，ssl依靠证书来验证服务器的身份，并为服务器域浏览器之间的通信加密。下图为https的握手流程<br><img src="https://img-blog.csdnimg.cn/20200728173039585.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="什么是分块传送"><a href="#什么是分块传送" class="headerlink" title="什么是分块传送"></a>什么是分块传送</h2><ol>
+<li>分块传送是超文本协议HTTP中的一种传输机制，允许HTTP由网页服务器发送给客户端应用（通常是网页浏览器）的数据可以分成多个部分。分块传送只在HTTP/1.1中提供。HTTP应答消息中发送的数据是整个发送的，Content-Length消息头字段表示数据的长度。数据的长度很重要，因为客户端需要知道哪里是应答消息的结束，以及后续应答消,息的开始。然而，使用分块传输编码，数据分解成一系列数据块，并以一个或多个块发送，这样服务器可以发送数据而不需要预先知道发送内容的总大小，通常数据块的大小是一致的，但也不总是这种情况。</li>
+<li>对于在发送HTTP头部前，无法计算出Content-Length的HTTP请求及回复（例如WEB服务端产生的动态内,容），可以使用分块传输，使得不至于等待所有数据产<br>生后，再发送带有Content-Length的HTTP头部，而是将已经产生的数据一块一块发送出去。</li>
+<li>HTTP BODY数据成连续的块传输，每块数据的最开始处，指明了该数据块的大小，随后则是CRLF，数据，及结尾,CRLF。可见每块数据<br>都是包含在两个CRLF之间，最后一块数据则是OCRLFCRLF，两个CRLF之间没有任何数据；数据大小以16进制字符串表示（不是二进制）。</li>
+<li>客户端发送请求时，也可以使用分块传输，但是一般客户端发送请求前，不知道服务端是否支持分块传输，所以，客户端可以发送HTTP头部，表明使用分块传输，假如服务端不支持，将会回复411(Length Required）错误，中断请求</li>
+</ol>
+<h2 id="http-1-0、http-1-1和http2-0有什么区别"><a href="#http-1-0、http-1-1和http2-0有什么区别" class="headerlink" title="http/1.0、http/1.1和http2.0有什么区别"></a>http/1.0、http/1.1和http2.0有什么区别</h2><p>【1】http/1.0协议默认使用非持久连接，既在非持久连接下，服务器处理完客户端请求后立即断开TCP连接，服务器不跟踪每个客户，也不记录过去的请求。<br>【2】http/1.1协议默认使用持久连接，既一个TCP可以传输多个WEB对象。同时也可通过配置支持非持久连接。<br>【3】http/1.1增加了Host字段，因为目前一台计算机上有多个虚拟主机共享一个IP地址，请求和响应消息都应该支持Host头信息，且请求消息中没有Host头信息会报（400 Bad Request）。此外服务<br>器应该接受以绝对路径标记的资源请求，而http/1.0中每台服务器都绑定一个唯一的IP，因此，请求消息中的URL没有传递主机名（HostName）<br>【4】增加了新的状态码100（Continue).客户端事先发送一个只带头域的请求，如果服务因权限等拒绝请求，就回送401(Unauthorized）或403；如果服务器接受此请求就回送100，客户端就可以继续发送带实体的完成请求，状态码的使用，在request发送body之前，先发送header 试探一下server，如果接受body，再发送body。可以节省带宽。<br>【5】 http/1.0加入了分块编码（Chunked TransferCoding)，发送方将消息分割成若干个任意大小的数据块，每个数据块在发送时都会附上块的长度，最后一个零长度的块作为消息的结束标志。这种发送<br>允许发送方只缓存一个片段，避免缓存整个片段带来的过载。<br>【6】 http/1.1在http/1.0的基础上加入了一些Cache的新特性，当缓存对象Ag e超过Expire时变为stale对象，Cache不需要直接抛弃stale对象，而是与源服务器进行重新激活（revalidation）<br>【7】http/2.0支持多路复用技术，同一个连接并发处理多个请求（NIO），http/1.1可以通过建立多个TCP解决。<br>【8】 http/1.1不支持Header数据的压缩，http/2.0使用HPACK算法对数据压缩，降体积提速度。<br>【9】 http/2.0请求服务器，服务器推送数据时会额外推送客户需要的资源，客户下次调用不用请求直接调用。提升速度。</p>
+<h2 id="DNS使用的协议（即使用-TCP-也使用-UDP）"><a href="#DNS使用的协议（即使用-TCP-也使用-UDP）" class="headerlink" title="DNS使用的协议（即使用 TCP 也使用 UDP）"></a>DNS使用的协议（即使用 TCP 也使用 UDP）</h2><p>【1】首先了解一下TCP与UDP传送字节的长度限制：UDP报文的最大长度为512字节，而TCP则允许报文长度超过512字节。当DNS查询超过512字节时，协议的TC标志出现删除标志，这时使用TCP发送通常传统的UDP报文一般不会大于512字节。<br>【2】区域传送时使用TCP，主要有一下两点考虑：辅域名服务器会定时（一般3个小时）向主域名服务器进行查询以便了解数据是否有变动。如有变动，则会执行一次区域传送， 进行数据同步。区域传送将使用TCP而不是UDP,因为数据同步传送的数据量比一个请求和应答的数据量要多得多。TCP是一种可靠的连接，保证了数据的准确性。<br>【3]域名解析时使用UDP协议：客户端向DNS服务器查询域名，一般返回的内容都不超过512字节，用UDP传输即可。不用经过TCP三次握手，这样DNS服务器负载更低，响应更快。虽然从理论上说，客户端也可以指向DNS服务器查询的时候使用TCP，但事实上，很多DNS服务器进行配置的时候，仅支持UDP查询包。</p>
+<h2 id="TCP-粘包和拆包产生的原因"><a href="#TCP-粘包和拆包产生的原因" class="headerlink" title="TCP 粘包和拆包产生的原因"></a>TCP 粘包和拆包产生的原因</h2><p>【1】应用程序写入数据的字节大小大于套接字发送缓冲区的大小,<br>【2】进行MSS大小的TCP分段。MSS是最大报文段长度的缩写。MSS是TCP报文段中的数据字段的最大长度，数据字段加上TCP首部才等于整个的TCP报文段。所以MSS并不是TCP报文段的最大长度，而是MSS=TCP报文段长度-TCP首部长度,<br>【3】以太网的payload大于MTU进行IP分片。MTU指：一种通信协议的某一层上面所能通过的最大数据包大小。如果IP层有一个数据包要传，而且数据的长度比链路层的MTU大，那么 IP<br>层就会进行分片，把数据包分成若干片，让每一片都不超过MTU。注意，IP分片可以发生在原始发送端主机上，也可以发生在中间路由器上。</p>
+<p>【解决办法】:<br>【1】消息定长。例如100字节,<br>【2】在包尾部增加回车或者空格符等特殊字符进行分割，典型的如FTP协议,<br>【3】将消息分为消息头和消息尾。<br>【4】其它复杂的协议，如RTMP协议等。</p>
+<h2 id="WEB开发中-Forward-和-Redirected的区别"><a href="#WEB开发中-Forward-和-Redirected的区别" class="headerlink" title="WEB开发中 Forward 和 Redirected的区别"></a>WEB开发中 Forward 和 Redirected的区别</h2><p>【1 】间接请求转发（Redirect)：实际是两次HTTP请求，服务器端在响应第一次请求的时候，让浏览器再向另外一个URL发出请求，从而达到转发的目的。一般用于避免用户的非正常访问。例如：用户在没有登录的情况下访问后台资源 ,Servlet可以将该HTTP请求重定向到登录页面，让用户登录以后再访问。<br>【2】直接请求转发（Forward):客户端和浏览器只发出一次请求，Serlet、HTML、JSP或其它信息资源，由第二个信息资源响应该请求，在请求对象request中，保存的对象对于每个信息资源是共享的。</p>
+<p>来源：<br><a href="https://mparticle.uc.cn/article.html?uc_param_str=frdnsnpfvecpntnwprdssskt&btifl=100&app=uc-iflow&title_type=1&wm_id=49d711aab7094af0a5ae5a2a7de44769&wm_cid=368657040576349184&pagetype=share&client=&uc_share_depth=1" target="_blank" rel="external nofollow noopener noreferrer">腾讯面试HTTP与TCP/IP20连问，你能答出多少？</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/HTTP%E4%B8%8ETCP-IP20%E8%BF%9E%E9%97%AE/">HTTP与TCP/IP20连问</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">w-klover</a></p>
+        <p><span>发布时间:</span>2020-07-29, 09:48:43</p>
+        <p><span>最后更新:</span>2021-09-23, 15:24:47</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/HTTP%E4%B8%8ETCP-IP20%E8%BF%9E%E9%97%AE/" title="HTTP与TCP/IP20连问">https://blog.wjc66.cn/HTTP%E4%B8%8ETCP-IP20%E8%BF%9E%E9%97%AE/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://blog.wjc66.cn/HTTP%E4%B8%8ETCP-IP20%E8%BF%9E%E9%97%AE/　　作者: w-klover" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <!-- <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p> -->
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%8E%88%E6%9D%83%E7%99%BB%E5%BD%95%E7%BD%91%E9%A1%B5%E8%8E%B7%E5%8F%96code/">
+                    微信公众号授权登录网页获取code
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/zip%E5%92%8Cunzip%E5%91%BD%E4%BB%A4/">
+                    zip和unzip命令
+                </a>
+            </div>
+        
+    </nav>
+
+  
+
+  
+    
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Session-和-cookie-的区别"><span class="toc-number">1.</span> <span class="toc-text">Session 和 cookie 的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP三次握手和四次挥手的流程，断开连接如果只有两次握手，会出现什么。"><span class="toc-number">2.</span> <span class="toc-text">TCP三次握手和四次挥手的流程，断开连接如果只有两次握手，会出现什么。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TIME-WAIT-和-CLOSE-WAIT的区别"><span class="toc-number">3.</span> <span class="toc-text">TIME_WAIT 和 CLOSE_WAIT的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么需要-TIME-WAIT-状态"><span class="toc-number">4.</span> <span class="toc-text">为什么需要 TIME_WAIT 状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么-TIME-WAIT-状态要保持-2MSL-这么长时间"><span class="toc-number">5.</span> <span class="toc-text">为什么 TIME_WAIT 状态要保持 2MSL 这么长时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#说说你知道的几种-HTTP-响应吗"><span class="toc-number">6.</span> <span class="toc-text">说说你知道的几种 HTTP 响应吗</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#当你用浏览器打开一个链接的时候，计算机做了哪些工作步骤"><span class="toc-number">7.</span> <span class="toc-text">当你用浏览器打开一个链接的时候，计算机做了哪些工作步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-IP-如何保证可靠性，说说-TCP-头的结构"><span class="toc-number">8.</span> <span class="toc-text">TCP&#x2F;IP 如何保证可靠性，说说 TCP 头的结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何理解HTTP协议的无状态性"><span class="toc-number">9.</span> <span class="toc-text">如何理解HTTP协议的无状态性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#简述-Http-请求-get-和-post-的区别以及数据包格式"><span class="toc-number">10.</span> <span class="toc-text">简述 Http 请求 get 和 post 的区别以及数据包格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-有哪些-method"><span class="toc-number">11.</span> <span class="toc-text">HTTP 有哪些 method</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#简述-HTTP-请求的报文格式"><span class="toc-number">12.</span> <span class="toc-text">简述 HTTP 请求的报文格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-的长连接是什么意思"><span class="toc-number">13.</span> <span class="toc-text">HTTP 的长连接是什么意思</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTPS-的加密方式是什么，讲讲整个加密解密流程"><span class="toc-number">14.</span> <span class="toc-text">HTTPS 的加密方式是什么，讲讲整个加密解密流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Http-和-Https-的三次握手有什么区别"><span class="toc-number">15.</span> <span class="toc-text">Http 和 Https 的三次握手有什么区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是分块传送"><span class="toc-number">16.</span> <span class="toc-text">什么是分块传送</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http-1-0、http-1-1和http2-0有什么区别"><span class="toc-number">17.</span> <span class="toc-text">http&#x2F;1.0、http&#x2F;1.1和http2.0有什么区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS使用的协议（即使用-TCP-也使用-UDP）"><span class="toc-number">18.</span> <span class="toc-text">DNS使用的协议（即使用 TCP 也使用 UDP）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-粘包和拆包产生的原因"><span class="toc-number">19.</span> <span class="toc-text">TCP 粘包和拆包产生的原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WEB开发中-Forward-和-Redirected的区别"><span class="toc-number">20.</span> <span class="toc-text">WEB开发中 Forward 和 Redirected的区别</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"HTTP与TCP/IP20连问　| 笔记　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%8E%88%E6%9D%83%E7%99%BB%E5%BD%95%E7%BD%91%E9%A1%B5%E8%8E%B7%E5%8F%96code/" title="上一篇: 微信公众号授权登录网页获取code">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/zip%E5%92%8Cunzip%E5%91%BD%E4%BB%A4/" title="下一篇: zip和unzip命令">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/%E4%BD%BF%E7%94%A8git%E5%87%BA%E7%8E%B0%E8%BF%87%E7%9A%84%E9%97%AE%E9%A2%98/">使用git出现过的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/%E5%B0%81%E8%A3%85elementui%E7%9A%84table%E7%BB%84%E4%BB%B6/">封装elementui的table组件</a></li><li class="post-list-item"><a class="post-list-link" href="/typescript%E6%B3%9B%E5%9E%8B%E7%9A%84%E4%BD%BF%E7%94%A8/">typescript泛型的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/nestjs%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">nestjs单元测试</a></li><li class="post-list-item"><a class="post-list-link" href="/nodejs%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E9%81%87%E5%88%B0%E5%86%85%E5%AD%98%E8%B6%85%E5%87%BA%E5%AF%BC%E8%87%B4pm2%E9%87%8D%E5%90%AF/">nodejs下载文件遇到内存超出导致pm2重启</a></li><li class="post-list-item"><a class="post-list-link" href="/linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E9%99%90%E5%88%B6%E4%BA%86%E7%94%A8%E6%88%B7%E5%8F%AF%E4%BB%A5watch%E6%96%87%E4%BB%B6%E5%8F%98%E6%9B%B4%E7%9A%84%E6%9C%80%E5%A4%A7%E6%95%B0/">linux系统中限制了用户可以watch文件变更的最大数</a></li><li class="post-list-item"><a class="post-list-link" href="/linux%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%AE%89%E8%A3%85elasticsearch/">linux环境下安装elasticsearch</a></li><li class="post-list-item"><a class="post-list-link" href="/windows10%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%AE%89%E8%A3%85elasticsearch/">windows10环境下安装elasticsearch</a></li><li class="post-list-item"><a class="post-list-link" href="/%E4%BD%BF%E7%94%A8nest%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">使用nest遇到的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/vue-socket-io%E7%9A%84%E4%BD%BF%E7%94%A8/">vue-socket.io的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/docker%E6%90%AD%E5%BB%BAElasticsearch-ik%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D%E5%99%A8-%E5%AE%89%E8%A3%85Kibana%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B7%A5%E5%85%B7/">docker搭建Elasticsearch-ik中文分词器-安装Kibana可视化工具</a></li><li class="post-list-item"><a class="post-list-link" href="/vue-socket-io%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">vue-socket.io跨域问题的解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/typeorm-nestjs%E7%9A%84%E4%BD%BF%E7%94%A8(%E4%BA%8C)/">typeorm+nestjs的使用(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/%E6%89%93%E5%8C%85%E4%B8%8A%E4%BC%A0%E8%87%B3%E9%98%BF%E9%87%8C%E4%BA%91oss/">打包上传至阿里云oss</a></li><li class="post-list-item"><a class="post-list-link" href="/distinct%E5%92%8Cdistinct-on%E7%9A%84%E4%BD%BF%E7%94%A8/">distinct和distinct-on的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/ts%E4%B8%ADkeyof%E7%9A%84%E4%BD%BF%E7%94%A8/">ts中keyof的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/nest%E4%B8%ADTypeORM%E7%9A%84%E4%BD%BF%E7%94%A8(%E4%B8%80)/">nest中TypeORM的使用(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/vue-ts%E9%A1%B9%E7%9B%AEvue-property-decorator%EF%BC%88%E8%A3%85%E9%A5%B0%E5%99%A8%EF%BC%89%E7%94%A8%E6%B3%95/">vue+ts项目vue-property-decorator（装饰器）用法</a></li><li class="post-list-item"><a class="post-list-link" href="/windows10%E5%AE%89%E8%A3%85docker/">windows10安装docker</a></li><li class="post-list-item"><a class="post-list-link" href="/ts%E6%A8%A1%E6%8B%9F%E7%B1%BB%E5%A4%9A%E7%BB%A7%E6%89%BF%E7%B1%BB/">ts模拟类多继承类</a></li><li class="post-list-item"><a class="post-list-link" href="/Linux%E6%9F%A5%E7%9C%8B%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%88%97%E8%A1%A8/">Linux查看设置开机启动的服务列表</a></li><li class="post-list-item"><a class="post-list-link" href="/%E4%BD%BF%E7%94%A8pierced%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">使用pierced进行内网穿透</a></li><li class="post-list-item"><a class="post-list-link" href="/%E5%90%AF%E5%8A%A8%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95http%E6%9C%8D%E5%8A%A1%E5%99%A8/">启动一个简单http服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/redis%E5%AE%9E%E7%8E%B0%E5%95%86%E5%9F%8E%E7%A7%92%E6%9D%80%E6%B4%BB%E5%8A%A8/">redis实现商城秒杀活动</a></li><li class="post-list-item"><a class="post-list-link" href="/IP%E8%8E%B7%E5%8F%96%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE%E7%9A%84API/">IP获取地理位置的API</a></li><li class="post-list-item"><a class="post-list-link" href="/docker%E7%9A%84-var-lib-docker%E7%9B%AE%E5%BD%95%E8%BF%81%E7%A7%BB/">docker的/var/lib/docker目录迁移</a></li><li class="post-list-item"><a class="post-list-link" href="/CentOS7%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/">CentOS7配置代理</a></li><li class="post-list-item"><a class="post-list-link" href="/polipo%E3%80%81privoxy%E5%AE%9E%E7%8E%B0%20Linux%20%E7%B3%BB%E7%BB%9F%E5%85%A8%E5%B1%80%E8%87%AA%E5%8A%A8%E4%BB%A3%E7%90%86/">polipo|privoxy实现 Linux 系统全局|自动代理</a></li><li class="post-list-item"><a class="post-list-link" href="/%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/">代理服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/%E9%87%8D%E8%BD%BD%E5%92%8C%E9%87%8D%E5%86%99%E7%9A%84%E5%8C%BA%E5%88%AB%E5%8F%8A%E5%9C%A8typescript%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/">重载和重写的区别及在typescript中的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/crypto%E5%8A%A0%E5%AF%86%E5%8F%82%E6%95%B0/">crypto加密参数</a></li><li class="post-list-item"><a class="post-list-link" href="/%E8%87%AA%E5%B7%B1%E5%8F%91%E5%B8%83%E7%9A%84NPM%E5%8C%85%E5%9C%A8CNPM%E4%B8%8A%E4%B8%8D%E5%90%8C%E6%AD%A5/">自己发布的NPM包在CNPM上不同步</a></li><li class="post-list-item"><a class="post-list-link" href="/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%A4%9A%E4%BA%BA%E9%9F%B3%E8%A7%86%E9%A2%91%E5%8F%82%E6%95%B0%E5%A4%84%E7%90%86/">微信小程序多人音视频参数处理</a></li><li class="post-list-item"><a class="post-list-link" href="/Docker%E5%AE%B9%E5%99%A8%E5%81%9A%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E6%8A%A5%E9%94%99/">Docker容器做端口映射报错(Error response from daemon)</a></li><li class="post-list-item"><a class="post-list-link" href="/%E8%A7%A3%E5%86%B3Docker%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/">解决Docker拉取镜像慢的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/sessionStorage%E5%92%8ClocalStorage%E7%9A%84%E4%BD%BF%E7%94%A8/">sessionStorage和localStorage的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/postgre%E5%AE%9E%E7%8E%B0%E6%8C%89%E5%B9%B4%E6%9C%88%E6%97%A5%E5%91%A8%E7%BB%9F%E8%AE%A1%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1/">postgre实现按年月日周统计分组统计</a></li><li class="post-list-item"><a class="post-list-link" href="/axios%E5%9B%A0%E4%B8%BA%E8%B7%A8%E5%9F%9F%E5%AF%BC%E8%87%B4%E6%88%96%E8%80%85headers%E4%BF%A1%E6%81%AF%E4%B8%8D%E5%85%A8/">axios因为跨域导致或者headers信息不全</a></li><li class="post-list-item"><a class="post-list-link" href="/nodejs%E4%BD%BF%E7%94%A8crypto%E5%8A%A0%E5%AF%86/">nodejs使用crypto加密</a></li><li class="post-list-item"><a class="post-list-link" href="/%E7%BB%99%E5%B7%B2%E7%BB%8F%E5%AD%98%E5%9C%A8%E7%9A%84%E9%A1%B9%E7%9B%AE%E6%B7%BB%E5%8A%A0git/">给已经存在的项目添加git</a></li><li class="post-list-item"><a class="post-list-link" href="/Nginx%E4%B8%ADroot%E4%B8%8Ealias%E7%9A%84%E7%94%A8%E6%B3%95%E5%8F%8A%E5%8C%BA%E5%88%AB/">Nginx中root与alias的用法及区别</a></li><li class="post-list-item"><a class="post-list-link" href="/CentOS7-nginx%E9%85%8D%E7%BD%AE-%E9%98%BB%E6%AD%A2dos%E6%94%BB%E5%87%BB%E3%80%81%E7%A6%81%E6%AD%A2%E4%BB%A3%E7%90%86%E8%AE%BF%E9%97%AE/">CentOS7-nginx配置,阻止dos攻击、禁止代理访问</a></li><li class="post-list-item"><a class="post-list-link" href="/Nginx%E9%85%8D%E7%BD%AE%E9%99%90%E5%88%B6IP%E8%AE%BF%E9%97%AE/">Nginx配置限制IP访问</a></li><li class="post-list-item"><a class="post-list-link" href="/journal%E4%BB%8B%E7%BB%8D/">journal介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/iview%E6%89%93%E5%8C%85icon%E4%B8%8D%E6%98%BE%E7%A4%BA/">iview打包icon不显示</a></li><li class="post-list-item"><a class="post-list-link" href="/mps%E7%BB%99%E4%B8%8A%E4%BC%A0%E5%88%B0oss%E7%9A%84%E8%A7%86%E9%A2%91%E6%88%AA%E5%8F%96%E5%85%B3%E9%94%AE%E5%B8%A7/">mps给上传到oss的视频截取关键帧</a></li><li class="post-list-item"><a class="post-list-link" href="/OSS%E9%85%8D%E7%BD%AE%E8%B7%A8%E5%9F%9F%E8%AE%BF%E9%97%AE/">OSS配置跨域访问</a></li><li class="post-list-item"><a class="post-list-link" href="/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8F%92%E4%BB%B6/">小程序插件</a></li><li class="post-list-item"><a class="post-list-link" href="/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E3%80%81%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0%E3%80%81H5%E8%B7%B3%E8%BD%AC%E8%B7%AF%E5%BE%84%E7%AE%80%E8%BF%B0/">小程序、公众号文章、H5跳转路径简述</a></li><li class="post-list-item"><a class="post-list-link" href="/%E7%94%B5%E8%84%91%E8%BF%9E%E6%8E%A5%E4%BD%B3%E8%83%BD2520i%E6%89%93%E5%8D%B0%E6%9C%BA/">电脑连接佳能2520i打印机</a></li><li class="post-list-item"><a class="post-list-link" href="/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0/">正则表达式学习</a></li><li class="post-list-item"><a class="post-list-link" href="/crypto%E6%A8%A1%E5%9D%97%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86%E7%A7%81%E9%92%A5%E8%A7%A3%E5%AF%86%E6%8E%A2%E7%B4%A2/">crypto模块公钥加密私钥解密探索</a></li><li class="post-list-item"><a class="post-list-link" href="/%E6%9C%AC%E5%9C%B0%E7%94%B5%E8%84%91%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E6%9C%8D%E5%8A%A1/">本地电脑静态资源访问服务</a></li><li class="post-list-item"><a class="post-list-link" href="/Oh-my-zsh/">Oh-my-zsh</a></li><li class="post-list-item"><a class="post-list-link" href="/mac%E4%B8%8Ahomebrew%E6%9C%80%E6%96%B0%E5%9B%BD%E5%86%85%E6%BA%90%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/">mac上homebrew最新国内源安装方法</a></li><li class="post-list-item"><a class="post-list-link" href="/install%E6%97%B6%E5%87%BA%E7%8E%B0node-gyp%E9%94%99%E8%AF%AF%E6%97%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">install时出现node-gyp错误时解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/%E4%BD%BF%E7%94%A8%E7%A7%98%E9%92%A5%E7%99%BB%E5%BD%95%E6%9C%8D%E5%8A%A1%E5%99%A8/">使用秘钥登录服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/">hexo博客图片处理</a></li><li class="post-list-item"><a class="post-list-link" href="/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%8E%88%E6%9D%83%E7%99%BB%E5%BD%95%E7%BD%91%E9%A1%B5%E8%8E%B7%E5%8F%96code/">微信公众号授权登录网页获取code</a></li><li class="post-list-item"><a class="post-list-link" href="/HTTP%E4%B8%8ETCP-IP20%E8%BF%9E%E9%97%AE/">HTTP与TCP/IP20连问</a></li><li class="post-list-item"><a class="post-list-link" href="/zip%E5%92%8Cunzip%E5%91%BD%E4%BB%A4/">zip和unzip命令</a></li><li class="post-list-item"><a class="post-list-link" href="/%E9%80%9A%E8%BF%87rinetd%E5%AE%9E%E7%8E%B0%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%9D%A5%E8%AE%BF%E9%97%AE%E5%86%85%E7%BD%91%E7%9A%84%E6%9C%8D%E5%8A%A1/">通过rinetd实现端口转发来访问内网的服务</a></li><li class="post-list-item"><a class="post-list-link" href="/JS%E4%B8%AD%EF%BC%88constructor%E5%B1%9E%E6%80%A7%EF%BC%89/">JS中（constructor属性）</a></li><li class="post-list-item"><a class="post-list-link" href="/es6%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8/">es6类的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/linux%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">linux一些基本命令</a></li><li class="post-list-item"><a class="post-list-link" href="/RESTFUL%E7%AE%80%E4%BB%8B%EF%BC%88get%E5%92%8Cpost%E5%8C%BA%E5%88%AB%EF%BC%89/">RESTFUL简介（get和post区别）</a></li><li class="post-list-item"><a class="post-list-link" href="/%E3%80%90node%E4%BD%BF%E7%94%A8%E3%80%91glob%E5%8C%B9%E9%85%8D%E6%A8%A1%E5%BC%8F/">【node使用】glob匹配模式</a></li><li class="post-list-item"><a class="post-list-link" href="/%E9%80%9A%E8%BF%87%E7%AE%A1%E9%81%93%E9%93%BE%E6%8E%A5%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%9D%A2%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93/">通过管道链接远程服务器上面的数据库</a></li><li class="post-list-item"><a class="post-list-link" href="/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3%E6%8E%92%E6%9F%A5/">linux服务器内存不足排查</a></li><li class="post-list-item"><a class="post-list-link" href="/docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/">docker安装与卸载</a></li><li class="post-list-item"><a class="post-list-link" href="/PostgreSQL%E4%B8%ADepoch%E7%9A%84%E7%94%A8%E6%B3%95/">PostgreSQL中epoch的用法</a></li><li class="post-list-item"><a class="post-list-link" href="/postgreSQL%E4%B9%8B%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">postgreSQL之类型转换</a></li><li class="post-list-item"><a class="post-list-link" href="/postgreSQL%E6%97%A5%E6%9C%9F%E5%87%BD%E6%95%B0Extract/">postgreSQL日期函数Extract</a></li><li class="post-list-item"><a class="post-list-link" href="/scp%E7%9A%84%E7%94%A8%E6%B3%95/">scp的用法</a></li><li class="post-list-item"><a class="post-list-link" href="/SSH%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">SSH命令行使用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/sftp%E7%9A%84%E4%BD%BF%E7%94%A8/">sftp的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/%E9%85%8D%E7%BD%AE%E6%99%AE%E9%80%9A%E9%93%BE%E6%8E%A5%E4%BA%8C%E7%BB%B4%E7%A0%81%E8%A7%84%E5%88%99%EF%BC%88%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%89/">配置普通链接二维码规则（小程序）</a></li><li class="post-list-item"><a class="post-list-link" href="/vscode%E6%96%AD%E7%82%B9%E5%90%AF%E5%8A%A8%E6%97%A0%E6%95%88/">vscode断点启动无效</a></li><li class="post-list-item"><a class="post-list-link" href="/docker%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">docker基本命令</a></li><li class="post-list-item"><a class="post-list-link" href="/pm2/">pm2</a></li><li class="post-list-item"><a class="post-list-link" href="/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E8%8F%9C%E5%8D%95%E6%A0%8F/">自定义微信公众号菜单栏</a></li><li class="post-list-item"><a class="post-list-link" href="/nodejs%E6%96%B0%E5%A2%9E%E5%85%B6%E4%BB%96%E7%B1%BB%E5%9E%8B%E6%B0%B8%E4%B9%85%E7%B4%A0%E6%9D%90%EF%BC%88%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%EF%BC%89/">nodejs新增其他类型永久素材（微信公众号）</a></li><li class="post-list-item"><a class="post-list-link" href="/%E6%8E%A5%E5%85%A5%E9%98%BF%E9%87%8C%E4%BA%91Node-js%E6%80%A7%E8%83%BD%E5%B9%B3%E5%8F%B0/">接入阿里云Node.js性能平台</a></li><li class="post-list-item"><a class="post-list-link" href="/vue%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8/">vue的一些方法使用</a></li><li class="post-list-item"><a class="post-list-link" href="/web-view%E4%B8%9A%E5%8A%A1%E5%9F%9F%E5%90%8D%E9%85%8D%E7%BD%AE/">web-view业务域名配置</a></li><li class="post-list-item"><a class="post-list-link" href="/%E5%BE%AE%E4%BF%A1%E5%AE%A2%E6%9C%8D%E6%B6%88%E6%81%AF%E6%88%96%E8%80%85%E4%BA%8B%E4%BB%B6%E6%8E%A8%E9%80%81%E6%88%96%E8%80%85%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/">微信客服消息或者事件推送或者公众号消息推送到服务器配置</a></li><li class="post-list-item"><a class="post-list-link" href="/form%E8%A1%A8%E5%8D%95%E4%B8%AD%E5%9C%A8input%E5%86%85%E5%9B%9E%E8%BD%A6%E5%85%B3%E9%97%AD%E8%87%AA%E5%8A%A8%E8%A7%A6%E5%8F%91button/">form表单中在input内回车关闭自动触发button</a></li><li class="post-list-item"><a class="post-list-link" href="/js%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E5%88%B0%E6%9C%AC%E5%9C%B0/">js下载视频到本地</a></li><li class="post-list-item"><a class="post-list-link" href="/node%E9%98%B2xss%E6%94%BB%E5%87%BB%E6%8F%92%E4%BB%B6-%E7%94%A8%E4%BA%8E%E5%AF%8C%E6%96%87%E6%9C%AC%E8%BF%87%E6%BB%A4%E8%84%9A%E6%9C%AC/">node防xss攻击插件,用于富文本过滤脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/VSCode%E8%BF%9E%E6%8E%A5%E4%B8%8D%E4%BA%86%E6%9C%8D%E5%8A%A1%E5%99%A8/">VSCode连接不了服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/kafka%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">kafka消息队列</a></li><li class="post-list-item"><a class="post-list-link" href="/koa-ratelimit%E8%AE%BF%E9%97%AE%E9%A2%91%E7%8E%87%E9%99%90%E5%88%B6/">koa-ratelimit访问频率限制</a></li><li class="post-list-item"><a class="post-list-link" href="/JWT%E6%95%B0%E6%8D%AE%E5%8A%A0%E5%AF%86/">JWT数据加密</a></li><li class="post-list-item"><a class="post-list-link" href="/redis%E7%9A%84%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/">redis的发布订阅</a></li><li class="post-list-item"><a class="post-list-link" href="/node-schedule%E5%AE%9A%E6%97%B6%E5%99%A8/">node-schedule定时器</a></li><li class="post-list-item"><a class="post-list-link" href="/VSCode%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE/">vsCode开发常用配置</a></li><li class="post-list-item"><a class="post-list-link" href="/win10%E9%BC%A0%E6%A0%87%E5%8F%B3%E9%94%AE%E6%8B%93%E5%B1%95%EF%BC%88%E4%BD%BF%E7%94%A8vsCode%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6%EF%BC%89/">windows10鼠标右键拓展（使用vsCode打开文件）</a></li><li class="post-list-item"><a class="post-list-link" href="/%E7%94%A8postgreSQL%E8%AE%A1%E7%AE%97%E8%B7%9D%E7%A6%BB/">用postgreSQL计算距离</a></li><li class="post-list-item"><a class="post-list-link" href="/%E7%94%A8-wxConfig-envVersion%E5%8C%BA%E5%88%86%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BD%93%E9%AA%8C%E7%89%88%EF%BC%8C%E5%BC%80%E5%8F%91%E6%9D%BF%EF%BC%8C%E6%AD%A3%E5%BC%8F%E7%89%88/">用__wxConfig.envVersion区分小程序体验版，开发板，正式版</a></li><li class="post-list-item"><a class="post-list-link" href="/GitHub%E9%85%8D%E7%BD%AE%E5%AF%86%E9%92%A5/">GitHub配置密钥</a></li><li class="post-list-item"><a class="post-list-link" href="/%E8%AE%BE%E7%BD%AE%E5%85%8D%E5%AF%86%E7%99%BB%E9%99%86%E8%87%AA%E5%B7%B1%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8/">设置免密登陆自己的服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/async-mapLimit%E6%8E%A7%E5%88%B6%E5%B9%B6%E5%8F%91%E6%95%B0%E9%87%8F/">async.mapLimit控制并发数量</a></li><li class="post-list-item"><a class="post-list-link" href="/centos%E5%AE%89%E8%A3%85puppeteer%E7%BC%BA%E5%B0%91%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/">centos安装puppeteer缺少浏览器插件</a></li><li class="post-list-item"><a class="post-list-link" href="/%E4%BD%BF%E7%94%A8yarn%E5%AE%89%E8%A3%85puppeteer%E7%AD%89%E9%97%AE%E9%A2%98/">使用yarn安装puppeteer等问题</a></li><li class="post-list-item"><a class="post-list-link" href="/centos7%E9%98%B2%E7%81%AB%E5%A2%99%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">centos7防火墙常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/CentOS6-CentOS7%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E9%85%8D%E7%BD%AE/">CentOS6,CentOS7防火墙的使用与配置</a></li><li class="post-list-item"><a class="post-list-link" href="/centos%E5%AE%89%E8%A3%85%E7%9A%84nodejs%E6%9B%B4%E6%96%B0npm/">centos安装的nodejs更新npm</a></li><li class="post-list-item"><a class="post-list-link" href="/centos7%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AEnginx/">centos7安装和配置nginx</a></li><li class="post-list-item"><a class="post-list-link" href="/centos7%E5%AE%89%E8%A3%85GitLab/">centos7安装GitLab</a></li><li class="post-list-item"><a class="post-list-link" href="/centos8%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85mysql8-0-17/">centos8使用docker安装mysql8.0.17</a></li><li class="post-list-item"><a class="post-list-link" href="/centos8%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85redis/">centos8使用docker安装redis</a></li><li class="post-list-item"><a class="post-list-link" href="/centos8-Docker%E4%B8%8A%E5%AE%89%E8%A3%85%E7%9A%84postgres/">centos8,Docker上安装的postgres</a></li><li class="post-list-item"><a class="post-list-link" href="/%E5%8F%91%E5%B8%83%E6%8F%92%E4%BB%B6%E5%88%B0npm%E4%B8%8A/">发布插件到npm上</a></li><li class="post-list-item"><a class="post-list-link" href="/koa2%E8%A7%A3%E6%9E%90%E8%AF%B7%E6%B1%82%E5%A4%B4%E4%BF%A1%E6%81%AF/">koa2解析请求头信息</a></li><li class="post-list-item"><a class="post-list-link" href="/windows10%E6%BF%80%E6%B4%BB/">windows10激活</a></li><li class="post-list-item"><a class="post-list-link" href="/windows10%E6%89%8B%E5%8A%A8%E9%85%8D%E7%BD%AEip/">windows10手动配置ip</a></li><li class="post-list-item"><a class="post-list-link" href="/SSR%E7%BF%BB%E5%A2%99/">SSR翻墙</a></li><li class="post-list-item"><a class="post-list-link" href="/get%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%A4%84%E7%90%86/">get请求参数处理</a></li><li class="post-list-item"><a class="post-list-link" href="/ip%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E6%88%90%E5%8D%81%E8%BF%9B%E5%88%B6%E7%AE%97%E6%B3%95/">ip地址转换成十进制算法</a></li><li class="post-list-item"><a class="post-list-link" href="/js%E4%B8%AD%E7%9A%84%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/">js中的位运算符(>>、>>>、|、<<、^、~)< a></、^、~)<></a></li><li class="post-list-item"><a class="post-list-link" href="/%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE%E5%9F%8E%E5%B8%82%E7%BC%96%E7%A0%81%E8%A1%A8%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/">高德地图城市编码表下载地址</a></li><li class="post-list-item"><a class="post-list-link" href="/decimal-js%E7%9A%84%E4%BD%BF%E7%94%A8/">decimal.js的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/%E4%BD%BF%E7%94%A8%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97kue%E5%A4%84%E7%90%86%E8%AE%A2%E5%8D%95/">使用任务队列kue处理订单</a></li><li class="post-list-item"><a class="post-list-link" href="/nodej-ocr%E8%AF%86%E5%88%AB%E5%9B%BE%E7%89%87%E4%B8%AD%E7%9A%84%E6%96%87%E5%AD%97/">nodej,ocr识别图片中的文字</a></li><li class="post-list-item"><a class="post-list-link" href="/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%A2%E9%98%85%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/">微信小程序订阅消息推送</a></li><li class="post-list-item"><a class="post-list-link" href="/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%99%BB%E5%BD%95%E8%8E%B7%E5%8F%96openid%E5%92%8Cunionid/">微信小程序登录获取openid和unionid</a></li><li class="post-list-item"><a class="post-list-link" href="/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%8C%E7%BB%B4%E7%A0%81/">微信小程序二维码</a></li><li class="post-list-item"><a class="post-list-link" href="/postgresql%E4%B8%BB%E9%94%AEid%E8%87%AA%E5%A2%9E%E9%97%AE%E9%A2%98%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%95%B0/">postgresql主键id自增问题和随机数</a></li><li class="post-list-item"><a class="post-list-link" href="/postgresql%E7%BB%9F%E8%AE%A1%E6%8E%92%E5%BA%8F%E6%9F%A5%E8%AF%A2%EF%BC%88%E6%8E%92%E5%BA%8F%E5%80%BC%E4%B8%AD%E5%90%AB%E6%9C%89null%E6%8E%92%E5%BA%8F%E5%92%8C%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%E6%8E%92%E5%BA%8F%EF%BC%89/">postgresql统计排序查询（排序值中含有null排序和关联查询排序）</a></li><li class="post-list-item"><a class="post-list-link" href="/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">git常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/git%E8%A7%A3%E5%86%B3%E6%AF%8F%E6%AC%A1%E6%8B%89%E5%8F%96%E4%BB%A3%E7%A0%81%E9%83%BD%E9%9C%80%E8%A6%81%E7%94%A8%E6%88%B7%E5%90%8D%E5%AF%86%E7%A0%81/">git解决每次拉取代码都需要用户名密码</a></li><li class="post-list-item"><a class="post-list-link" href="/linux%E6%B7%BB%E5%8A%A0%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7/">linux添加删除用户</a></li><li class="post-list-item"><a class="post-list-link" href="/%E6%8A%8A%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%B7%E6%B1%82%E6%98%A0%E5%B0%84%E5%88%B0%E6%9C%AC%E5%9C%B0/">把服务器请求映射到本地</a></li><li class="post-list-item"><a class="post-list-link" href="/%E9%87%8D%E8%A3%85window10%E7%B3%BB%E7%BB%9F/">重装window10系统</a></li><li class="post-list-item"><a class="post-list-link" href="/VSCode%E8%AF%86%E5%88%ABwxml-wxss%E6%96%87%E4%BB%B6%E4%B8%BAhtml-css%E6%A0%BC%E5%BC%8F/">vsCode识别wxml,wxss文件为html,css格式</a></li><li class="post-list-item"><a class="post-list-link" href="/git%E6%9B%B4%E6%94%B9%E8%BF%9C%E7%A8%8B%E5%BA%93/">git更改远程库</a></li><li class="post-list-item"><a class="post-list-link" href="/%E6%90%AD%E5%BB%BAyapi%E6%9C%8D%E5%8A%A1/">搭建yapi服务</a></li><li class="post-list-item"><a class="post-list-link" href="/docker%E5%AE%89%E8%A3%85mongo/">docker安装mongo</a></li><li class="post-list-item"><a class="post-list-link" href="/%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/">数组中的一些常用方法总结</a></li><li class="post-list-item"><a class="post-list-link" href="/git%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/">git设置代理</a></li><li class="post-list-item"><a class="post-list-link" href="/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA/">磁盘分区</a></li><li class="post-list-item"><a class="post-list-link" href="/%E7%BD%91%E7%BA%BF%E9%A1%BA%E5%BA%8F/">网线顺序</a></li><li class="post-list-item"><a class="post-list-link" href="/hexo-yelee%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A23%E7%89%B9%E6%95%881/">hexo+yelee搭建博客3特效1</a></li><li class="post-list-item"><a class="post-list-link" href="/hexo-yelee%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A22/">hexo+yelee搭建博客2</a></li><li class="post-list-item"><a class="post-list-link" href="/Hexo%E5%8F%91%E5%B8%83%E5%88%B0Github/">Hexo发布到Github</a></li><li class="post-list-item"><a class="post-list-link" href="/hexo+yelee%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E3%80%81%E7%AE%80%E6%B4%81%E4%B8%94%E9%AB%98%E6%95%88%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%A1%86%E6%9E%B6/">hexo+yelee搭建一个快速、简洁且高效的博客框架</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+
+      </div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div>
+                <!-- <i class="fa fa-copyright"></i> 
+                2016-2021 w-klover -->
+
+                <p><a href="http://beian.miit.gov.cn/" target="_blank" rel="external nofollow noopener noreferrer">浙ICP备20008562号-1</a></p>
+                <div style="width:300px;margin:0 auto; padding:20px 0;">
+                  <img src="/assets/beian.png">
+                  <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011002014605" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;" rel="external nofollow noopener noreferrer"><img src style="float:left;"><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">浙公网安备 33011002014605号</p></a>
+                </div>
+              
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                
+                <script>
+                  var now = new Date(); 
+                  function createtime() { 
+                    var grt= new Date("3/16/2020 12:00:00");//此处修改你的建站时间或者网站上线时间 
+                    now.setTime(now.getTime()+250); 
+                    days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                    hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                    if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                    mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                    seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                    snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                    document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+                    document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+                  } 
+                  setInterval("createtime()",250);
+                </script>
+            </div>
+            <!-- <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div> -->
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i>
+                            
+                                <span id="busuanzi_value_site_uv"></span>
+                             
+                            
+                        </span>
+                    </span>
+                
+                
+                    <!-- <span>| </span> -->
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i>
+                            
+                            <span id="_busuanzi_value_page_pv"></span>
+                             
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "(つェ⊂) 有空记一点~ " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) 好记性不如好笔记~ " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+  <!--动态线条背景-->
+
+<!-- 雪花特效2 -->
+
+<!-- 《页面点击小红心 -->
+
+<!-- 页面点击小红心》 -->
+<!--单击显示文字-->
+
+
+<!-- 雪花特效3 -->
+
+<!--彩带2.自动飘动-->
+
+  <!-- <script src="https://g.joyinshare.com/hc/piao.js" type="text/javascript"></script> -->
+  <script type="text/javascript" src="/js/ribbon_flow.js"></script>
+
+<!--代码雨-->
+
+
+<!--彩带1.点击自动替换彩带-->
+
+
+
+
+
+</body>
