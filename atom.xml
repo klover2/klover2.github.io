@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.wjc66.cn/"/>
-  <updated>2021-09-23T07:30:40.461Z</updated>
+  <updated>2021-10-25T10:11:17.575Z</updated>
   <id>https://blog.wjc66.cn/</id>
   
   <author>
@@ -17,11 +17,39 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>buffer与stream互相转换</title>
+    <link href="https://blog.wjc66.cn/buffer%E4%B8%8Estream%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/"/>
+    <id>https://blog.wjc66.cn/buffer%E4%B8%8Estream%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/</id>
+    <published>2021-10-25T10:07:30.000Z</published>
+    <updated>2021-10-25T10:11:17.575Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>流到缓冲区</li></ol><p>第一个操作是将读取流转换为缓冲区。Streams 最有效的操作是将它们通过管道传输到另一个流。这在您不想增加内存使用量的文件系统访问中很常见。</p><p>但是，在处理 HTTP 请求时，您可能希望直接将响应流转换为 JSON 对象或解析 url 编码值。</p><p>为此，您将读取缓冲区 data 事件提供的数据。Streams 将提供一个字符串或一个缓冲区作为数据事件的值。这取决于 Buffer 是否有编码集。默认情况下，它会在 data 事件期间输出 Buffers 。</p><p>这意味着您可以执行以下操作以从流中读取。</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">streamToBuffer</span>(<span class="params">stream</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> buffers = [];</span><br><span class="line">    stream.on(<span class="string">"error"</span>, reject);</span><br><span class="line">    stream.on(<span class="string">"data"</span>, (data) =&gt; buffers.push(data));</span><br><span class="line">    stream.on(<span class="string">"end"</span>, () =&gt; resolve(Buffer.concat(buffers)));</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>此函数获取流（可能来自 HTTP 或 FS 访问）。然后它将每个 Buffer 推送到一个 Buffer 数组中。当流被完全读取时，它会将所有这些 Buffers 与 Buffer.concat 结合起来。</p><p>这显然会对大流造成一些问题，但对于需要在应用程序的后续部分中转换并在内存中携带的小流来说，它非常有用。</p><ol start="2"><li>缓冲区到流<br>下一部分是将 Buffer 转换为流。当您想将数据通过管道传输到现有流中时，这很有用。</li></ol><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> Duplex = <span class="built_in">require</span>(<span class="string">"stream"</span>).Duplex;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bufferToStream</span>(<span class="params">buffer</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> stream = <span class="keyword">new</span> Duplex();</span><br><span class="line">  stream.push(buffer);</span><br><span class="line">  stream.push(<span class="literal">null</span>);</span><br><span class="line">  <span class="keyword">return</span> stream;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>此操作创建一个双工字符串并简单地将缓冲区写入其中。该流现在可以像通常的任何写入流一样使用。</p><p>文档：<br><a href="https://www.derpturkey.com/buffer-to-stream-in-node/" target="_blank" rel="external nofollow noopener noreferrer">缓冲到节点中的流</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;流到缓冲区&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;第一个操作是将读取流转换为缓冲区。Streams 最有效的操作是将它们通过管道传输到另一个流。这在您不想增加内存使用量的文件系统访问中很常见。&lt;/p&gt;
+&lt;p&gt;但是，在处理 HTTP 请求时，您可能希望直接将响应流转换为 J
+      
+    
+    </summary>
+    
+    
+    
+      <category term="nodejs" scheme="https://blog.wjc66.cn/tags/nodejs/"/>
+    
+  </entry>
+  
+  <entry>
     <title>使用git出现过的问题</title>
     <link href="https://blog.wjc66.cn/%E4%BD%BF%E7%94%A8git%E5%87%BA%E7%8E%B0%E8%BF%87%E7%9A%84%E9%97%AE%E9%A2%98/"/>
     <id>https://blog.wjc66.cn/%E4%BD%BF%E7%94%A8git%E5%87%BA%E7%8E%B0%E8%BF%87%E7%9A%84%E9%97%AE%E9%A2%98/</id>
     <published>2021-09-23T07:28:19.000Z</published>
-    <updated>2021-09-23T07:30:40.461Z</updated>
+    <updated>2021-09-23T07:30:46.323Z</updated>
     
     <content type="html"><![CDATA[<ol><li>拉取代码出现下面问题<br><code>load pubkey &quot;/c/Users/klover/.ssh/id_rsa&quot;: invalid format</code><br>是因为公钥之前我换过名字，导致出现问题<br>执行修复公钥命令，解决问题<br><code>ssh-keygen -f ~/.ssh/id_rsa -y &gt; ~/.ssh/id_rsa.pub</code></li></ol>]]></content>
     
@@ -496,30 +524,6 @@
     
     
       <category term="docker" scheme="https://blog.wjc66.cn/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ts模拟类多继承类</title>
-    <link href="https://blog.wjc66.cn/ts%E6%A8%A1%E6%8B%9F%E7%B1%BB%E5%A4%9A%E7%BB%A7%E6%89%BF%E7%B1%BB/"/>
-    <id>https://blog.wjc66.cn/ts%E6%A8%A1%E6%8B%9F%E7%B1%BB%E5%A4%9A%E7%BB%A7%E6%89%BF%E7%B1%BB/</id>
-    <published>2021-01-28T06:08:59.000Z</published>
-    <updated>2021-09-23T07:24:47.887Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这里的实现方式是把类当做接口 使用implements继承</span></span><br><span class="line"><span class="string">'use strict'</span>;</span><br><span class="line">class Person &#123;</span><br><span class="line">  name?: string;</span><br><span class="line">  grade?: number;</span><br><span class="line">  constructor(name: string, grade: number) &#123;</span><br><span class="line">    this.grade = grade;</span><br><span class="line">    this.name = name;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">sayHello</span></span>() &#123;</span><br><span class="line">    console.log(<span class="string">'tag'</span>, `Helo <span class="variable">$&#123;this.name&#125;</span>!, <span class="variable">$&#123;this.grade&#125;</span>`);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Student 类</span><br><span class="line">class Student &#123;</span><br><span class="line">  grade?: number;</span><br><span class="line">  constructor(grade: number) &#123;</span><br><span class="line">    this.grade = grade;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">test</span>!: (name: string) =&gt; void;</span><br><span class="line">  <span class="function"><span class="title">study</span></span>() &#123;</span><br><span class="line">    this.test(<span class="string">'1'</span>);</span><br><span class="line">    console.log(<span class="string">'tag'</span>, <span class="string">' I need Study!'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class SmartObject implements Person, Student &#123;</span><br><span class="line">  // Person</span><br><span class="line">  name = <span class="string">'person'</span>;</span><br><span class="line">  // Activatable</span><br><span class="line">  grade = 3;</span><br><span class="line">  sayHello!: () =&gt; void;</span><br><span class="line">  study!: () =&gt; void;</span><br><span class="line">  <span class="built_in">test</span>(name: string) &#123;</span><br><span class="line">    console.log(<span class="string">'test'</span>, name);</span><br><span class="line">  &#125;</span><br><span class="line">  static applyMixins(derivedCtor: any, baseCtors: any[]) &#123;</span><br><span class="line">    baseCtors.forEach(baseCtor =&gt; &#123;</span><br><span class="line">      Object.getOwnPropertyNames(baseCtor.prototype).forEach(name =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (name !== <span class="string">'test'</span>) derivedCtor.prototype[name] = baseCtor.prototype[name];</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SmartObject.applyMixins(SmartObject, [Person, Student]);</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> = SmartObject;</span><br></pre></td></tr></table></figure><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'use strict'</span>;</span><br><span class="line">import SmartObject from <span class="string">'./index'</span>;</span><br><span class="line">const smartObject = new SmartObject();</span><br><span class="line">smartObject.study();</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=
-      
-    
-    </summary>
-    
-    
-    
-      <category term="typescript" scheme="https://blog.wjc66.cn/tags/typescript/"/>
     
   </entry>
   

@@ -297,11 +297,11 @@
   
 
 
-<article id="post-es6类的使用" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-JS中（constructor属性）" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/es6%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
-      <time datetime="2020-07-23T09:54:08.000Z" itemprop="datePublished">2020-07-23</time>
+      <a href="/JS%E4%B8%AD%EF%BC%88constructor%E5%B1%9E%E6%80%A7%EF%BC%89/" class="article-date">
+      <time datetime="2020-07-24T07:33:08.000Z" itemprop="datePublished">2020-07-24</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/es6%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8/">es6类的使用</a>
+      <a class="article-title" href="/JS%E4%B8%AD%EF%BC%88constructor%E5%B1%9E%E6%80%A7%EF%BC%89/">JS中（constructor属性）</a>
     </h1>
   
 
         
-          <!-- <a href="/es6%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-      <time datetime="2020-07-23T09:54:08.000Z" itemprop="datePublished">2020-07-23</time>
+          <!-- <a href="/JS%E4%B8%AD%EF%BC%88constructor%E5%B1%9E%E6%80%A7%EF%BC%89/" class="archive-article-date">
+      <time datetime="2020-07-24T07:33:08.000Z" itemprop="datePublished">2020-07-24</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">223字</span>
+      <span class="post-count">150字</span>
     </span>
   </span>
 
@@ -358,9 +358,13 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'use strict'</span>;</span><br><span class="line">// 类的由来 原始js 方法声明</span><br><span class="line">// <span class="keyword">function</span> Book(title, pages, isbin) &#123;</span><br><span class="line">//     this.title = title;</span><br><span class="line">//     this.pages = pages;</span><br><span class="line">//     this.isbin = isbin;</span><br><span class="line">// &#125;</span><br><span class="line"></span><br><span class="line">// Book.prototype.init = <span class="function"><span class="title">function</span></span>() &#123; // 只能定义public 方法</span><br><span class="line">//     console.log(this.title);</span><br><span class="line">// &#125;;</span><br><span class="line"></span><br><span class="line">// <span class="built_in">let</span> book = new Book(<span class="string">'title'</span>, <span class="string">'page'</span>, <span class="string">'isbin'</span>);</span><br><span class="line"></span><br><span class="line">// book.init();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// es6 类声明</span><br><span class="line">class Book &#123;</span><br><span class="line">    constructor(title, pages, isbin) &#123;</span><br><span class="line">        this.title = title;</span><br><span class="line">        this.pages = pages;</span><br><span class="line">        this.isbin = isbin;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">init</span></span>() &#123;</span><br><span class="line">        console.log(this.title);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// <span class="built_in">let</span> book = new Book(<span class="string">'title'</span>, <span class="string">'page'</span>, <span class="string">'isbin'</span>);</span><br><span class="line">// console.log(book.title);// 输出 title</span><br><span class="line">// book.title = <span class="string">'new title'</span>;</span><br><span class="line">// console.log(book.title); // 输出 new title</span><br><span class="line">// book.init();// 输出 new title</span><br><span class="line"></span><br><span class="line">// 继承</span><br><span class="line">class IBook extends Book &#123;</span><br><span class="line">    constructor(title, pages, isbin, newBook) &#123;</span><br><span class="line">        super(title, pages, isbin);</span><br><span class="line">        this._newBook = newBook;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 也可以使用get <span class="built_in">set</span>属性存储器 可以进行一些其他参数处理</span><br><span class="line">    get <span class="function"><span class="title">newBook</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> this._newBook;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">set</span> newBook(value) &#123;</span><br><span class="line">        this._newBook = `aaaa<span class="variable">$&#123;value&#125;</span>`;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">let</span> iBook = new IBook(<span class="string">'title'</span>, <span class="string">'page'</span>, <span class="string">'isbin'</span>, <span class="string">'新参数'</span>);</span><br><span class="line"></span><br><span class="line">console.log(iBook.newBook); // 新参数</span><br><span class="line">iBook.newBook = <span class="string">'新参数2'</span>;</span><br><span class="line">console.log(iBook.newBook); // aaaa新参数2</span><br><span class="line"></span><br><span class="line">iBook.init(); // 输出 title</span><br></pre></td></tr></table></figure>
+        <p>在Javascript 语言中，constructor 属性是专门为 function 而设计的，它存在于每一个function 的prototype 属性中。这个constructor 保存了指向 function 的一个引用。 </p>
+<p>在定义一个函数（代码如下所示）时，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">functionF() </span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">// some code</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var f = new F();</span><br><span class="line">console(f.constructor === F);// output <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p> JavaScript 内部会执行如下几个动作：1</p>
+<p>1.为该函数添加一个原形（即 prototype）属性<br>2. 为 prototype 对象额外添加一个 constructor 属性，并且该属性保存指向函数F 的一个引用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 继承</span><br><span class="line">var f = new F();</span><br><span class="line"></span><br><span class="line">class Api extends f.constructor &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default new Api()</span><br></pre></td></tr></table></figure>
 
-<p><a href="https://es6.ruanyifeng.com/#docs/class" target="_blank" rel="external nofollow noopener noreferrer">Class 的基本语法</a></p>
 
       
     </div>
@@ -397,7 +401,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/63/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/62/">62</a><a class="page-number" href="/page/63/">63</a><span class="page-number current">64</span><a class="page-number" href="/page/65/">65</a><a class="page-number" href="/page/66/">66</a><span class="space">&hellip;</span><a class="page-number" href="/page/146/">146</a><a class="extend next" rel="next" href="/page/65/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/63/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/62/">62</a><a class="page-number" href="/page/63/">63</a><span class="page-number current">64</span><a class="page-number" href="/page/65/">65</a><a class="page-number" href="/page/66/">66</a><span class="space">&hellip;</span><a class="page-number" href="/page/147/">147</a><a class="extend next" rel="next" href="/page/65/">下一页</a>
     </nav>
   
 
