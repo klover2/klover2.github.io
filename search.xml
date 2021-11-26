@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>配置jdk与maven</title>
+      <link href="%E9%85%8D%E7%BD%AEjdk%E4%B8%8Emaven/"/>
+      <url>%E9%85%8D%E7%BD%AEjdk%E4%B8%8Emaven/</url>
+      
+        <content type="html"><![CDATA[<h2 id="安装与配置-jdk"><a href="#安装与配置-jdk" class="headerlink" title="安装与配置 jdk"></a>安装与配置 jdk</h2><ol><li><p>下载链接（<a href="https://www.oracle.com/java/technologies/downloads/#jdk17-windows）" target="_blank" rel="external nofollow noopener noreferrer">https://www.oracle.com/java/technologies/downloads/#jdk17-windows）</a><br>默认安装就好</p></li><li><p>配置环境变量<br>在系统变量里面增加<br><code>JAVA_HOME C:\Program Files\Java\jdk-17.0.1</code><br><code>Path %JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;</code><br><code>CLASSPATH .;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;</code></p></li></ol><a id="more"></a><ol start="3"><li>检验是否配置成功(如下就成功了)<br><img src="https://img-blog.csdnimg.cn/b767a02e41564a34acea65a65e491c40.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li></ol><h2 id="安装与配置-maven"><a href="#安装与配置-maven" class="headerlink" title="安装与配置 maven"></a>安装与配置 maven</h2><ol><li><p>下载链接（<a href="https://maven.apache.org/download.cgi）" target="_blank" rel="external nofollow noopener noreferrer">https://maven.apache.org/download.cgi）</a><br><img src="https://img-blog.csdnimg.cn/100e624ae8ba497ca780550ce7aa8e72.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li><li><p>解压 并且创建 maven-local-repository 目录用于存储 jar 包</p></li><li><p>配置环境变量<br>在系统变量里面增加<br><code>Maven_Home D:\maven\apache-maven-3.8.4</code><br>Path 变量值增加 <code>%Maven_Home%\bin</code></p></li><li><p>检测是否配置成功 <code>mvn -v</code><br><img src="https://img-blog.csdnimg.cn/66f6977fc2544e919db721b2b6b9249f.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li><li><p>Maven 的配置<br>打开 settings.xml<br>本地仓库位置<br><code>&lt;localRepository&gt;D:\maven\maven-local-repository&lt;/localRepository&gt;</code></p></li></ol><!-- 配置中央仓库的镜像（改用：阿里云中央仓库镜像）--><pre><code>&lt;mirror&gt;  &lt;id&gt;alimaven&lt;/id&gt;  &lt;name&gt;aliyun-maven&lt;/name&gt;  &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;  &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public&lt;/url&gt;&lt;/mirror&gt;</code></pre><ol start="6"><li>IntelliJ IDEA 中使用 Maven<br><img src="https://img-blog.csdnimg.cn/849c3d4f1624456b9c24147d979c05a4.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li></ol>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>buffer与stream互相转换</title>
       <link href="buffer%E4%B8%8Estream%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/"/>
       <url>buffer%E4%B8%8Estream%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/</url>

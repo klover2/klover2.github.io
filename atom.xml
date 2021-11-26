@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.wjc66.cn/"/>
-  <updated>2021-10-25T10:11:17.575Z</updated>
+  <updated>2021-11-26T02:23:12.872Z</updated>
   <id>https://blog.wjc66.cn/</id>
   
   <author>
@@ -17,11 +17,37 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>配置jdk与maven</title>
+    <link href="https://blog.wjc66.cn/%E9%85%8D%E7%BD%AEjdk%E4%B8%8Emaven/"/>
+    <id>https://blog.wjc66.cn/%E9%85%8D%E7%BD%AEjdk%E4%B8%8Emaven/</id>
+    <published>2021-11-26T02:21:33.000Z</published>
+    <updated>2021-11-26T02:23:12.872Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="安装与配置-jdk"><a href="#安装与配置-jdk" class="headerlink" title="安装与配置 jdk"></a>安装与配置 jdk</h2><ol><li><p>下载链接（<a href="https://www.oracle.com/java/technologies/downloads/#jdk17-windows）" target="_blank" rel="external nofollow noopener noreferrer">https://www.oracle.com/java/technologies/downloads/#jdk17-windows）</a><br>默认安装就好</p></li><li><p>配置环境变量<br>在系统变量里面增加<br><code>JAVA_HOME C:\Program Files\Java\jdk-17.0.1</code><br><code>Path %JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;</code><br><code>CLASSPATH .;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;</code></p></li></ol><a id="more"></a><ol start="3"><li>检验是否配置成功(如下就成功了)<br><img src="https://img-blog.csdnimg.cn/b767a02e41564a34acea65a65e491c40.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li></ol><h2 id="安装与配置-maven"><a href="#安装与配置-maven" class="headerlink" title="安装与配置 maven"></a>安装与配置 maven</h2><ol><li><p>下载链接（<a href="https://maven.apache.org/download.cgi）" target="_blank" rel="external nofollow noopener noreferrer">https://maven.apache.org/download.cgi）</a><br><img src="https://img-blog.csdnimg.cn/100e624ae8ba497ca780550ce7aa8e72.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li><li><p>解压 并且创建 maven-local-repository 目录用于存储 jar 包</p></li><li><p>配置环境变量<br>在系统变量里面增加<br><code>Maven_Home D:\maven\apache-maven-3.8.4</code><br>Path 变量值增加 <code>%Maven_Home%\bin</code></p></li><li><p>检测是否配置成功 <code>mvn -v</code><br><img src="https://img-blog.csdnimg.cn/66f6977fc2544e919db721b2b6b9249f.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li><li><p>Maven 的配置<br>打开 settings.xml<br>本地仓库位置<br><code>&lt;localRepository&gt;D:\maven\maven-local-repository&lt;/localRepository&gt;</code></p></li></ol><!-- 配置中央仓库的镜像（改用：阿里云中央仓库镜像）--><pre><code>&lt;mirror&gt;  &lt;id&gt;alimaven&lt;/id&gt;  &lt;name&gt;aliyun-maven&lt;/name&gt;  &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;  &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public&lt;/url&gt;&lt;/mirror&gt;</code></pre><ol start="6"><li>IntelliJ IDEA 中使用 Maven<br><img src="https://img-blog.csdnimg.cn/849c3d4f1624456b9c24147d979c05a4.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;安装与配置-jdk&quot;&gt;&lt;a href=&quot;#安装与配置-jdk&quot; class=&quot;headerlink&quot; title=&quot;安装与配置 jdk&quot;&gt;&lt;/a&gt;安装与配置 jdk&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;下载链接（&lt;a href=&quot;https://www.oracle.com/java/technologies/downloads/#jdk17-windows）&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noopener noreferrer&quot;&gt;https://www.oracle.com/java/technologies/downloads/#jdk17-windows）&lt;/a&gt;&lt;br&gt;默认安装就好&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;配置环境变量&lt;br&gt;在系统变量里面增加&lt;br&gt;&lt;code&gt;JAVA_HOME C:\Program Files\Java\jdk-17.0.1&lt;/code&gt;&lt;br&gt;&lt;code&gt;Path %JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;&lt;/code&gt;&lt;br&gt;&lt;code&gt;CLASSPATH .;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="java" scheme="https://blog.wjc66.cn/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
     <title>buffer与stream互相转换</title>
     <link href="https://blog.wjc66.cn/buffer%E4%B8%8Estream%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/"/>
     <id>https://blog.wjc66.cn/buffer%E4%B8%8Estream%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/</id>
     <published>2021-10-25T10:07:30.000Z</published>
-    <updated>2021-10-25T10:11:17.575Z</updated>
+    <updated>2021-10-25T10:11:48.940Z</updated>
     
     <content type="html"><![CDATA[<ol><li>流到缓冲区</li></ol><p>第一个操作是将读取流转换为缓冲区。Streams 最有效的操作是将它们通过管道传输到另一个流。这在您不想增加内存使用量的文件系统访问中很常见。</p><p>但是，在处理 HTTP 请求时，您可能希望直接将响应流转换为 JSON 对象或解析 url 编码值。</p><p>为此，您将读取缓冲区 data 事件提供的数据。Streams 将提供一个字符串或一个缓冲区作为数据事件的值。这取决于 Buffer 是否有编码集。默认情况下，它会在 data 事件期间输出 Buffers 。</p><p>这意味着您可以执行以下操作以从流中读取。</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">streamToBuffer</span>(<span class="params">stream</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> buffers = [];</span><br><span class="line">    stream.on(<span class="string">"error"</span>, reject);</span><br><span class="line">    stream.on(<span class="string">"data"</span>, (data) =&gt; buffers.push(data));</span><br><span class="line">    stream.on(<span class="string">"end"</span>, () =&gt; resolve(Buffer.concat(buffers)));</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>此函数获取流（可能来自 HTTP 或 FS 访问）。然后它将每个 Buffer 推送到一个 Buffer 数组中。当流被完全读取时，它会将所有这些 Buffers 与 Buffer.concat 结合起来。</p><p>这显然会对大流造成一些问题，但对于需要在应用程序的后续部分中转换并在内存中携带的小流来说，它非常有用。</p><ol start="2"><li>缓冲区到流<br>下一部分是将 Buffer 转换为流。当您想将数据通过管道传输到现有流中时，这很有用。</li></ol><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> Duplex = <span class="built_in">require</span>(<span class="string">"stream"</span>).Duplex;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bufferToStream</span>(<span class="params">buffer</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> stream = <span class="keyword">new</span> Duplex();</span><br><span class="line">  stream.push(buffer);</span><br><span class="line">  stream.push(<span class="literal">null</span>);</span><br><span class="line">  <span class="keyword">return</span> stream;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>此操作创建一个双工字符串并简单地将缓冲区写入其中。该流现在可以像通常的任何写入流一样使用。</p><p>文档：<br><a href="https://www.derpturkey.com/buffer-to-stream-in-node/" target="_blank" rel="external nofollow noopener noreferrer">缓冲到节点中的流</a></p>]]></content>
     
@@ -498,32 +524,6 @@
       <category term="vue" scheme="https://blog.wjc66.cn/tags/vue/"/>
     
       <category term="typescript" scheme="https://blog.wjc66.cn/tags/typescript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>windows10安装docker</title>
-    <link href="https://blog.wjc66.cn/windows10%E5%AE%89%E8%A3%85docker/"/>
-    <id>https://blog.wjc66.cn/windows10%E5%AE%89%E8%A3%85docker/</id>
-    <published>2021-03-17T10:01:56.000Z</published>
-    <updated>2021-09-23T07:24:47.888Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ol><li>必须是 windows 10 专业版</li><li>进入任务管理器看虚拟化是否已启用<br><img src="https://img-blog.csdnimg.cn/20210317175951685.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li><li>然后再是进入电脑的控制面板-&gt;程序-&gt;启用或关闭 Windows 功能-&gt;把 Hyper-v 勾上，启用后电脑会重启，后面就可以下载并安装 Docker for Windows 了。</li></ol><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p><code>https://docs.docker.com/docker-for-windows/wsl/</code><br><img src="https://img-blog.csdnimg.cn/20210317180105110.png" alt="在这里插入图片描述"></p><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol><li>直接安装（就是取消勾选 WSL 2）</li><li>安装成功 右键进入 settings 取消勾选 wsl 2 就可以正常使用了</li></ol><p><img src="https://img-blog.csdnimg.cn/20210317175824765.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>dockers ps</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;准备&quot;&gt;&lt;a href=&quot;#准备&quot; class=&quot;headerlink&quot; title=&quot;准备&quot;&gt;&lt;/a&gt;准备&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;必须是 windows 10 专业版&lt;/li&gt;
-&lt;li&gt;进入任务管理器看虚拟化是否已启用&lt;br&gt;&lt;img src=&quot;https:
-      
-    
-    </summary>
-    
-    
-    
-      <category term="docker" scheme="https://blog.wjc66.cn/tags/docker/"/>
     
   </entry>
   
