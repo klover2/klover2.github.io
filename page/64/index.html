@@ -297,11 +297,11 @@
   
 
 
-<article id="post-通过rinetd实现端口转发来访问内网的服务" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-zip和unzip命令" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/%E9%80%9A%E8%BF%87rinetd%E5%AE%9E%E7%8E%B0%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%9D%A5%E8%AE%BF%E9%97%AE%E5%86%85%E7%BD%91%E7%9A%84%E6%9C%8D%E5%8A%A1/" class="article-date">
-      <time datetime="2020-07-27T08:35:25.000Z" itemprop="datePublished">2020-07-27</time>
+      <a href="/zip%E5%92%8Cunzip%E5%91%BD%E4%BB%A4/" class="article-date">
+      <time datetime="2020-07-28T03:28:25.000Z" itemprop="datePublished">2020-07-28</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/%E9%80%9A%E8%BF%87rinetd%E5%AE%9E%E7%8E%B0%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%9D%A5%E8%AE%BF%E9%97%AE%E5%86%85%E7%BD%91%E7%9A%84%E6%9C%8D%E5%8A%A1/">通过rinetd实现端口转发来访问内网的服务</a>
+      <a class="article-title" href="/zip%E5%92%8Cunzip%E5%91%BD%E4%BB%A4/">zip和unzip命令</a>
     </h1>
   
 
         
-          <!-- <a href="/%E9%80%9A%E8%BF%87rinetd%E5%AE%9E%E7%8E%B0%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%9D%A5%E8%AE%BF%E9%97%AE%E5%86%85%E7%BD%91%E7%9A%84%E6%9C%8D%E5%8A%A1/" class="archive-article-date">
-      <time datetime="2020-07-27T08:35:25.000Z" itemprop="datePublished">2020-07-27</time>
+          <!-- <a href="/zip%E5%92%8Cunzip%E5%91%BD%E4%BB%A4/" class="archive-article-date">
+      <time datetime="2020-07-28T03:28:25.000Z" itemprop="datePublished">2020-07-28</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">400字</span>
+      <span class="post-count">114字</span>
     </span>
   </span>
 
@@ -358,10 +358,42 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>$ yum –enablerepo=nux-misc install rinetd</p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>配置端口转发的配置文件在/etc/rinetd.conf</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[bindaddress] [bindport] [connectaddress] [connectport]</span><br><span class="line">绑定的地址    绑定的端口  连接的地址      连接的端口</span><br><span class="line"></span><br><span class="line">[Source Address] [Source Port] [Destination Address] [Destination Port]</span><br><span class="line">源地址            源端口         目的地址               目的端口</span><br></pre></td></tr></table></figure>
-          
+        <h2 id="zip命令"><a href="#zip命令" class="headerlink" title="zip命令"></a>zip命令</h2><ol>
+<li><p>压缩一个文件，并且指定一个新的文件名。</p>
+<blockquote>
+<p>zip [new_name].zip [file_path]</p>
+</blockquote>
+</li>
+<li><p>压缩一个目录下的所有文件，并且指定一个新的文件名。</p>
+<blockquote>
+<p>zip -r [new_name].zip [dir_path]</p>
+</blockquote>
+</li>
+<li><p>加密压缩。</p>
+<blockquote>
+<p>zip -rP [password] [new_name].zip [file_path]</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="unzip命令"><a href="#unzip命令" class="headerlink" title="unzip命令"></a>unzip命令</h2><ol>
+<li><p>解压文件到当前文件夹。</p>
+<blockquote>
+<p>unzip [file_name].zip</p>
+</blockquote>
+</li>
+<li><p>解压文件到指定目录下。</p>
+<blockquote>
+<p>unzip -d [dir_path] [file_name].zip</p>
+</blockquote>
+</li>
+<li><p>解压加密文件。</p>
+<blockquote>
+<p>unzip -P [password] [file_name].zip</p>
+</blockquote>
+</li>
+</ol>
+<p>注：<br>-r 递归  -v 查看 -P  密码</p>
+
       
     </div>
     
@@ -371,13 +403,9 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rinetd%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" rel="tag">rinetd端口转发</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
     </div>
 
-      
-        <p class="article-more-link">
-          <a href="/%E9%80%9A%E8%BF%87rinetd%E5%AE%9E%E7%8E%B0%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E6%9D%A5%E8%AE%BF%E9%97%AE%E5%86%85%E7%BD%91%E7%9A%84%E6%9C%8D%E5%8A%A1/#more">阅读全文 >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -401,7 +429,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/63/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/62/">62</a><a class="page-number" href="/page/63/">63</a><span class="page-number current">64</span><a class="page-number" href="/page/65/">65</a><a class="page-number" href="/page/66/">66</a><span class="space">&hellip;</span><a class="page-number" href="/page/148/">148</a><a class="extend next" rel="next" href="/page/65/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/63/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/62/">62</a><a class="page-number" href="/page/63/">63</a><span class="page-number current">64</span><a class="page-number" href="/page/65/">65</a><a class="page-number" href="/page/66/">66</a><span class="space">&hellip;</span><a class="page-number" href="/page/149/">149</a><a class="extend next" rel="next" href="/page/65/">下一页</a>
     </nav>
   
 

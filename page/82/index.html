@@ -297,11 +297,11 @@
   
 
 
-<article id="post-pm2" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-docker基本命令" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/pm2/" class="article-date">
-      <time datetime="2020-07-06T05:56:06.000Z" itemprop="datePublished">2020-07-06</time>
+      <a href="/docker%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" class="article-date">
+      <time datetime="2020-07-06T06:22:26.000Z" itemprop="datePublished">2020-07-06</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/pm2/">pm2</a>
+      <a class="article-title" href="/docker%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">docker基本命令</a>
     </h1>
   
 
         
-          <!-- <a href="/pm2/" class="archive-article-date">
-      <time datetime="2020-07-06T05:56:06.000Z" itemprop="datePublished">2020-07-06</time>
+          <!-- <a href="/docker%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" class="archive-article-date">
+      <time datetime="2020-07-06T06:22:26.000Z" itemprop="datePublished">2020-07-06</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">825字</span>
+      <span class="post-count">464字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">3分</span>
+      <span class="post-count">1分</span>
     </span>
   </span>
 </div>
@@ -358,29 +358,18 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><blockquote>
-<p>npm install pm2 -g</p>
+              <h2 id="为啥使用docker"><a href="#为啥使用docker" class="headerlink" title="为啥使用docker"></a>为啥使用docker</h2><p>Docker五大优势：持续集成、版本控制、可移植性、隔离性和安全性</p>
+<h2 id="docker基本命令"><a href="#docker基本命令" class="headerlink" title="docker基本命令"></a>docker基本命令</h2><ol>
+<li>查看已有的镜像<blockquote>
+<p>docker images</p>
 </blockquote>
-<p>pm2 的两种方式：<br>fork 模式，单实例多进程，常用于多语言混编，比如 php、python 等，不支持端口复用，需要自己做应用的端口分配和负载均衡的子进程业务代码。<br>缺点就是单服务器实例容易由于异常会导致服务器实例崩溃。</p>
-<p>cluster 模式，多实例多进程，但是只支持 node，端口可以复用，不需要额外的端口配置，0 代码实现负载均衡。<br>优点就是由于多实例机制，可以保证服务器的容错性，就算出现异常也不会使多个服务器实例同时崩溃。</p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>初始化创建 ecosystem.config.js<br>pm2 init<br>会在/root/下创建<br>编辑文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'use strict'</span>;</span><br><span class="line">module.exports = &#123;</span><br><span class="line">    <span class="string">'apps'</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">'name'</span>: <span class="string">'Auth'</span>, // 项目名</span><br><span class="line">            <span class="string">'script'</span>: <span class="string">'/data/www/Auth/app.js'</span>, // 执行文件</span><br><span class="line">            <span class="string">'cwd'</span>: <span class="string">'./'</span>, // 根目录</span><br><span class="line">            <span class="string">'exec_mode'</span>: <span class="string">'cluster'</span>, // 应用启动模式，支持fork和cluster模式</span><br><span class="line">            <span class="string">'instances'</span>: 1, // 应用启动实例个数，仅在cluster模式有效 默认为fork；或者 max</span><br><span class="line">            <span class="string">'max_memory_restart'</span>: <span class="string">'300M'</span>, // 最大内存限制数，超出自动重启</span><br><span class="line">            <span class="string">'min_uptime'</span>: <span class="string">'60s'</span>, // 应用运行少于时间被认为是异常启动</span><br><span class="line">            <span class="string">'max_restarts'</span>: 3, // 最大异常重启次数，即小于min_uptime运行时间重启次数；</span><br><span class="line">            <span class="string">'env_tri'</span>: &#123; // 环境参数，当前指定为测试环境</span><br><span class="line">                <span class="string">'NODE_ENV'</span>: <span class="string">'tri'</span>, // alinode配置</span><br><span class="line">                // <span class="string">'ENABLE_NODE_LOG'</span>: <span class="string">'YES'</span>, // process.env.REMOTE_ADDR // alinode配置</span><br><span class="line">                // <span class="string">'NODE_LOG_DIR'</span>: <span class="string">'/root/.alinode/logs/'</span>, // alinode配置</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="string">'env_api'</span>: &#123; // 环境参数，当前指定为测试环境</span><br><span class="line">                <span class="string">'NODE_ENV'</span>: <span class="string">'api'</span>,</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">    ],</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// <span class="string">'autorestart'</span>: <span class="literal">true</span>, // 默认为<span class="literal">true</span>, 发生异常的情况下自动重启</span><br><span class="line">// <span class="string">'cron_restart'</span>: <span class="string">''</span>, // crontab时间格式重启应用，目前只支持cluster模式;</span><br><span class="line">// <span class="string">'error_file'</span>: <span class="string">'~/.pm2/logs/Auth-error.log'</span>, // 错误日志文件</span><br><span class="line">// <span class="string">'out_file'</span>: <span class="string">'~/.pm2/logs/Auth-out.log'</span>, // 正常日志文件 可以设置输出到 /dev/null</span><br><span class="line">// <span class="string">'merge_logs'</span>: <span class="literal">true</span>, // 设置追加日志而不是新建日志</span><br><span class="line">// <span class="string">'log_date_format'</span>: <span class="string">'YYYY-MM-DD HH:mm:ss'</span>, // 指定日志文件的时间格式</span><br><span class="line">// <span class="string">'args'</span>: <span class="string">''</span>, // 传递给脚本的参数</span><br><span class="line">// <span class="string">'interpreter'</span>: <span class="string">''</span>, // 指定的脚本解释器</span><br><span class="line">// <span class="string">'interpreter_args'</span>: <span class="string">''</span>, // 传递给解释器的参数</span><br><span class="line">// <span class="string">'watch'</span>: <span class="literal">true</span>, // 是否监听文件变动然后重启</span><br><span class="line">// <span class="string">'ignore_watch'</span>: [ // 不用监听的文件</span><br><span class="line">//     <span class="string">'node_modules'</span>,</span><br><span class="line">//     <span class="string">'logs'</span>,</span><br><span class="line">// ],</span><br><span class="line">// <span class="string">'restart_delay'</span>: <span class="string">'60s'</span>, // 异常重启情况下，延时重启时间</span><br></pre></td></tr></table></figure>
-
-<h2 id="文件启动方式（可以启动多个项目）"><a href="#文件启动方式（可以启动多个项目）" class="headerlink" title="文件启动方式（可以启动多个项目）"></a>文件启动方式（可以启动多个项目）</h2><blockquote>
-<p><code>pm2 start ecosystem.config.js --env tri</code></p>
-</blockquote>
-<h2 id="进入到项目中单个启动"><a href="#进入到项目中单个启动" class="headerlink" title="进入到项目中单个启动"></a>进入到项目中单个启动</h2><blockquote>
-<p><code>pm2 start /root/pm2.config.js --only Auth --env tri</code></p>
-</blockquote>
-<h2 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">pm2 start &lt;js|json&gt;  // 启动并添加一个进程</span><br><span class="line">pm2 ls  // 显示所有进程</span><br><span class="line">pm2 delete &lt;name|id|script|all|json|stdin&gt;  // 停止并删除指定的进程</span><br><span class="line">// 此进程使用<span class="built_in">kill</span> 无效，因为存在守护进程，所以手动<span class="built_in">kill</span>掉某个进程后会自动重启</span><br><span class="line">pm2 stop &lt;id|name|all|json|stdin&gt;  // 停止进程</span><br><span class="line">pm2 start &lt;id|name|all|json|stdin&gt;  // 启动指定进程</span><br><span class="line">pm2 restart &lt;id|name|all|json|stdin&gt;  // 重启指定进程 也可使用正则匹配多个进程</span><br><span class="line">pm2 monit 查看内存 cpu使用</span><br></pre></td></tr></table></figure>
-
-<h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 1 实时查看某进程日志</span><br><span class="line">pm2 logs &lt;id|name|all&gt;</span><br><span class="line">// 2 当没有指定日志目录时，默认在~/.pm2/logs中存放这所有进程日志历史</span><br><span class="line"></span><br><span class="line">pm2 flush 清空所有历史应用日志</span><br></pre></td></tr></table></figure>
-
-<h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><blockquote>
-<p>pm2 start app.js -i &lt;number | max&gt; // 启动指定数量的子进程</p>
-</blockquote>
-<p><a href="https://pm2.io/docs/plus/guide/server-apps-overview/" target="_blank" rel="external nofollow noopener noreferrer">pm2 文档</a><br><a href="https://www.jianshu.com/p/7b10123c8b88" target="_blank" rel="external nofollow noopener noreferrer">pm2 进程管理工具使用总结</a><br><a href="https://blog.wjc66.cn/%E6%8E%A5%E5%85%A5%E9%98%BF%E9%87%8C%E4%BA%91Node-js%E6%80%A7%E8%83%BD%E5%B9%B3%E5%8F%B0/">alinode 监控配置</a></p>
-
+</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20200706143508883.png" alt="在这里插入图片描述"></p>
+<ol start="2">
+<li>动态查看容器日志</li>
+</ol>
+          
       
     </div>
     
@@ -390,9 +379,13 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a href="/docker%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -416,7 +409,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/81/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/80/">80</a><a class="page-number" href="/page/81/">81</a><span class="page-number current">82</span><a class="page-number" href="/page/83/">83</a><a class="page-number" href="/page/84/">84</a><span class="space">&hellip;</span><a class="page-number" href="/page/148/">148</a><a class="extend next" rel="next" href="/page/83/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/81/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/80/">80</a><a class="page-number" href="/page/81/">81</a><span class="page-number current">82</span><a class="page-number" href="/page/83/">83</a><a class="page-number" href="/page/84/">84</a><span class="space">&hellip;</span><a class="page-number" href="/page/149/">149</a><a class="extend next" rel="next" href="/page/83/">下一页</a>
     </nav>
   
 

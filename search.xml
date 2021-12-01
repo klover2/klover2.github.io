@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>git撤销commit中单个文件的修改</title>
+      <link href="git%E6%92%A4%E9%94%80commit%E4%B8%AD%E5%8D%95%E4%B8%AA%E6%96%87%E4%BB%B6%E7%9A%84%E4%BF%AE%E6%94%B9/"/>
+      <url>git%E6%92%A4%E9%94%80commit%E4%B8%AD%E5%8D%95%E4%B8%AA%E6%96%87%E4%BB%B6%E7%9A%84%E4%BF%AE%E6%94%B9/</url>
+      
+        <content type="html"><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>由于不小心提交了了 yarn.lock 文件，后面还 commit 了几次提交。现在只要回退 yarn.lock 的提交。</p><ol><li><p>先查询 yarn.lock 的提交记录<br><code>git log yarn.lock</code></p></li><li><p>找到这个文件的上次 commit id, 并对其进行 reset 操作<br><code>git reset &lt;commit-id&gt; yarn.lock</code></p></li><li><p>再撤销对此文件的修改<br><code>git checkout yarn.lock</code></p></li><li><p>重新 commit 提交就好<br><code>git commit -m &#39;&#39;</code><br><code>git push</code></p></li></ol>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>配置jdk与maven</title>
       <link href="%E9%85%8D%E7%BD%AEjdk%E4%B8%8Emaven/"/>
       <url>%E9%85%8D%E7%BD%AEjdk%E4%B8%8Emaven/</url>

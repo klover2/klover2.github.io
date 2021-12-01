@@ -297,11 +297,11 @@
   
 
 
-<article id="post-使用任务队列kue处理订单" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-decimal-js的使用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/%E4%BD%BF%E7%94%A8%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97kue%E5%A4%84%E7%90%86%E8%AE%A2%E5%8D%95/" class="article-date">
-      <time datetime="2020-05-12T01:19:15.000Z" itemprop="datePublished">2020-05-12</time>
+      <a href="/decimal-js%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
+      <time datetime="2020-05-13T06:00:04.000Z" itemprop="datePublished">2020-05-13</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/%E4%BD%BF%E7%94%A8%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97kue%E5%A4%84%E7%90%86%E8%AE%A2%E5%8D%95/">使用任务队列kue处理订单</a>
+      <a class="article-title" href="/decimal-js%E7%9A%84%E4%BD%BF%E7%94%A8/">decimal.js的使用</a>
     </h1>
   
 
         
-          <!-- <a href="/%E4%BD%BF%E7%94%A8%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97kue%E5%A4%84%E7%90%86%E8%AE%A2%E5%8D%95/" class="archive-article-date">
-      <time datetime="2020-05-12T01:19:15.000Z" itemprop="datePublished">2020-05-12</time>
+          <!-- <a href="/decimal-js%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+      <time datetime="2020-05-13T06:00:04.000Z" itemprop="datePublished">2020-05-13</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">566字</span>
+      <span class="post-count">161字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">2分</span>
+      <span class="post-count">1分</span>
     </span>
   </span>
 </div>
@@ -358,13 +358,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在计算机科学中，消息队列（英语：Message queue）是一种进程间通信或同一进程的不同线程间的通信方式。</p>
-<p>在高并发或者在计算资源有限的情况下，由于来不及同步处理，请求往往会发生堵塞，比如说，大量的insert，update之类的请求同时到达MySQL，直接导致无数的行锁表锁，甚至最后请求会堆积过多，从而触发too many connections错误。通过使用消息队列，我们可以异步处理请求，从而缓解系统的压力。</p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>kue是基于node.js构建的，redis支持的优先级任务队列。</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>在koa中使用<br>安装插件 </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yarn add kue</span><br><span class="line">yarn add ioredis</span><br></pre></td></tr></table></figure>
-
-<p>在services中新增kue.service.js</p>
+              <p>decimal.js<br>1.js有精度问题, 对于一些金额的计算就总是与偶莫名其妙的问题<br>2.decimal.js是使用的二进制来计算的, 所以能解决js的精度问题</p>
           
       
     </div>
@@ -375,12 +369,12 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/koa/" rel="tag">koa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kue/" rel="tag">kue</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/decimal-js/" rel="tag">decimal.js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li></ul>
     </div>
 
       
         <p class="article-more-link">
-          <a href="/%E4%BD%BF%E7%94%A8%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97kue%E5%A4%84%E7%90%86%E8%AE%A2%E5%8D%95/#more">阅读全文 >></a>
+          <a href="/decimal-js%E7%9A%84%E4%BD%BF%E7%94%A8/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -405,7 +399,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/124/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/123/">123</a><a class="page-number" href="/page/124/">124</a><span class="page-number current">125</span><a class="page-number" href="/page/126/">126</a><a class="page-number" href="/page/127/">127</a><span class="space">&hellip;</span><a class="page-number" href="/page/148/">148</a><a class="extend next" rel="next" href="/page/126/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/124/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/123/">123</a><a class="page-number" href="/page/124/">124</a><span class="page-number current">125</span><a class="page-number" href="/page/126/">126</a><a class="page-number" href="/page/127/">127</a><span class="space">&hellip;</span><a class="page-number" href="/page/149/">149</a><a class="extend next" rel="next" href="/page/126/">下一页</a>
     </nav>
   
 
