@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>压测工具使用</title>
+      <link href="%E5%8E%8B%E6%B5%8B%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"/>
+      <url>%E5%8E%8B%E6%B5%8B%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Apache-Bench"><a href="#Apache-Bench" class="headerlink" title="Apache Bench"></a>Apache Bench</h2><p>Apache Bench 简介<br>ApacheBench 是 Apache 服务器自带的一个 web 压力测试工具，简称 ab。ab 又是一个命令行工具，对发起负载的本机要求很低，根据 ab 命令可以创建很多的并发访问线程，模拟多个访问者同时对某一 URL 地址进行访问，因此可以用来测试目标服务器的负载压力。总的来说 ab 工具小巧简单，上手学习较快，可以提供需要的基本性能指标，但是没有图形化结果，不能监控。</p><a id="more"></a><ol><li><p><a href="https://www.apachelounge.com/download/#google_vignette" target="_blank" rel="external nofollow noopener noreferrer">下载</a></p><p><img src="https://img-blog.csdnimg.cn/cb7d20bc7f9040c38d4a0fadd05dbdbf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li><li><p>解压到本地就可以直接使用,使用如下<br><code>.\bin\abs.exe -c 1 -n 1 -p .\body.txt -T application/json http://127.0.0.1:3000/testing/nium/api/v1/authorization</code></p></li></ol><p><img src="https://img-blog.csdnimg.cn/9ca0540115c0436cad7042e636115b3d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>body.txt 就是请求的 body 参数<br><img src="https://img-blog.csdnimg.cn/d3a1a92dc12644238c80507c808b6b15.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p><ol start="3"><li>参数介绍：</li></ol><p>参数说明：<br>格式：ab [options] [http://]hostname[:port]/path</p><p>-n requests Number of requests to perform //本次测试发起的总请求数<br>-c concurrency Number of multiple requests to make //一次产生的请求数（或并发数）<br>-t timelimit Seconds to max. wait for responses //测试所进行的最大秒数，默认没有时间限制。<br>-r Don’t exit on socket receive errors. // 抛出异常继续执行测试任务<br>-p postfile File containing data to POST //包含了需要 POST 的数据的文件，文件格式如“p1=1&amp;p2=2”.使用方法是 -p 111.txt</p><p>-T content-type Content-type header for POSTing<br>//POST 数据所使用的 Content-type 头信息，如 -T “application/x-www-form-urlencoded” 。 （配合-p）</p><p>-v verbosity How much troubleshooting info to print<br>//设置显示信息的详细程度 – 4 或更大值会显示头信息， 3 或更大值可以显示响应代码(404, 200 等), 2 或更大值可以显示警告和其他信息。</p><p>-V 显示版本号并退出。<br>-C attribute Add cookie, eg. -C “c1=1234,c2=2,c3=3” (repeatable)<br>//-C cookie-name=value 对请求附加一个 Cookie:行。 其典型形式是 name=value 的一个参数对。此参数可以重复，用逗号分割。<br>提示：可以借助 session 实现原理传递 JSESSIONID 参数， 实现保持会话的功能，如-C ” c1=1234,c2=2,c3=3, JSESSIONID=FF056CD16DA9D71CB131C1D56F0319F8″ 。</p><p>-w Print out results in HTML tables //以 HTML 表的格式输出结果。默认时，它是白色背景的两列宽度的一张表。<br>-i Use HEAD instead of GET</p><ol start="4"><li><p>返回介绍<br>Document Path:测试页面<br>Document Length: 页面大小<br>Concurrency Level: 测试的并发数<br>Time taken for tests:整个测试持续的时间<br>Complete requests:完成的请求数量<br>Failed requests: 失败的请求数量<br>Write errors: 0<br>Total transferred: 整个过程中的网络传输量<br>HTML transferred: 整个过程中的 HTML 内容传输量<br>Requests per second: 最重要的指标之一，相当于 LR 中的每秒事务数，后面括号中的 mean 表示这是一个平均值<br>Time per request: 最重要的指标之二，相当于 LR 中的平均事务响应时间，后面括号中的 mean 表示这是一个平均值<br>Time per request: 每个连接请求实际运行时间的平均值<br>Transfer rate: 平均每秒网络上的流量，可以帮助排除是否存在网络流量过大导致响应时间延长的问题</p></li><li><p><a href="https://blog.csdn.net/weixin_39089928/article/details/87371792" target="_blank" rel="external nofollow noopener noreferrer">参考文档</a></p></li></ol>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 压测工具 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>git撤销commit中单个文件的修改</title>
       <link href="git%E6%92%A4%E9%94%80commit%E4%B8%AD%E5%8D%95%E4%B8%AA%E6%96%87%E4%BB%B6%E7%9A%84%E4%BF%AE%E6%94%B9/"/>
       <url>git%E6%92%A4%E9%94%80commit%E4%B8%AD%E5%8D%95%E4%B8%AA%E6%96%87%E4%BB%B6%E7%9A%84%E4%BF%AE%E6%94%B9/</url>
