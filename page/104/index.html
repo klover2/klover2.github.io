@@ -297,11 +297,11 @@
   
 
 
-<article id="post-GitHub配置密钥" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-用-wxConfig-envVersion区分小程序体验版，开发板，正式版" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/GitHub%E9%85%8D%E7%BD%AE%E5%AF%86%E9%92%A5/" class="article-date">
-      <time datetime="2020-05-20T03:12:42.000Z" itemprop="datePublished">2020-05-20</time>
+      <a href="/%E7%94%A8-wxConfig-envVersion%E5%8C%BA%E5%88%86%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BD%93%E9%AA%8C%E7%89%88%EF%BC%8C%E5%BC%80%E5%8F%91%E6%9D%BF%EF%BC%8C%E6%AD%A3%E5%BC%8F%E7%89%88/" class="article-date">
+      <time datetime="2020-05-20T10:25:29.000Z" itemprop="datePublished">2020-05-20</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/GitHub%E9%85%8D%E7%BD%AE%E5%AF%86%E9%92%A5/">GitHub配置密钥</a>
+      <a class="article-title" href="/%E7%94%A8-wxConfig-envVersion%E5%8C%BA%E5%88%86%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BD%93%E9%AA%8C%E7%89%88%EF%BC%8C%E5%BC%80%E5%8F%91%E6%9D%BF%EF%BC%8C%E6%AD%A3%E5%BC%8F%E7%89%88/">用__wxConfig.envVersion区分小程序体验版，开发板，正式版</a>
     </h1>
   
 
         
-          <!-- <a href="/GitHub%E9%85%8D%E7%BD%AE%E5%AF%86%E9%92%A5/" class="archive-article-date">
-      <time datetime="2020-05-20T03:12:42.000Z" itemprop="datePublished">2020-05-20</time>
+          <!-- <a href="/%E7%94%A8-wxConfig-envVersion%E5%8C%BA%E5%88%86%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BD%93%E9%AA%8C%E7%89%88%EF%BC%8C%E5%BC%80%E5%8F%91%E6%9D%BF%EF%BC%8C%E6%AD%A3%E5%BC%8F%E7%89%88/" class="archive-article-date">
+      <time datetime="2020-05-20T10:25:29.000Z" itemprop="datePublished">2020-05-20</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">163字</span>
+      <span class="post-count">25字</span>
     </span>
   </span>
 
@@ -358,14 +358,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>在windows 电脑下生产公钥文件<br>ssh-keygen -t rsa -C MAIL，一路回车就行<br>(MAIL 处输入自己的邮箱号）</p>
-<p>生产之后在用户.ssh目录下 打开 id_rsa.pub,复制里面的内容</p>
-<ol>
-<li>所有项目配置同一个公钥<br>登陆到自己的gitbub,点击右上角的倒立小三角形。选择 settings<br><img src="https://img-blog.csdnimg.cn/2020031716054754.png" alt="在这里插入图片描述"><br>选择SSH and GPG keys<br><img src="https://img-blog.csdnimg.cn/20200317160619158.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
-</ol>
-<p>点击右边的New SSH key 把复制的公钥文件复制进入</p>
-<p>2.给其中一个项目添加公钥文件<br>点击自己其中一个项目，选择setting<br><img src="https://img-blog.csdnimg.cn/20200317161029478.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>选择deploy key 点击add deploy key<br>复制公钥 名称随便起<br>保存就可以了</p>
-
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const envVersion = __wxConfig.envVersion</span><br><span class="line"></span><br><span class="line">envVersion 类型为字符串</span><br><span class="line"></span><br><span class="line">envVersion: <span class="string">'develop'</span>,    //开发版</span><br><span class="line"></span><br><span class="line">envVersion: <span class="string">'trial'</span>,      //体验版</span><br><span class="line"></span><br><span class="line">envVersion: <span class="string">'release'</span>,     //正式版</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -375,7 +368,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a></li></ul>
     </div>
 
       
@@ -401,7 +394,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/103/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/102/">102</a><a class="page-number" href="/page/103/">103</a><span class="page-number current">104</span><a class="page-number" href="/page/105/">105</a><a class="page-number" href="/page/106/">106</a><span class="space">&hellip;</span><a class="page-number" href="/page/150/">150</a><a class="extend next" rel="next" href="/page/105/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/103/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/102/">102</a><a class="page-number" href="/page/103/">103</a><span class="page-number current">104</span><a class="page-number" href="/page/105/">105</a><a class="page-number" href="/page/106/">106</a><span class="space">&hellip;</span><a class="page-number" href="/page/151/">151</a><a class="extend next" rel="next" href="/page/105/">下一页</a>
     </nav>
   
 

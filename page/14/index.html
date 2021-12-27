@@ -297,11 +297,11 @@
   
 
 
-<article id="post-vue-socket-io的使用" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-使用nest遇到的问题" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/vue-socket-io%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
-      <time datetime="2021-04-22T01:58:35.000Z" itemprop="datePublished">2021-04-22</time>
+      <a href="/%E4%BD%BF%E7%94%A8nest%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
+      <time datetime="2021-06-11T07:28:25.000Z" itemprop="datePublished">2021-06-11</time>
 </a>
 
 
@@ -316,19 +316,38 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/vue-socket-io%E7%9A%84%E4%BD%BF%E7%94%A8/">vue-socket.io的使用</a>
+      <a class="article-title" href="/%E4%BD%BF%E7%94%A8nest%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">使用nest遇到的问题</a>
     </h1>
   
 
         
-          <!-- <a href="/vue-socket-io%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-      <time datetime="2021-04-22T01:58:35.000Z" itemprop="datePublished">2021-04-22</time>
+          <!-- <a href="/%E4%BD%BF%E7%94%A8nest%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
+      <time datetime="2021-06-11T07:28:25.000Z" itemprop="datePublished">2021-06-11</time>
 </a>
 
  -->
           <!-- 需要添加的位置 -->
           <!-- 开始添加字数统计-->
           
+            <div style="margin-top:10px;margin-bottom:30px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-keyboard-o"></i>
+      <span class="post-meta-item-text">  字数统计: </span>
+      <span class="post-count">48字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="fa fa-hourglass-half"></i>
+      <span class="post-meta-item-text">  阅读时长: </span>
+      <span class="post-count">1分</span>
+    </span>
+  </span>
+</div>
+            
           <!-- 添加完成 -->
   
           
@@ -339,14 +358,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>ts + vue</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">'@/store'</span></span><br><span class="line"><span class="keyword">import</span> &#123; Module, VuexModule, Mutation, Action, getModule &#125; <span class="keyword">from</span> <span class="string">'vuex-module-decorators'</span></span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'@/main'</span></span><br><span class="line"><span class="keyword">import</span> &#123; UserModule &#125; <span class="keyword">from</span> <span class="string">'@/store/modules/user'</span></span><br><span class="line"></span><br><span class="line">@Module(&#123; <span class="attr">dynamic</span>: <span class="literal">true</span>, store, <span class="attr">name</span>: <span class="string">'WebSocket'</span> &#125;)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WebSocket</span> <span class="keyword">extends</span> <span class="title">VuexModule</span> </span>&#123;</span><br><span class="line">  connect_status: <span class="built_in">Boolean</span> = <span class="literal">false</span> <span class="comment">// 连接状态</span></span><br><span class="line">  message: any <span class="comment">// 全局消息</span></span><br><span class="line">  env = process.env.NODE_ENV === <span class="string">'development'</span></span><br><span class="line"></span><br><span class="line">  @Mutation</span><br><span class="line">  private SOCKET_CONNECT() &#123;</span><br><span class="line">    <span class="keyword">this</span>.connect_status = <span class="literal">true</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.env) <span class="built_in">console</span>.log(<span class="string">'socket连接成功==========&gt;'</span>, <span class="keyword">this</span>.connect_status)</span><br><span class="line">  &#125;</span><br><span class="line">  @Mutation</span><br><span class="line">  private SOCKET_CONNECT_ERROR() &#123;</span><br><span class="line">    <span class="keyword">this</span>.connect_status = <span class="literal">false</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.env) <span class="built_in">console</span>.log(<span class="string">'socket连接失败==========&gt;'</span>, <span class="keyword">this</span>.connect_status)</span><br><span class="line">  &#125;</span><br><span class="line">  @Mutation</span><br><span class="line">  private SOCKET_DISCONNECT() &#123;</span><br><span class="line">    <span class="keyword">this</span>.connect_status = <span class="literal">true</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.env) <span class="built_in">console</span>.log(<span class="string">'socket连接断开==========&gt;'</span>, <span class="keyword">this</span>.connect_status)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Mutation</span><br><span class="line">  private SOCKET_NOTIFICATION(message: any) &#123;</span><br><span class="line">    <span class="keyword">this</span>.message = message</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Mutation</span><br><span class="line">  private SOCKET_JOINACCOUNTROOM(data: any) &#123;</span><br><span class="line">    App.$socket.emit(<span class="string">'joinAccountRoom'</span>, &#123;</span><br><span class="line">      accountId: data.accountId,</span><br><span class="line">      userId: data.userId,</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Action</span><br><span class="line">  socket_connect() &#123;</span><br><span class="line">    <span class="keyword">this</span>.context.commit(<span class="string">'SOCKET_CONNECT'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  @Action</span><br><span class="line">  socket_disconnet() &#123;</span><br><span class="line">    <span class="keyword">this</span>.context.commit(<span class="string">'SOCKET_DISCONNECT'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  @Action</span><br><span class="line">  socket_reconnect() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'重连成功'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 服务器重启 重新加入私有房间</span></span><br><span class="line">    <span class="keyword">const</span> accountId = UserModule.accountId</span><br><span class="line">    <span class="keyword">const</span> userId = UserModule.userId</span><br><span class="line">    <span class="built_in">console</span>.log(accountId, userId)</span><br><span class="line">    <span class="keyword">if</span> (accountId &amp;&amp; userId)</span><br><span class="line">      <span class="keyword">this</span>.context.commit(<span class="string">'SOCKET_JOINACCOUNTROOM'</span>, &#123;</span><br><span class="line">        accountId,</span><br><span class="line">        userId,</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  @Action</span><br><span class="line">  socket_connect_error() &#123;</span><br><span class="line">    <span class="keyword">this</span>.context.commit(<span class="string">'SOCKET_CONNECT_ERROR'</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Action <span class="comment">// notification 与后端 通知的方法名称一致</span></span><br><span class="line">  socket_notification(message: any) &#123;</span><br><span class="line">    <span class="keyword">this</span>.context.commit(<span class="string">'SOCKET_NOTIFICATION'</span>, message)</span><br><span class="line">  &#125;</span><br><span class="line">  @Action <span class="comment">// 加入私有房间</span></span><br><span class="line">  socket_joinAccountRoom(data: any) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.connect_status) <span class="keyword">this</span>.context.commit(<span class="string">'SOCKET_JOINACCOUNTROOM'</span>, data)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> WebSocketModule = getModule(WebSocket)</span><br></pre></td></tr></table></figure>
-
-<p>在 main.js</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Vue.use(</span><br><span class="line">  <span class="keyword">new</span> VueSocketIO(&#123;</span><br><span class="line">    debug: process.env.NODE_ENV === <span class="string">"development"</span>,</span><br><span class="line">    connection: process.env.VUE_APP_SOCKET_UEL || <span class="string">""</span>,</span><br><span class="line">    vuex: &#123;</span><br><span class="line">      store,</span><br><span class="line">      actionPrefix: <span class="string">"socket_"</span>,</span><br><span class="line">      mutationPrefix: <span class="string">"SOCKET_"</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<p>在 app.vue 导入 就可以用了</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"@/store/modules/websocket"</span>;</span><br></pre></td></tr></table></figure>
+        <h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题 1"></a>问题 1</h2><p>访问接口报下面警告<br>No metadata found. There is more than once class-validator version installed probably. You need to flatten your dependencies<br>原因 是类验证版本有问题<br>处理 <code>npm install --save class-validator</code></p>
 
       
     </div>
@@ -357,7 +369,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/socket/" rel="tag">socket</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nestjs/" rel="tag">nestjs</a></li></ul>
     </div>
 
       
@@ -383,7 +395,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/13/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/150/">150</a><a class="extend next" rel="next" href="/page/15/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/13/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/151/">151</a><a class="extend next" rel="next" href="/page/15/">下一页</a>
     </nav>
   
 
