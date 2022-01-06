@@ -297,11 +297,11 @@
   
 
 
-<article id="post-Nginx配置限制IP访问" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-CentOS7-nginx配置-阻止dos攻击、禁止代理访问" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/Nginx%E9%85%8D%E7%BD%AE%E9%99%90%E5%88%B6IP%E8%AE%BF%E9%97%AE/" class="article-date">
-      <time datetime="2020-10-09T02:40:27.000Z" itemprop="datePublished">2020-10-09</time>
+      <a href="/CentOS7-nginx%E9%85%8D%E7%BD%AE-%E9%98%BB%E6%AD%A2dos%E6%94%BB%E5%87%BB%E3%80%81%E7%A6%81%E6%AD%A2%E4%BB%A3%E7%90%86%E8%AE%BF%E9%97%AE/" class="article-date">
+      <time datetime="2020-10-09T03:02:07.000Z" itemprop="datePublished">2020-10-09</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/Nginx%E9%85%8D%E7%BD%AE%E9%99%90%E5%88%B6IP%E8%AE%BF%E9%97%AE/">Nginx配置限制IP访问</a>
+      <a class="article-title" href="/CentOS7-nginx%E9%85%8D%E7%BD%AE-%E9%98%BB%E6%AD%A2dos%E6%94%BB%E5%87%BB%E3%80%81%E7%A6%81%E6%AD%A2%E4%BB%A3%E7%90%86%E8%AE%BF%E9%97%AE/">CentOS7-nginx配置,阻止dos攻击、禁止代理访问</a>
     </h1>
   
 
         
-          <!-- <a href="/Nginx%E9%85%8D%E7%BD%AE%E9%99%90%E5%88%B6IP%E8%AE%BF%E9%97%AE/" class="archive-article-date">
-      <time datetime="2020-10-09T02:40:27.000Z" itemprop="datePublished">2020-10-09</time>
+          <!-- <a href="/CentOS7-nginx%E9%85%8D%E7%BD%AE-%E9%98%BB%E6%AD%A2dos%E6%94%BB%E5%87%BB%E3%80%81%E7%A6%81%E6%AD%A2%E4%BB%A3%E7%90%86%E8%AE%BF%E9%97%AE/" class="archive-article-date">
+      <time datetime="2020-10-09T03:02:07.000Z" itemprop="datePublished">2020-10-09</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">398字</span>
+      <span class="post-count">1k字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">1分</span>
+      <span class="post-count">3分</span>
     </span>
   </span>
 </div>
@@ -358,64 +358,18 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="Nginx配置限制IP访问"><a href="#Nginx配置限制IP访问" class="headerlink" title="Nginx配置限制IP访问"></a>Nginx配置限制IP访问</h2><p>有时候我们需要针对屏蔽某些恶意的IP访问我们的网站，或者限制仅仅某些白名单IP才能访问我们的网站。这时候我们就可以在nginx中通过简单的配置来达到目的。</p>
-<h2 id="相关配置语句"><a href="#相关配置语句" class="headerlink" title="相关配置语句"></a>相关配置语句</h2><ol>
-<li>屏蔽单个ip访问</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 格式： deny ip;</span></span><br><span class="line">deny 123.68.23.5;</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>允许单个ip访问</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 格式： allow ip;</span></span><br><span class="line">allow 123.68.25.6;</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>屏蔽所有ip访问<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deny all;</span><br></pre></td></tr></table></figure></li>
-<li>允许所有ip访问</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">allow all;</span><br></pre></td></tr></table></figure>
-<ol start="5">
-<li>屏蔽ip段访问</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment"># deny ip/mask</span></span><br><span class="line"><span class="comment"># 屏蔽172.12.62.0到172.45.62.255访问的命令 </span></span><br><span class="line">deny 172.12.62.0/24;</span><br></pre></td></tr></table></figure>
-<ol start="6">
-<li>允许ip段访问</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># allow ip/mask</span></span><br><span class="line"><span class="comment"># 屏蔽172.102.0.0到172.102.255.255访问的命令 </span></span><br><span class="line">allow 172.102.0.0/16;</span><br></pre></td></tr></table></figure>
-<h2 id="配置说明"><a href="#配置说明" class="headerlink" title="配置说明"></a>配置说明</h2><ol>
-<li>可新建一个配置文件，如blockip.conf。在其中编写相关的ip限制语句，然后在nginx.conf中加入如下配置：</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置ip限制策略</span></span><br><span class="line">include blockip.conf;</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>nginx会根据配置文件中的语句，从上至下依次判断。因此，写在前面的语句可能会屏蔽后续的语句。<br>除部分ip白名单外，屏蔽所有ip<h1 id="允许部分ip访问"><a href="#允许部分ip访问" class="headerlink" title="允许部分ip访问"></a>允许部分ip访问</h1></li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">allow 123.45.25.6;</span><br><span class="line">allow 123.68.52.125;</span><br><span class="line">allow 123.125.25.106;</span><br><span class="line"> <span class="comment"># 禁止其余ip访问</span></span><br><span class="line">deny all;</span><br></pre></td></tr></table></figure>
+        <p>如何设置能限制某个IP某一时间段的访问次数是一个让人头疼的问题，特别面对恶意的ddos攻击的时候。其中CC攻击（Challenge Collapsar）是DDOS（分布式拒绝服务）的一种，也是一种常见的网站攻击方法，攻击者通过代理服务器或者肉鸡向向受害主机不停地发大量数据包，造成对方服务器资源耗尽，一直到宕机崩溃。<br>cc攻击一般就是使用有限的ip数对服务器频繁发送数据来达到攻击的目的，nginx可以通过HttpLimitReqModul和HttpLimitZoneModule配置来限制ip在同一时间段的访问次数来防cc攻击。</p>
+<p>HttpLimitReqModul用来限制连单位时间内连接数的模块，使用limit_req_zone和limit_req指令配合使用来达到限制。一旦并发连接超过指定数量，就会返回503错误。</p>
+<p>HttpLimitConnModul用来限制单个ip的并发连接数，使用limit_zone和limit_conn指令</p>
+<p>这两个模块的区别前一个是对一段时间内的连接数限制，后者是对同一时刻的连接数限制</p>
+<h2 id="HttpLimitReqModul-限制某一段时间内同一ip访问数实例"><a href="#HttpLimitReqModul-限制某一段时间内同一ip访问数实例" class="headerlink" title="HttpLimitReqModul 限制某一段时间内同一ip访问数实例"></a>HttpLimitReqModul 限制某一段时间内同一ip访问数实例</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">http&#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="comment">#定义一个名为allips的limit_req_zone用来存储session，大小是10M内存，</span></span><br><span class="line">    <span class="comment">#以$binary_remote_addr 为key,限制平均每秒的请求为20个，</span></span><br><span class="line">    <span class="comment">#1M能存储16000个状态，rete的值必须为整数，</span></span><br><span class="line">    <span class="comment">#如果限制两秒钟一个请求，可以设置成30r/m</span></span><br><span class="line"></span><br><span class="line">    limit_req_zone <span class="variable">$binary_remote_addr</span> zone=allips:10m rate=20r/s;</span><br><span class="line">    ...</span><br><span class="line">    server&#123;</span><br><span class="line">        ...</span><br><span class="line">        location &#123;</span><br><span class="line">            ...</span><br><span class="line"></span><br><span class="line">            <span class="comment">#限制每ip每秒不超过20个请求，漏桶数burst为5</span></span><br><span class="line">            <span class="comment">#brust的意思就是，如果第1秒、2,3,4秒请求为19个，</span></span><br><span class="line">            <span class="comment">#第5秒的请求为25个是被允许的。</span></span><br><span class="line">            <span class="comment">#但是如果你第1秒就25个请求，第2秒超过20的请求返回503错误。</span></span><br><span class="line">            <span class="comment">#nodelay，如果不设置该选项，严格使用平均速率限制请求数，</span></span><br><span class="line">            <span class="comment">#第1秒25个请求时，5个请求放到第2秒执行，</span></span><br><span class="line">            <span class="comment">#设置nodelay，25个请求将在第1秒执行。</span></span><br><span class="line"></span><br><span class="line">            limit_req zone=allips burst=5 nodelay;</span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<ol start="3">
-<li>屏蔽策略文件可以放在http, server, location, limit_except语句块中，我们可以根据需要合理的配置。</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>放置位置</th>
-<th>效果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>http</td>
-<td>nginx中所有服务起效</td>
-</tr>
-<tr>
-<td>server</td>
-<td>指定的服务起效</td>
-</tr>
-<tr>
-<td>location</td>
-<td>满足的location下起效</td>
-</tr>
-<tr>
-<td>limit_except</td>
-<td>指定的http方法谓词起效</td>
-</tr>
-</tbody></table>
+<h2 id="阻止用户使用代理"><a href="#阻止用户使用代理" class="headerlink" title="阻止用户使用代理"></a>阻止用户使用代理</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#这三句if是禁止使用代理ip来访问，或禁止使用压力测试软件进行dos攻击（放在nginx.conf的server里面）</span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$http_user_agent</span> ~* ApacheBench|WebBench|java/)&#123;</span><br><span class="line">                <span class="built_in">return</span> 403;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="keyword">if</span> ( <span class="variable">$http_user_agent</span> ~* (Wget|ab) ) &#123;</span><br><span class="line">   <span class="built_in">return</span> 403;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ( <span class="variable">$http_user_agent</span> ~* LWP::Simple|BBBike|wget) &#123;</span><br><span class="line">            <span class="built_in">return</span> 403;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="nginx配置和排查指引"><a href="#nginx配置和排查指引" class="headerlink" title="nginx配置和排查指引"></a>nginx配置和排查指引</h2><p>当出现直接超时、处理返回慢时的报警时，nigix侧的故障排查参考方法有如下： 1、检查请求日志情况， tail -f logs/access.log ，看upstream_status字段。</p>
+<p>200：表示正常； 502/503/504：表示处理慢，或者后端down机；再看upstream_response_time返回的时间是否真的较慢，有没有上百毫秒，或更高的，有则说明是后端服务有问题。 404：表示请求的路径不存在或不对，文件不在了。需要检查你的url路径是否正确； 服务器上的文件、程序是否存在。 403：表示无权限访问。 检查一下nginx.conf 是否有特殊的访问配置。 499: 则是客户端的问题 此错误少见。</p>
+<p>2、检查错误日志情况，tail -f logs/error_log ，查看是否有connect() failed、Connection refused、 Connection reset by peer等error错误日志，有则说明有可能nginx出现的连接数超负载等情况。</p>
+<p>（1）查看系统的网络连接数情况确认是否有较大的链接数 # netstat -n | awk ‘/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}’ 解析： CLOSED //无连接是活动的或正在进行 LISTEN //服务器在等待进入呼叫 SYN_RECV //一个连接请求已经到达，等待确认 SYN_SENT //应用已经开始，打开一个连接 ESTABLISHED //正常数据传输状态/当前并发连接数 FIN_WAIT1 //应用说它已经完成 FIN_WAIT2 //另一边已同意释放 ITMED_WAIT //等待所有分组死掉 CLOSING //两边同时尝试关闭 TIME_WAIT //另一边已初始化一个释放 LAST_ACK //等待所有分组死掉<br>（2）查看系统的句柄配置情况，ulimit -n ，确认是否过小（小于请求数） （3）worker_rlimit_nofile、worker_connections配置项，是否过小（小于请求数）</p>
 
       
     </div>
@@ -452,7 +406,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/47/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><a class="page-number" href="/page/47/">47</a><span class="page-number current">48</span><a class="page-number" href="/page/49/">49</a><a class="page-number" href="/page/50/">50</a><span class="space">&hellip;</span><a class="page-number" href="/page/151/">151</a><a class="extend next" rel="next" href="/page/49/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/47/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><a class="page-number" href="/page/47/">47</a><span class="page-number current">48</span><a class="page-number" href="/page/49/">49</a><a class="page-number" href="/page/50/">50</a><span class="space">&hellip;</span><a class="page-number" href="/page/152/">152</a><a class="extend next" rel="next" href="/page/49/">下一页</a>
     </nav>
   
 
@@ -462,7 +416,7 @@
         <div id="footer-info">
             <div>
                 <!-- <i class="fa fa-copyright"></i> 
-                2016-2021 w-klover -->
+                2016-2022 w-klover -->
 
                 <p><a href="http://beian.miit.gov.cn/" target="_blank" rel="external nofollow noopener noreferrer">浙ICP备20008562号-1</a></p>
                 <div style="width:300px;margin:0 auto; padding:20px 0;">

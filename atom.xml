@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.wjc66.cn/"/>
-  <updated>2021-12-27T05:58:23.733Z</updated>
+  <updated>2022-01-06T13:38:09.440Z</updated>
   <id>https://blog.wjc66.cn/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何对typescript进行单元测试</title>
+    <link href="https://blog.wjc66.cn/%E5%A6%82%E4%BD%95%E5%AF%B9typescript%E8%BF%9B%E8%A1%8C%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"/>
+    <id>https://blog.wjc66.cn/%E5%A6%82%E4%BD%95%E5%AF%B9typescript%E8%BF%9B%E8%A1%8C%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</id>
+    <published>2022-01-06T13:34:18.000Z</published>
+    <updated>2022-01-06T13:38:09.440Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><code>yarn add -D ts-jest jest @types/jest</code></p><h3 id="全局安装"><a href="#全局安装" class="headerlink" title="全局安装"></a>全局安装</h3><p><code>npm i jest -g</code></p><h2 id="初始化-jest"><a href="#初始化-jest" class="headerlink" title="初始化 jest"></a>初始化 jest</h2><p><code>jest --init</code></p><h2 id="移除生成的-jest-config-js-文件"><a href="#移除生成的-jest-config-js-文件" class="headerlink" title="移除生成的 jest.config.js 文件"></a>移除生成的 jest.config.js 文件</h2><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>在 package.json 中配置</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"jest"</span>: &#123;</span><br><span class="line">    <span class="string">"moduleFileExtensions"</span>: [</span><br><span class="line">      <span class="string">"js"</span>,</span><br><span class="line">      <span class="string">"json"</span>,</span><br><span class="line">      <span class="string">"ts"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"rootDir"</span>: <span class="string">"."</span>,</span><br><span class="line">    <span class="string">"testRegex"</span>: <span class="string">".spec.ts$"</span>,</span><br><span class="line">    <span class="string">"transform"</span>: &#123;</span><br><span class="line">      <span class="string">"^.+\\.(t|j)s$"</span>: <span class="string">"ts-jest"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"coverageDirectory"</span>: <span class="string">"./coverage"</span>,</span><br><span class="line">    <span class="string">"testEnvironment"</span>: <span class="string">"node"</span>,</span><br><span class="line">    <span class="string">"roots"</span>: [</span><br><span class="line">      <span class="string">"&lt;rootDir&gt;/test/"</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">describe(<span class="string">"test"</span>, () =&gt; &#123;</span><br><span class="line">  beforeAll(<span class="keyword">async</span> () =&gt; &#123;&#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">"test"</span>, () =&gt; &#123;&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h2&gt;&lt;p&gt;&lt;code&gt;yarn add -D ts-jest jest @types/jest&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&quot;全局安装&quot;&gt;&lt;a
+      
+    
+    </summary>
+    
+    
+    
+      <category term="typescript" scheme="https://blog.wjc66.cn/tags/typescript/"/>
+    
+  </entry>
   
   <entry>
     <title>PostgreSQL中JSONB的使用</title>
@@ -485,32 +510,6 @@
     
     
       <category term="vue" scheme="https://blog.wjc66.cn/tags/vue/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>distinct和distinct-on的使用</title>
-    <link href="https://blog.wjc66.cn/distinct%E5%92%8Cdistinct-on%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-    <id>https://blog.wjc66.cn/distinct%E5%92%8Cdistinct-on%E7%9A%84%E4%BD%BF%E7%94%A8/</id>
-    <published>2021-04-15T13:03:38.000Z</published>
-    <updated>2021-09-23T07:24:47.888Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="去重；关键字-distinct-去重功能-在其他数据库（oracle，mysql）是存在；当然-postgresql-也有这个功能"><a href="#去重；关键字-distinct-去重功能-在其他数据库（oracle，mysql）是存在；当然-postgresql-也有这个功能" class="headerlink" title="去重；关键字 distinct 去重功能 在其他数据库（oracle，mysql）是存在；当然 postgresql 也有这个功能"></a>去重；关键字 distinct 去重功能 在其他数据库（oracle，mysql）是存在；当然 postgresql 也有这个功能</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">[postgres@sdserver40_210 ~]$ psql mydb lottu</span><br><span class="line">psql (9.5.0)</span><br><span class="line">Type <span class="string">"help"</span> <span class="keyword">for</span> <span class="built_in">help</span>.</span><br><span class="line"></span><br><span class="line">mydb=&gt; select * from trade;</span><br><span class="line"> tradeno | accountid  | fee | game_id</span><br><span class="line">---------+------------+-----+---------</span><br><span class="line"> 1000006 | yyb_100001 |  10 |    2555</span><br><span class="line"> 1000011 | yyb_100002 | 100 |    2555</span><br><span class="line"> 1001859 | yyb_100001 |  10 |    2555</span><br><span class="line"> 1001861 | yyb_100003 |  20 |    2555</span><br><span class="line"> 1001854 | yyb_100004 |   6 |    2555</span><br><span class="line"> 1001881 | yyb_100002 | 328 |    2555</span><br><span class="line">(6 rows)</span><br><span class="line"></span><br><span class="line">mydb=&gt; select distinct accountid from trade;</span><br><span class="line"> accountid</span><br><span class="line">------------</span><br><span class="line"> yyb_100001</span><br><span class="line"> yyb_100004</span><br><span class="line"> yyb_100002</span><br><span class="line"> yyb_100003</span><br><span class="line">(4 rows)</span><br><span class="line"></span><br><span class="line">mydb=&gt; select distinct accountid,game_id from trade;</span><br><span class="line"> accountid  | game_id</span><br><span class="line">------------+---------</span><br><span class="line"> yyb_100001 |    2555</span><br><span class="line"> yyb_100003 |    2555</span><br><span class="line"> yyb_100004 |    2555</span><br><span class="line"> yyb_100002 |    2555</span><br><span class="line">(4 rows)</span><br></pre></td></tr></table></figure><h2 id="跟-on-一起用；-使用-DISTINCT-ON-实现用窗口函数实现的取第一名的功能"><a href="#跟-on-一起用；-使用-DISTINCT-ON-实现用窗口函数实现的取第一名的功能" class="headerlink" title="跟 on 一起用； 使用 DISTINCT ON 实现用窗口函数实现的取第一名的功能"></a>跟 on 一起用； 使用 DISTINCT ON 实现用窗口函数实现的取第一名的功能</h2><p>这个功能 oracle，mysql 是没有的；当然它们有其他的分析函数可以替换；顶替；例如 row_number, fisrt_value 等等</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">mydb=&gt; select distinct on (accountid) accountid,fee from trade;</span><br><span class="line"> accountid  | fee</span><br><span class="line">------------+-----</span><br><span class="line"> yyb_100001 |  10</span><br><span class="line"> yyb_100002 | 100</span><br><span class="line"> yyb_100003 |  20</span><br><span class="line"> yyb_100004 |   6</span><br><span class="line">(4 rows)</span><br><span class="line"></span><br><span class="line">mydb=&gt; select distinct on (game_id) accountid,fee from trade;</span><br><span class="line"> accountid  | fee</span><br><span class="line">------------+-----</span><br><span class="line"> yyb_100001 |  10</span><br><span class="line">(1 row)</span><br><span class="line"></span><br><span class="line">mydb=&gt; select distinct on (game_id) accountid,fee from trade order by game_id, fee desc;</span><br><span class="line"> accountid  | fee</span><br><span class="line">------------+-----</span><br><span class="line"> yyb_100002 | 328</span><br><span class="line">(1 row)</span><br><span class="line"></span><br><span class="line">--例如取每个帐号充值最大的一笔</span><br><span class="line">mydb=&gt; select distinct on (accountid) accountid,fee from trade order by accountid, fee desc;</span><br><span class="line"> accountid  | fee</span><br><span class="line">------------+-----</span><br><span class="line"> yyb_100001 |  10</span><br><span class="line"> yyb_100002 | 328</span><br><span class="line"> yyb_100003 |  20</span><br><span class="line"> yyb_100004 |   6</span><br><span class="line">(4 rows)</span><br></pre></td></tr></table></figure><p>在 typeorm 中实现</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">    Repository, Between, MoreThanOrEqual, In, LessThan, IsNull, LessThanOrEqual</span><br><span class="line">    &#125; <span class="keyword">from</span> <span class="string">'typeorm'</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span>.transactionRepository</span><br><span class="line">        .createQueryBuilder()</span><br><span class="line">        .select(<span class="string">`DISTINCT ON ("accountId") "accountId"`</span>)</span><br><span class="line">        .addSelect([<span class="string">'"transactionTime"'</span>, <span class="string">'"recipientCost"'</span>])</span><br><span class="line">        .where(&#123;</span><br><span class="line">          status: TransactionStatusEnum.Closed,</span><br><span class="line">          type: TransactionTypeEnum.Deposit,</span><br><span class="line">          accountId: In(_accountIds),</span><br><span class="line">          senderType: IsNull(),</span><br><span class="line">          transactionTime: Between(time[<span class="number">0</span>], time[<span class="number">1</span>]),</span><br><span class="line">        &#125;)</span><br><span class="line">        .orderBy(<span class="string">`"accountId", "transactionTime"`</span>, <span class="string">'ASC'</span>)</span><br><span class="line">        .getRawMany(),</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;去重；关键字-distinct-去重功能-在其他数据库（oracle，mysql）是存在；当然-postgresql-也有这个功能&quot;&gt;&lt;a href=&quot;#去重；关键字-distinct-去重功能-在其他数据库（oracle，mysql）是存在；当然-postgre
-      
-    
-    </summary>
-    
-    
-    
-      <category term="postgresql" scheme="https://blog.wjc66.cn/tags/postgresql/"/>
-    
-      <category term="typeorm" scheme="https://blog.wjc66.cn/tags/typeorm/"/>
     
   </entry>
   

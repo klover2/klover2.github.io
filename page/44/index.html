@@ -297,11 +297,11 @@
   
 
 
-<article id="post-nodejs使用crypto加密" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-axios因为跨域导致或者headers信息不全" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/nodejs%E4%BD%BF%E7%94%A8crypto%E5%8A%A0%E5%AF%86/" class="article-date">
-      <time datetime="2020-11-05T10:02:12.000Z" itemprop="datePublished">2020-11-05</time>
+      <a href="/axios%E5%9B%A0%E4%B8%BA%E8%B7%A8%E5%9F%9F%E5%AF%BC%E8%87%B4%E6%88%96%E8%80%85headers%E4%BF%A1%E6%81%AF%E4%B8%8D%E5%85%A8/" class="article-date">
+      <time datetime="2020-11-13T08:53:20.000Z" itemprop="datePublished">2020-11-13</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/nodejs%E4%BD%BF%E7%94%A8crypto%E5%8A%A0%E5%AF%86/">nodejs使用crypto加密</a>
+      <a class="article-title" href="/axios%E5%9B%A0%E4%B8%BA%E8%B7%A8%E5%9F%9F%E5%AF%BC%E8%87%B4%E6%88%96%E8%80%85headers%E4%BF%A1%E6%81%AF%E4%B8%8D%E5%85%A8/">axios因为跨域导致或者headers信息不全</a>
     </h1>
   
 
         
-          <!-- <a href="/nodejs%E4%BD%BF%E7%94%A8crypto%E5%8A%A0%E5%AF%86/" class="archive-article-date">
-      <time datetime="2020-11-05T10:02:12.000Z" itemprop="datePublished">2020-11-05</time>
+          <!-- <a href="/axios%E5%9B%A0%E4%B8%BA%E8%B7%A8%E5%9F%9F%E5%AF%BC%E8%87%B4%E6%88%96%E8%80%85headers%E4%BF%A1%E6%81%AF%E4%B8%8D%E5%85%A8/" class="archive-article-date">
+      <time datetime="2020-11-13T08:53:20.000Z" itemprop="datePublished">2020-11-13</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">20字</span>
+      <span class="post-count">252字</span>
     </span>
   </span>
 
@@ -358,7 +358,17 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="sha1加密"><a href="#sha1加密" class="headerlink" title="sha1加密"></a>sha1加密</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const shasum = crypto.createHash(<span class="string">'sha1'</span>);</span><br><span class="line">        shasum.update(<span class="string">'要加密的参数'</span>);</span><br><span class="line">        str.signature = shasum.digest(<span class="string">'hex'</span>);</span><br></pre></td></tr></table></figure>
+        <p>nodejs+koa2</p>
+<p>CORS跨域时axios无法获取服务器自定义的header信息</p>
+<p>用axios发送请求获取reponse header中的数据，需要提前在后台添加设置过滤器头部配置、自定义头部属性、并打开过滤器。<br>然后就是前端发送请求，然后获取reponse headers里面的自定义属性。</p>
+<p>原来在默认的请求上， 浏览器只能访问以下默认的 响应头：（如下例）</p>
+<p>Cache-Control<br>Content-Language<br>Content-Type<br>Expires<br>Last-Modified<br>Pragma</p>
+<p>而且使用捕获响应头的方法时，浏览器默认respose.headers 拿到的只有两个headers信息（如下列）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Object &#123;</span><br><span class="line">    cache-control:<span class="string">"private, must-revalidate"</span>,  // 默认无配置不显示</span><br><span class="line">    content-type:<span class="string">"application/json"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果想让浏览器能访问到其他的 响应头的话：需要在服务器上设置 Access-Control-Expose-Headers</p>
+<p>服务器安装koa2-cors</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yarn add koa2-cors</span><br><span class="line"></span><br><span class="line">const cors = require(<span class="string">'koa2-cors'</span>);</span><br><span class="line">// 解决跨域问题</span><br><span class="line">App.use(cors(&#123;</span><br><span class="line">    <span class="string">'credentials'</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">'exposeHeaders'</span>: [ <span class="string">'*'</span> ], //Access-Control-Expose-Headers *:代表所有 也可以一个一个配置 [<span class="string">'token'</span>, <span class="string">'status'</span>]</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -368,7 +378,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/crypto/" rel="tag">crypto</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/axios/" rel="tag">axios</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li></ul>
     </div>
 
       
@@ -394,7 +404,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/43/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="page-number" href="/page/43/">43</a><span class="page-number current">44</span><a class="page-number" href="/page/45/">45</a><a class="page-number" href="/page/46/">46</a><span class="space">&hellip;</span><a class="page-number" href="/page/151/">151</a><a class="extend next" rel="next" href="/page/45/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/43/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="page-number" href="/page/43/">43</a><span class="page-number current">44</span><a class="page-number" href="/page/45/">45</a><a class="page-number" href="/page/46/">46</a><span class="space">&hellip;</span><a class="page-number" href="/page/152/">152</a><a class="extend next" rel="next" href="/page/45/">下一页</a>
     </nav>
   
 
@@ -404,7 +414,7 @@
         <div id="footer-info">
             <div>
                 <!-- <i class="fa fa-copyright"></i> 
-                2016-2021 w-klover -->
+                2016-2022 w-klover -->
 
                 <p><a href="http://beian.miit.gov.cn/" target="_blank" rel="external nofollow noopener noreferrer">浙ICP备20008562号-1</a></p>
                 <div style="width:300px;margin:0 auto; padding:20px 0;">

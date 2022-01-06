@@ -297,11 +297,11 @@
   
 
 
-<article id="mac上执行npm-install时出现node-gyp错误时解决方法" class="article article-type-mac上执行npm" itemscope itemprop="blogPost">
+<article id="post-mac上homebrew最新国内源安装方法" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/install%E6%97%B6%E5%87%BA%E7%8E%B0node-gyp%E9%94%99%E8%AF%AF%E6%97%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="article-date">
-      <time datetime="2020-08-03T08:53:18.000Z" itemprop="datePublished">2020-08-03</time>
+      <a href="/mac%E4%B8%8Ahomebrew%E6%9C%80%E6%96%B0%E5%9B%BD%E5%86%85%E6%BA%90%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/" class="article-date">
+      <time datetime="2020-08-14T02:24:07.000Z" itemprop="datePublished">2020-08-14</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/install%E6%97%B6%E5%87%BA%E7%8E%B0node-gyp%E9%94%99%E8%AF%AF%E6%97%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">install时出现node-gyp错误时解决方法</a>
+      <a class="article-title" href="/mac%E4%B8%8Ahomebrew%E6%9C%80%E6%96%B0%E5%9B%BD%E5%86%85%E6%BA%90%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/">mac上homebrew最新国内源安装方法</a>
     </h1>
   
 
         
-          <!-- <a href="/install%E6%97%B6%E5%87%BA%E7%8E%B0node-gyp%E9%94%99%E8%AF%AF%E6%97%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="archive-article-date">
-      <time datetime="2020-08-03T08:53:18.000Z" itemprop="datePublished">2020-08-03</time>
+          <!-- <a href="/mac%E4%B8%8Ahomebrew%E6%9C%80%E6%96%B0%E5%9B%BD%E5%86%85%E6%BA%90%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/" class="archive-article-date">
+      <time datetime="2020-08-14T02:24:07.000Z" itemprop="datePublished">2020-08-14</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">198字</span>
+      <span class="post-count">711字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">1分</span>
+      <span class="post-count">3分</span>
     </span>
   </span>
 </div>
@@ -358,14 +358,14 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&gt; fsevents@1.2.11 install /*...*/project/node_modules/chokidar/node_modules/fsevents</span><br><span class="line">&gt; node-gyp rebuild</span><br><span class="line"></span><br><span class="line">No receipt <span class="keyword">for</span> <span class="string">'com.apple.pkg.CLTools_Executables'</span> found at <span class="string">'/'</span>.</span><br><span class="line"></span><br><span class="line">No receipt <span class="keyword">for</span> <span class="string">'com.apple.pkg.DeveloperToolsCLILeo'</span> found at <span class="string">'/'</span>.</span><br><span class="line"></span><br><span class="line">No receipt <span class="keyword">for</span> <span class="string">'com.apple.pkg.DeveloperToolsCLI'</span> found at <span class="string">'/'</span>.</span><br><span class="line"></span><br><span class="line">gyp: No Xcode or CLT version detected!</span><br><span class="line">gyp ERR! configure error</span><br><span class="line">gyp ERR! stack Error: `gyp` failed with <span class="built_in">exit</span> code: 1</span><br><span class="line">gyp ERR! stack     at ChildProcess.onCpExit (/usr/<span class="built_in">local</span>/lib/node_modules/npm/node_modules/node-gyp/lib/configure.js:351:16)</span><br><span class="line">gyp ERR! stack     at ChildProcess.emit (events.js:210:5)</span><br><span class="line">gyp ERR! stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:272:12)</span><br><span class="line">gyp ERR! System Darwin 19.2.0</span><br><span class="line">gyp ERR! <span class="built_in">command</span> <span class="string">"/usr/local/bin/node"</span> <span class="string">"/usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js"</span> <span class="string">"rebuild"</span></span><br><span class="line">gyp ERR! cwd /Users/guoguo/Sites/pufa100/react-admin/node_modules/chokidar/node_modules/fsevents</span><br><span class="line">gyp ERR! node -v v12.14.0</span><br><span class="line">gyp ERR! node-gyp -v v5.0.5</span><br><span class="line">gyp ERR! not ok</span><br></pre></td></tr></table></figure>
+              <h2 id="官网的安装方法"><a href="#官网的安装方法" class="headerlink" title="官网的安装方法"></a>官网的安装方法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install &gt;&gt; brew_install</span><br></pre></td></tr></table></figure>
 
-<ol>
-<li>删除已经安装的CommandLineTools<br><code>sudo rm -rf $(xcode-select -p)</code></li>
-<li>重新安装<br><code>sudo xcode-select --install</code></li>
-</ol>
-<p>同意条款选择同意，会提示系统更新一并同意。</p>
 
+<h2 id="Homebrew国内源安装"><a href="#Homebrew国内源安装" class="headerlink" title="Homebrew国内源安装"></a>Homebrew国内源安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh &gt;&gt; brew_install</span><br></pre></td></tr></table></figure>
+<p>由于访问<code>https://raw.githubusercontent.com/Homebrew/install/master/install.sh</code>需要翻墙 没有翻墙工具的可以访问我已经下载好的文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">curl -fsSL https://gitee.com/w-klover/mac_software_package/blob/master/install.sh &gt;&gt; brew_install</span><br></pre></td></tr></table></figure>
+<h3 id="在终端中用curl复制地址内容，或者直接从浏览器上输入地址后复制内容，然后修改BREW-REPO的值"><a href="#在终端中用curl复制地址内容，或者直接从浏览器上输入地址后复制内容，然后修改BREW-REPO的值" class="headerlink" title="在终端中用curl复制地址内容，或者直接从浏览器上输入地址后复制内容，然后修改BREW_REPO的值"></a>在终端中用curl复制地址内容，或者直接从浏览器上输入地址后复制内容，然后修改BREW_REPO的值</h3>
+          
       
     </div>
     
@@ -375,9 +375,13 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/" rel="tag">mac</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/homebrew/" rel="tag">homebrew</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/" rel="tag">mac</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a href="/mac%E4%B8%8Ahomebrew%E6%9C%80%E6%96%B0%E5%9B%BD%E5%86%85%E6%BA%90%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -401,7 +405,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/60/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="page-number" href="/page/60/">60</a><span class="page-number current">61</span><a class="page-number" href="/page/62/">62</a><a class="page-number" href="/page/63/">63</a><span class="space">&hellip;</span><a class="page-number" href="/page/151/">151</a><a class="extend next" rel="next" href="/page/62/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/60/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="page-number" href="/page/60/">60</a><span class="page-number current">61</span><a class="page-number" href="/page/62/">62</a><a class="page-number" href="/page/63/">63</a><span class="space">&hellip;</span><a class="page-number" href="/page/152/">152</a><a class="extend next" rel="next" href="/page/62/">下一页</a>
     </nav>
   
 
@@ -411,7 +415,7 @@
         <div id="footer-info">
             <div>
                 <!-- <i class="fa fa-copyright"></i> 
-                2016-2021 w-klover -->
+                2016-2022 w-klover -->
 
                 <p><a href="http://beian.miit.gov.cn/" target="_blank" rel="external nofollow noopener noreferrer">浙ICP备20008562号-1</a></p>
                 <div style="width:300px;margin:0 auto; padding:20px 0;">
