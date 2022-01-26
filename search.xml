@@ -1196,9 +1196,9 @@
       
         <tags>
             
-            <tag> homebrew </tag>
-            
             <tag> mac </tag>
+            
+            <tag> homebrew </tag>
             
         </tags>
       
@@ -1772,9 +1772,9 @@
       
         <tags>
             
-            <tag> nginx </tag>
-            
             <tag> 微信小程序 </tag>
+            
+            <tag> nginx </tag>
             
         </tags>
       
@@ -1793,11 +1793,11 @@
       
         <tags>
             
-            <tag> crypto </tag>
-            
             <tag> 微信小程序 </tag>
             
             <tag> 微信公众号 </tag>
+            
+            <tag> crypto </tag>
             
         </tags>
       
@@ -2557,11 +2557,11 @@
       
         <tags>
             
+            <tag> crypto </tag>
+            
             <tag> ocr </tag>
             
             <tag> 阿里云 </tag>
-            
-            <tag> crypto </tag>
             
         </tags>
       
