@@ -297,11 +297,11 @@
   
 
 
-<article id="post-如何对typescript进行单元测试" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-飞书-企业自建应用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/%E5%A6%82%E4%BD%95%E5%AF%B9typescript%E8%BF%9B%E8%A1%8C%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="article-date">
-      <time datetime="2022-01-06T13:34:18.000Z" itemprop="datePublished">2022-01-06</time>
+      <a href="/%E9%A3%9E%E4%B9%A6-%E4%BC%81%E4%B8%9A%E8%87%AA%E5%BB%BA%E5%BA%94%E7%94%A8/" class="article-date">
+      <time datetime="2022-02-21T08:44:36.000Z" itemprop="datePublished">2022-02-21</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/%E5%A6%82%E4%BD%95%E5%AF%B9typescript%E8%BF%9B%E8%A1%8C%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">如何对typescript进行单元测试</a>
+      <a class="article-title" href="/%E9%A3%9E%E4%B9%A6-%E4%BC%81%E4%B8%9A%E8%87%AA%E5%BB%BA%E5%BA%94%E7%94%A8/">飞书-企业自建应用</a>
     </h1>
   
 
         
-          <!-- <a href="/%E5%A6%82%E4%BD%95%E5%AF%B9typescript%E8%BF%9B%E8%A1%8C%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="archive-article-date">
-      <time datetime="2022-01-06T13:34:18.000Z" itemprop="datePublished">2022-01-06</time>
+          <!-- <a href="/%E9%A3%9E%E4%B9%A6-%E4%BC%81%E4%B8%9A%E8%87%AA%E5%BB%BA%E5%BA%94%E7%94%A8/" class="archive-article-date">
+      <time datetime="2022-02-21T08:44:36.000Z" itemprop="datePublished">2022-02-21</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">87字</span>
+      <span class="post-count">215字</span>
     </span>
   </span>
 
@@ -358,13 +358,27 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><code>yarn add -D ts-jest jest @types/jest</code></p>
-<h3 id="全局安装"><a href="#全局安装" class="headerlink" title="全局安装"></a>全局安装</h3><p><code>npm i jest -g</code></p>
-<h2 id="初始化-jest"><a href="#初始化-jest" class="headerlink" title="初始化 jest"></a>初始化 jest</h2><p><code>jest --init</code></p>
-<h2 id="移除生成的-jest-config-js-文件"><a href="#移除生成的-jest-config-js-文件" class="headerlink" title="移除生成的 jest.config.js 文件"></a>移除生成的 jest.config.js 文件</h2><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>在 package.json 中配置</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"jest"</span>: &#123;</span><br><span class="line">    <span class="string">"moduleFileExtensions"</span>: [</span><br><span class="line">      <span class="string">"js"</span>,</span><br><span class="line">      <span class="string">"json"</span>,</span><br><span class="line">      <span class="string">"ts"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"rootDir"</span>: <span class="string">"."</span>,</span><br><span class="line">    <span class="string">"testRegex"</span>: <span class="string">".spec.ts$"</span>,</span><br><span class="line">    <span class="string">"transform"</span>: &#123;</span><br><span class="line">      <span class="string">"^.+\\.(t|j)s$"</span>: <span class="string">"ts-jest"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"coverageDirectory"</span>: <span class="string">"./coverage"</span>,</span><br><span class="line">    <span class="string">"testEnvironment"</span>: <span class="string">"node"</span>,</span><br><span class="line">    <span class="string">"roots"</span>: [</span><br><span class="line">      <span class="string">"&lt;rootDir&gt;/test/"</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="企业自建应用-嵌入三方网页"><a href="#企业自建应用-嵌入三方网页" class="headerlink" title="企业自建应用 嵌入三方网页"></a>企业自建应用 嵌入三方网页</h1><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol>
+<li><p>进入<code>https://open.feishu.cn/app?lang=zh-CN</code></p>
+</li>
+<li><p>选择创建自建应用-内容随便</p>
+</li>
+<li><p>获取对应的应用凭证<br><img src="https://img-blog.csdnimg.cn/12c92114f8584f10b3a2c2aca6f41ba3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+</li>
+<li><p>嵌入网页配置<br><img src="https://img-blog.csdnimg.cn/7d733f9fd91a4266ba8ec41391962940.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>手机端和电脑端可以一样</p>
+</li>
+<li><p>在权限关联中授权获取手机号和邮箱<br><img src="https://img-blog.csdnimg.cn/af64c572686147a5a271d6b4298156af.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+</li>
+</ol>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><ol>
+<li>获取 AppAccessToken<br>文档： <code>https://open.feishu.cn/document/ukTMukTMukTM/ukDNz4SO0MjL5QzM/auth-v3/auth/app_access_token_internal</code></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const res = await request</span><br><span class="line">      .post(<span class="string">'https://open.feishu.cn/open-apis/auth/v3/app_access_token/internal'</span>)</span><br><span class="line">      .<span class="built_in">set</span>(&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/json; charset=utf-8'</span>,</span><br><span class="line">      &#125;)</span><br><span class="line">      .send(&#123;</span><br><span class="line">        app_id: data.client_id,</span><br><span class="line">        app_secret: data.client_secret,</span><br><span class="line">      &#125;);</span><br><span class="line">    const body = res.body;</span><br><span class="line">    <span class="keyword">if</span> (!(body.msg === <span class="string">'ok'</span> &amp;&amp; body.code === 0)) throw new CustomException(-1, <span class="string">'获取app_access_token失败'</span>);</span><br><span class="line">    const &#123; app_access_token, expire &#125; = body;</span><br></pre></td></tr></table></figure>
 
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">describe(<span class="string">"test"</span>, () =&gt; &#123;</span><br><span class="line">  beforeAll(<span class="keyword">async</span> () =&gt; &#123;&#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">"test"</span>, () =&gt; &#123;&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>获取用户信息<br>文档<code>https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/authen-v1/authen/access_token</code></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const res = await request</span><br><span class="line">      .post(<span class="string">'https://open.feishu.cn/open-apis/authen/v1/access_token'</span>)</span><br><span class="line">      .<span class="built_in">set</span>(&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/json; charset=utf-8'</span>,</span><br><span class="line">        Authorization: `Bearer <span class="variable">$&#123;data.access_token&#125;</span>`,</span><br><span class="line">      &#125;)</span><br><span class="line">      .send(&#123;</span><br><span class="line">        grant_type: <span class="string">'authorization_code'</span>,</span><br><span class="line">        code: code,</span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -375,7 +389,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A3%9E%E4%B9%A6/" rel="tag">飞书</a></li></ul>
     </div>
 
       
@@ -401,7 +415,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/155/">155</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
     </nav>
   
 

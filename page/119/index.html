@@ -297,11 +297,11 @@
   
 
 
-<article id="post-centos8使用docker安装mysql8-0-17" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-centos7安装GitLab" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/centos8%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85mysql8-0-17/" class="article-date">
-      <time datetime="2020-05-20T02:50:06.000Z" itemprop="datePublished">2020-05-20</time>
+      <a href="/centos7%E5%AE%89%E8%A3%85GitLab/" class="article-date">
+      <time datetime="2020-05-20T02:51:35.000Z" itemprop="datePublished">2020-05-20</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/centos8%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85mysql8-0-17/">centos8使用docker安装mysql8.0.17</a>
+      <a class="article-title" href="/centos7%E5%AE%89%E8%A3%85GitLab/">centos7安装GitLab</a>
     </h1>
   
 
         
-          <!-- <a href="/centos8%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85mysql8-0-17/" class="archive-article-date">
-      <time datetime="2020-05-20T02:50:06.000Z" itemprop="datePublished">2020-05-20</time>
+          <!-- <a href="/centos7%E5%AE%89%E8%A3%85GitLab/" class="archive-article-date">
+      <time datetime="2020-05-20T02:51:35.000Z" itemprop="datePublished">2020-05-20</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">382字</span>
+      <span class="post-count">1.1k字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">1分</span>
+      <span class="post-count">4分</span>
     </span>
   </span>
 </div>
@@ -358,24 +358,58 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <blockquote>
-<p>拉取镜像<br>docker pull mysql:8.0.17<br>使用 docker images 查看镜像文件</p>
-</blockquote>
-<p>现在自己的服务器上依次创建/data/docker/mysql 文件夹，用于挂载外部配置和数据</p>
+        <p><strong><em>一、 安装并配置必要的依赖关系</em></strong></p>
 <blockquote>
-<p>启动(注释的代码不要)</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --restart=always \ // 开机启动</span><br><span class="line">  -v /data/docker/mysql/data:/var/lib/mysql \ // 将容器的 /var/lib/mysql目录挂载到主机/data/docker/mysql/data目录。</span><br><span class="line">    -v /data/docker/mysql/config/my.cnf:/etc/mysql/conf.d \ //映射配置文件</span><br><span class="line">      -e MYSQL_ROOT_PASSWORD=123456 \ //密码</span><br><span class="line">        -p 3306:3306 \ // 将容器的3306端口映射到主机的3306端口</span><br><span class="line">          --name mysql \ // MySQL容器名称</span><br><span class="line">            mysql:8.0.17 // 后台运行容器</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --restart=always \</span><br><span class="line">-v /data/docker/mysql/data:/var/lib/mysql \</span><br><span class="line">-v /data/docker/mysql/config/my.cnf:/etc/mysql/conf.d \</span><br><span class="line">-e MYSQL_ROOT_PASSWORD=123456 \</span><br><span class="line">-p 3306:3306 \</span><br><span class="line">--name mysql \</span><br><span class="line">mysql:8.0.17</span><br></pre></td></tr></table></figure>
-
-<p>运行成功 会在 /data/docker/mysql 文件夹 创建 config 和data 文件夹 ，里面都有东西</p>
-<blockquote>
-<p>使用镜像进入mysql<br>$:docker exec -it mysql bash<br>$:mysql -u root -p (会提示输入密码)<br>成功就会进入数据库<br><img src="https://img-blog.csdnimg.cn/20191213144411686.png" alt="在这里插入图片描述"><br>初始化MySQL，不然用 navicat连接不了mysql数据库<br>$:<code>ALTER USER &#39;root&#39;@&#39;%&#39; IDENTIFIED WITH mysql_native_password BY &#39;123456&#39;;</code><br>$:flush privileges;</p>
+<p>1.在CentOS系统上安装所需的依赖：ssh，防火墙,postfix(用于邮件通知) ，wget，以下这些命令也会打开系统防火墙中的HTTP和SSH端口访问<br>sudo yum install -y curl policycoreutils-pythonopenssh-server</p>
 </blockquote>
 <blockquote>
-<p>（可选）设置时间<br>$:set global time_zone = ‘+8:00’;<br>set time_zone = ‘+8:00’;<br>flush privileges;<br>select curtime();<br><img src="https://img-blog.csdnimg.cn/20191213144731992.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>2.将SSH服务设置成开机自启动，安装命令：sudo systemctl enable sshd  </p>
 </blockquote>
-<h2 id="docker出现错误"><a href="#docker出现错误" class="headerlink" title="docker出现错误"></a>docker出现错误</h2><p> <code>Error response from daemon: driver failed programming external connectivity on endpoint mysql (a29d3409d7b1f5eaf8706050f4aeed7b11fa90415d243239a0c882eeb9fb83be):  (iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 0/0 --dport 3306 -j DNAT --to-destination 172.17.0.5:3306 ! -i docker0: iptables: No chain/target/match by that name.</code><br> Docker容器做端口映射报错，docker服务启动时定义的自定义链DOCKER被清除；重启即可<br> systemctl restart docker</p>
+<blockquote>
+<p>3.启动SSH服务，安装命令：sudo systemctl start sshd</p>
+</blockquote>
+<blockquote>
+<p>4.添加http服务到firewalld,pemmanent表示永久生效，若不加–permanent系统下次启动后就会失效<br>sudo firewall-cmd –permanent –add-service=http<br>(<br>如果系统没有firewall防火墙就安装一个<br>查看防火墙状态<br>firewall-cmd –state<br>安装<br>yum install firewalld systemd -y<br>开启防火墙，命令：service firewalld  start<br>)</p>
+</blockquote>
+<blockquote>
+<p>5.重启防火墙，安装命令：sudo systemctl reload firewalld</p>
+</blockquote>
+<blockquote>
+<p>6.接下来，安装Postfix以发送通知邮件，安装命令：sudo yum install postfix</p>
+</blockquote>
+<blockquote>
+<p>7.将postfix服务设置成开机自启动，安装命令：sudo systemctl enable postfix</p>
+</blockquote>
+<blockquote>
+<p>8.启动postfix，安装命令：sudo systemctl start postfix<br>（在安装Postfix期间，可能会出现配置屏幕。选择“Internet Site”并按enter键。使用您的服务器的外部DNS以“mail name”并按enter。如果出现额外的屏幕，继续按enter键接受默认值。）</p>
+</blockquote>
+<p><strong><em>二、添加GitLab镜像源并安装gitlab服务器</em></strong></p>
+<blockquote>
+<p>1.添加gitlab镜像<br>wget <a href="https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/yum/el7/gitlab-ce-10.0.0-ce.0.el7.x86_64.rpm" target="_blank" rel="external nofollow noopener noreferrer">https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/yum/el7/gitlab-ce-10.0.0-ce.0.el7.x86_64.rpm</a><br>（wget 没有就安装一个yum -y install wget）</p>
+</blockquote>
+<blockquote>
+<p>2.yum install policycoreutils-python（不然会提示 error: Failed dependencies:<br>        policycoreutils-python is needed by gitlab-ce-10.0.0-ce.0.el7.x86_64.rpm）</p>
+</blockquote>
+<blockquote>
+<p>3.安装gitlab 安装命令：rpm -i gitlab-ce-10.0.0-ce.0.el7.x86_64.rpm（出现下图表示成功）<br><img src="https://img-blog.csdnimg.cn/20191216145903219.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</blockquote>
+<blockquote>
+<p>4.修改gitlab配置文件指定服务器ip和自定义端口：<a href="http://localhost:8090" target="_blank" rel="external nofollow noopener noreferrer">http://localhost:8090</a><br>vim  /etc/gitlab/gitlab.rb（最好不要用8080端口，容易被占用, 没有vim:yum install vim -y）<br><img src="https://img-blog.csdnimg.cn/2019121614594215.png" alt="在这里插入图片描述"><br>:wq 保存</p>
+</blockquote>
+<blockquote>
+<p>5.重置并启动GitLab<br>执行：<br>gitlab-ctl reconfigure<br>gitlab-ctl restart （出现ok: run: 表示执行成功）</p>
+</blockquote>
+<blockquote>
+<p>6.在服务器上测试 curl <a href="http://127.0.0.1:8090" target="_blank" rel="external nofollow noopener noreferrer">http://127.0.0.1:8090</a> (出现下面一样就表示成功，如果报502错误，可能端口被占用，或者系统内存不够，执行 gitlab-ctl tail unicorn 出现<br>E, [2015-02-11T17:27:57.818492 #26687] ERROR – : adding listener failed addr=127.0.0.1:8080 (in use)<br>E, [2015-02-11T17:27:57.818621 #26687] ERROR – : retrying in 0.5 seconds (4 tries left)<br>E, [2015-02-11T17:27:58.318902 #26687] ERROR – : adding listener failed addr=127.0.0.1:8080 (in use)<br>E, [2015-02-11T17:27:58.318998 #26687] ERROR – : retrying in 0.5 seconds (3 tries left)<br>E, [2015-02-11T17:27:58.819309 #26687] ERROR – : adding listener failed addr=127.0.0.1:8080 (in use)<br>E, [2015-02-11T17:27:58.819423 #26687] ERROR – : retrying in 0.5 seconds (2 tries left)<br>E, [2015-02-11T17:27:59.319954 #26687] ERROR – : adding listener failed addr=127.0.0.1:8080 (in use)<br>E, [2015-02-11T17:27:59.320076 #26687] ERROR – : retrying in 0.5 seconds (1 tries left)<br>表示端口被占用，换个端口号,如果不是，请等待1分钟左右，因为在单核服务器上，可能最多需要一分钟才能重新启动Unicorn和Sidekiq，还不行手动执行sudo gitlab-ctl restart sidekiq  sudo gitlab-ctl hup unicorn这两个命令<br>) 这个表示成功：<br><img src="https://img-blog.csdnimg.cn/20191216135009393.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<blockquote>
+<p>7.在浏览器范围会发现访问不了，是因为你没有给这个端口开放访问的权限，<br>（<br>1、开放端口<br>firewall-cmd –zone=public –add-port=5672/tcp –permanent   # 开放5672端口<br>firewall-cmd –zone=public –remove-port=5672/tcp –permanent  #关闭5672端口<br>firewall-cmd –reload   # 配置立即生效<br>2、查看防火墙所有开放的端口<br>firewall-cmd –zone=public –list-ports<br>3.、关闭防火墙<br>如果要开放的端口太多，嫌麻烦，可以关闭防火墙，安全性自行评估<br>systemctl stop firewalld.service<br>4、查看防火墙状态<br> firewall-cmd –state<br> 5、查看监听的端口<br>netstat -lnpt<br>centos7默认没有 netstat 命令，需要安装 net-tools 工具，yum install -y net-tools<br>6、检查端口被哪个进程占用<br>netstat -lnpt |grep 8090<br> ）</p>
+</blockquote>
+<blockquote>
+<p>在网页上访问<a href="http://45.76.185.64:8090" target="_blank" rel="external nofollow noopener noreferrer">http://45.76.185.64:8090</a> 会进入改密码页面<br> <img src="https://img-blog.csdnimg.cn/20191216135845731.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> （我发现改密码时间有点长，一直没有反应，后来我关闭请求在刷新一下，就好了就会让你绑定邮箱，可能是我电脑卡了）</p>
+</blockquote>
+<p> 登录进去就可以了 （账号是root,密码是你设置的新密码）</p>
+<p>gitlab 安装出现其他问题查看<a href="https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/README.md" target="_blank" rel="external nofollow noopener noreferrer">https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/README.md</a></p>
 
       
     </div>
@@ -386,7 +420,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitLab/" rel="tag">GitLab</a></li></ul>
     </div>
 
       
@@ -412,7 +446,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/118/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/117/">117</a><a class="page-number" href="/page/118/">118</a><span class="page-number current">119</span><a class="page-number" href="/page/120/">120</a><a class="page-number" href="/page/121/">121</a><span class="space">&hellip;</span><a class="page-number" href="/page/155/">155</a><a class="extend next" rel="next" href="/page/120/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/118/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/117/">117</a><a class="page-number" href="/page/118/">118</a><span class="page-number current">119</span><a class="page-number" href="/page/120/">120</a><a class="page-number" href="/page/121/">121</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><a class="extend next" rel="next" href="/page/120/">下一页</a>
     </nav>
   
 
