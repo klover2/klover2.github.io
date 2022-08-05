@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">749字</span>
+      <span class="post-count">824字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">4分</span>
+      <span class="post-count">5分</span>
     </span>
   </span>
 </div>
@@ -392,6 +392,10 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE <span class="string">"accountExtend"</span> SET <span class="string">"qbitCardCountLimit"</span> = <span class="string">"qbitCardCountLimit"</span> + 10, <span class="string">"version"</span> = <span class="string">"version"</span> + 1 WHERE <span class="string">"accountId"</span> = <span class="variable">$1</span> -- PARAMETERS: [<span class="string">"cd459ae2-3f4c-4505-a984-d14c2a85c734"</span>]</span><br></pre></td></tr></table></figure>
 
 <h2 id="cast-的使用-类型转换"><a href="#cast-的使用-类型转换" class="headerlink" title="cast 的使用 类型转换"></a>cast 的使用 类型转换</h2><p><code>cast (sum(&quot;a&quot;) as integer)</code></p>
+<h2 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.* <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> <span class="string">"accountId"</span>, <span class="keyword">MAX</span>(<span class="string">"createTime"</span>) <span class="keyword">AS</span> <span class="string">"followTime"</span> <span class="keyword">FROM</span> <span class="string">"operationLog"</span> <span class="string">"OperationLog"</span> <span class="keyword">WHERE</span> ( <span class="string">"OperationLog"</span>.<span class="string">"businessType"</span> <span class="keyword">IN</span> ($<span class="number">1</span>) ) <span class="keyword">AND</span> ( <span class="string">"OperationLog"</span>.<span class="string">"deleteTime"</span> <span class="keyword">IS</span> <span class="literal">NULL</span> ) <span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="string">"accountId"</span>) <span class="string">"a"</span>  <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="string">"followTime"</span> <span class="keyword">DESC</span> <span class="comment">-- PARAMETERS: ["FollowCSMAccountLog"]</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [db, parameters] = <span class="keyword">this</span>.operationLogRepo</span><br><span class="line">      .createQueryBuilder()</span><br><span class="line">      .select(<span class="string">'"accountId"'</span>)</span><br><span class="line">      .addSelect(<span class="string">`MAX("createTime")`</span>, <span class="string">'followTime'</span>)</span><br><span class="line">      .where(&#123;</span><br><span class="line">        businessType: In([<span class="string">'FollowCSMAccountLog'</span>]),</span><br><span class="line">      &#125;)</span><br><span class="line">      .groupBy(<span class="string">'"accountId"'</span>)</span><br><span class="line">      .getQueryAndParameters();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> res = <span class="keyword">await</span> createQueryBuilder()</span><br><span class="line">      .select(<span class="string">'a.*'</span>)</span><br><span class="line">      .from(<span class="string">`(<span class="subst">$&#123;db&#125;</span>)`</span> <span class="keyword">as</span> any, <span class="string">'a'</span>)</span><br><span class="line">      .setNativeParameters(parameters)</span><br><span class="line">      .orderBy(<span class="string">'"followTime"'</span>, <span class="string">'DESC'</span>)</span><br><span class="line">      .getRawMany();</span><br></pre></td></tr></table></figure>
 
       
     </div>

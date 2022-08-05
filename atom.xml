@@ -63,6 +63,30 @@
   </entry>
   
   <entry>
+    <title>飞书-企业自建应用</title>
+    <link href="https://blog.wjc66.cn/%E9%A3%9E%E4%B9%A6-%E4%BC%81%E4%B8%9A%E8%87%AA%E5%BB%BA%E5%BA%94%E7%94%A8/"/>
+    <id>https://blog.wjc66.cn/%E9%A3%9E%E4%B9%A6-%E4%BC%81%E4%B8%9A%E8%87%AA%E5%BB%BA%E5%BA%94%E7%94%A8/</id>
+    <published>2022-02-21T08:44:36.000Z</published>
+    <updated>2022-02-21T08:55:32.388Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="企业自建应用-嵌入三方网页"><a href="#企业自建应用-嵌入三方网页" class="headerlink" title="企业自建应用 嵌入三方网页"></a>企业自建应用 嵌入三方网页</h1><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol><li><p>进入<code>https://open.feishu.cn/app?lang=zh-CN</code></p></li><li><p>选择创建自建应用-内容随便</p></li><li><p>获取对应的应用凭证<br><img src="https://img-blog.csdnimg.cn/12c92114f8584f10b3a2c2aca6f41ba3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li><li><p>嵌入网页配置<br><img src="https://img-blog.csdnimg.cn/7d733f9fd91a4266ba8ec41391962940.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>手机端和电脑端可以一样</p></li><li><p>在权限关联中授权获取手机号和邮箱<br><img src="https://img-blog.csdnimg.cn/af64c572686147a5a271d6b4298156af.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li></ol><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><ol><li>获取 AppAccessToken<br>文档： <code>https://open.feishu.cn/document/ukTMukTMukTM/ukDNz4SO0MjL5QzM/auth-v3/auth/app_access_token_internal</code></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const res = await request</span><br><span class="line">      .post(<span class="string">'https://open.feishu.cn/open-apis/auth/v3/app_access_token/internal'</span>)</span><br><span class="line">      .<span class="built_in">set</span>(&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/json; charset=utf-8'</span>,</span><br><span class="line">      &#125;)</span><br><span class="line">      .send(&#123;</span><br><span class="line">        app_id: data.client_id,</span><br><span class="line">        app_secret: data.client_secret,</span><br><span class="line">      &#125;);</span><br><span class="line">    const body = res.body;</span><br><span class="line">    <span class="keyword">if</span> (!(body.msg === <span class="string">'ok'</span> &amp;&amp; body.code === 0)) throw new CustomException(-1, <span class="string">'获取app_access_token失败'</span>);</span><br><span class="line">    const &#123; app_access_token, expire &#125; = body;</span><br></pre></td></tr></table></figure><ol start="2"><li>获取用户信息<br>文档<code>https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/authen-v1/authen/access_token</code></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const res = await request</span><br><span class="line">      .post(<span class="string">'https://open.feishu.cn/open-apis/authen/v1/access_token'</span>)</span><br><span class="line">      .<span class="built_in">set</span>(&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/json; charset=utf-8'</span>,</span><br><span class="line">        Authorization: `Bearer <span class="variable">$&#123;data.access_token&#125;</span>`,</span><br><span class="line">      &#125;)</span><br><span class="line">      .send(&#123;</span><br><span class="line">        grant_type: <span class="string">'authorization_code'</span>,</span><br><span class="line">        code: code,</span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;企业自建应用-嵌入三方网页&quot;&gt;&lt;a href=&quot;#企业自建应用-嵌入三方网页&quot; class=&quot;headerlink&quot; title=&quot;企业自建应用 嵌入三方网页&quot;&gt;&lt;/a&gt;企业自建应用 嵌入三方网页&lt;/h1&gt;&lt;h2 id=&quot;配置&quot;&gt;&lt;a href=&quot;#配置&quot; cla
+      
+    
+    </summary>
+    
+    
+    
+      <category term="飞书" scheme="https://blog.wjc66.cn/tags/%E9%A3%9E%E4%B9%A6/"/>
+    
+  </entry>
+  
+  <entry>
     <title>amazon配置邮件推送服务</title>
     <link href="https://blog.wjc66.cn/amazon%E9%85%8D%E7%BD%AE%E9%82%AE%E4%BB%B6%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1/"/>
     <id>https://blog.wjc66.cn/amazon%E9%85%8D%E7%BD%AE%E9%82%AE%E4%BB%B6%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1/</id>
@@ -84,30 +108,6 @@
     
     
       <category term="amazon" scheme="https://blog.wjc66.cn/tags/amazon/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>飞书-企业自建应用</title>
-    <link href="https://blog.wjc66.cn/%E9%A3%9E%E4%B9%A6-%E4%BC%81%E4%B8%9A%E8%87%AA%E5%BB%BA%E5%BA%94%E7%94%A8/"/>
-    <id>https://blog.wjc66.cn/%E9%A3%9E%E4%B9%A6-%E4%BC%81%E4%B8%9A%E8%87%AA%E5%BB%BA%E5%BA%94%E7%94%A8/</id>
-    <published>2022-02-21T08:44:36.000Z</published>
-    <updated>2022-02-21T08:55:32.388Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="企业自建应用-嵌入三方网页"><a href="#企业自建应用-嵌入三方网页" class="headerlink" title="企业自建应用 嵌入三方网页"></a>企业自建应用 嵌入三方网页</h1><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol><li><p>进入<code>https://open.feishu.cn/app?lang=zh-CN</code></p></li><li><p>选择创建自建应用-内容随便</p></li><li><p>获取对应的应用凭证<br><img src="https://img-blog.csdnimg.cn/12c92114f8584f10b3a2c2aca6f41ba3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li><li><p>嵌入网页配置<br><img src="https://img-blog.csdnimg.cn/7d733f9fd91a4266ba8ec41391962940.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>手机端和电脑端可以一样</p></li><li><p>在权限关联中授权获取手机号和邮箱<br><img src="https://img-blog.csdnimg.cn/af64c572686147a5a271d6b4298156af.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li></ol><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><ol><li>获取 AppAccessToken<br>文档： <code>https://open.feishu.cn/document/ukTMukTMukTM/ukDNz4SO0MjL5QzM/auth-v3/auth/app_access_token_internal</code></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const res = await request</span><br><span class="line">      .post(<span class="string">'https://open.feishu.cn/open-apis/auth/v3/app_access_token/internal'</span>)</span><br><span class="line">      .<span class="built_in">set</span>(&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/json; charset=utf-8'</span>,</span><br><span class="line">      &#125;)</span><br><span class="line">      .send(&#123;</span><br><span class="line">        app_id: data.client_id,</span><br><span class="line">        app_secret: data.client_secret,</span><br><span class="line">      &#125;);</span><br><span class="line">    const body = res.body;</span><br><span class="line">    <span class="keyword">if</span> (!(body.msg === <span class="string">'ok'</span> &amp;&amp; body.code === 0)) throw new CustomException(-1, <span class="string">'获取app_access_token失败'</span>);</span><br><span class="line">    const &#123; app_access_token, expire &#125; = body;</span><br></pre></td></tr></table></figure><ol start="2"><li>获取用户信息<br>文档<code>https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/authen-v1/authen/access_token</code></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const res = await request</span><br><span class="line">      .post(<span class="string">'https://open.feishu.cn/open-apis/authen/v1/access_token'</span>)</span><br><span class="line">      .<span class="built_in">set</span>(&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/json; charset=utf-8'</span>,</span><br><span class="line">        Authorization: `Bearer <span class="variable">$&#123;data.access_token&#125;</span>`,</span><br><span class="line">      &#125;)</span><br><span class="line">      .send(&#123;</span><br><span class="line">        grant_type: <span class="string">'authorization_code'</span>,</span><br><span class="line">        code: code,</span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;企业自建应用-嵌入三方网页&quot;&gt;&lt;a href=&quot;#企业自建应用-嵌入三方网页&quot; class=&quot;headerlink&quot; title=&quot;企业自建应用 嵌入三方网页&quot;&gt;&lt;/a&gt;企业自建应用 嵌入三方网页&lt;/h1&gt;&lt;h2 id=&quot;配置&quot;&gt;&lt;a href=&quot;#配置&quot; cla
-      
-    
-    </summary>
-    
-    
-    
-      <category term="飞书" scheme="https://blog.wjc66.cn/tags/%E9%A3%9E%E4%B9%A6/"/>
     
   </entry>
   
