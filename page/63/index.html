@@ -297,11 +297,11 @@
   
 
 
-<article id="post-本地电脑静态资源访问服务" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-mps给上传到oss的视频截取关键帧" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/%E6%9C%AC%E5%9C%B0%E7%94%B5%E8%84%91%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E6%9C%8D%E5%8A%A1/" class="article-date">
-      <time datetime="2020-08-24T02:16:50.000Z" itemprop="datePublished">2020-08-24</time>
+      <a href="/mps%E7%BB%99%E4%B8%8A%E4%BC%A0%E5%88%B0oss%E7%9A%84%E8%A7%86%E9%A2%91%E6%88%AA%E5%8F%96%E5%85%B3%E9%94%AE%E5%B8%A7/" class="article-date">
+      <time datetime="2020-10-09T02:03:26.000Z" itemprop="datePublished">2020-10-09</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/%E6%9C%AC%E5%9C%B0%E7%94%B5%E8%84%91%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E6%9C%8D%E5%8A%A1/">本地电脑静态资源访问服务</a>
+      <a class="article-title" href="/mps%E7%BB%99%E4%B8%8A%E4%BC%A0%E5%88%B0oss%E7%9A%84%E8%A7%86%E9%A2%91%E6%88%AA%E5%8F%96%E5%85%B3%E9%94%AE%E5%B8%A7/">mps给上传到oss的视频截取关键帧</a>
     </h1>
   
 
         
-          <!-- <a href="/%E6%9C%AC%E5%9C%B0%E7%94%B5%E8%84%91%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E6%9C%8D%E5%8A%A1/" class="archive-article-date">
-      <time datetime="2020-08-24T02:16:50.000Z" itemprop="datePublished">2020-08-24</time>
+          <!-- <a href="/mps%E7%BB%99%E4%B8%8A%E4%BC%A0%E5%88%B0oss%E7%9A%84%E8%A7%86%E9%A2%91%E6%88%AA%E5%8F%96%E5%85%B3%E9%94%AE%E5%B8%A7/" class="archive-article-date">
+      <time datetime="2020-10-09T02:03:26.000Z" itemprop="datePublished">2020-10-09</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">161字</span>
+      <span class="post-count">132字</span>
     </span>
   </span>
 
@@ -358,21 +358,21 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><blockquote>
-<p>npm i serve -g</p>
-</blockquote>
-<p>##<br>启动服务</p>
-<blockquote>
-<p>serve</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\klover\Downloads&gt;serve</span><br><span class="line">   ┌───────────────────────────────────────────────────┐</span><br><span class="line">   │                                                   │</span><br><span class="line">   │   Serving!                                        │</span><br><span class="line">   │                                                   │</span><br><span class="line">   │   - Local:            http://localhost:5000       │</span><br><span class="line">   │   - On Your Network:  http://192.168.3.213:5000   │</span><br><span class="line">   │                                                   │</span><br><span class="line">   │   Copied <span class="built_in">local</span> address to clipboard!              │</span><br><span class="line">   │                                                   │</span><br><span class="line">   └───────────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
-
-
-<p>出现的问题：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">PS C:\Users\klover\Downloads&gt; serve</span><br><span class="line">serve : 无法加载文件 C:\Users\klover\AppData\Roaming\npm\serve.ps1，因为在此系统上禁止运行脚本。有关详细信息，请参阅 https</span><br><span class="line">:/go.microsoft.com/fwlink/?LinkID=135170 中的 about_Execution_Policies。</span><br><span class="line">所在位置 行:1 字符: 1</span><br><span class="line">+ serve</span><br><span class="line">+ ~~~~~</span><br><span class="line">    + CategoryInfo          : SecurityError: (:) []，PSSecurityException</span><br><span class="line">    + FullyQualifiedErrorId : UnauthorizedAccess</span><br></pre></td></tr></table></figure>
-<p>出现上述问题<br>在命令窗口输入 <code>cmd</code> 出现下面输出</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Path</span><br><span class="line">----</span><br><span class="line">C:\Users\klover\Downloads</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PS C:\Users\klover\Downloads&gt; cmd</span><br><span class="line">Microsoft Windows [版本 10.0.18362.1016]</span><br><span class="line">(c) 2019 Microsoft Corporation。保留所有权利。</span><br></pre></td></tr></table></figure>
-<p>在 运行 <code>serve</code></p>
+        <p><a href="https://help.aliyun.com/document_detail/29207.html?spm=a2c4g.11186623.6.543.55b25529tkkA0j" target="_blank" rel="external nofollow noopener noreferrer">mps介绍文档</a></p>
+<ol>
+<li><p>先创建好两个bucket ,配置好跨域等</p>
+</li>
+<li><p>把两个bucket加入到媒体bucket(<a href="https://mps.console.aliyun.com/bucket" target="_blank" rel="external nofollow noopener noreferrer">https://mps.console.aliyun.com/bucket</a>)<br>一个输入 一个输出<br><img src="https://img-blog.csdnimg.cn/20200929174010447.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+</li>
+<li><p>添加工作流（<a href="https://mps.console.aliyun.com/workflow/list）" target="_blank" rel="external nofollow noopener noreferrer">https://mps.console.aliyun.com/workflow/list）</a><br><img src="https://img-blog.csdnimg.cn/20200929174216834.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+</li>
+<li><p>配置工作流<br><img src="https://img-blog.csdnimg.cn/2020092917443418.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>输入<br><img src="https://img-blog.csdnimg.cn/20200929174500470.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>转码<br><img src="https://img-blog.csdnimg.cn/20200929174551756.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200929174701726.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+</li>
+</ol>
+<p>截图<br><img src="https://img-blog.csdnimg.cn/20200929174627847.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>输出<br><img src="https://img-blog.csdnimg.cn/2020092917471764.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>保存就好了</p>
+<ol start="5">
+<li>使用 通过输入的bucket 上传视频，视频和截屏处理好后会自动同步的输出的bucket中<br>在输入bucket只会有一个视频<br><img src="https://img-blog.csdnimg.cn/20200929175100146.png#pic_center" alt="在这里插入图片描述"><br>在输出的bucket会有一个视频和一个图片（路径相同）<br><img src="https://img-blog.csdnimg.cn/20200929175151244.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></li>
+</ol>
 
       
     </div>
@@ -383,7 +383,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%AF%E5%8A%A8%E9%9D%99%E6%80%81%E8%AE%BF%E9%97%AE%E6%9C%8D%E5%8A%A1/" rel="tag">启动静态访问服务</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oss/" rel="tag">oss</a></li></ul>
     </div>
 
       
@@ -409,7 +409,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/62/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/61/">61</a><a class="page-number" href="/page/62/">62</a><span class="page-number current">63</span><a class="page-number" href="/page/64/">64</a><a class="page-number" href="/page/65/">65</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><a class="extend next" rel="next" href="/page/64/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/62/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/61/">61</a><a class="page-number" href="/page/62/">62</a><span class="page-number current">63</span><a class="page-number" href="/page/64/">64</a><a class="page-number" href="/page/65/">65</a><span class="space">&hellip;</span><a class="page-number" href="/page/163/">163</a><a class="extend next" rel="next" href="/page/64/">下一页</a>
     </nav>
   
 

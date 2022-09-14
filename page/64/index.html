@@ -297,11 +297,11 @@
   
 
 
-<article id="post-Oh-my-zsh" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-OSS配置跨域访问" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/Oh-my-zsh/" class="article-date">
-      <time datetime="2020-08-18T01:25:24.000Z" itemprop="datePublished">2020-08-18</time>
+      <a href="/OSS%E9%85%8D%E7%BD%AE%E8%B7%A8%E5%9F%9F%E8%AE%BF%E9%97%AE/" class="article-date">
+      <time datetime="2020-10-09T02:02:26.000Z" itemprop="datePublished">2020-10-09</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/Oh-my-zsh/">Oh-my-zsh</a>
+      <a class="article-title" href="/OSS%E9%85%8D%E7%BD%AE%E8%B7%A8%E5%9F%9F%E8%AE%BF%E9%97%AE/">OSS配置跨域访问</a>
     </h1>
   
 
         
-          <!-- <a href="/Oh-my-zsh/" class="archive-article-date">
-      <time datetime="2020-08-18T01:25:24.000Z" itemprop="datePublished">2020-08-18</time>
+          <!-- <a href="/OSS%E9%85%8D%E7%BD%AE%E8%B7%A8%E5%9F%9F%E8%AE%BF%E9%97%AE/" class="archive-article-date">
+      <time datetime="2020-10-09T02:02:26.000Z" itemprop="datePublished">2020-10-09</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">213字</span>
+      <span class="post-count">209字</span>
     </span>
   </span>
 
@@ -358,12 +358,23 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>zsh 是一个虚拟终端，原先不同的终端有不同的命令，现在通过这个虚拟终端就可以执行所有的命令，如可以执行git命令、subline命令等。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">1. curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建配置文件</span></span><br><span class="line">2. cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置zsh为默认终端</span></span><br><span class="line">3. chsh -s /bin/zsh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装完成后会自带一些主题，也可以去下面的地址下载主题放到 ~/.oh-my-zsh/themes 下</span></span><br><span class="line"><span class="comment">#4. https://github.com/robbyrussell/oh-my-zsh/wiki/themes</span></span><br></pre></td></tr></table></figure>
+        <p>如果没有配置，网页控制台会报（如果出现以下错误):<br>Access to XMLHttpRequest at ‘<a href="https://xxx.oss-cn-hangzhou.aliyuncs.com/" target="_blank" rel="external nofollow noopener noreferrer">https://xxx.oss-cn-hangzhou.aliyuncs.com/</a> ’ from origin ‘null’ has been blocked by CORS policy: No ‘Access-Control-Allow-Origin’ header is present on the requested resource.</p>
+<p>1.进入bucket 管理后台 （<a href="https://oss.console.aliyun.com/bucket）" target="_blank" rel="external nofollow noopener noreferrer">https://oss.console.aliyun.com/bucket）</a><br>2. 点击需要配置的bucket<br><img src="https://img-blog.csdnimg.cn/20200929162018457.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200929162149945.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>保存就可以上传图片了</p>
+<p>如果在自己后台中访问图片出现403 可以在html中加入</p>
+<meta name="referrer" content="no-referrer">
+这是oss配置了防盗链 所以不要带上referrer
 
-<h2 id="修改主题"><a href="#修改主题" class="headerlink" title="修改主题"></a>修改主题</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 打开配置文件：open ~/.zshrc</span><br><span class="line">2. 修改配置文件：ZSH_THEME=你想要的主题，默认为robbyrussell(使用默认就可以)</span><br><span class="line">3. 主题推荐：ys，ys是安装时自带的，无需额外下载</span><br></pre></td></tr></table></figure>
 
-<h2 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">让配置文件生效：<span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
+<p>注意：<br>oss 需要配置域名，不然访问是下载<br>配置一个域名（必须备案）</p>
+<ol>
+<li><p>在域名解析中通过CANME 映射到oss分配的外网bucket地址</p>
+</li>
+<li><p>进入oss管理后台 点击你要配置的bucket<br><img src="https://img-blog.csdnimg.cn/20200929175702675.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+</li>
+<li><p>如果需要https 访问 就需要上传证书（申请一个免费证书即可）<br><img src="https://img-blog.csdnimg.cn/20200929175820876.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+</li>
+</ol>
+
       
     </div>
     
@@ -373,7 +384,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/" rel="tag">mac</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oss/" rel="tag">oss</a></li></ul>
     </div>
 
       
@@ -399,7 +410,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/63/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/62/">62</a><a class="page-number" href="/page/63/">63</a><span class="page-number current">64</span><a class="page-number" href="/page/65/">65</a><a class="page-number" href="/page/66/">66</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><a class="extend next" rel="next" href="/page/65/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/63/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/62/">62</a><a class="page-number" href="/page/63/">63</a><span class="page-number current">64</span><a class="page-number" href="/page/65/">65</a><a class="page-number" href="/page/66/">66</a><span class="space">&hellip;</span><a class="page-number" href="/page/163/">163</a><a class="extend next" rel="next" href="/page/65/">下一页</a>
     </nav>
   
 

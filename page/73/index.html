@@ -297,11 +297,11 @@
   
 
 
-<article id="post-JS中（constructor属性）" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="mac上执行npm-install时出现node-gyp错误时解决方法" class="article article-type-mac上执行npm" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/JS%E4%B8%AD%EF%BC%88constructor%E5%B1%9E%E6%80%A7%EF%BC%89/" class="article-date">
-      <time datetime="2020-07-24T07:33:08.000Z" itemprop="datePublished">2020-07-24</time>
+      <a href="/install%E6%97%B6%E5%87%BA%E7%8E%B0node-gyp%E9%94%99%E8%AF%AF%E6%97%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="article-date">
+      <time datetime="2020-08-03T08:53:18.000Z" itemprop="datePublished">2020-08-03</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/JS%E4%B8%AD%EF%BC%88constructor%E5%B1%9E%E6%80%A7%EF%BC%89/">JS中（constructor属性）</a>
+      <a class="article-title" href="/install%E6%97%B6%E5%87%BA%E7%8E%B0node-gyp%E9%94%99%E8%AF%AF%E6%97%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">install时出现node-gyp错误时解决方法</a>
     </h1>
   
 
         
-          <!-- <a href="/JS%E4%B8%AD%EF%BC%88constructor%E5%B1%9E%E6%80%A7%EF%BC%89/" class="archive-article-date">
-      <time datetime="2020-07-24T07:33:08.000Z" itemprop="datePublished">2020-07-24</time>
+          <!-- <a href="/install%E6%97%B6%E5%87%BA%E7%8E%B0node-gyp%E9%94%99%E8%AF%AF%E6%97%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="archive-article-date">
+      <time datetime="2020-08-03T08:53:18.000Z" itemprop="datePublished">2020-08-03</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">150字</span>
+      <span class="post-count">198字</span>
     </span>
   </span>
 
@@ -358,13 +358,13 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>在Javascript 语言中，constructor 属性是专门为 function 而设计的，它存在于每一个function 的prototype 属性中。这个constructor 保存了指向 function 的一个引用。 </p>
-<p>在定义一个函数（代码如下所示）时，</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">functionF() </span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">// some code</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var f = new F();</span><br><span class="line">console(f.constructor === F);// output <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p> JavaScript 内部会执行如下几个动作：1</p>
-<p>1.为该函数添加一个原形（即 prototype）属性<br>2. 为 prototype 对象额外添加一个 constructor 属性，并且该属性保存指向函数F 的一个引用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 继承</span><br><span class="line">var f = new F();</span><br><span class="line"></span><br><span class="line">class Api extends f.constructor &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> default new Api()</span><br></pre></td></tr></table></figure>
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&gt; fsevents@1.2.11 install /*...*/project/node_modules/chokidar/node_modules/fsevents</span><br><span class="line">&gt; node-gyp rebuild</span><br><span class="line"></span><br><span class="line">No receipt <span class="keyword">for</span> <span class="string">'com.apple.pkg.CLTools_Executables'</span> found at <span class="string">'/'</span>.</span><br><span class="line"></span><br><span class="line">No receipt <span class="keyword">for</span> <span class="string">'com.apple.pkg.DeveloperToolsCLILeo'</span> found at <span class="string">'/'</span>.</span><br><span class="line"></span><br><span class="line">No receipt <span class="keyword">for</span> <span class="string">'com.apple.pkg.DeveloperToolsCLI'</span> found at <span class="string">'/'</span>.</span><br><span class="line"></span><br><span class="line">gyp: No Xcode or CLT version detected!</span><br><span class="line">gyp ERR! configure error</span><br><span class="line">gyp ERR! stack Error: `gyp` failed with <span class="built_in">exit</span> code: 1</span><br><span class="line">gyp ERR! stack     at ChildProcess.onCpExit (/usr/<span class="built_in">local</span>/lib/node_modules/npm/node_modules/node-gyp/lib/configure.js:351:16)</span><br><span class="line">gyp ERR! stack     at ChildProcess.emit (events.js:210:5)</span><br><span class="line">gyp ERR! stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:272:12)</span><br><span class="line">gyp ERR! System Darwin 19.2.0</span><br><span class="line">gyp ERR! <span class="built_in">command</span> <span class="string">"/usr/local/bin/node"</span> <span class="string">"/usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js"</span> <span class="string">"rebuild"</span></span><br><span class="line">gyp ERR! cwd /Users/guoguo/Sites/pufa100/react-admin/node_modules/chokidar/node_modules/fsevents</span><br><span class="line">gyp ERR! node -v v12.14.0</span><br><span class="line">gyp ERR! node-gyp -v v5.0.5</span><br><span class="line">gyp ERR! not ok</span><br></pre></td></tr></table></figure>
 
+<ol>
+<li>删除已经安装的CommandLineTools<br><code>sudo rm -rf $(xcode-select -p)</code></li>
+<li>重新安装<br><code>sudo xcode-select --install</code></li>
+</ol>
+<p>同意条款选择同意，会提示系统更新一并同意。</p>
 
       
     </div>
@@ -375,7 +375,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/" rel="tag">mac</a></li></ul>
     </div>
 
       
@@ -401,7 +401,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/72/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/71/">71</a><a class="page-number" href="/page/72/">72</a><span class="page-number current">73</span><a class="page-number" href="/page/74/">74</a><a class="page-number" href="/page/75/">75</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><a class="extend next" rel="next" href="/page/74/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/72/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/71/">71</a><a class="page-number" href="/page/72/">72</a><span class="page-number current">73</span><a class="page-number" href="/page/74/">74</a><a class="page-number" href="/page/75/">75</a><span class="space">&hellip;</span><a class="page-number" href="/page/163/">163</a><a class="extend next" rel="next" href="/page/74/">下一页</a>
     </nav>
   
 

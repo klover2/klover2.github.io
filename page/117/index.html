@@ -297,11 +297,11 @@
   
 
 
-<article id="post-centos安装的nodejs更新npm" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-GitHub配置密钥" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/centos%E5%AE%89%E8%A3%85%E7%9A%84nodejs%E6%9B%B4%E6%96%B0npm/" class="article-date">
-      <time datetime="2020-05-20T02:54:49.000Z" itemprop="datePublished">2020-05-20</time>
+      <a href="/GitHub%E9%85%8D%E7%BD%AE%E5%AF%86%E9%92%A5/" class="article-date">
+      <time datetime="2020-05-20T03:12:42.000Z" itemprop="datePublished">2020-05-20</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/centos%E5%AE%89%E8%A3%85%E7%9A%84nodejs%E6%9B%B4%E6%96%B0npm/">centos安装的nodejs更新npm</a>
+      <a class="article-title" href="/GitHub%E9%85%8D%E7%BD%AE%E5%AF%86%E9%92%A5/">GitHub配置密钥</a>
     </h1>
   
 
         
-          <!-- <a href="/centos%E5%AE%89%E8%A3%85%E7%9A%84nodejs%E6%9B%B4%E6%96%B0npm/" class="archive-article-date">
-      <time datetime="2020-05-20T02:54:49.000Z" itemprop="datePublished">2020-05-20</time>
+          <!-- <a href="/GitHub%E9%85%8D%E7%BD%AE%E5%AF%86%E9%92%A5/" class="archive-article-date">
+      <time datetime="2020-05-20T03:12:42.000Z" itemprop="datePublished">2020-05-20</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">168字</span>
+      <span class="post-count">163字</span>
     </span>
   </span>
 
@@ -358,21 +358,13 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>npm 官网 ：<a href="https://docs.npmjs.com/getting-started/installing-node" target="_blank" rel="external nofollow noopener noreferrer">https://docs.npmjs.com/getting-started/installing-node</a><br>安装 nodejs  [官方介绍请看这里：<a href="https://github.com/nodesource/distributions]" target="_blank" rel="external nofollow noopener noreferrer">https://github.com/nodesource/distributions]</a></p>
-<blockquote>
+        <p>在windows 电脑下生产公钥文件<br>ssh-keygen -t rsa -C MAIL，一路回车就行<br>(MAIL 处输入自己的邮箱号）</p>
+<p>生产之后在用户.ssh目录下 打开 id_rsa.pub,复制里面的内容</p>
 <ol>
-<li>安装 nodejs：<br>下载包 我这里下载是版本10的包<br>curl -sL <a href="https://rpm.nodesource.com/setup_10.x" target="_blank" rel="external nofollow noopener noreferrer">https://rpm.nodesource.com/setup_10.x</a>  |  bash  -<br>安装<br>yum install -y nodejs<br>查看node版本<br>node -v </li>
+<li>所有项目配置同一个公钥<br>登陆到自己的gitbub,点击右上角的倒立小三角形。选择 settings<br><img src="https://img-blog.csdnimg.cn/2020031716054754.png" alt="在这里插入图片描述"><br>选择SSH and GPG keys<br><img src="https://img-blog.csdnimg.cn/20200317160619158.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
 </ol>
-</blockquote>
-<blockquote>
-<ol start="2">
-<li>更新 npm<br>npm install npm@latest -g<br>查看npm版本<br>npm -v </li>
-</ol>
-</blockquote>
-<blockquote>
-<p>如果你发现nodejs和你的程序不对，我就碰上了，我刚开始下载了11的包，版本太高，程序报错，后来改成10。<br>1.卸载npm：sudo npm uninstall npm -g<br>2.卸载nodejs包：yum remove nodejs<br>3. cd 到yum源配置文件夹：cd /etc/yum.repo.d ，删除以 node 开头的源<br>4. 清除 yum 缓存 yum clean all</p>
-</blockquote>
-<p>sudo yum install -y git</p>
+<p>点击右边的New SSH key 把复制的公钥文件复制进入</p>
+<p>2.给其中一个项目添加公钥文件<br>点击自己其中一个项目，选择setting<br><img src="https://img-blog.csdnimg.cn/20200317161029478.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>选择deploy key 点击add deploy key<br>复制公钥 名称随便起<br>保存就可以了</p>
 
       
     </div>
@@ -383,7 +375,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li></ul>
     </div>
 
       
@@ -409,7 +401,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/116/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/115/">115</a><a class="page-number" href="/page/116/">116</a><span class="page-number current">117</span><a class="page-number" href="/page/118/">118</a><a class="page-number" href="/page/119/">119</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><a class="extend next" rel="next" href="/page/118/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/116/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/115/">115</a><a class="page-number" href="/page/116/">116</a><span class="page-number current">117</span><a class="page-number" href="/page/118/">118</a><a class="page-number" href="/page/119/">119</a><span class="space">&hellip;</span><a class="page-number" href="/page/163/">163</a><a class="extend next" rel="next" href="/page/118/">下一页</a>
     </nav>
   
 

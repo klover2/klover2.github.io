@@ -297,11 +297,11 @@
   
 
 
-<article id="post-配置jdk与maven" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-通过注解获取对应的类型" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/%E9%85%8D%E7%BD%AEjdk%E4%B8%8Emaven/" class="article-date">
-      <time datetime="2021-11-26T02:21:33.000Z" itemprop="datePublished">2021-11-26</time>
+      <a href="/%E9%80%9A%E8%BF%87%E6%B3%A8%E8%A7%A3%E8%8E%B7%E5%8F%96%E5%AF%B9%E5%BA%94%E7%9A%84%E7%B1%BB%E5%9E%8B/" class="article-date">
+      <time datetime="2022-03-30T07:12:49.000Z" itemprop="datePublished">2022-03-30</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/%E9%85%8D%E7%BD%AEjdk%E4%B8%8Emaven/">配置jdk与maven</a>
+      <a class="article-title" href="/%E9%80%9A%E8%BF%87%E6%B3%A8%E8%A7%A3%E8%8E%B7%E5%8F%96%E5%AF%B9%E5%BA%94%E7%9A%84%E7%B1%BB%E5%9E%8B/">通过注解获取对应的类型</a>
     </h1>
   
 
         
-          <!-- <a href="/%E9%85%8D%E7%BD%AEjdk%E4%B8%8Emaven/" class="archive-article-date">
-      <time datetime="2021-11-26T02:21:33.000Z" itemprop="datePublished">2021-11-26</time>
+          <!-- <a href="/%E9%80%9A%E8%BF%87%E6%B3%A8%E8%A7%A3%E8%8E%B7%E5%8F%96%E5%AF%B9%E5%BA%94%E7%9A%84%E7%B1%BB%E5%9E%8B/" class="archive-article-date">
+      <time datetime="2022-03-30T07:12:49.000Z" itemprop="datePublished">2022-03-30</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">223字</span>
+      <span class="post-count">517字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">1分</span>
+      <span class="post-count">3分</span>
     </span>
   </span>
 </div>
@@ -358,12 +358,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h2 id="安装与配置-jdk"><a href="#安装与配置-jdk" class="headerlink" title="安装与配置 jdk"></a>安装与配置 jdk</h2><ol>
-<li><p>下载链接（<a href="https://www.oracle.com/java/technologies/downloads/#jdk17-windows）" target="_blank" rel="external nofollow noopener noreferrer">https://www.oracle.com/java/technologies/downloads/#jdk17-windows）</a><br>默认安装就好</p>
-</li>
-<li><p>配置环境变量<br>在系统变量里面增加<br><code>JAVA_HOME C:\Program Files\Java\jdk-17.0.1</code><br><code>Path %JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;</code><br><code>CLASSPATH .;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;</code></p>
-</li>
-</ol>
+              <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> klover</span></span><br><span class="line"><span class="comment"> * 处理器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Processor &#123;</span><br><span class="line">    <span class="meta">@AliasFor</span>(</span><br><span class="line">            annotation = Component<span class="class">.<span class="keyword">class</span></span></span><br><span class="line"><span class="class">    )</span></span><br><span class="line">    String value() default "";</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 执行器</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Target</span>(&#123;ElementType.METHOD&#125;)</span><br><span class="line">    <span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line">    <span class="meta">@interface</span> Process &#123;</span><br><span class="line">        <span class="function">String <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
       
     </div>
@@ -379,7 +374,7 @@
 
       
         <p class="article-more-link">
-          <a href="/%E9%85%8D%E7%BD%AEjdk%E4%B8%8Emaven/#more">阅读全文 >></a>
+          <a href="/%E9%80%9A%E8%BF%87%E6%B3%A8%E8%A7%A3%E8%8E%B7%E5%8F%96%E5%AF%B9%E5%BA%94%E7%9A%84%E7%B1%BB%E5%9E%8B/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -404,7 +399,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/8/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><a class="extend next" rel="next" href="/page/10/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/8/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/163/">163</a><a class="extend next" rel="next" href="/page/10/">下一页</a>
     </nav>
   
 

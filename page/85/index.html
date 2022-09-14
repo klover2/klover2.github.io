@@ -297,11 +297,11 @@
   
 
 
-<article id="post-SSH命令行使用方法" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-通过管道链接远程服务器上面的数据库" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/SSH%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" class="article-date">
-      <time datetime="2020-07-20T07:01:37.000Z" itemprop="datePublished">2020-07-20</time>
+      <a href="/%E9%80%9A%E8%BF%87%E7%AE%A1%E9%81%93%E9%93%BE%E6%8E%A5%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%9D%A2%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93/" class="article-date">
+      <time datetime="2020-07-21T07:03:10.000Z" itemprop="datePublished">2020-07-21</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/SSH%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">SSH命令行使用方法</a>
+      <a class="article-title" href="/%E9%80%9A%E8%BF%87%E7%AE%A1%E9%81%93%E9%93%BE%E6%8E%A5%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%9D%A2%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93/">通过管道链接远程服务器上面的数据库</a>
     </h1>
   
 
         
-          <!-- <a href="/SSH%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" class="archive-article-date">
-      <time datetime="2020-07-20T07:01:37.000Z" itemprop="datePublished">2020-07-20</time>
+          <!-- <a href="/%E9%80%9A%E8%BF%87%E7%AE%A1%E9%81%93%E9%93%BE%E6%8E%A5%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%9D%A2%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93/" class="archive-article-date">
+      <time datetime="2020-07-21T07:03:10.000Z" itemprop="datePublished">2020-07-21</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">279字</span>
+      <span class="post-count">251字</span>
     </span>
   </span>
 
@@ -358,10 +358,13 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="什么是SSH"><a href="#什么是SSH" class="headerlink" title="什么是SSH"></a>什么是SSH</h2><p>简单说，SSH是一种网络协议，用于计算机之间的加密登录。如果一个用户从本地计算机，使用SSH协议登录另一台远程计算机，我们就可以认为，这种登录是安全的，即使被中途截获，密码也不会泄露。最早的时候，互联网通信都是明文通信，一旦被截获，内容就暴露无疑。1995年，芬兰学者Tatu Ylonen设计了SSH协议，将登录信息全部加密，成为互联网安全的一个基本解决方案，迅速在全世界获得推广，目前已经成为Linux系统的标准配置。</p>
-<p>连接过程是这样的：（1）远程主机收到用户的登录请求，把自己的公钥发给用户。（2）用户使用这个公钥，将登录密码加密后，发送回来。（3）远程主机用自己的私钥，解密登录密码，如果密码正确，就同意用户登录。</p>
-<h2 id="登陆远程服务器"><a href="#登陆远程服务器" class="headerlink" title="登陆远程服务器"></a>登陆远程服务器</h2><p>ssh -p 22 root@ip</p>
-<p>设置免密登录<br>ssh-copy-id root@ip</p>
+        <p>服务器的数据库在linux上面不方便管理，又无开启数据库远程访问权限。只有ssh权限的情况下。本地通过ssh管道链接该数据库。。</p>
+<p>首先保证服务器数据库开启，<br>本地链接服务器</p>
+<p>ssh -L 20202:localhost:5432 <a href="mailto:root@12.54.654.77" rel="external nofollow noopener noreferrer" target="_blank">root@12.54.654.77</a> -p 22</p>
+<p>通过ssh -L 管道链接 ：将地址为12.54.654.77服务器上面的 ，本地（localhost）服务端口5432（postgresql服务）映射到，客户端的本地端口20202.</p>
+<p>至此，客户端的本地端口20202即为服务端的 5432端口服务。</p>
+<p>20202：可配置的将服务端数据库端口映射过来的本地端口。<br>localhost：在服务器上面的本地服务。<br>5432：服务器上面的数据库服务端口。<br>root：服务器的ssh账号。<br>12.54.654.77：服务器地址。<br>22：服务器的ssh端口。</p>
+<p>通过公钥文件连接 id_rsa_2048 是秘钥文件<br>ssh -L 5432:localhost:5432 <a href="mailto:root@12.54.654.77" rel="external nofollow noopener noreferrer" target="_blank">root@12.54.654.77</a> -p 22 -i id_rsa_2048</p>
 
       
     </div>
@@ -398,7 +401,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/84/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/83/">83</a><a class="page-number" href="/page/84/">84</a><span class="page-number current">85</span><a class="page-number" href="/page/86/">86</a><a class="page-number" href="/page/87/">87</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><a class="extend next" rel="next" href="/page/86/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/84/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/83/">83</a><a class="page-number" href="/page/84/">84</a><span class="page-number current">85</span><a class="page-number" href="/page/86/">86</a><a class="page-number" href="/page/87/">87</a><span class="space">&hellip;</span><a class="page-number" href="/page/163/">163</a><a class="extend next" rel="next" href="/page/86/">下一页</a>
     </nav>
   
 

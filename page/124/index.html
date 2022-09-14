@@ -297,11 +297,11 @@
   
 
 
-<article id="post-koa2解析请求头信息" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-centos安装的nodejs更新npm" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/koa2%E8%A7%A3%E6%9E%90%E8%AF%B7%E6%B1%82%E5%A4%B4%E4%BF%A1%E6%81%AF/" class="article-date">
-      <time datetime="2020-05-20T02:41:27.000Z" itemprop="datePublished">2020-05-20</time>
+      <a href="/centos%E5%AE%89%E8%A3%85%E7%9A%84nodejs%E6%9B%B4%E6%96%B0npm/" class="article-date">
+      <time datetime="2020-05-20T02:54:49.000Z" itemprop="datePublished">2020-05-20</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/koa2%E8%A7%A3%E6%9E%90%E8%AF%B7%E6%B1%82%E5%A4%B4%E4%BF%A1%E6%81%AF/">koa2解析请求头信息</a>
+      <a class="article-title" href="/centos%E5%AE%89%E8%A3%85%E7%9A%84nodejs%E6%9B%B4%E6%96%B0npm/">centos安装的nodejs更新npm</a>
     </h1>
   
 
         
-          <!-- <a href="/koa2%E8%A7%A3%E6%9E%90%E8%AF%B7%E6%B1%82%E5%A4%B4%E4%BF%A1%E6%81%AF/" class="archive-article-date">
-      <time datetime="2020-05-20T02:41:27.000Z" itemprop="datePublished">2020-05-20</time>
+          <!-- <a href="/centos%E5%AE%89%E8%A3%85%E7%9A%84nodejs%E6%9B%B4%E6%96%B0npm/" class="archive-article-date">
+      <time datetime="2020-05-20T02:54:49.000Z" itemprop="datePublished">2020-05-20</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">337字</span>
+      <span class="post-count">168字</span>
     </span>
   </span>
 
@@ -358,49 +358,21 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <blockquote>
-<p>推荐使用ua-parser-js<br>npm i ua-parser-js –save</p>
+        <p>npm 官网 ：<a href="https://docs.npmjs.com/getting-started/installing-node" target="_blank" rel="external nofollow noopener noreferrer">https://docs.npmjs.com/getting-started/installing-node</a><br>安装 nodejs  [官方介绍请看这里：<a href="https://github.com/nodesource/distributions]" target="_blank" rel="external nofollow noopener noreferrer">https://github.com/nodesource/distributions]</a></p>
+<blockquote>
+<ol>
+<li>安装 nodejs：<br>下载包 我这里下载是版本10的包<br>curl -sL <a href="https://rpm.nodesource.com/setup_10.x" target="_blank" rel="external nofollow noopener noreferrer">https://rpm.nodesource.com/setup_10.x</a>  |  bash  -<br>安装<br>yum install -y nodejs<br>查看node版本<br>node -v </li>
+</ol>
 </blockquote>
-<p>eg:<br>       const parser = require(‘ua-parser-js’);<br>       let ua = ctx.headers[‘user-agent’];<br>        let ua_parser = new parser(ua);</p>
-<pre><code>// 自己检查一些不常用的浏览器
-if (/99Browser/.test(ua)) { // 久久浏览器
-    let myOwnRegex = [[ /(99Browser)\/([\w\.]+)/i ], [ parser.BROWSER.NAME, parser.BROWSER.VERSION ]];
-    let myParser = new parser({ &apos;browser&apos;: myOwnRegex });
-    ua_parser = myParser.setUA(ua);
-} else if (/LieBaoFast/.test(ua)) { // 猎豹浏览器
-    let myOwnRegex = [[ /(LieBaoFast)\/([\w\.]+)/i ], [ parser.BROWSER.NAME, parser.BROWSER.VERSION ]];
-    let myParser = new parser({ &apos;browser&apos;: myOwnRegex });
-    ua_parser = myParser.setUA(ua);
-} else if (/2345Browser/.test(ua)) { // 2345浏览器
-    let myOwnRegex = [[ /(2345Browser)\/([\w\.]+)/i ], [ parser.BROWSER.NAME, parser.BROWSER.VERSION ]];
-    let myParser = new parser({ &apos;browser&apos;: myOwnRegex });
-    ua_parser = myParser.setUA(ua);
-} else if (/SogouMobileBrowser/.test(ua)) { // 搜狗浏览器
-    let myOwnRegex = [[ /(SogouMobileBrowser)\/([\w\.]+)/i ], [ parser.BROWSER.NAME, parser.BROWSER.VERSION ]];
-    let myParser = new parser({ &apos;browser&apos;: myOwnRegex });
-    ua_parser = myParser.setUA(ua);
-} else if (/MZBrowser/.test(ua)) { // 魅族浏览器
-    let myOwnRegex = [[ /(MZBrowser)\/([\w\.]+)/i ], [ parser.BROWSER.NAME, parser.BROWSER.VERSION ]];
-    let myParser = new parser({ &apos;browser&apos;: myOwnRegex });
-    ua_parser = myParser.setUA(ua);
-}
-
-const client_type = ua_parser.getResult();
-
-let getBrowser = ua_parser.getBrowser();
-let browser_name = getBrowser.name || &apos;其他&apos;; // 浏览器名称
-let browser_version = getBrowser.version; // 浏览器版本
-
-let getOS = ua_parser.getOS();
-let os_name = getOS.name || &apos;其他&apos;; // 操作系统名称
-let os_version = getOS.version; // 操作系统版本
-
-let getDevice = ua_parser.getDevice();
-let platform_type = getDevice.type || &apos;desktop&apos;;// 判断是什么平台
-
-let getEngine = ua_parser.getEngine();
-let engine_name = getEngine.name || &apos;其他&apos;; // 判断是什么引擎</code></pre><p>如果不需要太多信息，只是简单使用 推荐使用 bowser<br>npm i bowser –save</p>
-<p>eg:<br>     const Bowser = require(‘bowser’);<br>     const client_type = Bowser.parse(ctx.headers[‘user-agent’]);</p>
+<blockquote>
+<ol start="2">
+<li>更新 npm<br>npm install npm@latest -g<br>查看npm版本<br>npm -v </li>
+</ol>
+</blockquote>
+<blockquote>
+<p>如果你发现nodejs和你的程序不对，我就碰上了，我刚开始下载了11的包，版本太高，程序报错，后来改成10。<br>1.卸载npm：sudo npm uninstall npm -g<br>2.卸载nodejs包：yum remove nodejs<br>3. cd 到yum源配置文件夹：cd /etc/yum.repo.d ，删除以 node 开头的源<br>4. 清除 yum 缓存 yum clean all</p>
+</blockquote>
+<p>sudo yum install -y git</p>
 
       
     </div>
@@ -411,7 +383,7 @@ let engine_name = getEngine.name || &apos;其他&apos;; // 判断是什么引擎
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/koa/" rel="tag">koa</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li></ul>
     </div>
 
       
@@ -437,7 +409,7 @@ let engine_name = getEngine.name || &apos;其他&apos;; // 判断是什么引擎
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/123/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/122/">122</a><a class="page-number" href="/page/123/">123</a><span class="page-number current">124</span><a class="page-number" href="/page/125/">125</a><a class="page-number" href="/page/126/">126</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><a class="extend next" rel="next" href="/page/125/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/123/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/122/">122</a><a class="page-number" href="/page/123/">123</a><span class="page-number current">124</span><a class="page-number" href="/page/125/">125</a><a class="page-number" href="/page/126/">126</a><span class="space">&hellip;</span><a class="page-number" href="/page/163/">163</a><a class="extend next" rel="next" href="/page/125/">下一页</a>
     </nav>
   
 

@@ -297,11 +297,11 @@
   
 
 
-<article id="post-docker的-var-lib-docker目录迁移" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-windows10安装docker" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/docker%E7%9A%84-var-lib-docker%E7%9B%AE%E5%BD%95%E8%BF%81%E7%A7%BB/" class="article-date">
-      <time datetime="2020-12-30T06:49:55.000Z" itemprop="datePublished">2020-12-30</time>
+      <a href="/windows10%E5%AE%89%E8%A3%85docker/" class="article-date">
+      <time datetime="2021-03-17T10:01:56.000Z" itemprop="datePublished">2021-03-17</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/docker%E7%9A%84-var-lib-docker%E7%9B%AE%E5%BD%95%E8%BF%81%E7%A7%BB/">docker的/var/lib/docker目录迁移</a>
+      <a class="article-title" href="/windows10%E5%AE%89%E8%A3%85docker/">windows10安装docker</a>
     </h1>
   
 
         
-          <!-- <a href="/docker%E7%9A%84-var-lib-docker%E7%9B%AE%E5%BD%95%E8%BF%81%E7%A7%BB/" class="archive-article-date">
-      <time datetime="2020-12-30T06:49:55.000Z" itemprop="datePublished">2020-12-30</time>
+          <!-- <a href="/windows10%E5%AE%89%E8%A3%85docker/" class="archive-article-date">
+      <time datetime="2021-03-17T10:01:56.000Z" itemprop="datePublished">2021-03-17</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">287字</span>
+      <span class="post-count">130字</span>
     </span>
   </span>
 
@@ -358,34 +358,18 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>由于/var/lib/docker/overlay2 占用空间很大 迁移到一个空闲的地方</p>
-<ol>
-<li>首先需要停止docker服务</li>
+        <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ol>
+<li>必须是 windows 10 专业版</li>
+<li>进入任务管理器看虚拟化是否已启用<br><img src="https://img-blog.csdnimg.cn/20210317175951685.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>然后再是进入电脑的控制面板-&gt;程序-&gt;启用或关闭 Windows 功能-&gt;把 Hyper-v 勾上，启用后电脑会重启，后面就可以下载并安装 Docker for Windows 了。</li>
 </ol>
-<p>systemctl stop docker<br>2. 通过命令df -h 先去看下磁盘大概的情况，找一个大的空间</p>
-<ol start="3">
-<li>创建docker的新目录，我这边找了data, 所以我这边的新目录地址是 /data/docker</li>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p><code>https://docs.docker.com/docker-for-windows/wsl/</code><br><img src="https://img-blog.csdnimg.cn/20210317180105110.png" alt="在这里插入图片描述"></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol>
+<li>直接安装（就是取消勾选 WSL 2）</li>
+<li>安装成功 右键进入 settings 取消勾选 wsl 2 就可以正常使用了</li>
 </ol>
-<p>mkdir -p /data/docker<br>注：参数-p 确保目录名称存在，如果目录不存在的就新创建一个。</p>
-<ol start="4">
-<li>开始迁移</li>
-</ol>
-<p><code>rsync -avzP /var/lib/docker /data/docker</code><br>先确认是否安装了rsync. 若未安装rsync使用<code>yum install -y rsync</code>安装</p>
-<p>参数解释：</p>
-<p>-a，归档模式，表示递归传输并保持文件属性。<br>-v，显示rsync过程中详细信息。可以使用”-vvvv”获取更详细信息。<br>-P，显示文件传输的进度信息。(实际上”-P”=”–partial –progress”，其中的”–progress”才是显示进度信息的)。<br>-z,   传输时进行压缩提高效率。</p>
-<ol start="5">
-<li>指定新的docker目录</li>
-</ol>
-<p><code>vim /lib/systemd/system/docker.service</code><br>在ExecStart加入:  </p>
-<p> <code>--graph=/data/docker</code></p>
-<ol start="6">
-<li><p>重启docker</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line"> </span><br><span class="line">systemctl restart docker</span><br><span class="line"> </span><br><span class="line">systemctl <span class="built_in">enable</span> docker</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>启动之后确认docker 没有问题，删除旧的/var/lib/docker/目录</p>
-</li>
-</ol>
-<p><a href="https://zengwu.com.cn/p/fe977338.html" target="_blank" rel="external nofollow noopener noreferrer">文档</a></p>
+<p><img src="https://img-blog.csdnimg.cn/20210317175824765.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>dockers ps</p>
 
       
     </div>
@@ -422,7 +406,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/35/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="page-number" href="/page/35/">35</a><span class="page-number current">36</span><a class="page-number" href="/page/37/">37</a><a class="page-number" href="/page/38/">38</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><a class="extend next" rel="next" href="/page/37/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/35/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="page-number" href="/page/35/">35</a><span class="page-number current">36</span><a class="page-number" href="/page/37/">37</a><a class="page-number" href="/page/38/">38</a><span class="space">&hellip;</span><a class="page-number" href="/page/163/">163</a><a class="extend next" rel="next" href="/page/37/">下一页</a>
     </nav>
   
 

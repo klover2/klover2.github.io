@@ -297,11 +297,11 @@
   
 
 
-<article id="post-Docker容器做端口映射报错" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-CentOS7配置代理" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/Docker%E5%AE%B9%E5%99%A8%E5%81%9A%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E6%8A%A5%E9%94%99/" class="article-date">
-      <time datetime="2020-12-07T11:08:45.000Z" itemprop="datePublished">2020-12-07</time>
+      <a href="/CentOS7%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/" class="article-date">
+      <time datetime="2020-12-30T06:14:02.000Z" itemprop="datePublished">2020-12-30</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/Docker%E5%AE%B9%E5%99%A8%E5%81%9A%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E6%8A%A5%E9%94%99/">Docker容器做端口映射报错(Error response from daemon)</a>
+      <a class="article-title" href="/CentOS7%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/">CentOS7配置代理</a>
     </h1>
   
 
         
-          <!-- <a href="/Docker%E5%AE%B9%E5%99%A8%E5%81%9A%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E6%8A%A5%E9%94%99/" class="archive-article-date">
-      <time datetime="2020-12-07T11:08:45.000Z" itemprop="datePublished">2020-12-07</time>
+          <!-- <a href="/CentOS7%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/" class="archive-article-date">
+      <time datetime="2020-12-30T06:14:02.000Z" itemprop="datePublished">2020-12-30</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">85字</span>
+      <span class="post-count">135字</span>
     </span>
   </span>
 
@@ -358,7 +358,18 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="docker出现错误"><a href="#docker出现错误" class="headerlink" title="docker出现错误"></a>docker出现错误</h2><p> <code>Error response from daemon: driver failed programming external connectivity on endpoint mysql (a29d3409d7b1f5eaf8706050f4aeed7b11fa90415d243239a0c882eeb9fb83be):  (iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 0/0 --dport 3306 -j DNAT --to-destination 172.17.0.5:3306 ! -i docker0: iptables: No chain/target/match by that name.</code><br> Docker容器做端口映射报错，docker服务启动时定义的自定义链DOCKER被清除；重启即可<br> systemctl restart docker</p>
+        <ol>
+<li><p>通过修改/etc/profile文件来实现</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#打开profile文件</span></span><br><span class="line">vim /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="comment">#添加Proxy代理信息（其中username和password根据需要填写，若无则不填写）</span></span><br><span class="line">http_proxy = http://username:password@proxy_ip:port/</span><br><span class="line">https_proxy = http://username:password@proxy_ip:port/</span><br><span class="line">ftp_proxy = http://username:password@proxy_ip:port/</span><br><span class="line"><span class="built_in">export</span> http_proxy</span><br><span class="line"><span class="built_in">export</span> https_proxy</span><br><span class="line"><span class="built_in">export</span> ftp_proxy</span><br><span class="line"></span><br><span class="line"><span class="comment">#生效配置</span></span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure></li>
+<li><p>yum代理设置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#打开yum.conf文件</span></span><br><span class="line">vim /etc/yum.conf</span><br><span class="line"></span><br><span class="line"><span class="comment">#添加Proxy代理信息</span></span><br><span class="line">proxy = http://username:password@proxy_ip:port/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>wget代理设置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#打开/wgetrc文件</span></span><br><span class="line">vim /etc/wgetrc</span><br><span class="line"></span><br><span class="line"><span class="comment">#修改Proxy代理信息</span></span><br><span class="line">http_proxy=http://username:password@proxy_ip:port/</span><br><span class="line">ftp_proxy=http://username:password@proxy_ip:port/</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>重启服务器 <code>reboot</code></p>
 
       
     </div>
@@ -369,7 +380,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BF%BB%E5%A2%99/" rel="tag">翻墙</a></li></ul>
     </div>
 
       
@@ -395,7 +406,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/43/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="page-number" href="/page/43/">43</a><span class="page-number current">44</span><a class="page-number" href="/page/45/">45</a><a class="page-number" href="/page/46/">46</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><a class="extend next" rel="next" href="/page/45/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/43/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="page-number" href="/page/43/">43</a><span class="page-number current">44</span><a class="page-number" href="/page/45/">45</a><a class="page-number" href="/page/46/">46</a><span class="space">&hellip;</span><a class="page-number" href="/page/163/">163</a><a class="extend next" rel="next" href="/page/45/">下一页</a>
     </nav>
   
 

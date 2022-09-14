@@ -297,11 +297,11 @@
   
 
 
-<article id="post-linux一些基本命令" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-hexo博客图片处理" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/linux%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" class="article-date">
-      <time datetime="2020-07-23T03:33:14.000Z" itemprop="datePublished">2020-07-23</time>
+      <a href="/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" class="article-date">
+      <time datetime="2020-07-30T03:20:12.000Z" itemprop="datePublished">2020-07-30</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/linux%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">linux一些基本命令</a>
+      <a class="article-title" href="/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/">hexo博客图片处理</a>
     </h1>
   
 
         
-          <!-- <a href="/linux%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" class="archive-article-date">
-      <time datetime="2020-07-23T03:33:14.000Z" itemprop="datePublished">2020-07-23</time>
+          <!-- <a href="/hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" class="archive-article-date">
+      <time datetime="2020-07-30T03:20:12.000Z" itemprop="datePublished">2020-07-30</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">1.3k字</span>
+      <span class="post-count">184字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">5分</span>
+      <span class="post-count">1分</span>
     </span>
   </span>
 </div>
@@ -358,27 +358,35 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h2 id="history"><a href="#history" class="headerlink" title="history"></a>history</h2><p>查看历史命令(显示最近的一千条命令)<br>查看历史指令除了有history,还有方向键盘上的方向键上下键，或者家目录下的隐藏文件.bash_history查看</p>
+        <p>hexo博客图片的问题在于，markdown文章使用的图片路径和hexo博客发布时的图片路径不一致。</p>
+<p>解决方式是使用CodeFalling/hexo-asset-image插件。</p>
+<ol>
+<li>post_asset_folder<br>首先确认_config.yml中有post_asset_folder:true。</li>
+</ol>
+<p>Hexo提供了一种更方便管理Asset的设定：post_asset_folder<br>当您设置post_asset_folder为true参数后，在建立文件时，Hexo<br>会自动建立一个与文章同名的文件夹；以前的文章也可以自己手动创建同名文件夹。</p>
+<ol start="2">
+<li>安装 hexo-asset-image<br>在hexo的目录下执行</li>
+</ol>
 <blockquote>
-<p>cat .bash_history | more -10</p>
+<p><code>npm install https://github.com/CodeFalling/hexo-asset-image --save</code></p>
 </blockquote>
-          
+<ol start="3">
+<li>使用hexo new hexo博客图片处理 创建博客<br>会生成 hexo博客图片处理.md文件 和 hexo博客图片处理文件夹</li>
+</ol>
+<p>如图:<br><img src="hexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/316BE77F-D585-4170-84BC-720474E3E292.png" alt> </p>
+
       
     </div>
     
     <div class="article-info article-info-index">
       
       
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/hexo/">hexo</a>
     </div>
 
+
       
-        <p class="article-more-link">
-          <a href="/linux%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/#more">阅读全文 >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -402,7 +410,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/74/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/73/">73</a><a class="page-number" href="/page/74/">74</a><span class="page-number current">75</span><a class="page-number" href="/page/76/">76</a><a class="page-number" href="/page/77/">77</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><a class="extend next" rel="next" href="/page/76/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/74/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/73/">73</a><a class="page-number" href="/page/74/">74</a><span class="page-number current">75</span><a class="page-number" href="/page/76/">76</a><a class="page-number" href="/page/77/">77</a><span class="space">&hellip;</span><a class="page-number" href="/page/163/">163</a><a class="extend next" rel="next" href="/page/76/">下一页</a>
     </nav>
   
 

@@ -297,11 +297,11 @@
   
 
 
-<article id="vue-cli3-打包上传至阿里云oss" class="article article-type-vue-cli3" itemscope itemprop="blogPost">
+<article id="post-linux环境下安装elasticsearch" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/%E6%89%93%E5%8C%85%E4%B8%8A%E4%BC%A0%E8%87%B3%E9%98%BF%E9%87%8C%E4%BA%91oss/" class="article-date">
-      <time datetime="2021-04-15T13:09:14.000Z" itemprop="datePublished">2021-04-15</time>
+      <a href="/linux%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%AE%89%E8%A3%85elasticsearch/" class="article-date">
+      <time datetime="2021-06-21T12:32:57.000Z" itemprop="datePublished">2021-06-21</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/%E6%89%93%E5%8C%85%E4%B8%8A%E4%BC%A0%E8%87%B3%E9%98%BF%E9%87%8C%E4%BA%91oss/">打包上传至阿里云oss</a>
+      <a class="article-title" href="/linux%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%AE%89%E8%A3%85elasticsearch/">linux环境下安装elasticsearch</a>
     </h1>
   
 
         
-          <!-- <a href="/%E6%89%93%E5%8C%85%E4%B8%8A%E4%BC%A0%E8%87%B3%E9%98%BF%E9%87%8C%E4%BA%91oss/" class="archive-article-date">
-      <time datetime="2021-04-15T13:09:14.000Z" itemprop="datePublished">2021-04-15</time>
+          <!-- <a href="/linux%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%AE%89%E8%A3%85elasticsearch/" class="archive-article-date">
+      <time datetime="2021-06-21T12:32:57.000Z" itemprop="datePublished">2021-06-21</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">122字</span>
+      <span class="post-count">329字</span>
     </span>
   </span>
 
@@ -358,10 +358,11 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="安装-webpack-aliyun-oss-plugin-包"><a href="#安装-webpack-aliyun-oss-plugin-包" class="headerlink" title="安装 webpack-aliyun-oss-plugin 包"></a>安装 webpack-aliyun-oss-plugin 包</h2><p><code>npm install webpack-aliyun-oss-plugin --save-dev</code></p>
-<h2 id="配置-vue-config-js"><a href="#配置-vue-config-js" class="headerlink" title="配置 vue.config.js"></a>配置 vue.config.js</h2><p>// 上述代码是修改你的资源根目录，改为你上传到 oss 上的目录<br><code>publicPath: process.env.NODE_ENV !== &#39;development&#39; ? &#39;https://xxx.com/&#39; : &#39;./&#39;,</code></p>
-<h2 id="webpack-打包配置"><a href="#webpack-打包配置" class="headerlink" title="webpack 打包配置"></a>webpack 打包配置</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> webpackAliyunOssPlugin = <span class="built_in">require</span>(<span class="string">'webpack-aliyun-oss-plugin'</span>)</span><br><span class="line"></span><br><span class="line">chainWebpack(config) &#123;</span><br><span class="line">    <span class="keyword">if</span> (process.env.NODE_ENV === <span class="string">'production'</span>) &#123;</span><br><span class="line">      <span class="comment">// eslint-disable-next-line @typescript-eslint/no-var-requires</span></span><br><span class="line">      <span class="keyword">const</span> &#123; oss &#125; = <span class="built_in">require</span>(<span class="string">'./config'</span>)</span><br><span class="line">      config</span><br><span class="line">        .plugin(<span class="string">'webpack-aliyun-oss-plugin'</span>)</span><br><span class="line">        .use(webpackAliyunOssPlugin, [&#123;</span><br><span class="line">          buildPath: <span class="string">'dist/**'</span>,</span><br><span class="line">          region: <span class="string">'oss-cn-hangzhou'</span>,</span><br><span class="line">          ak: <span class="string">''</span>, <span class="comment">// ak为accessKeyId，sk为accessKeySecret</span></span><br><span class="line">          sk: <span class="string">''</span>,</span><br><span class="line">          bucket: <span class="string">''</span>, <span class="comment">// bucket的name</span></span><br><span class="line">        &#125;])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
+              <h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>1.ElasticSearch 下载地址：</p>
+<p><code>https://www.elastic.co/downloads/elasticsearch</code>（最新 es）</p>
+<p>如果你想要下载其他版本请访问<code>https://www.elastic.co/cn/downloads/past-releases#elasticsearch</code></p>
+<p>我这里选择的是 7.12.0<br>进入/home 文件夹下（最好不要放在 root 下，会报错）<br>下载命令<br><code>wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.12.0-linux-x86_64.tar.gz</code></p>
+          
       
     </div>
     
@@ -371,9 +372,13 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a href="/linux%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%AE%89%E8%A3%85elasticsearch/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -397,7 +402,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/23/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><a class="page-number" href="/page/26/">26</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><a class="extend next" rel="next" href="/page/25/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/23/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><a class="page-number" href="/page/26/">26</a><span class="space">&hellip;</span><a class="page-number" href="/page/163/">163</a><a class="extend next" rel="next" href="/page/25/">下一页</a>
     </nav>
   
 

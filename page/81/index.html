@@ -297,11 +297,11 @@
   
 
 
-<article id="post-PostgreSQL中epoch的用法" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-es6类的使用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/PostgreSQL%E4%B8%ADepoch%E7%9A%84%E7%94%A8%E6%B3%95/" class="article-date">
-      <time datetime="2020-07-21T03:00:18.000Z" itemprop="datePublished">2020-07-21</time>
+      <a href="/es6%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
+      <time datetime="2020-07-23T09:54:08.000Z" itemprop="datePublished">2020-07-23</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/PostgreSQL%E4%B8%ADepoch%E7%9A%84%E7%94%A8%E6%B3%95/">PostgreSQL中epoch的用法</a>
+      <a class="article-title" href="/es6%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8/">es6类的使用</a>
     </h1>
   
 
         
-          <!-- <a href="/PostgreSQL%E4%B8%ADepoch%E7%9A%84%E7%94%A8%E6%B3%95/" class="archive-article-date">
-      <time datetime="2020-07-21T03:00:18.000Z" itemprop="datePublished">2020-07-21</time>
+          <!-- <a href="/es6%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+      <time datetime="2020-07-23T09:54:08.000Z" itemprop="datePublished">2020-07-23</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">281字</span>
+      <span class="post-count">223字</span>
     </span>
   </span>
 
@@ -358,14 +358,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>epoch的含义官网上的原本解释如下：</p>
-<p>For date and timestamp values, the number of seconds since 1970-01-01 00:00:00 UTC (can be negative);<br>for interval values, the total number of seconds in the interval.</p>
-<p>翻译过来就是说，对于日期和时间戳类型的值，会获取到从1970-01-01 00:00:00 UTC这个Linux纪元年的开始时间到给定的日期或者时间戳参数的时间之间相隔的秒数。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select extract(<span class="string">'epoch'</span> from <span class="string">'2020-02-20 11:11:11'</span>::timestamp)</span><br><span class="line">输出 1582168271</span><br></pre></td></tr></table></figure>
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'use strict'</span>;</span><br><span class="line">// 类的由来 原始js 方法声明</span><br><span class="line">// <span class="keyword">function</span> Book(title, pages, isbin) &#123;</span><br><span class="line">//     this.title = title;</span><br><span class="line">//     this.pages = pages;</span><br><span class="line">//     this.isbin = isbin;</span><br><span class="line">// &#125;</span><br><span class="line"></span><br><span class="line">// Book.prototype.init = <span class="function"><span class="title">function</span></span>() &#123; // 只能定义public 方法</span><br><span class="line">//     console.log(this.title);</span><br><span class="line">// &#125;;</span><br><span class="line"></span><br><span class="line">// <span class="built_in">let</span> book = new Book(<span class="string">'title'</span>, <span class="string">'page'</span>, <span class="string">'isbin'</span>);</span><br><span class="line"></span><br><span class="line">// book.init();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// es6 类声明</span><br><span class="line">class Book &#123;</span><br><span class="line">    constructor(title, pages, isbin) &#123;</span><br><span class="line">        this.title = title;</span><br><span class="line">        this.pages = pages;</span><br><span class="line">        this.isbin = isbin;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">init</span></span>() &#123;</span><br><span class="line">        console.log(this.title);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// <span class="built_in">let</span> book = new Book(<span class="string">'title'</span>, <span class="string">'page'</span>, <span class="string">'isbin'</span>);</span><br><span class="line">// console.log(book.title);// 输出 title</span><br><span class="line">// book.title = <span class="string">'new title'</span>;</span><br><span class="line">// console.log(book.title); // 输出 new title</span><br><span class="line">// book.init();// 输出 new title</span><br><span class="line"></span><br><span class="line">// 继承</span><br><span class="line">class IBook extends Book &#123;</span><br><span class="line">    constructor(title, pages, isbin, newBook) &#123;</span><br><span class="line">        super(title, pages, isbin);</span><br><span class="line">        this._newBook = newBook;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 也可以使用get <span class="built_in">set</span>属性存储器 可以进行一些其他参数处理</span><br><span class="line">    get <span class="function"><span class="title">newBook</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> this._newBook;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">set</span> newBook(value) &#123;</span><br><span class="line">        this._newBook = `aaaa<span class="variable">$&#123;value&#125;</span>`;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">let</span> iBook = new IBook(<span class="string">'title'</span>, <span class="string">'page'</span>, <span class="string">'isbin'</span>, <span class="string">'新参数'</span>);</span><br><span class="line"></span><br><span class="line">console.log(iBook.newBook); // 新参数</span><br><span class="line">iBook.newBook = <span class="string">'新参数2'</span>;</span><br><span class="line">console.log(iBook.newBook); // aaaa新参数2</span><br><span class="line"></span><br><span class="line">iBook.init(); // 输出 title</span><br></pre></td></tr></table></figure>
 
-<p>而对于interval这种时间间隔类型，这会获取到这个时间间隔对应的秒数目</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select extract(<span class="string">'epoch'</span> from interval <span class="string">'10 YEAR'</span>) <span class="comment"># 有year month days hour minute second</span></span><br><span class="line">输出 315576000 </span><br><span class="line"></span><br><span class="line">今天是 2020-7-21</span><br><span class="line">select extract(<span class="string">'epoch'</span> from age(cast(<span class="string">'2020-07-20 00:00:00'</span> as timestamp)))</span><br><span class="line">select extract(<span class="string">'epoch'</span> from age(<span class="string">'2020-07-20 00:00:00'</span>::timestamp))</span><br><span class="line">输出 86400</span><br></pre></td></tr></table></figure>
-<h2 id="在sequelize-中的使用"><a href="#在sequelize-中的使用" class="headerlink" title="在sequelize 中的使用"></a>在sequelize 中的使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// attributes:&#123;include: []&#125;选择所有模型属性并添加一些附加值</span><br><span class="line"></span><br><span class="line"><span class="built_in">let</span> rooms = await RoomModel.findAndCountAll(&#123;</span><br><span class="line">            <span class="string">'attributes'</span>: &#123;</span><br><span class="line">                <span class="string">'include'</span>: [[ Sequelize.literal(<span class="string">'EXTRACT(epoch FROM CAST( "room"."msgAt" AS TIMESTAMP)) - EXTRACT(epoch FROM CAST( "lookInfo"."outAt" AS TIMESTAMP))'</span>), <span class="string">'siun'</span> ]],</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="string">'where'</span>: &#123;</span><br><span class="line">                <span class="string">'user_hashs'</span>: &#123;</span><br><span class="line">                    <span class="string">'$overlap'</span>: [ user_hash ],</span><br><span class="line">                &#125;,</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="string">'limit'</span>: <span class="built_in">limit</span>,</span><br><span class="line">            <span class="string">'offset'</span>: offset,</span><br><span class="line">            <span class="string">'order'</span>: [[ <span class="string">'msgAt'</span>, <span class="string">'desc'</span> ], [ Sequelize.literal(<span class="string">'"siun" asc nulls last'</span>) ]],</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+<p><a href="https://es6.ruanyifeng.com/#docs/class" target="_blank" rel="external nofollow noopener noreferrer">Class 的基本语法</a></p>
+
       
     </div>
     
@@ -375,7 +371,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li></ul>
     </div>
 
       
@@ -401,7 +397,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/80/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/79/">79</a><a class="page-number" href="/page/80/">80</a><span class="page-number current">81</span><a class="page-number" href="/page/82/">82</a><a class="page-number" href="/page/83/">83</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><a class="extend next" rel="next" href="/page/82/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/80/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/79/">79</a><a class="page-number" href="/page/80/">80</a><span class="page-number current">81</span><a class="page-number" href="/page/82/">82</a><a class="page-number" href="/page/83/">83</a><span class="space">&hellip;</span><a class="page-number" href="/page/163/">163</a><a class="extend next" rel="next" href="/page/82/">下一页</a>
     </nav>
   
 

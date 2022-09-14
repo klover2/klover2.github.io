@@ -297,11 +297,11 @@
   
 
 
-<article id="post-buffer与stream互相转换" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-飞书-企业自建应用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/buffer%E4%B8%8Estream%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/" class="article-date">
-      <time datetime="2021-10-25T10:07:30.000Z" itemprop="datePublished">2021-10-25</time>
+      <a href="/%E9%A3%9E%E4%B9%A6-%E4%BC%81%E4%B8%9A%E8%87%AA%E5%BB%BA%E5%BA%94%E7%94%A8/" class="article-date">
+      <time datetime="2022-02-21T08:44:36.000Z" itemprop="datePublished">2022-02-21</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/buffer%E4%B8%8Estream%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/">buffer与stream互相转换</a>
+      <a class="article-title" href="/%E9%A3%9E%E4%B9%A6-%E4%BC%81%E4%B8%9A%E8%87%AA%E5%BB%BA%E5%BA%94%E7%94%A8/">飞书-企业自建应用</a>
     </h1>
   
 
         
-          <!-- <a href="/buffer%E4%B8%8Estream%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/" class="archive-article-date">
-      <time datetime="2021-10-25T10:07:30.000Z" itemprop="datePublished">2021-10-25</time>
+          <!-- <a href="/%E9%A3%9E%E4%B9%A6-%E4%BC%81%E4%B8%9A%E8%87%AA%E5%BB%BA%E5%BA%94%E7%94%A8/" class="archive-article-date">
+      <time datetime="2022-02-21T08:44:36.000Z" itemprop="datePublished">2022-02-21</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">435字</span>
+      <span class="post-count">215字</span>
     </span>
   </span>
 
@@ -358,24 +358,27 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <ol>
-<li>流到缓冲区</li>
+        <h1 id="企业自建应用-嵌入三方网页"><a href="#企业自建应用-嵌入三方网页" class="headerlink" title="企业自建应用 嵌入三方网页"></a>企业自建应用 嵌入三方网页</h1><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol>
+<li><p>进入<code>https://open.feishu.cn/app?lang=zh-CN</code></p>
+</li>
+<li><p>选择创建自建应用-内容随便</p>
+</li>
+<li><p>获取对应的应用凭证<br><img src="https://img-blog.csdnimg.cn/12c92114f8584f10b3a2c2aca6f41ba3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+</li>
+<li><p>嵌入网页配置<br><img src="https://img-blog.csdnimg.cn/7d733f9fd91a4266ba8ec41391962940.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>手机端和电脑端可以一样</p>
+</li>
+<li><p>在权限关联中授权获取手机号和邮箱<br><img src="https://img-blog.csdnimg.cn/af64c572686147a5a271d6b4298156af.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+</li>
 </ol>
-<p>第一个操作是将读取流转换为缓冲区。Streams 最有效的操作是将它们通过管道传输到另一个流。这在您不想增加内存使用量的文件系统访问中很常见。</p>
-<p>但是，在处理 HTTP 请求时，您可能希望直接将响应流转换为 JSON 对象或解析 url 编码值。</p>
-<p>为此，您将读取缓冲区 data 事件提供的数据。Streams 将提供一个字符串或一个缓冲区作为数据事件的值。这取决于 Buffer 是否有编码集。默认情况下，它会在 data 事件期间输出 Buffers 。</p>
-<p>这意味着您可以执行以下操作以从流中读取。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">streamToBuffer</span>(<span class="params">stream</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> buffers = [];</span><br><span class="line">    stream.on(<span class="string">"error"</span>, reject);</span><br><span class="line">    stream.on(<span class="string">"data"</span>, (data) =&gt; buffers.push(data));</span><br><span class="line">    stream.on(<span class="string">"end"</span>, () =&gt; resolve(Buffer.concat(buffers)));</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><ol>
+<li>获取 AppAccessToken<br>文档： <code>https://open.feishu.cn/document/ukTMukTMukTM/ukDNz4SO0MjL5QzM/auth-v3/auth/app_access_token_internal</code></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const res = await request</span><br><span class="line">      .post(<span class="string">'https://open.feishu.cn/open-apis/auth/v3/app_access_token/internal'</span>)</span><br><span class="line">      .<span class="built_in">set</span>(&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/json; charset=utf-8'</span>,</span><br><span class="line">      &#125;)</span><br><span class="line">      .send(&#123;</span><br><span class="line">        app_id: data.client_id,</span><br><span class="line">        app_secret: data.client_secret,</span><br><span class="line">      &#125;);</span><br><span class="line">    const body = res.body;</span><br><span class="line">    <span class="keyword">if</span> (!(body.msg === <span class="string">'ok'</span> &amp;&amp; body.code === 0)) throw new CustomException(-1, <span class="string">'获取app_access_token失败'</span>);</span><br><span class="line">    const &#123; app_access_token, expire &#125; = body;</span><br></pre></td></tr></table></figure>
 
-<p>此函数获取流（可能来自 HTTP 或 FS 访问）。然后它将每个 Buffer 推送到一个 Buffer 数组中。当流被完全读取时，它会将所有这些 Buffers 与 Buffer.concat 结合起来。</p>
-<p>这显然会对大流造成一些问题，但对于需要在应用程序的后续部分中转换并在内存中携带的小流来说，它非常有用。</p>
 <ol start="2">
-<li>缓冲区到流<br>下一部分是将 Buffer 转换为流。当您想将数据通过管道传输到现有流中时，这很有用。</li>
+<li>获取用户信息<br>文档<code>https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/authen-v1/authen/access_token</code></li>
 </ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> Duplex = <span class="built_in">require</span>(<span class="string">"stream"</span>).Duplex;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bufferToStream</span>(<span class="params">buffer</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> stream = <span class="keyword">new</span> Duplex();</span><br><span class="line">  stream.push(buffer);</span><br><span class="line">  stream.push(<span class="literal">null</span>);</span><br><span class="line">  <span class="keyword">return</span> stream;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>此操作创建一个双工字符串并简单地将缓冲区写入其中。该流现在可以像通常的任何写入流一样使用。</p>
-<p>文档：<br><a href="https://www.derpturkey.com/buffer-to-stream-in-node/" target="_blank" rel="external nofollow noopener noreferrer">缓冲到节点中的流</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const res = await request</span><br><span class="line">      .post(<span class="string">'https://open.feishu.cn/open-apis/authen/v1/access_token'</span>)</span><br><span class="line">      .<span class="built_in">set</span>(&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/json; charset=utf-8'</span>,</span><br><span class="line">        Authorization: `Bearer <span class="variable">$&#123;data.access_token&#125;</span>`,</span><br><span class="line">      &#125;)</span><br><span class="line">      .send(&#123;</span><br><span class="line">        grant_type: <span class="string">'authorization_code'</span>,</span><br><span class="line">        code: code,</span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -386,7 +389,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A3%9E%E4%B9%A6/" rel="tag">飞书</a></li></ul>
     </div>
 
       
@@ -412,7 +415,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/9/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><a class="extend next" rel="next" href="/page/11/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/9/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/163/">163</a><a class="extend next" rel="next" href="/page/11/">下一页</a>
     </nav>
   
 

@@ -297,11 +297,11 @@
   
 
 
-<article id="post-PostgreSQL中JSONB的使用" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-postgresql-raise函数" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/PostgreSQL%E4%B8%ADJSONB%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
-      <time datetime="2021-12-27T05:23:52.000Z" itemprop="datePublished">2021-12-27</time>
+      <a href="/postgresql-raise%E5%87%BD%E6%95%B0/" class="article-date">
+      <time datetime="2022-09-08T06:32:44.000Z" itemprop="datePublished">2022-09-08</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/PostgreSQL%E4%B8%ADJSONB%E7%9A%84%E4%BD%BF%E7%94%A8/">PostgreSQL中JSONB的使用</a>
+      <a class="article-title" href="/postgresql-raise%E5%87%BD%E6%95%B0/">postgresql-raise函数</a>
     </h1>
   
 
         
-          <!-- <a href="/PostgreSQL%E4%B8%ADJSONB%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-      <time datetime="2021-12-27T05:23:52.000Z" itemprop="datePublished">2021-12-27</time>
+          <!-- <a href="/postgresql-raise%E5%87%BD%E6%95%B0/" class="archive-article-date">
+      <time datetime="2022-09-08T06:32:44.000Z" itemprop="datePublished">2022-09-08</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">2.1k字</span>
+      <span class="post-count">323字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">9分</span>
+      <span class="post-count">1分</span>
     </span>
   </span>
 </div>
@@ -358,12 +358,16 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h2 id="json-类型"><a href="#json-类型" class="headerlink" title="json 类型"></a>json 类型</h2><h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>根据 RFC 7159[1]中的说明，JSON 数据类型是用来存储 JSON（JavaScript Object Notation） 数据的。这种数据也可以被存储为 text，但是 JSON 数据类型的 优势在于能强制要求每个被存储的值符合 JSON 规则。也有很多 JSON 相关的函 数和操作符可以用于存储在这些数据类型中的数据</p>
-<p>PostgreSQL 支持两种 JSON 数据类型：json 和 jsonb。它们几乎接受完全相同的值集合作为输入。两者最大的区别是效率。json 数据类型存储输入文本的精准拷贝，处理函数必须在每 次执行时必须重新解析该数据。而 jsonb 数据被存储在一种分解好的二进制格式中，因为需要做附加的转换，它在输入时要稍慢一些。但是 jsonb 在处理时要快很多，因为不需要重新解析。</p>
-<blockquote>
-<p>重点：jsonb 支持索引</p>
-</blockquote>
-          
+        <p>raise函数<br>在PostgreSQL中，该函数用于打印字符串，类似于Java中的System.out.println()，Oracle中的dbms_output.put_line()。</p>
+<p>用法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">raise notice 'My name is %, I am a %.', 'Lewis', 'coder';</span><br></pre></td></tr></table></figure>
+
+<p>以上sql会在控制台输出My name is Lewis, I am a coder.。如果是在DBeaver里使用该函数，则会在output的tab里输出字符串。</p>
+<p>raise后面的notice是级别，一共有debug/log/info/notice/warning/exception这些级别，可以任意指定一个级别。有些类似于Java里的日志框架，比如Log4j2之类的。</p>
+<p>接着级别后面的是要输出的字符串参数，用一对单引号包括起来。这个字符串支持占位符的写法，也就是%这个字符。如果在字符串里使用了这个%，那么会自动使用字符串参数后面的参数来替换掉这里的%。有多少个占位符，就需要在第一个字符串参数后面加上多少个对应的参数。</p>
+<p>这个占位符输出的用法，也和Log4j2类似。</p>
+<p>由raise打印出来的信息可以输出到服务端日志，也可以输出到客户端，亦或者同时输出到二者。这个是由log_min_messages和client_min_messages两个参数控制的，这两个参数在数据库初始化时用到。</p>
+
       
     </div>
     
@@ -376,10 +380,6 @@
         <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a></li></ul>
     </div>
 
-      
-        <p class="article-more-link">
-          <a href="/PostgreSQL%E4%B8%ADJSONB%E7%9A%84%E4%BD%BF%E7%94%A8/#more">阅读全文 >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -403,7 +403,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/5/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><a class="extend next" rel="next" href="/page/7/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/5/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/163/">163</a><a class="extend next" rel="next" href="/page/7/">下一页</a>
     </nav>
   
 

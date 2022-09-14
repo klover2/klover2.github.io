@@ -297,11 +297,11 @@
   
 
 
-<article id="post-sftp的使用" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-linux服务器内存不足排查" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/sftp%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
-      <time datetime="2020-07-20T06:45:38.000Z" itemprop="datePublished">2020-07-20</time>
+      <a href="/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3%E6%8E%92%E6%9F%A5/" class="article-date">
+      <time datetime="2020-07-21T05:56:49.000Z" itemprop="datePublished">2020-07-21</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/sftp%E7%9A%84%E4%BD%BF%E7%94%A8/">sftp的使用</a>
+      <a class="article-title" href="/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3%E6%8E%92%E6%9F%A5/">linux服务器内存不足排查</a>
     </h1>
   
 
         
-          <!-- <a href="/sftp%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-      <time datetime="2020-07-20T06:45:38.000Z" itemprop="datePublished">2020-07-20</time>
+          <!-- <a href="/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3%E6%8E%92%E6%9F%A5/" class="archive-article-date">
+      <time datetime="2020-07-21T05:56:49.000Z" itemprop="datePublished">2020-07-21</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">491字</span>
+      <span class="post-count">309字</span>
     </span>
   </span>
 
@@ -358,17 +358,15 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h2 id="SFTP的概念"><a href="#SFTP的概念" class="headerlink" title="SFTP的概念"></a>SFTP的概念</h2><p>sftp是Secure File Transfer Protocol的缩写，安全文件传送协议。可以为传输文件提供一种安全的网络的加密方法。sftp 与 ftp 有着几乎一样的语法和功能。SFTP 为 SSH的其中一部分，是一种传输档案至 Blogger 伺服器的安全方式。其实在SSH软件包中，已经包含了一个叫作SFTP(Secure File Transfer Protocol)的安全文件信息传输子系统，SFTP本身没有单独的守护进程，它必须使用sshd守护进程（端口号默认是22）来完成相应的连接和答复操作，所以从某种意义上来说，SFTP并不像一个服务器程序，而更像是一个客户端程序。SFTP同样是使用加密传输认证信息和传输的数据，所以，使用SFTP是非常安全的。但是，由于这种传输方式使用了加密/解密技术，所以传输效率比普通的FTP要低得多，如果您对网络安全性要求更高时，可以使用SFTP代替FTP。（来自百度百科）</p>
-<p>这里我们用sftp来对远程服务器和本地电脑上文件进行上传，下载操作。</p>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>连接远程服务器</p>
+              <p>// 查找大于1G的文件 查找opt下大于1g的文件 输出日志保存在/dev/null中<br>// find /opt/ -size +1G 2&gt;/dev/null</p>
 <ol>
-<li><p>用户名加ip 会提示输入密码</p>
-<blockquote>
-<p>sftp -oPort=22 username@ip </p>
-</blockquote>
+<li>使用df -h发现磁盘占满99%</li>
+</ol>
+<p>看到是/var/lib/docker/containers/**里面占用了 超大的数据</p>
+<p>怀疑是docker的镜像日志造成删除镜像日志<br>docker system prune <a href="http://localhost:4000/docker%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" target="_blank" rel="external nofollow noopener noreferrer">命令介绍</a><br>发现删除之后仍然占存很大</p>
           
       
-    </li></ol></div>
+    </div>
     
     <div class="article-info article-info-index">
       
@@ -381,7 +379,7 @@
 
       
         <p class="article-more-link">
-          <a href="/sftp%E7%9A%84%E4%BD%BF%E7%94%A8/#more">阅读全文 >></a>
+          <a href="/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3%E6%8E%92%E6%9F%A5/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -406,7 +404,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/85/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/84/">84</a><a class="page-number" href="/page/85/">85</a><span class="page-number current">86</span><a class="page-number" href="/page/87/">87</a><a class="page-number" href="/page/88/">88</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><a class="extend next" rel="next" href="/page/87/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/85/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/84/">84</a><a class="page-number" href="/page/85/">85</a><span class="page-number current">86</span><a class="page-number" href="/page/87/">87</a><a class="page-number" href="/page/88/">88</a><span class="space">&hellip;</span><a class="page-number" href="/page/163/">163</a><a class="extend next" rel="next" href="/page/87/">下一页</a>
     </nav>
   
 

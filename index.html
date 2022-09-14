@@ -297,11 +297,11 @@
   
 
 
-<article id="post-TypeScript装饰器" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-记一次使用redis的keys命令导致redis雪崩的生产事故" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/TypeScript%E8%A3%85%E9%A5%B0%E5%99%A8/" class="article-date">
-      <time datetime="2022-04-08T08:00:13.000Z" itemprop="datePublished">2022-04-08</time>
+      <a href="/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BD%BF%E7%94%A8redis%E7%9A%84keys%E5%91%BD%E4%BB%A4%E5%AF%BC%E8%87%B4redis%E9%9B%AA%E5%B4%A9%E7%9A%84%E7%94%9F%E4%BA%A7%E4%BA%8B%E6%95%85/" class="article-date">
+      <time datetime="2022-09-08T09:00:31.000Z" itemprop="datePublished">2022-09-08</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/TypeScript%E8%A3%85%E9%A5%B0%E5%99%A8/">TypeScript装饰器</a>
+      <a class="article-title" href="/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BD%BF%E7%94%A8redis%E7%9A%84keys%E5%91%BD%E4%BB%A4%E5%AF%BC%E8%87%B4redis%E9%9B%AA%E5%B4%A9%E7%9A%84%E7%94%9F%E4%BA%A7%E4%BA%8B%E6%95%85/">记一次使用redis的keys命令导致redis雪崩的生产事故</a>
     </h1>
   
 
         
-          <!-- <a href="/TypeScript%E8%A3%85%E9%A5%B0%E5%99%A8/" class="archive-article-date">
-      <time datetime="2022-04-08T08:00:13.000Z" itemprop="datePublished">2022-04-08</time>
+          <!-- <a href="/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BD%BF%E7%94%A8redis%E7%9A%84keys%E5%91%BD%E4%BB%A4%E5%AF%BC%E8%87%B4redis%E9%9B%AA%E5%B4%A9%E7%9A%84%E7%94%9F%E4%BA%A7%E4%BA%8B%E6%95%85/" class="archive-article-date">
+      <time datetime="2022-09-08T09:00:31.000Z" itemprop="datePublished">2022-09-08</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">1.4k字</span>
+      <span class="post-count">688字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">5分</span>
+      <span class="post-count">2分</span>
     </span>
   </span>
 </div>
@@ -358,9 +358,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h2 id="TypeScript-装饰器（decorators）"><a href="#TypeScript-装饰器（decorators）" class="headerlink" title="TypeScript 装饰器（decorators）"></a>TypeScript 装饰器（decorators）</h2><h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><p>随着 TypeScript 和 ES6 里引入了类，在一些场景下我们需要额外的特性来支持标注或修改类及其成员。 装饰器（Decorators）为我们在类的声明及成员上通过元编程语法添加标注提供了一种方式</p>
-<p>若要启用实验性的装饰器特性，你必须在命令行或 tsconfig.json 里启用 experimentalDecorators 编译器选项</p>
-<p>装饰器是一种特殊类型的声明，它能够被附加到类声明，方法， 访问符，属性或参数上。它可以在不修改代码自身的前提下，给已有代码增加额外的行为</p>
+              <h2 id="出现原因"><a href="#出现原因" class="headerlink" title="出现原因"></a>出现原因</h2><p>由于需要每时每刻监听三方报错超过十次发送机器人警告，所以每次报错我这边就存入一个（key+时间），同时过期时间为1小时，所以查询当前的一个小时内错误次数，使用 <code>keys key*</code>查询key的数量，就知道错误次数，本来一直没有问题，跑了大半年了，突然有一天redis的cpu100%，直接雪崩，导致客户无法登录，后面排查原因是有个三方一直报错，代码又重试，由于需要机器人提醒(这个时候我们redis key已经超过80w个key),导致一秒钟查上千次询<code>keys</code>命令，最后redis直接爆炸。</p>
           
       
     </div>
@@ -371,12 +369,12 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li></ul>
     </div>
 
       
         <p class="article-more-link">
-          <a href="/TypeScript%E8%A3%85%E9%A5%B0%E5%99%A8/#more">阅读全文 >></a>
+          <a href="/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BD%BF%E7%94%A8redis%E7%9A%84keys%E5%91%BD%E4%BB%A4%E5%AF%BC%E8%87%B4redis%E9%9B%AA%E5%B4%A9%E7%9A%84%E7%94%9F%E4%BA%A7%E4%BA%8B%E6%95%85/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -401,7 +399,7 @@
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/163/">163</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
     </nav>
   
 

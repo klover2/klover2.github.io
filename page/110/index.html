@@ -297,11 +297,11 @@
   
 
 
-<article id="post-GitHub配置密钥" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-JWT数据加密" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/GitHub%E9%85%8D%E7%BD%AE%E5%AF%86%E9%92%A5/" class="article-date">
-      <time datetime="2020-05-20T03:12:42.000Z" itemprop="datePublished">2020-05-20</time>
+      <a href="/JWT%E6%95%B0%E6%8D%AE%E5%8A%A0%E5%AF%86/" class="article-date">
+      <time datetime="2020-05-26T07:51:47.000Z" itemprop="datePublished">2020-05-26</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/GitHub%E9%85%8D%E7%BD%AE%E5%AF%86%E9%92%A5/">GitHub配置密钥</a>
+      <a class="article-title" href="/JWT%E6%95%B0%E6%8D%AE%E5%8A%A0%E5%AF%86/">JWT数据加密</a>
     </h1>
   
 
         
-          <!-- <a href="/GitHub%E9%85%8D%E7%BD%AE%E5%AF%86%E9%92%A5/" class="archive-article-date">
-      <time datetime="2020-05-20T03:12:42.000Z" itemprop="datePublished">2020-05-20</time>
+          <!-- <a href="/JWT%E6%95%B0%E6%8D%AE%E5%8A%A0%E5%AF%86/" class="archive-article-date">
+      <time datetime="2020-05-26T07:51:47.000Z" itemprop="datePublished">2020-05-26</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">163字</span>
+      <span class="post-count">355字</span>
     </span>
   </span>
 
@@ -358,13 +358,13 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>在windows 电脑下生产公钥文件<br>ssh-keygen -t rsa -C MAIL，一路回车就行<br>(MAIL 处输入自己的邮箱号）</p>
-<p>生产之后在用户.ssh目录下 打开 id_rsa.pub,复制里面的内容</p>
-<ol>
-<li>所有项目配置同一个公钥<br>登陆到自己的gitbub,点击右上角的倒立小三角形。选择 settings<br><img src="https://img-blog.csdnimg.cn/2020031716054754.png" alt="在这里插入图片描述"><br>选择SSH and GPG keys<br><img src="https://img-blog.csdnimg.cn/20200317160619158.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
-</ol>
-<p>点击右边的New SSH key 把复制的公钥文件复制进入</p>
-<p>2.给其中一个项目添加公钥文件<br>点击自己其中一个项目，选择setting<br><img src="https://img-blog.csdnimg.cn/20200317161029478.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>选择deploy key 点击add deploy key<br>复制公钥 名称随便起<br>保存就可以了</p>
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// 登录加密</span><br><span class="line">const jwt = require(<span class="string">'jsonwebtoken'</span>);</span><br><span class="line">(async () =&gt; &#123;</span><br><span class="line">    // 加密</span><br><span class="line">    const token = jwt.sign(&#123; <span class="string">'foo'</span>: <span class="string">'bar'</span> &#125;, <span class="string">'test_123'</span>, &#123; <span class="string">'expiresIn'</span>: <span class="string">'2 days'</span> &#125;);</span><br><span class="line">    console.log(token);</span><br><span class="line">    const token1 = jwt.sign(&#123; <span class="string">'foo'</span>: <span class="string">'bar'</span> &#125;, <span class="string">'test_123'</span>, &#123; <span class="string">'expiresIn'</span>: <span class="string">'1h'</span> &#125;);</span><br><span class="line">    console.log(token1);</span><br><span class="line">    console.log(token1 === token);</span><br><span class="line"></span><br><span class="line">    try &#123;</span><br><span class="line">        const data = jwt.verify(token, <span class="string">'test_123'</span>);</span><br><span class="line">        console.log(data);</span><br><span class="line">        <span class="built_in">let</span> &#123; exp, iat &#125; = data;</span><br><span class="line">        console.log(exp - iat);</span><br><span class="line">    &#125; catch (error) &#123;</span><br><span class="line">        console.log(<span class="string">'error=============&gt;'</span>, error);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<h2 id="JWT-简介"><a href="#JWT-简介" class="headerlink" title="JWT 简介"></a>JWT 简介</h2><p>（1）JWT 默认是不加密，但也是可以加密的。生成原始 Token 以后，可以用密钥再加密一次。</p>
+<p>（2）JWT 不加密的情况下，不能将秘密数据写入 JWT。</p>
+<p>（3）JWT 不仅可以用于认证，也可以用于交换信息。有效使用 JWT，可以降低服务器查询数据库的次数。</p>
+<p>（4）JWT 的最大缺点是，由于服务器不保存 session 状态，因此无法在使用过程中废止某个 token，或者更改 token 的权限。也就是说，一旦 JWT 签发了，在到期之前就会始终有效，除非服务器部署额外的逻辑。</p>
+<p>（5）JWT 本身包含了认证信息，一旦泄露，任何人都可以获得该令牌的所有权限。为了减少盗用，JWT 的有效期应该设置得比较短。对于一些比较重要的权限，使用时应该再次对用户进行认证。</p>
+<p>（6）为了减少盗用，JWT 不应该使用 HTTP 协议明码传输，要使用 HTTPS 协议传输</p>
 
       
     </div>
@@ -375,7 +375,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jwt/" rel="tag">jwt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li></ul>
     </div>
 
       
@@ -401,7 +401,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/109/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/108/">108</a><a class="page-number" href="/page/109/">109</a><span class="page-number current">110</span><a class="page-number" href="/page/111/">111</a><a class="page-number" href="/page/112/">112</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><a class="extend next" rel="next" href="/page/111/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/109/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/108/">108</a><a class="page-number" href="/page/109/">109</a><span class="page-number current">110</span><a class="page-number" href="/page/111/">111</a><a class="page-number" href="/page/112/">112</a><span class="space">&hellip;</span><a class="page-number" href="/page/163/">163</a><a class="extend next" rel="next" href="/page/111/">下一页</a>
     </nav>
   
 

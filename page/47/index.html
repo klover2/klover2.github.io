@@ -297,11 +297,11 @@
   
 
 
-<article id="post-postgre实现按年月日周统计分组统计" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-重载和重写的区别及在typescript中的使用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/postgre%E5%AE%9E%E7%8E%B0%E6%8C%89%E5%B9%B4%E6%9C%88%E6%97%A5%E5%91%A8%E7%BB%9F%E8%AE%A1%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1/" class="article-date">
-      <time datetime="2020-11-16T08:17:09.000Z" itemprop="datePublished">2020-11-16</time>
+      <a href="/%E9%87%8D%E8%BD%BD%E5%92%8C%E9%87%8D%E5%86%99%E7%9A%84%E5%8C%BA%E5%88%AB%E5%8F%8A%E5%9C%A8typescript%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
+      <time datetime="2020-12-28T03:38:50.000Z" itemprop="datePublished">2020-12-28</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/postgre%E5%AE%9E%E7%8E%B0%E6%8C%89%E5%B9%B4%E6%9C%88%E6%97%A5%E5%91%A8%E7%BB%9F%E8%AE%A1%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1/">postgre实现按年月日周统计分组统计</a>
+      <a class="article-title" href="/%E9%87%8D%E8%BD%BD%E5%92%8C%E9%87%8D%E5%86%99%E7%9A%84%E5%8C%BA%E5%88%AB%E5%8F%8A%E5%9C%A8typescript%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/">重载和重写的区别及在typescript中的使用</a>
     </h1>
   
 
         
-          <!-- <a href="/postgre%E5%AE%9E%E7%8E%B0%E6%8C%89%E5%B9%B4%E6%9C%88%E6%97%A5%E5%91%A8%E7%BB%9F%E8%AE%A1%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1/" class="archive-article-date">
-      <time datetime="2020-11-16T08:17:09.000Z" itemprop="datePublished">2020-11-16</time>
+          <!-- <a href="/%E9%87%8D%E8%BD%BD%E5%92%8C%E9%87%8D%E5%86%99%E7%9A%84%E5%8C%BA%E5%88%AB%E5%8F%8A%E5%9C%A8typescript%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+      <time datetime="2020-12-28T03:38:50.000Z" itemprop="datePublished">2020-12-28</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">623字</span>
+      <span class="post-count">643字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">3分</span>
+      <span class="post-count">2分</span>
     </span>
   </span>
 </div>
@@ -358,12 +358,19 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p>const sequelize = require(‘sequelize’);</p>
-<h2 id="postgre-按照年分组统计"><a href="#postgre-按照年分组统计" class="headerlink" title="postgre 按照年分组统计"></a>postgre 按照年分组统计</h2><blockquote>
-<p>SELECT to_char(“createdAt”::DATE, ‘YYYY’) AS “year”, SUM(“money”) AS “total” FROM “reward_logs” AS “reward_log” GROUP BY “year” ORDER BY “year” DESC</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(async () =&gt; &#123;</span><br><span class="line">    <span class="built_in">let</span> list = await model.findAll(&#123;</span><br><span class="line">        <span class="string">'attributes'</span>: [[ sequelize.literal(`to_char(<span class="string">"createdAt"</span>::DATE, <span class="string">'$&#123;'</span>YYYY<span class="string">'&#125;'</span>)`), <span class="string">'year'</span> ], [ sequelize.fn(<span class="string">'SUM'</span>, sequelize.col(<span class="string">'money'</span>)), <span class="string">'total'</span> ]],</span><br><span class="line">        <span class="string">'where'</span>: &#123;&#125;,</span><br><span class="line">        <span class="string">'group'</span>: [ sequelize.col(<span class="string">'year'</span>) ],</span><br><span class="line">        <span class="string">'order'</span>: [[ sequelize.col(<span class="string">'year'</span>), <span class="string">'DESC'</span> ]],</span><br><span class="line">    &#125;);</span><br><span class="line">    console.log(<span class="string">'list===========&gt;'</span>, list);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-          
+        <h2 id="重写-Override"><a href="#重写-Override" class="headerlink" title="重写(Override)"></a>重写(Override)</h2><p>从字面上看，重写就是 重新写一遍的意思。其实就是在子类中把父类本身有的方法重新写一遍。子类继承了父类原有的方法，但有时子类并不想原封不动的继承父类中的某个方法，所以在方法名，参数列表，返回类型(除过子类中方法的返回值是父类中方法返回值的子类时)都相同的情况下， 对方法体进行修改或重写，这就是重写。但要注意子类函数的访问修饰权限不能小于父类的。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Animal &#123;</span><br><span class="line">    public <span class="function"><span class="title">eat</span></span>() &#123;</span><br><span class="line">        console.log(<span class="string">"这是一个吃的方法"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Dog extends Animal &#123;</span><br><span class="line">    public <span class="function"><span class="title">eat</span></span>() &#123;</span><br><span class="line">        console.log(<span class="string">"这是一个小狗吃的方法"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">let</span> dog: Dog = new Dog()</span><br><span class="line">dog.eat()</span><br></pre></td></tr></table></figure>
+<p>重写 总结：</p>
+<ul>
+<li>发生在父类与子类之间</li>
+<li>方法名，参数列表，返回类型（除过子类中方法的返回类型是父类中返回类型的子类）必须相同</li>
+<li>访问修饰符的限制一定要大于被重写方法的访问修饰符（public&gt;protected&gt;private)</li>
+</ul>
+<h2 id="重载-Overload"><a href="#重载-Overload" class="headerlink" title="重载(Overload)"></a>重载(Overload)</h2><p>在一个类中，同名的方法如果有不同的参数列表（<code>参数类型不同、参数个数不同甚至是参数顺序不同</code>）则视为重载。同时，重载对返回类型没有要求，可以相同也可以不同，但<code>不能通过返回类型是否相同来判断重载</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'use strict'</span>;</span><br><span class="line">class Demo &#123;</span><br><span class="line">  // 重载</span><br><span class="line">  public <span class="built_in">log</span>(): void;</span><br><span class="line">  public <span class="built_in">log</span>(arg1: string): void;</span><br><span class="line">  public <span class="built_in">log</span>(arg1: number, arg2: number): void;</span><br><span class="line">  public <span class="built_in">log</span>(arg1: string, arg2: string): void;</span><br><span class="line">  // 实现</span><br><span class="line">  <span class="built_in">log</span>(arg1?: string | number, arg2?: string | number) &#123;</span><br><span class="line">    console.log(arg1, arg2);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">export</span> = Demo;</span><br></pre></td></tr></table></figure>
+
+<p>面试题：重载（Overload）和重写（Override）的区别？<br>答：方法的重载和重写都是实现多态的方式，区别在于前者实现的是编译时的多态性，而后者实现的是运行时的多态性。重载发生在一个类中，同名的方法如果有不同的参数列表（参数类型不同、参数个数不同或者二者都不同）则视为重载；重写发生在子类与父类之间，重写要求子类被重写方法与父类被重写方法有相同的参数列表，有兼容的返回类型，比父类被重写方法更好访问，不能比父类被重写方法声明更多的异常（里氏代换原则）。重载对返回类型没有特殊的要求，不能根据返回类型进行区分。</p>
+
       
     </div>
     
@@ -373,13 +380,9 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sequelize/" rel="tag">sequelize</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li></ul>
     </div>
 
-      
-        <p class="article-more-link">
-          <a href="/postgre%E5%AE%9E%E7%8E%B0%E6%8C%89%E5%B9%B4%E6%9C%88%E6%97%A5%E5%91%A8%E7%BB%9F%E8%AE%A1%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1/#more">阅读全文 >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -403,7 +406,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/46/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/45/">45</a><a class="page-number" href="/page/46/">46</a><span class="page-number current">47</span><a class="page-number" href="/page/48/">48</a><a class="page-number" href="/page/49/">49</a><span class="space">&hellip;</span><a class="page-number" href="/page/156/">156</a><a class="extend next" rel="next" href="/page/48/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/46/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/45/">45</a><a class="page-number" href="/page/46/">46</a><span class="page-number current">47</span><a class="page-number" href="/page/48/">48</a><a class="page-number" href="/page/49/">49</a><span class="space">&hellip;</span><a class="page-number" href="/page/163/">163</a><a class="extend next" rel="next" href="/page/48/">下一页</a>
     </nav>
   
 
