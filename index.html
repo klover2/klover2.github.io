@@ -297,11 +297,11 @@
   
 
 
-<article id="post-记一次使用redis的keys命令导致redis雪崩的生产事故" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-Jar上传到maven中央仓库" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BD%BF%E7%94%A8redis%E7%9A%84keys%E5%91%BD%E4%BB%A4%E5%AF%BC%E8%87%B4redis%E9%9B%AA%E5%B4%A9%E7%9A%84%E7%94%9F%E4%BA%A7%E4%BA%8B%E6%95%85/" class="article-date">
-      <time datetime="2022-09-08T09:00:31.000Z" itemprop="datePublished">2022-09-08</time>
+      <a href="/Jar%E4%B8%8A%E4%BC%A0%E5%88%B0maven%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93/" class="article-date">
+      <time datetime="2022-10-17T10:29:26.000Z" itemprop="datePublished">2022-10-17</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BD%BF%E7%94%A8redis%E7%9A%84keys%E5%91%BD%E4%BB%A4%E5%AF%BC%E8%87%B4redis%E9%9B%AA%E5%B4%A9%E7%9A%84%E7%94%9F%E4%BA%A7%E4%BA%8B%E6%95%85/">记一次使用redis的keys命令导致redis雪崩的生产事故</a>
+      <a class="article-title" href="/Jar%E4%B8%8A%E4%BC%A0%E5%88%B0maven%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93/">Jar上传到maven中央仓库</a>
     </h1>
   
 
         
-          <!-- <a href="/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BD%BF%E7%94%A8redis%E7%9A%84keys%E5%91%BD%E4%BB%A4%E5%AF%BC%E8%87%B4redis%E9%9B%AA%E5%B4%A9%E7%9A%84%E7%94%9F%E4%BA%A7%E4%BA%8B%E6%95%85/" class="archive-article-date">
-      <time datetime="2022-09-08T09:00:31.000Z" itemprop="datePublished">2022-09-08</time>
+          <!-- <a href="/Jar%E4%B8%8A%E4%BC%A0%E5%88%B0maven%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93/" class="archive-article-date">
+      <time datetime="2022-10-17T10:29:26.000Z" itemprop="datePublished">2022-10-17</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">688字</span>
+      <span class="post-count">2.3k字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">2分</span>
+      <span class="post-count">11分</span>
     </span>
   </span>
 </div>
@@ -358,7 +358,15 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h2 id="出现原因"><a href="#出现原因" class="headerlink" title="出现原因"></a>出现原因</h2><p>由于需要每时每刻监听三方报错超过十次发送机器人警告，所以每次报错我这边就存入一个（key+时间），同时过期时间为1小时，所以查询当前的一个小时内错误次数，使用 <code>keys key*</code>查询key的数量，就知道错误次数，本来一直没有问题，跑了大半年了，突然有一天redis的cpu100%，直接雪崩，导致客户无法登录，后面排查原因是有个三方一直报错，代码又重试，由于需要机器人提醒(这个时候我们redis key已经超过80w个key),导致一秒钟查上千次询<code>keys</code>命令，最后redis直接爆炸。</p>
+              <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>开发环境为：win11 + jdk8 + maven</p>
+<h2 id="注册账户"><a href="#注册账户" class="headerlink" title="注册账户"></a>注册账户</h2><p><a href="https://issues.sonatype.org/secure/Signup!default.jspa" target="_blank" rel="external nofollow noopener noreferrer">Sign up for Jira - Sonatype JIRA</a><br>选择中文 比较好</p>
+<p>如果未使用过 Sonatype 系统，需要先注册一个帐号。</p>
+<ul>
+<li>Email: 填写自己的邮箱帐号即可，在 Sonatype 上的相关操作，会通知到这个邮箱帐号来提醒你相关进度。</li>
+<li>Full name: 填写联系人名称。</li>
+<li>Username: 这个就是你在 Sonatype 的登录帐号了。</li>
+<li>Password: 为登录密码，要求至少 8 位，并带有大小写字母和字符。</li>
+</ul>
           
       
     </div>
@@ -369,12 +377,12 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
     </div>
 
       
         <p class="article-more-link">
-          <a href="/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BD%BF%E7%94%A8redis%E7%9A%84keys%E5%91%BD%E4%BB%A4%E5%AF%BC%E8%87%B4redis%E9%9B%AA%E5%B4%A9%E7%9A%84%E7%94%9F%E4%BA%A7%E4%BA%8B%E6%95%85/#more">阅读全文 >></a>
+          <a href="/Jar%E4%B8%8A%E4%BC%A0%E5%88%B0maven%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -399,7 +407,7 @@
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/163/">163</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/164/">164</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
     </nav>
   
 

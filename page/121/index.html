@@ -297,11 +297,11 @@
   
 
 
-<article id="post-使用yarn安装puppeteer等问题" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-centos安装puppeteer缺少浏览器插件" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/%E4%BD%BF%E7%94%A8yarn%E5%AE%89%E8%A3%85puppeteer%E7%AD%89%E9%97%AE%E9%A2%98/" class="article-date">
-      <time datetime="2020-05-20T03:07:08.000Z" itemprop="datePublished">2020-05-20</time>
+      <a href="/centos%E5%AE%89%E8%A3%85puppeteer%E7%BC%BA%E5%B0%91%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/" class="article-date">
+      <time datetime="2020-05-20T03:08:21.000Z" itemprop="datePublished">2020-05-20</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/%E4%BD%BF%E7%94%A8yarn%E5%AE%89%E8%A3%85puppeteer%E7%AD%89%E9%97%AE%E9%A2%98/">使用yarn安装puppeteer等问题</a>
+      <a class="article-title" href="/centos%E5%AE%89%E8%A3%85puppeteer%E7%BC%BA%E5%B0%91%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/">centos安装puppeteer缺少浏览器插件</a>
     </h1>
   
 
         
-          <!-- <a href="/%E4%BD%BF%E7%94%A8yarn%E5%AE%89%E8%A3%85puppeteer%E7%AD%89%E9%97%AE%E9%A2%98/" class="archive-article-date">
-      <time datetime="2020-05-20T03:07:08.000Z" itemprop="datePublished">2020-05-20</time>
+          <!-- <a href="/centos%E5%AE%89%E8%A3%85puppeteer%E7%BC%BA%E5%B0%91%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/" class="archive-article-date">
+      <time datetime="2020-05-20T03:08:21.000Z" itemprop="datePublished">2020-05-20</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">29字</span>
+      <span class="post-count">154字</span>
     </span>
   </span>
 
@@ -358,10 +358,23 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><img src="https://img-blog.csdnimg.cn/20200303092537934.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>处理方式 设置成淘宝镜像</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> PUPPETEER_DOWNLOAD_HOST=https://npm.taobao.org/mirrors</span><br></pre></td></tr></table></figure>
+        <p>当你启动chromeium时（推荐在服务器上测试的时候先进入到node_modules/puppeteer/.local-chromium/linux-496140/chrome-linux/chrome目录下执行./chrome进行测试，能成功运行代表通过puppeteer的api调用也能成功）你如果遇到例如：</p>
+<p>error while loading shared libraries: libpangocairo-1.0.so.0: cannot open shared object file: No such file or directory</p>
+<p>出现过运行Puppeteer时，报error while loading shared libraries:libpangocairo-1.0.so.0等依赖错误，可通过执行如下命令安装依赖包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install libX11 libXcomposite libXcursor libXdamage libXext libXi libXtst cups-libs libXScrnSaver libXrandr alsa-lib pango atk at-spi2-atk gtk3</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+<p>推荐看下：<a href="https://www.jianshu.com/p/ea8a557f6407" target="_blank" rel="external nofollow noopener noreferrer">https://www.jianshu.com/p/ea8a557f6407</a></p>
 
       
     </div>
@@ -398,7 +411,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/120/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/119/">119</a><a class="page-number" href="/page/120/">120</a><span class="page-number current">121</span><a class="page-number" href="/page/122/">122</a><a class="page-number" href="/page/123/">123</a><span class="space">&hellip;</span><a class="page-number" href="/page/163/">163</a><a class="extend next" rel="next" href="/page/122/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/120/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/119/">119</a><a class="page-number" href="/page/120/">120</a><span class="page-number current">121</span><a class="page-number" href="/page/122/">122</a><a class="page-number" href="/page/123/">123</a><span class="space">&hellip;</span><a class="page-number" href="/page/164/">164</a><a class="extend next" rel="next" href="/page/122/">下一页</a>
     </nav>
   
 
