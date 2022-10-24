@@ -297,11 +297,11 @@
   
 
 
-<article id="post-VSCode连接不了服务器" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-node防xss攻击插件-用于富文本过滤脚本" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/VSCode%E8%BF%9E%E6%8E%A5%E4%B8%8D%E4%BA%86%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="article-date">
-      <time datetime="2020-06-04T07:16:27.000Z" itemprop="datePublished">2020-06-04</time>
+      <a href="/node%E9%98%B2xss%E6%94%BB%E5%87%BB%E6%8F%92%E4%BB%B6-%E7%94%A8%E4%BA%8E%E5%AF%8C%E6%96%87%E6%9C%AC%E8%BF%87%E6%BB%A4%E8%84%9A%E6%9C%AC/" class="article-date">
+      <time datetime="2020-06-04T07:21:52.000Z" itemprop="datePublished">2020-06-04</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/VSCode%E8%BF%9E%E6%8E%A5%E4%B8%8D%E4%BA%86%E6%9C%8D%E5%8A%A1%E5%99%A8/">VSCode连接不了服务器</a>
+      <a class="article-title" href="/node%E9%98%B2xss%E6%94%BB%E5%87%BB%E6%8F%92%E4%BB%B6-%E7%94%A8%E4%BA%8E%E5%AF%8C%E6%96%87%E6%9C%AC%E8%BF%87%E6%BB%A4%E8%84%9A%E6%9C%AC/">node防xss攻击插件,用于富文本过滤脚本</a>
     </h1>
   
 
         
-          <!-- <a href="/VSCode%E8%BF%9E%E6%8E%A5%E4%B8%8D%E4%BA%86%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="archive-article-date">
-      <time datetime="2020-06-04T07:16:27.000Z" itemprop="datePublished">2020-06-04</time>
+          <!-- <a href="/node%E9%98%B2xss%E6%94%BB%E5%87%BB%E6%8F%92%E4%BB%B6-%E7%94%A8%E4%BA%8E%E5%AF%8C%E6%96%87%E6%9C%AC%E8%BF%87%E6%BB%A4%E8%84%9A%E6%9C%AC/" class="archive-article-date">
+      <time datetime="2020-06-04T07:21:52.000Z" itemprop="datePublished">2020-06-04</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">57字</span>
+      <span class="post-count">55字</span>
     </span>
   </span>
 
@@ -358,12 +358,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>VSCode连接服务器提示“could not establish connection to “xxx”.Connecting was canceled.”解决办法</p>
-<p>解决办法：</p>
-<p>1.更新本地以及服务器端VSCode至最新版本</p>
-<p>2.删除服务器上的.vscode-server文件夹 (ls -la)</p>
-<p><img src="https://img-blog.csdnimg.cn/20200604151821920.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'use strict'</span>;</span><br><span class="line"><span class="built_in">let</span> xss = require(<span class="string">'node-xss'</span>).clean;</span><br><span class="line"></span><br><span class="line"><span class="built_in">let</span> html = <span class="string">"&lt;script&gt;alert('弹弹弹')&lt;/script&gt;&lt;p&gt;123&lt;/p&gt;"</span>;</span><br><span class="line">(() =&gt; &#123;</span><br><span class="line">    <span class="built_in">let</span> params = xss(html);</span><br><span class="line"></span><br><span class="line">    console.log(params); // [removed]alert&amp;<span class="comment">#40;'弹弹弹'&amp;#41;[removed]&lt;p&gt;123&lt;/p&gt;</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -373,7 +368,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VSCode/" rel="tag">VSCode</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xss/" rel="tag">xss</a></li></ul>
     </div>
 
       
@@ -399,7 +394,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/108/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/107/">107</a><a class="page-number" href="/page/108/">108</a><span class="page-number current">109</span><a class="page-number" href="/page/110/">110</a><a class="page-number" href="/page/111/">111</a><span class="space">&hellip;</span><a class="page-number" href="/page/165/">165</a><a class="extend next" rel="next" href="/page/110/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/108/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/107/">107</a><a class="page-number" href="/page/108/">108</a><span class="page-number current">109</span><a class="page-number" href="/page/110/">110</a><a class="page-number" href="/page/111/">111</a><span class="space">&hellip;</span><a class="page-number" href="/page/166/">166</a><a class="extend next" rel="next" href="/page/110/">下一页</a>
     </nav>
   
 

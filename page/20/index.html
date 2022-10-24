@@ -297,11 +297,11 @@
   
 
 
-<article id="post-使用git出现过的问题" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-buffer与stream互相转换" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/%E4%BD%BF%E7%94%A8git%E5%87%BA%E7%8E%B0%E8%BF%87%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
-      <time datetime="2021-09-23T07:28:19.000Z" itemprop="datePublished">2021-09-23</time>
+      <a href="/buffer%E4%B8%8Estream%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/" class="article-date">
+      <time datetime="2021-10-25T10:07:30.000Z" itemprop="datePublished">2021-10-25</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/%E4%BD%BF%E7%94%A8git%E5%87%BA%E7%8E%B0%E8%BF%87%E7%9A%84%E9%97%AE%E9%A2%98/">使用git出现过的问题</a>
+      <a class="article-title" href="/buffer%E4%B8%8Estream%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/">buffer与stream互相转换</a>
     </h1>
   
 
         
-          <!-- <a href="/%E4%BD%BF%E7%94%A8git%E5%87%BA%E7%8E%B0%E8%BF%87%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
-      <time datetime="2021-09-23T07:28:19.000Z" itemprop="datePublished">2021-09-23</time>
+          <!-- <a href="/buffer%E4%B8%8Estream%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/" class="archive-article-date">
+      <time datetime="2021-10-25T10:07:30.000Z" itemprop="datePublished">2021-10-25</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">61字</span>
+      <span class="post-count">435字</span>
     </span>
   </span>
 
@@ -359,8 +359,23 @@
       
           
         <ol>
-<li>拉取代码出现下面问题<br><code>load pubkey &quot;/c/Users/klover/.ssh/id_rsa&quot;: invalid format</code><br>是因为公钥之前我换过名字，导致出现问题<br>执行修复公钥命令，解决问题<br><code>ssh-keygen -f ~/.ssh/id_rsa -y &gt; ~/.ssh/id_rsa.pub</code></li>
+<li>流到缓冲区</li>
 </ol>
+<p>第一个操作是将读取流转换为缓冲区。Streams 最有效的操作是将它们通过管道传输到另一个流。这在您不想增加内存使用量的文件系统访问中很常见。</p>
+<p>但是，在处理 HTTP 请求时，您可能希望直接将响应流转换为 JSON 对象或解析 url 编码值。</p>
+<p>为此，您将读取缓冲区 data 事件提供的数据。Streams 将提供一个字符串或一个缓冲区作为数据事件的值。这取决于 Buffer 是否有编码集。默认情况下，它会在 data 事件期间输出 Buffers 。</p>
+<p>这意味着您可以执行以下操作以从流中读取。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">streamToBuffer</span>(<span class="params">stream</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> buffers = [];</span><br><span class="line">    stream.on(<span class="string">"error"</span>, reject);</span><br><span class="line">    stream.on(<span class="string">"data"</span>, (data) =&gt; buffers.push(data));</span><br><span class="line">    stream.on(<span class="string">"end"</span>, () =&gt; resolve(Buffer.concat(buffers)));</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此函数获取流（可能来自 HTTP 或 FS 访问）。然后它将每个 Buffer 推送到一个 Buffer 数组中。当流被完全读取时，它会将所有这些 Buffers 与 Buffer.concat 结合起来。</p>
+<p>这显然会对大流造成一些问题，但对于需要在应用程序的后续部分中转换并在内存中携带的小流来说，它非常有用。</p>
+<ol start="2">
+<li>缓冲区到流<br>下一部分是将 Buffer 转换为流。当您想将数据通过管道传输到现有流中时，这很有用。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> Duplex = <span class="built_in">require</span>(<span class="string">"stream"</span>).Duplex;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bufferToStream</span>(<span class="params">buffer</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> stream = <span class="keyword">new</span> Duplex();</span><br><span class="line">  stream.push(buffer);</span><br><span class="line">  stream.push(<span class="literal">null</span>);</span><br><span class="line">  <span class="keyword">return</span> stream;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此操作创建一个双工字符串并简单地将缓冲区写入其中。该流现在可以像通常的任何写入流一样使用。</p>
+<p>文档：<br><a href="https://www.derpturkey.com/buffer-to-stream-in-node/" target="_blank" rel="external nofollow noopener noreferrer">缓冲到节点中的流</a></p>
 
       
     </div>
@@ -371,7 +386,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li></ul>
     </div>
 
       
@@ -397,7 +412,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/19/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/165/">165</a><a class="extend next" rel="next" href="/page/21/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/19/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/166/">166</a><a class="extend next" rel="next" href="/page/21/">下一页</a>
     </nav>
   
 

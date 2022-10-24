@@ -297,11 +297,11 @@
   
 
 
-<article id="post-HTTP与TCP-IP20连问" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-微信公众号授权登录网页获取code" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/HTTP%E4%B8%8ETCP-IP20%E8%BF%9E%E9%97%AE/" class="article-date">
-      <time datetime="2020-07-29T01:48:43.000Z" itemprop="datePublished">2020-07-29</time>
+      <a href="/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%8E%88%E6%9D%83%E7%99%BB%E5%BD%95%E7%BD%91%E9%A1%B5%E8%8E%B7%E5%8F%96code/" class="article-date">
+      <time datetime="2020-07-29T07:05:26.000Z" itemprop="datePublished">2020-07-29</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/HTTP%E4%B8%8ETCP-IP20%E8%BF%9E%E9%97%AE/">HTTP与TCP/IP20连问</a>
+      <a class="article-title" href="/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%8E%88%E6%9D%83%E7%99%BB%E5%BD%95%E7%BD%91%E9%A1%B5%E8%8E%B7%E5%8F%96code/">微信公众号授权登录网页获取code</a>
     </h1>
   
 
         
-          <!-- <a href="/HTTP%E4%B8%8ETCP-IP20%E8%BF%9E%E9%97%AE/" class="archive-article-date">
-      <time datetime="2020-07-29T01:48:43.000Z" itemprop="datePublished">2020-07-29</time>
+          <!-- <a href="/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%8E%88%E6%9D%83%E7%99%BB%E5%BD%95%E7%BD%91%E9%A1%B5%E8%8E%B7%E5%8F%96code/" class="archive-article-date">
+      <time datetime="2020-07-29T07:05:26.000Z" itemprop="datePublished">2020-07-29</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">6.1k字</span>
+      <span class="post-count">974字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">21分</span>
+      <span class="post-count">3分</span>
     </span>
   </span>
 </div>
@@ -358,13 +358,66 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h2 id="Session-和-cookie-的区别"><a href="#Session-和-cookie-的区别" class="headerlink" title="Session 和 cookie 的区别"></a>Session 和 cookie 的区别</h2><ol>
-<li>cookie保存在客户端，未设置存储时间的cookie,关闭浏览器会话cookie就会被删除；设置了存储时间的cookie会保存在用户设备的磁盘中直到过期，同时cookie在客户端可以伪造，不是十分安全，敏感数据不容易保存。session保存在服务器端，存在在IIS的进程开辟的内存中，而session会过多消耗服务器资源，所以尽量少使用session。</li>
-<li>session是服务器用来跟踪用户的一种手段，每个session都有一个唯一标识sessionID。当服务器端生成一个session时就会向客户端发送一个cookie保存到客户端。这个cookie保存的是session的sessionID,这样才能保证客户端发起请求后，用户能够与服务器端成千上万的session进行匹配，同时也保证了不同的页面之间传值的正确性。</li>
-<li>存储数据类型不同：session能够存储任意的java对象，cookie只能存储string类型的对象。</li>
-<li>大于10k的数据，不要用到cookies</li>
-</ol>
-          
+        <p>配置回调函数<br>我们在微信客户端访问第三方网页（即我们自己的网页）的时候，我们可以通过微信网页授权机制，我们不仅要有前面获取到的appid和appsecret还需要有当用户授权之后，回调的域名设置，即用户授权后，页面会跳转到哪里。具体的配置如下：</p>
+<p>在开发-&gt;接口权限中配置<br><img src="https://img-blog.csdnimg.cn/20200729150845785.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>请求授权页面的构造方式：</p>
+<blockquote>
+<p><a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&amp;redirect_uri=REDIRECT_URI&amp;response_type=code&amp;scope=SCOPE&amp;state=STATE#wechat_redirect" target="_blank" rel="external nofollow noopener noreferrer">https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&amp;redirect_uri=REDIRECT_URI&amp;response_type=code&amp;scope=SCOPE&amp;state=STATE#wechat_redirect</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>必须</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>appid</td>
+<td>是</td>
+<td>公众号的唯一标识</td>
+</tr>
+<tr>
+<td>redirect_uri</td>
+<td>是</td>
+<td>授权后重定向的回调链接地址</td>
+</tr>
+<tr>
+<td>response_type</td>
+<td>是</td>
+<td>返回类型，请填写code</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>是</td>
+<td>应用授权作用域，snsapi_base （不弹出授权页面，直接跳转，只能获取用户openid），snsapi_userinfo （弹出授权页面，可通过openid拿到昵称、性别、所在地。并且，即使在未关注的情况下，只要用户授权，也能获取其信息）</td>
+</tr>
+<tr>
+<td>state</td>
+<td>否</td>
+<td>重定向后会带上state参数，开发者可以填写a-zA-Z0-9的参数值，最多128字节，该值会被微信原样返回，我们可以将其进行比对，防止别人的攻击。</td>
+</tr>
+<tr>
+<td>#wechat_redirect</td>
+<td>否</td>
+<td>直接在微信打开链接，可以不填此参数。做页面302重定向时候，必须带此参数</td>
+</tr>
+</tbody></table>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">应用授权作用域：由于snsapi_base只能获取到openid，意义不大，所以我们使用snsapi_userinfo。</span><br><span class="line"></span><br><span class="line">参考链接如下：（域名是你配置的回调函数域名）</span><br><span class="line">&gt;https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3d0b47a2e9037&amp;redirect_uri=https://域名/wechattransfer.html&amp;response_type=code&amp;scope=snsapi_userinfo&amp;state=https://域名/index.html<span class="comment">#wechat_redirect</span></span><br><span class="line"></span><br><span class="line">`https://域名/wechattransfer.html`是授权后会跳转的地址,在这个页面中会解析路径参入从而进入`https://域名/index.html`（[wechattransfer下载链接](https://github.com/klover2/wechattransfer)）</span><br><span class="line"></span><br><span class="line">下载wechattransfer.html之后配置在你的服务器上，在微信授权下的域名能够访问到</span><br><span class="line">`https://域名/index.html`是要进入的页面</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">使用微信开发工具访问上面参考链接，最后会进入下面链接，同时带上code</span><br><span class="line">https://域名/index.html?code=0014rK302cHWcV0w7K502IhK3024rK3u</span><br></pre></td></tr></table></figure>
+
+
+<p>把当前code发送给服务器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const got = require(<span class="string">'got'</span>);</span><br><span class="line">(async()=&gt;&#123;</span><br><span class="line">    <span class="built_in">let</span> appid= <span class="string">''</span>; // 公众号appid</span><br><span class="line">    <span class="built_in">let</span> appsecret=<span class="string">''</span>;// 公众号appsecret</span><br><span class="line"></span><br><span class="line"><span class="built_in">let</span> WxLoginInfo = (await got.get(`https://api.weixin.qq.com/sns/oauth2/access_token?appid=<span class="variable">$&#123;appid&#125;</span>&amp;secret=<span class="variable">$&#123;appsecret&#125;</span>&amp;code=<span class="variable">$&#123;code&#125;</span>&amp;grant_type=authorization_code`, &#123; <span class="string">'json'</span>: <span class="literal">true</span> &#125;)).body;</span><br><span class="line">        // 获取微信中的用户信息</span><br><span class="line"><span class="built_in">let</span> &#123; access_token, openid &#125; = WxLoginInfo || &#123;&#125;;</span><br><span class="line">        // 通过微信获取用户信息</span><br><span class="line"><span class="built_in">let</span> wxUserInfo = (await got.get(`https://api.weixin.qq.com/sns/userinfo?access_token=<span class="variable">$&#123;access_token&#125;</span>&amp;openid=<span class="variable">$&#123;openid&#125;</span>`, &#123; <span class="string">'json'</span>: <span class="literal">true</span> &#125;)).body;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+
+<p>注意：</p>
+<p>使用微信调试工具调试必须得有当前公众号开发者权限<br>在开发-&gt;开发者工具-&gt;点击web开发者工具<br><a href="https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Web_Developer_Tools.html" target="_blank" rel="external nofollow noopener noreferrer">如何添加</a></p>
+<p>UnionID机制的作用说明：如果开发者拥有多个移动应用、网站应用和公众帐号，可通过获取用户基本信息中的unionid来区分用户的唯一性，因为同一用户，对同一个微信开放平台下的不同应用（移动应用、网站应用和公众帐号），unionid是相同的。</p>
+<p><a href="https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html" target="_blank" rel="external nofollow noopener noreferrer">微信网页授权文档</a></p>
+<p>通过开发者ID及密码调用获取access_token接口时，需要设置访问来源IP为白名单<br>在开发-&gt;基本配置中配置</p>
+<p>JS接口安全域名配置<br>在设置-&gt;公众号设置-&gt;功能设置</p>
+<p>特别说下<br>有些功能在个人订阅号中是开通不了的，订阅号微信认证需要企业帮忙<br>服务号是必须是有营业执照才能注册,个人只能注册订阅号,但是个人如果想要服务号的话,可以先办一个营业执照,再申请服务号就可以了。</p>
+
       
     </div>
     
@@ -374,13 +427,9 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/" rel="tag">微信公众号</a></li></ul>
     </div>
 
-      
-        <p class="article-more-link">
-          <a href="/HTTP%E4%B8%8ETCP-IP20%E8%BF%9E%E9%97%AE/#more">阅读全文 >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -404,7 +453,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/78/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/77/">77</a><a class="page-number" href="/page/78/">78</a><span class="page-number current">79</span><a class="page-number" href="/page/80/">80</a><a class="page-number" href="/page/81/">81</a><span class="space">&hellip;</span><a class="page-number" href="/page/165/">165</a><a class="extend next" rel="next" href="/page/80/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/78/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/77/">77</a><a class="page-number" href="/page/78/">78</a><span class="page-number current">79</span><a class="page-number" href="/page/80/">80</a><a class="page-number" href="/page/81/">81</a><span class="space">&hellip;</span><a class="page-number" href="/page/166/">166</a><a class="extend next" rel="next" href="/page/80/">下一页</a>
     </nav>
   
 

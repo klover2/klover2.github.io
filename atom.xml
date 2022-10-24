@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.wjc66.cn/"/>
-  <updated>2022-10-24T03:40:42.933Z</updated>
+  <updated>2022-10-24T05:07:52.299Z</updated>
   <id>https://blog.wjc66.cn/</id>
   
   <author>
@@ -17,11 +17,35 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>pipenv命令的使用</title>
+    <link href="https://blog.wjc66.cn/pipenv%E5%91%BD%E4%BB%A4%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>https://blog.wjc66.cn/pipenv%E5%91%BD%E4%BB%A4%E7%9A%84%E4%BD%BF%E7%94%A8/</id>
+    <published>2022-10-24T05:04:55.000Z</published>
+    <updated>2022-10-24T05:07:52.299Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安装</span></span><br><span class="line">pip install pipenv</span><br><span class="line"><span class="comment">#查看版本</span></span><br><span class="line">pipenv --version</span><br><span class="line"><span class="comment">#创建</span></span><br><span class="line"><span class="comment">#pipenv --python 3.8(可以不用)</span></span><br><span class="line"><span class="comment">#激活虚拟环境</span></span><br><span class="line">pipenv shell</span><br><span class="line"><span class="comment">#退出</span></span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line">安装开发扩展</span><br><span class="line">pipenv install --dev django</span><br><span class="line"><span class="comment">#安装生产环境</span></span><br><span class="line">pipenv install</span><br><span class="line"><span class="comment">#安装开发环境</span></span><br><span class="line">pipenv install --dev</span><br><span class="line"><span class="comment">#卸载包</span></span><br><span class="line">pipenv uninstall [package]</span><br><span class="line"><span class="comment">#查看创建虚拟机所在目录</span></span><br><span class="line">pipenv --venv全局切换版本pyenv global 3.6.4当前目录切换版本pyenv <span class="built_in">local</span> 3.6.4pipenv --three <span class="comment"># 初始化一个python3虚拟环境，如果想初始化pyhton2的虚拟环境，则使用pipenv --twopipenv --python 2.7.14删除环境(在pipfile所在目录执行)</span></span><br><span class="line">pipenv uninstall --all <span class="comment"># 卸载全部包</span></span><br><span class="line">pipenv --rm     <span class="comment"># 删除整个环境  不会删除pipfile</span></span><br></pre></td></tr></table></figure><h2 id="安装第三方库"><a href="#安装第三方库" class="headerlink" title="安装第三方库"></a>安装第三方库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安装第三方库</span></span><br><span class="line">pipenv install [第三方库名]</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看包的依赖结构</span></span><br><span class="line">pipenv graph</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看安装的包</span></span><br><span class="line">pip list</span><br><span class="line"></span><br><span class="line"><span class="comment">#卸载包</span></span><br><span class="line">pipenv uninstall [第三方库名]</span><br><span class="line"></span><br><span class="line"><span class="comment">#退出虚拟环境</span></span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#删除虚拟环境</span></span><br><span class="line">pipenv – – rm</span><br><span class="line"></span><br><span class="line"><span class="comment">#要更新所有的依赖项，使用命令 pipenv update</span></span><br><span class="line"><span class="comment">#使用 pipenv update &lt;pkg&gt; 命令升级指定的包</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#如果项目已经存在requirements.txt</span></span><br><span class="line">pipenv install -r requirements.txt</span><br></pre></td></tr></table></figure><h2 id="安装环境区分"><a href="#安装环境区分" class="headerlink" title="安装环境区分"></a>安装环境区分</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">pipenv install</span><br><span class="line">–dev 安装Pipfile中 [default] 和 [devlop] 中的包</span><br><span class="line"></span><br><span class="line">–system 使用系统的 pip 命令而不是virtualenv的 pip 命令</span><br><span class="line"></span><br><span class="line">–ignore-pipfile 忽略 Pipfile 文件而直接安装 Pipfile.lock 中的包</span><br><span class="line"></span><br><span class="line">–ignore-lock 忽略 Pipfile.lock 文件而直接安装 Pipfile 中的包。此外，不会更新 Pipfile.lock 文件。</span><br><span class="line"></span><br><span class="line">pipenv uninstall</span><br><span class="line">–all 从虚拟环境中移除所有已安装的包，但 Pipfile.lock 文件不受影响</span><br><span class="line">–all-dev 从虚拟环境中卸载所有开发包，并从 Pipfile 文件中移除这些包</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;常用命令&quot;&gt;&lt;a href=&quot;#常用命令&quot; class=&quot;headerlink&quot; title=&quot;常用命令&quot;&gt;&lt;/a&gt;常用命令&lt;/h2&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre
+      
+    
+    </summary>
+    
+    
+    
+      <category term="python" scheme="https://blog.wjc66.cn/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
     <title>封装代码成python包</title>
     <link href="https://blog.wjc66.cn/%E5%B0%81%E8%A3%85%E4%BB%A3%E7%A0%81%E6%88%90python%E5%8C%85/"/>
     <id>https://blog.wjc66.cn/%E5%B0%81%E8%A3%85%E4%BB%A3%E7%A0%81%E6%88%90python%E5%8C%85/</id>
     <published>2022-10-24T03:15:55.000Z</published>
-    <updated>2022-10-24T03:40:42.933Z</updated>
+    <updated>2022-10-24T03:40:56.011Z</updated>
     
     <content type="html"><![CDATA[<h2 id="注册账户"><a href="#注册账户" class="headerlink" title="注册账户"></a>注册账户</h2><p>PyPI, Python Package Index,是 python 的正式第三方软件包的软件存储库。一些软件包管理器如 pip，就是默认从 PyPI 下载软件包</p><p>链接： <a href="https://pypi.org/" target="_blank" rel="external nofollow noopener noreferrer">https://pypi.org/</a></p><p>在 Pypi 中注册账号，并且需要激活邮箱</p><a id="more"></a><h2 id="更新-pip"><a href="#更新-pip" class="headerlink" title="更新 pip"></a>更新 pip</h2><p><code>python -m pip install --upgrade pip</code></p><h2 id="安装-pipenv"><a href="#安装-pipenv" class="headerlink" title="安装 pipenv"></a>安装 pipenv</h2><p><code>pip install pipenv</code></p><h2 id="使用-pyCharm-创建项目"><a href="#使用-pyCharm-创建项目" class="headerlink" title="使用 pyCharm 创建项目"></a>使用 pyCharm 创建项目</h2><p>选择 pipenv<br><img src="https://img-blog.csdnimg.cn/5aca5d0c3fba4d958f4b59d4bd5fec84.png" alt="在这里插入图片描述"><br>在当前项目目录执行 <code>pipenv install</code>,初始化后项目如下</p><p><img src="https://img-blog.csdnimg.cn/21bf61bd322644d4b5b246cbab0b632d.png" alt="在这里插入图片描述"></p><h2 id="创建包名-mypackage"><a href="#创建包名-mypackage" class="headerlink" title="创建包名 mypackage"></a>创建包名 mypackage</h2><p><code>注意</code>：包名尽量不要用驼峰和中划线做包名，不然容易出现找不到包名<br><img src="https://img-blog.csdnimg.cn/08aa097a6f1944858778b1defba75f0f.png" alt="在这里插入图片描述"></p><h2 id="创建-setup-py-用于编译包配置"><a href="#创建-setup-py-用于编译包配置" class="headerlink" title="创建 setup.py 用于编译包配置"></a>创建 setup.py 用于编译包配置</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> setuptools</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"README.md"</span>, <span class="string">"r"</span>, encoding=<span class="string">"utf-8"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    readme = f.read()</span><br><span class="line"></span><br><span class="line">requires = [</span><br><span class="line">    <span class="string">"requests&gt;=2.28.1"</span>,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">setuptools.setup(</span><br><span class="line">    name=<span class="string">"mypackage"</span>,</span><br><span class="line">    version=<span class="string">"1.0.0"</span>,</span><br><span class="line">    keywords=[<span class="string">"关键词1"</span>, <span class="string">"关键词2"</span>, <span class="string">"关键词3"</span>],</span><br><span class="line">    author=<span class="string">"开发者"</span>,</span><br><span class="line">    author_email=<span class="string">"开发者邮箱"</span>,</span><br><span class="line">    description=<span class="string">"描述"</span>,</span><br><span class="line">    long_description=readme,</span><br><span class="line">    long_description_content_type=<span class="string">"text/markdown"</span>,</span><br><span class="line">    url=<span class="string">"项目githup地址"</span>,</span><br><span class="line">    packages=setuptools.find_packages(exclude=(<span class="string">'tests'</span>, <span class="string">'.pypirc'</span>)),</span><br><span class="line">    classifiers=[</span><br><span class="line">        <span class="string">"Programming Language :: Python :: 3"</span>,</span><br><span class="line">        <span class="string">"License :: OSI Approved :: Apache Software License"</span>,</span><br><span class="line">        <span class="string">"Operating System :: OS Independent"</span>,</span><br><span class="line">    ],</span><br><span class="line">    python_requires=<span class="string">'&gt;=3.7'</span>,</span><br><span class="line">    install_requires=requires,</span><br><span class="line">)</span><br></pre></td></tr></table></figure><p><code>注意</code>：install_requires 是你当前包需要的外部引入，需要在这里声明，不然其他人用你当前包会出现缺少引入</p><h2 id="配置-pypi-密码"><a href="#配置-pypi-密码" class="headerlink" title="配置 pypi 密码"></a>配置 pypi 密码</h2><p>创建 <code>.pypirc</code> 防止你电脑的用户目录下：<code>C:\Users\klover</code>,因为 setup.py 上传指令会检查.pypirc 文件是否存在在路径 $HOME/.pypirc 中。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[distutils]</span><br><span class="line">index-servers =</span><br><span class="line">    pypi</span><br><span class="line"></span><br><span class="line">[pypi]</span><br><span class="line">repository: &lt;repository-url&gt;</span><br><span class="line">username: &lt;username&gt;</span><br><span class="line">password: &lt;password&gt;</span><br></pre></td></tr></table></figure><h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编译</span></span><br><span class="line"><span class="comment"># 执行当前命令需要移除 build dist mypackage.egg-info 三个文件夹连同里面的文件</span></span><br><span class="line"></span><br><span class="line">python setup.py sdist bdist_wheel</span><br></pre></td></tr></table></figure><h2 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">twine upload dist/*</span><br></pre></td></tr></table></figure><p>上传成功就能在 pypi 上看见了</p><h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://zhuanlan.zhihu.com/p/342682533" target="_blank" rel="external nofollow noopener noreferrer">Pypi 官方教程中文版：封装代码成 python 包</a></p>]]></content>
     
@@ -250,9 +274,9 @@
     
     
     
-      <category term="nodejs" scheme="https://blog.wjc66.cn/tags/nodejs/"/>
-    
       <category term="typescript" scheme="https://blog.wjc66.cn/tags/typescript/"/>
+    
+      <category term="nodejs" scheme="https://blog.wjc66.cn/tags/nodejs/"/>
     
   </entry>
   
@@ -473,31 +497,6 @@
     
     
       <category term="nodejs" scheme="https://blog.wjc66.cn/tags/nodejs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用git出现过的问题</title>
-    <link href="https://blog.wjc66.cn/%E4%BD%BF%E7%94%A8git%E5%87%BA%E7%8E%B0%E8%BF%87%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-    <id>https://blog.wjc66.cn/%E4%BD%BF%E7%94%A8git%E5%87%BA%E7%8E%B0%E8%BF%87%E7%9A%84%E9%97%AE%E9%A2%98/</id>
-    <published>2021-09-23T07:28:19.000Z</published>
-    <updated>2021-09-23T07:30:46.323Z</updated>
-    
-    <content type="html"><![CDATA[<ol><li>拉取代码出现下面问题<br><code>load pubkey &quot;/c/Users/klover/.ssh/id_rsa&quot;: invalid format</code><br>是因为公钥之前我换过名字，导致出现问题<br>执行修复公钥命令，解决问题<br><code>ssh-keygen -f ~/.ssh/id_rsa -y &gt; ~/.ssh/id_rsa.pub</code></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ol&gt;
-&lt;li&gt;拉取代码出现下面问题&lt;br&gt;&lt;code&gt;load pubkey &amp;quot;/c/Users/klover/.ssh/id_rsa&amp;quot;: invalid format&lt;/code&gt;&lt;br&gt;是因为公钥之前我换过名字，导致出现问题&lt;br&gt;执行修复公钥命令，解
-      
-    
-    </summary>
-    
-    
-    
-      <category term="git" scheme="https://blog.wjc66.cn/tags/git/"/>
     
   </entry>
   

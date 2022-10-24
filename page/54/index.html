@@ -297,11 +297,11 @@
   
 
 
-<article id="centos7-解决Docker拉取镜像慢的问题" class="article article-type-centos7" itemscope itemprop="blogPost">
+<article id="post-Docker容器做端口映射报错" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/%E8%A7%A3%E5%86%B3Docker%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
-      <time datetime="2020-12-07T10:29:16.000Z" itemprop="datePublished">2020-12-07</time>
+      <a href="/Docker%E5%AE%B9%E5%99%A8%E5%81%9A%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E6%8A%A5%E9%94%99/" class="article-date">
+      <time datetime="2020-12-07T11:08:45.000Z" itemprop="datePublished">2020-12-07</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/%E8%A7%A3%E5%86%B3Docker%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/">解决Docker拉取镜像慢的问题</a>
+      <a class="article-title" href="/Docker%E5%AE%B9%E5%99%A8%E5%81%9A%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E6%8A%A5%E9%94%99/">Docker容器做端口映射报错(Error response from daemon)</a>
     </h1>
   
 
         
-          <!-- <a href="/%E8%A7%A3%E5%86%B3Docker%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
-      <time datetime="2020-12-07T10:29:16.000Z" itemprop="datePublished">2020-12-07</time>
+          <!-- <a href="/Docker%E5%AE%B9%E5%99%A8%E5%81%9A%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E6%8A%A5%E9%94%99/" class="archive-article-date">
+      <time datetime="2020-12-07T11:08:45.000Z" itemprop="datePublished">2020-12-07</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">157字</span>
+      <span class="post-count">85字</span>
     </span>
   </span>
 
@@ -358,25 +358,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>配置阿里云加速<br><code>https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors</code><br>点击镜像中心的镜像加速器</p>
-<p>加速地址为 <code>https://quk9x0kt.mirror.aliyuncs.com</code> 或者也可以使用网易的<code>http://hub-mirror.c.163.com</code></p>
-<h2 id="centos配置"><a href="#centos配置" class="headerlink" title="centos配置"></a>centos配置</h2><ol>
-<li><code>vim /etc/docker/daemon.json</code></li>
-<li>在配置文件中加入<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> &#123;</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://quk9x0kt.mirror.aliyuncs.com"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>重启服务<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h2 id="mac配置"><a href="#mac配置" class="headerlink" title="mac配置"></a>mac配置</h2><ol>
-<li>安装docker<br><code>brew cask install docker</code></li>
-<li>点击启动 -&gt;右上角有图片-&gt;点击选择Preferences -&gt; 选择Docker Engine<br>加入配置<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"registry-mirrors"</span>: [</span><br><span class="line">    <span class="string">"http://hub-mirror.c.163.com"</span></span><br><span class="line">  ]</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>整体如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"experimental"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="string">"debug"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [</span><br><span class="line">    <span class="string">"http://hub-mirror.c.163.com"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><p>docker info</p>
+        <h2 id="docker出现错误"><a href="#docker出现错误" class="headerlink" title="docker出现错误"></a>docker出现错误</h2><p> <code>Error response from daemon: driver failed programming external connectivity on endpoint mysql (a29d3409d7b1f5eaf8706050f4aeed7b11fa90415d243239a0c882eeb9fb83be):  (iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 0/0 --dport 3306 -j DNAT --to-destination 172.17.0.5:3306 ! -i docker0: iptables: No chain/target/match by that name.</code><br> Docker容器做端口映射报错，docker服务启动时定义的自定义链DOCKER被清除；重启即可<br> systemctl restart docker</p>
 
       
     </div>
@@ -413,7 +395,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/53/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/52/">52</a><a class="page-number" href="/page/53/">53</a><span class="page-number current">54</span><a class="page-number" href="/page/55/">55</a><a class="page-number" href="/page/56/">56</a><span class="space">&hellip;</span><a class="page-number" href="/page/165/">165</a><a class="extend next" rel="next" href="/page/55/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/53/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/52/">52</a><a class="page-number" href="/page/53/">53</a><span class="page-number current">54</span><a class="page-number" href="/page/55/">55</a><a class="page-number" href="/page/56/">56</a><span class="space">&hellip;</span><a class="page-number" href="/page/166/">166</a><a class="extend next" rel="next" href="/page/55/">下一页</a>
     </nav>
   
 

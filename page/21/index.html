@@ -297,11 +297,11 @@
   
 
 
-<article id="post-封装elementui的table组件" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-使用git出现过的问题" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/%E5%B0%81%E8%A3%85elementui%E7%9A%84table%E7%BB%84%E4%BB%B6/" class="article-date">
-      <time datetime="2021-09-03T01:45:17.000Z" itemprop="datePublished">2021-09-03</time>
+      <a href="/%E4%BD%BF%E7%94%A8git%E5%87%BA%E7%8E%B0%E8%BF%87%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
+      <time datetime="2021-09-23T07:28:19.000Z" itemprop="datePublished">2021-09-23</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/%E5%B0%81%E8%A3%85elementui%E7%9A%84table%E7%BB%84%E4%BB%B6/">封装elementui的table组件</a>
+      <a class="article-title" href="/%E4%BD%BF%E7%94%A8git%E5%87%BA%E7%8E%B0%E8%BF%87%E7%9A%84%E9%97%AE%E9%A2%98/">使用git出现过的问题</a>
     </h1>
   
 
         
-          <!-- <a href="/%E5%B0%81%E8%A3%85elementui%E7%9A%84table%E7%BB%84%E4%BB%B6/" class="archive-article-date">
-      <time datetime="2021-09-03T01:45:17.000Z" itemprop="datePublished">2021-09-03</time>
+          <!-- <a href="/%E4%BD%BF%E7%94%A8git%E5%87%BA%E7%8E%B0%E8%BF%87%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
+      <time datetime="2021-09-23T07:28:19.000Z" itemprop="datePublished">2021-09-23</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">553字</span>
+      <span class="post-count">61字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">3分</span>
+      <span class="post-count">1分</span>
     </span>
   </span>
 </div>
@@ -358,8 +358,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h2 id="table-vue"><a href="#table-vue" class="headerlink" title="table.vue"></a>table.vue</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;el-table</span><br><span class="line">    v-bind=<span class="string">"$props"</span></span><br><span class="line">    border</span><br><span class="line">    :header-cell-style=<span class="string">"&#123; 'text-align': 'center' &#125;"</span></span><br><span class="line">    style=<span class="string">"width: 100%"</span></span><br><span class="line">  &gt;</span><br><span class="line">    &lt;el-table-column</span><br><span class="line">      label=<span class="string">"序号"</span></span><br><span class="line">      width=<span class="string">"50"</span></span><br><span class="line">      align=<span class="string">"center"</span></span><br><span class="line">    &gt;</span><br><span class="line">      &lt;template slot-scope=<span class="string">"scope"</span>&gt;</span><br><span class="line">        &#123;&#123; scope.$index + <span class="number">1</span> &#125;&#125;</span><br><span class="line">      &lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>el-table-column&gt;</span><br><span class="line">    &lt;template v-<span class="keyword">for</span>=<span class="string">"(col, key) in tableColumns"</span>&gt;</span><br><span class="line">      &lt;el-table-column</span><br><span class="line">        :key=<span class="string">"key"</span></span><br><span class="line">        v-bind=<span class="string">"col"</span></span><br><span class="line">      /&gt;</span><br><span class="line">    &lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>el-table&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp">&lt;script lang="ts"&gt;</span></span><br><span class="line"><span class="regexp">import &#123; Vue, Component, Prop &#125; from 'vue-property-decorator'</span></span><br><span class="line"><span class="regexp">import &#123; Table &#125; from 'element-ui'</span></span><br><span class="line"><span class="regexp">export type Column = &#123;</span></span><br><span class="line"><span class="regexp">  label: string</span></span><br><span class="line"><span class="regexp">  prop?: string</span></span><br><span class="line"><span class="regexp">  width?: string</span></span><br><span class="line"><span class="regexp">  minWidth?: string</span></span><br><span class="line"><span class="regexp">  fixed?: string | boolean</span></span><br><span class="line"><span class="regexp">  align?: 'left' | 'center' | 'right'</span></span><br><span class="line"><span class="regexp">  formatter?: &#123; (row: any, col: any, value: any): unknown &#125;</span></span><br><span class="line"><span class="regexp">  /</span><span class="regexp">/ renderHeader的使用 https:/</span><span class="regexp">/www.cnblogs.com/yi</span>xiancheng/p/<span class="number">11525970.</span>html</span><br><span class="line">  renderHeader?: &#123; (h: <span class="built_in">any</span>, &#123; column, $index &#125;: <span class="built_in">any</span>): unknown &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span>(&#123;</span><br><span class="line">  props: &#123;</span><br><span class="line">    ...(Table <span class="keyword">as</span> <span class="built_in">any</span>).props,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> <span class="keyword">extends</span> Vue &#123;</span><br><span class="line">    <span class="meta">@Prop</span>(&#123; <span class="keyword">default</span>: <span class="function"><span class="params">()</span> =&gt;</span> ([]) &#125;) tableColumns!: Column</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-          
+        <ol>
+<li>拉取代码出现下面问题<br><code>load pubkey &quot;/c/Users/klover/.ssh/id_rsa&quot;: invalid format</code><br>是因为公钥之前我换过名字，导致出现问题<br>执行修复公钥命令，解决问题<br><code>ssh-keygen -f ~/.ssh/id_rsa -y &gt; ~/.ssh/id_rsa.pub</code></li>
+</ol>
+
       
     </div>
     
@@ -369,13 +371,9 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/element/" rel="tag">element</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
     </div>
 
-      
-        <p class="article-more-link">
-          <a href="/%E5%B0%81%E8%A3%85elementui%E7%9A%84table%E7%BB%84%E4%BB%B6/#more">阅读全文 >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -399,7 +397,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/20/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/165/">165</a><a class="extend next" rel="next" href="/page/22/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/20/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/166/">166</a><a class="extend next" rel="next" href="/page/22/">下一页</a>
     </nav>
   
 
