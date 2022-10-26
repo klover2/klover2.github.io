@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.wjc66.cn/"/>
-  <updated>2022-10-24T05:07:52.299Z</updated>
+  <updated>2022-10-26T08:16:07.169Z</updated>
   <id>https://blog.wjc66.cn/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>发布一个golang的工具包到github</title>
+    <link href="https://blog.wjc66.cn/%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AAgolang%E7%9A%84%E5%B7%A5%E5%85%B7%E5%8C%85%E5%88%B0github/"/>
+    <id>https://blog.wjc66.cn/%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AAgolang%E7%9A%84%E5%B7%A5%E5%85%B7%E5%8C%85%E5%88%B0github/</id>
+    <published>2022-10-26T07:54:10.000Z</published>
+    <updated>2022-10-26T08:16:07.169Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Go-语言环境安装"><a href="#Go-语言环境安装" class="headerlink" title="Go 语言环境安装"></a>Go 语言环境安装</h2><p>Go 语言支持以下系统：</p><ul><li>Linux</li><li>FreeBSD</li><li>Mac OS X（也称为 Darwin）</li><li>Windows<br>安装包下载地址为：<a href="https://golang.org/dl/。" target="_blank" rel="external nofollow noopener noreferrer">https://golang.org/dl/。</a></li></ul><p>如果打不开可以使用这个地址：<a href="https://golang.google.cn/dl/。" target="_blank" rel="external nofollow noopener noreferrer">https://golang.google.cn/dl/。</a></p><a id="more"></a><h2 id="新建空项目"><a href="#新建空项目" class="headerlink" title="新建空项目"></a>新建空项目</h2><ul><li><p>在 github 上新建一个公开的项目，比如我创建一个 qbit-go-sdk 的项目</p></li><li><p>将项目克隆到本地来</p></li><li><p>进入项目根目录，使用<code>go mod</code>初始化项目</p></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">go mod init github.com/klover2/qbit-go-sdk</span><br></pre></td></tr></table></figure><ul><li>初始化后的 go.mod 的文件如下，如果你的 module 不是你 github 的项目地址你要修改过来</li></ul><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module github.com/klover2/qbit-<span class="keyword">go</span>-sdk</span><br><span class="line"></span><br><span class="line"><span class="keyword">go</span> <span class="number">1.16</span></span><br></pre></td></tr></table></figure><ul><li>随便写一些东西发布到 githup 上</li></ul><h2 id="将-github-上的工程转换为别人可以下载的依赖包"><a href="#将-github-上的工程转换为别人可以下载的依赖包" class="headerlink" title="将 github 上的工程转换为别人可以下载的依赖包"></a>将 github 上的工程转换为别人可以下载的依赖包</h2><ol><li>本地使用 git 命令创建一个 tag</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">git tag -a tag名 -m <span class="string">'创建一个版本'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># eg</span></span><br><span class="line"></span><br><span class="line">git tag -a v1.0.0 -m <span class="string">'创建一个项目'</span></span><br></pre></td></tr></table></figure><ol start="2"><li>将 tag 提交到 github 上</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">git push origin tag名称</span><br><span class="line"></span><br><span class="line"><span class="comment"># eg</span></span><br><span class="line"></span><br><span class="line">git push origin v1.0.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一次性提交本地全部的tag</span></span><br><span class="line"></span><br><span class="line">git push origin --tags</span><br></pre></td></tr></table></figure><h2 id="直接在-github-上查看是否已经提交成功-tag"><a href="#直接在-github-上查看是否已经提交成功-tag" class="headerlink" title="直接在 github 上查看是否已经提交成功 tag"></a>直接在 github 上查看是否已经提交成功 tag</h2><p><img src="https://img-blog.csdnimg.cn/ae6769f561a44c4c94abab5df257a55b.png" alt="在这里插入图片描述"></p><h2 id="创建对应的发布"><a href="#创建对应的发布" class="headerlink" title="创建对应的发布"></a>创建对应的发布</h2><p><img src="https://img-blog.csdnimg.cn/5dce1126bf7e4c6f982f6bf5626e1d04.png" alt="在这里插入图片描述"></p><h2 id="查看自己发布的包"><a href="#查看自己发布的包" class="headerlink" title="查看自己发布的包"></a>查看自己发布的包</h2><p><a href="https://pkg.go.dev/" target="_blank" rel="external nofollow noopener noreferrer">pkg.go</a> 同步有点慢，不用在乎，上传到 githup 上就可以用了</p><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><code>go get github.com/klover2/qbit-go-sdk</code><br><code>go get vendor</code> 把代码拉到本地</p><h2 id="更新包版本"><a href="#更新包版本" class="headerlink" title="更新包版本"></a>更新包版本</h2><p>直接修改<code>go.mod</code> 对应包的版本<br><code>go mod tidy</code> 更新包<br><code>go get vendor</code> 把代码拉到本地</p><h2 id="配置代理"><a href="#配置代理" class="headerlink" title="配置代理"></a>配置代理</h2><h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>打开你的 PowerShell 并执行</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\&gt; <span class="variable">$env</span>:GO111MODULE = <span class="string">"on"</span></span><br><span class="line">C:\&gt; <span class="variable">$env</span>:GOPROXY = <span class="string">"https://goproxy.cn"</span></span><br></pre></td></tr></table></figure><p>或者</p><ol><li>打开“开始”并搜索“env”</li><li>选择“编辑系统环境变量”</li><li>点击“环境变量…”按钮</li><li>在“&lt;你的用户名&gt; 的用户变量”章节下（上半部分）</li><li>点击“新建…”按钮</li><li>选择“变量名”输入框并输入“GO111MODULE”</li><li>选择“变量值”输入框并输入“on”</li><li>点击“确定”按钮</li><li>点击“新建…”按钮</li><li>选择“变量名”输入框并输入“GOPROXY”</li><li>选择“变量值”输入框并输入“<a href="https://goproxy.cn”" target="_blank" rel="external nofollow noopener noreferrer">https://goproxy.cn”</a></li><li>点击“确定”按钮</li></ol><h3 id="Go-1-13-及以上（推荐）"><a href="#Go-1-13-及以上（推荐）" class="headerlink" title="Go 1.13 及以上（推荐）"></a>Go 1.13 及以上（推荐）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ go env -w GO111MODULE=on</span><br><span class="line">$ go env -w GOPROXY=https://goproxy.cn,direct</span><br></pre></td></tr></table></figure><h3 id="macOS-或-Linux"><a href="#macOS-或-Linux" class="headerlink" title="macOS 或 Linux"></a>macOS 或 Linux</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">export</span> GO111MODULE=on</span><br><span class="line">$ <span class="built_in">export</span> GOPROXY=https://goproxy.cn</span><br></pre></td></tr></table></figure><p>或者</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"export GO111MODULE=on"</span> &gt;&gt; ~/.profile</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"export GOPROXY=https://goproxy.cn"</span> &gt;&gt; ~/.profile</span><br><span class="line">$ <span class="built_in">source</span> ~/.profile</span><br></pre></td></tr></table></figure><h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://goproxy.cn/" target="_blank" rel="external nofollow noopener noreferrer">配置代理</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Go-语言环境安装&quot;&gt;&lt;a href=&quot;#Go-语言环境安装&quot; class=&quot;headerlink&quot; title=&quot;Go 语言环境安装&quot;&gt;&lt;/a&gt;Go 语言环境安装&lt;/h2&gt;&lt;p&gt;Go 语言支持以下系统：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Linux&lt;/li&gt;
+&lt;li&gt;FreeBSD&lt;/li&gt;
+&lt;li&gt;Mac OS X（也称为 Darwin）&lt;/li&gt;
+&lt;li&gt;Windows&lt;br&gt;安装包下载地址为：&lt;a href=&quot;https://golang.org/dl/。&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noopener noreferrer&quot;&gt;https://golang.org/dl/。&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果打不开可以使用这个地址：&lt;a href=&quot;https://golang.google.cn/dl/。&quot; target=&quot;_blank&quot; rel=&quot;external nofollow noopener noreferrer&quot;&gt;https://golang.google.cn/dl/。&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="golang" scheme="https://blog.wjc66.cn/tags/golang/"/>
+    
+  </entry>
   
   <entry>
     <title>pipenv命令的使用</title>
@@ -274,9 +302,9 @@
     
     
     
-      <category term="typescript" scheme="https://blog.wjc66.cn/tags/typescript/"/>
-    
       <category term="nodejs" scheme="https://blog.wjc66.cn/tags/nodejs/"/>
+    
+      <category term="typescript" scheme="https://blog.wjc66.cn/tags/typescript/"/>
     
   </entry>
   
@@ -469,34 +497,6 @@
     
     
       <category term="java" scheme="https://blog.wjc66.cn/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>buffer与stream互相转换</title>
-    <link href="https://blog.wjc66.cn/buffer%E4%B8%8Estream%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/"/>
-    <id>https://blog.wjc66.cn/buffer%E4%B8%8Estream%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/</id>
-    <published>2021-10-25T10:07:30.000Z</published>
-    <updated>2022-03-30T07:06:54.332Z</updated>
-    
-    <content type="html"><![CDATA[<ol><li>流到缓冲区</li></ol><p>第一个操作是将读取流转换为缓冲区。Streams 最有效的操作是将它们通过管道传输到另一个流。这在您不想增加内存使用量的文件系统访问中很常见。</p><p>但是，在处理 HTTP 请求时，您可能希望直接将响应流转换为 JSON 对象或解析 url 编码值。</p><p>为此，您将读取缓冲区 data 事件提供的数据。Streams 将提供一个字符串或一个缓冲区作为数据事件的值。这取决于 Buffer 是否有编码集。默认情况下，它会在 data 事件期间输出 Buffers 。</p><p>这意味着您可以执行以下操作以从流中读取。</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">streamToBuffer</span>(<span class="params">stream</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> buffers = [];</span><br><span class="line">    stream.on(<span class="string">"error"</span>, reject);</span><br><span class="line">    stream.on(<span class="string">"data"</span>, (data) =&gt; buffers.push(data));</span><br><span class="line">    stream.on(<span class="string">"end"</span>, () =&gt; resolve(Buffer.concat(buffers)));</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>此函数获取流（可能来自 HTTP 或 FS 访问）。然后它将每个 Buffer 推送到一个 Buffer 数组中。当流被完全读取时，它会将所有这些 Buffers 与 Buffer.concat 结合起来。</p><p>这显然会对大流造成一些问题，但对于需要在应用程序的后续部分中转换并在内存中携带的小流来说，它非常有用。</p><ol start="2"><li>缓冲区到流<br>下一部分是将 Buffer 转换为流。当您想将数据通过管道传输到现有流中时，这很有用。</li></ol><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> Duplex = <span class="built_in">require</span>(<span class="string">"stream"</span>).Duplex;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bufferToStream</span>(<span class="params">buffer</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> stream = <span class="keyword">new</span> Duplex();</span><br><span class="line">  stream.push(buffer);</span><br><span class="line">  stream.push(<span class="literal">null</span>);</span><br><span class="line">  <span class="keyword">return</span> stream;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>此操作创建一个双工字符串并简单地将缓冲区写入其中。该流现在可以像通常的任何写入流一样使用。</p><p>文档：<br><a href="https://www.derpturkey.com/buffer-to-stream-in-node/" target="_blank" rel="external nofollow noopener noreferrer">缓冲到节点中的流</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ol&gt;
-&lt;li&gt;流到缓冲区&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;第一个操作是将读取流转换为缓冲区。Streams 最有效的操作是将它们通过管道传输到另一个流。这在您不想增加内存使用量的文件系统访问中很常见。&lt;/p&gt;
-&lt;p&gt;但是，在处理 HTTP 请求时，您可能希望直接将响应流转换为 J
-      
-    
-    </summary>
-    
-    
-    
-      <category term="nodejs" scheme="https://blog.wjc66.cn/tags/nodejs/"/>
     
   </entry>
   
