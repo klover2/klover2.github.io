@@ -297,11 +297,11 @@
   
 
 
-<article id="post-postgresql-raise函数" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-postgresql日期相关函数" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/postgresql-raise%E5%87%BD%E6%95%B0/" class="article-date">
-      <time datetime="2022-09-08T06:32:44.000Z" itemprop="datePublished">2022-09-08</time>
+      <a href="/postgresql%E6%97%A5%E6%9C%9F%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0/" class="article-date">
+      <time datetime="2022-09-08T06:35:24.000Z" itemprop="datePublished">2022-09-08</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/postgresql-raise%E5%87%BD%E6%95%B0/">postgresql-raise函数</a>
+      <a class="article-title" href="/postgresql%E6%97%A5%E6%9C%9F%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0/">postgresql日期相关函数</a>
     </h1>
   
 
         
-          <!-- <a href="/postgresql-raise%E5%87%BD%E6%95%B0/" class="archive-article-date">
-      <time datetime="2022-09-08T06:32:44.000Z" itemprop="datePublished">2022-09-08</time>
+          <!-- <a href="/postgresql%E6%97%A5%E6%9C%9F%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0/" class="archive-article-date">
+      <time datetime="2022-09-08T06:35:24.000Z" itemprop="datePublished">2022-09-08</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">323字</span>
+      <span class="post-count">2.3k字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">1分</span>
+      <span class="post-count">10分</span>
     </span>
   </span>
 </div>
@@ -358,15 +358,577 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>raise函数<br>在PostgreSQL中，该函数用于打印字符串，类似于Java中的System.out.println()，Oracle中的dbms_output.put_line()。</p>
-<p>用法如下：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">raise notice 'My name is %, I am a %.', 'Lewis', 'coder';</span><br></pre></td></tr></table></figure>
+        <h2 id="Postgresql中string转换成timestamp类型"><a href="#Postgresql中string转换成timestamp类型" class="headerlink" title="Postgresql中string转换成timestamp类型"></a>Postgresql中string转换成timestamp类型</h2><p>Mybatis+Postgresql<br><code>TO_DATE(#{startTime}, &#39;YYYY-MM-DD&#39;)</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AND op_date &lt;![CDATA[&gt;= ]]&gt;  TO_TIMESTAMP(#&#123;beginTime&#125;, 'YYYY-MM-DD HH24:MI:SS')</span><br><span class="line">AND op_date &lt;![CDATA[&lt;= ]]&gt;  TO_TIMESTAMP(#&#123;endTime&#125;, 'YYYY-MM-DD HH24:MI:SS')</span><br></pre></td></tr></table></figure>
+<p>而页面要接收和传递数据需要在javaBean中写如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@JsonFormat</span>(pattern=<span class="string">"yyyy-MM-dd HH:mm:ss"</span>,timezone = <span class="string">"GMT+8"</span>)</span><br><span class="line"><span class="keyword">private</span> Timestamp opDate;        <span class="comment">//操作日期</span></span><br></pre></td></tr></table></figure>
 
-<p>以上sql会在控制台输出My name is Lewis, I am a coder.。如果是在DBeaver里使用该函数，则会在output的tab里输出字符串。</p>
-<p>raise后面的notice是级别，一共有debug/log/info/notice/warning/exception这些级别，可以任意指定一个级别。有些类似于Java里的日志框架，比如Log4j2之类的。</p>
-<p>接着级别后面的是要输出的字符串参数，用一对单引号包括起来。这个字符串支持占位符的写法，也就是%这个字符。如果在字符串里使用了这个%，那么会自动使用字符串参数后面的参数来替换掉这里的%。有多少个占位符，就需要在第一个字符串参数后面加上多少个对应的参数。</p>
-<p>这个占位符输出的用法，也和Log4j2类似。</p>
-<p>由raise打印出来的信息可以输出到服务端日志，也可以输出到客户端，亦或者同时输出到二者。这个是由log_min_messages和client_min_messages两个参数控制的，这两个参数在数据库初始化时用到。</p>
+<h2 id="PostgreSQL日期加减"><a href="#PostgreSQL日期加减" class="headerlink" title="PostgreSQL日期加减"></a>PostgreSQL日期加减</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">now</span>()::<span class="built_in">timestamp</span> + <span class="string">'1 year'</span>;  <span class="comment">--当前时间加1年</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">now</span>()::<span class="built_in">timestamp</span> + <span class="string">'1 month'</span>;  <span class="comment">--当前时间加一个月</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">now</span>()::<span class="built_in">timestamp</span> + <span class="string">'1 day'</span>;  <span class="comment">--当前时间加一天</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">now</span>()::<span class="built_in">timestamp</span> + <span class="string">'1 hour'</span>;  <span class="comment">--当前时间加一个小时</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">now</span>()::<span class="built_in">timestamp</span> + <span class="string">'1 min'</span>;  <span class="comment">--当前时间加一分钟</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">now</span>()::<span class="built_in">timestamp</span> + <span class="string">'1 sec'</span>;  <span class="comment">--加一秒钟</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">select</span> <span class="keyword">now</span>()::<span class="built_in">timestamp</span> + <span class="string">'1 year 1 month 1 day 1 hour 1 min 1 sec'</span>;  <span class="comment">--加1年1月1天1时1分1秒</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">now</span>()::<span class="built_in">timestamp</span> + (<span class="keyword">col</span> || <span class="string">' day'</span>)::<span class="built_in">interval</span> <span class="keyword">FROM</span> <span class="keyword">table</span> <span class="comment">--把col字段转换成天 然后相加</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="PostgreSQL常用当前时间"><a href="#PostgreSQL常用当前时间" class="headerlink" title="PostgreSQL常用当前时间"></a>PostgreSQL常用当前时间</h2><p>PostgreSQL 提供可许多返回当前日期和时间的函数。部分函数按照当前事务的开始时刻返回结果：</p>
+<p>CURRENT_TIME(precision)<br>transaction_timestamp() 感觉这个描述更符合实际情况</p>
+<p>另外部分函数返回实时时间值，在事务中也会随时间变化。<br>statement_timestamp()<br>clock_timestamp()<br>timeofday() 返回的是text字符串</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="string">''</span>||<span class="keyword">now</span>()::<span class="built_in">timestamp</span> <span class="comment">-- 2022-02-25 14:29:00.189944</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">substring</span>(<span class="string">''</span>||<span class="keyword">now</span>()::<span class="built_in">timestamp</span> <span class="keyword">from</span> <span class="number">1</span> <span class="keyword">for</span> <span class="number">19</span>)  <span class="comment">--  2022-02-25 14:25:44</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">now</span>() <span class="comment">-- 2022-02-25 14:48:35</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">localtime</span> <span class="comment">-- 14:47:08</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">localtimestamp</span> <span class="comment">-- 2022-02-25 14:47:08</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">current_date</span> <span class="comment">--  2022-02-25</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">current_time</span> <span class="comment">--  14:29:13</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">current_timestamp</span> <span class="comment">-- 2022-02-25 14:45:03</span></span><br><span class="line"><span class="keyword">select</span>  to_char(<span class="keyword">now</span>(), <span class="string">'YYYY-MM-DD HH24:mi:ss:ms'</span>) <span class="comment">--  2022-02-25 14:35:06:569</span></span><br><span class="line"><span class="keyword">select</span> timeofday() <span class="comment">-- 返回的是text字符串,Fri Feb 25 14:43:46.005910 2022 CST</span></span><br><span class="line">此外，还有<span class="keyword">CURRENT_TIME</span>(<span class="keyword">precision</span>)， statement_timestamp()， clock_timestamp()</span><br></pre></td></tr></table></figure>
+
+<h2 id="PostgreSQL的时间类型"><a href="#PostgreSQL的时间类型" class="headerlink" title="PostgreSQL的时间类型"></a>PostgreSQL的时间类型</h2><h3 id="类型转换函数"><a href="#类型转换函数" class="headerlink" title="类型转换函数"></a>类型转换函数</h3><p>PostgreSQL格式化函数提供一套有效的工具用于把各种数据类型(日期/时间、integer、floating point和numeric)转换成格式化的字符串以及反过来从格式化的字符串转换成指定的数据类型。下面列出了这些函数，它们都遵循一个公共的调用习惯：第一个参数是待格式化的值，而第二个是定义输出或输出格式的模板。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>返回类型</th>
+<th>描述</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>to_char(timestamp, text)</td>
+<td>text</td>
+<td>把时间戳转换成字串</td>
+<td>to_char(current_timestamp, ‘HH12:MI:SS’)</td>
+</tr>
+<tr>
+<td>to_char(interval, text)</td>
+<td>text</td>
+<td>把时间间隔转为字串</td>
+<td>to_char(interval ‘15h 2m 12s’, ‘HH24:MI:SS’)</td>
+</tr>
+<tr>
+<td>to_char(int, text)</td>
+<td>text</td>
+<td>把整数转换成字串</td>
+<td>to_char(125, ‘999’)</td>
+</tr>
+<tr>
+<td>to_char(double precision, text)</td>
+<td>text</td>
+<td>把实数/双精度数转换成字串</td>
+<td>to_char(125.8::real, ‘999D9’)</td>
+</tr>
+<tr>
+<td>to_char(numeric, text)</td>
+<td>text</td>
+<td>把numeric转换成字串</td>
+<td>to_char(-125.8, ‘999D99S’)</td>
+</tr>
+<tr>
+<td>to_date(text, text)</td>
+<td>date</td>
+<td>把字串转换成日期</td>
+<td>to_date(‘05 Dec 2000’, ‘DD Mon YYYY’)</td>
+</tr>
+<tr>
+<td>to_timestamp(text, text)</td>
+<td>timestamp</td>
+<td>把字串转换成时间戳</td>
+<td>to_timestamp(‘05 Dec 2000’, ‘DD Mon YYYY’)</td>
+</tr>
+<tr>
+<td>to_timestamp(double)</td>
+<td>timestamp</td>
+<td>把UNIX纪元转换成时间戳</td>
+<td>to_timestamp(200120400)</td>
+</tr>
+<tr>
+<td>to_number(text, text)</td>
+<td>numeric</td>
+<td>把字串转换成numeric</td>
+<td>to_number(‘12,454.8-‘, ‘99G999D9S’)</td>
+</tr>
+</tbody></table>
+<h3 id="日期-时间格式化的模式"><a href="#日期-时间格式化的模式" class="headerlink" title="日期/时间格式化的模式"></a>日期/时间格式化的模式</h3><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>HH</td>
+<td>一天的小时数(01-12)</td>
+</tr>
+<tr>
+<td>HH12</td>
+<td>一天的小时数(01-12)</td>
+</tr>
+<tr>
+<td>HH24</td>
+<td>一天的小时数(00-23)</td>
+</tr>
+<tr>
+<td>MI</td>
+<td>分钟(00-59)</td>
+</tr>
+<tr>
+<td>SS</td>
+<td>秒(00-59)</td>
+</tr>
+<tr>
+<td>MS</td>
+<td>毫秒(000-999)</td>
+</tr>
+<tr>
+<td>US</td>
+<td>微秒(000000-999999)</td>
+</tr>
+<tr>
+<td>AM</td>
+<td>正午标识(大写)</td>
+</tr>
+<tr>
+<td>Y,YYY</td>
+<td>带逗号的年(4和更多位)</td>
+</tr>
+<tr>
+<td>YYYY</td>
+<td>年(4和更多位)</td>
+</tr>
+<tr>
+<td>YYY</td>
+<td>年的后三位</td>
+</tr>
+<tr>
+<td>YY</td>
+<td>年的后两位</td>
+</tr>
+<tr>
+<td>Y</td>
+<td>年的最后一位</td>
+</tr>
+<tr>
+<td>MONTH</td>
+<td>全长大写月份名(空白填充为9字符)</td>
+</tr>
+<tr>
+<td>Month</td>
+<td>全长混合大小写月份名(空白填充为9字符)</td>
+</tr>
+<tr>
+<td>month</td>
+<td>全长小写月份名(空白填充为9字符)</td>
+</tr>
+<tr>
+<td>MON</td>
+<td>大写缩写月份名(3字符)</td>
+</tr>
+<tr>
+<td>Mon</td>
+<td>缩写混合大小写月份名(3字符)</td>
+</tr>
+<tr>
+<td>mon</td>
+<td>小写缩写月份名(3字符)</td>
+</tr>
+<tr>
+<td>MM</td>
+<td>月份号(01-12)</td>
+</tr>
+<tr>
+<td>DAY</td>
+<td>全长大写日期名(空白填充为9字符)</td>
+</tr>
+<tr>
+<td>Day</td>
+<td>全长混合大小写日期名(空白填充为9字符)</td>
+</tr>
+<tr>
+<td>day</td>
+<td>全长小写日期名(空白填充为9字符)</td>
+</tr>
+<tr>
+<td>DY</td>
+<td>缩写大写日期名(3字符)</td>
+</tr>
+<tr>
+<td>Dy</td>
+<td>缩写混合大小写日期名(3字符)</td>
+</tr>
+<tr>
+<td>dy</td>
+<td>缩写小写日期名(3字符)</td>
+</tr>
+<tr>
+<td>DDD</td>
+<td>一年里的日子(001-366)</td>
+</tr>
+<tr>
+<td>DD</td>
+<td>一个月里的日子(01-31)</td>
+</tr>
+<tr>
+<td>D</td>
+<td>一周里的日子(1-7；周日是1)</td>
+</tr>
+<tr>
+<td>W</td>
+<td>一个月里的周数(1-5)(第一周从该月第一天开始)</td>
+</tr>
+<tr>
+<td>WW</td>
+<td>一年里的周数(1-53)(第一周从该年的第一天开始)</td>
+</tr>
+</tbody></table>
+<h3 id="数值格式化的模板模式"><a href="#数值格式化的模板模式" class="headerlink" title="数值格式化的模板模式"></a>数值格式化的模板模式</h3><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>9</td>
+<td>带有指定数值位数的值</td>
+</tr>
+<tr>
+<td>0</td>
+<td>带前导零的值</td>
+</tr>
+<tr>
+<td>.(句点)</td>
+<td>小数点</td>
+</tr>
+<tr>
+<td>,(逗号)</td>
+<td>分组(千)分隔符</td>
+</tr>
+<tr>
+<td>PR</td>
+<td>尖括号内负值</td>
+</tr>
+<tr>
+<td>S</td>
+<td>带符号的数值</td>
+</tr>
+<tr>
+<td>L</td>
+<td>货币符号</td>
+</tr>
+<tr>
+<td>D</td>
+<td>小数点</td>
+</tr>
+<tr>
+<td>G</td>
+<td>分组分隔符</td>
+</tr>
+<tr>
+<td>MI</td>
+<td>在指明的位置的负号(如果数字 &lt; 0)</td>
+</tr>
+<tr>
+<td>PL</td>
+<td>在指明的位置的正号(如果数字 &gt; 0)</td>
+</tr>
+<tr>
+<td>SG</td>
+<td>在指明的位置的正/负号</td>
+</tr>
+</tbody></table>
+<h2 id="时间-日期函数和操作符"><a href="#时间-日期函数和操作符" class="headerlink" title="时间/日期函数和操作符"></a>时间/日期函数和操作符</h2><h3 id="下面是PostgreSQL中支持的时间-日期操作符的列表："><a href="#下面是PostgreSQL中支持的时间-日期操作符的列表：" class="headerlink" title="下面是PostgreSQL中支持的时间/日期操作符的列表："></a>下面是PostgreSQL中支持的时间/日期操作符的列表：</h3><table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>例子</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>date ‘2001-09-28’ + integer ‘7’</td>
+<td>date ‘2001-10-05’</td>
+</tr>
+<tr>
+<td>+</td>
+<td>date ‘2001-09-28’ + interval ‘1 hour’</td>
+<td>timestamp ‘2001-09-28 01:00’</td>
+</tr>
+<tr>
+<td>+</td>
+<td>date ‘2001-09-28’ + time ‘03:00’</td>
+<td>timestamp ‘2001-09-28 03:00’</td>
+</tr>
+<tr>
+<td>+</td>
+<td>interval ‘1 day’ + interval ‘1 hour’</td>
+<td>interval ‘1 day 01:00’</td>
+</tr>
+<tr>
+<td>+</td>
+<td>timestamp ‘2001-09-28 01:00’ + interval ‘23 hours’</td>
+<td>timestamp ‘2001-09-29 00:00’</td>
+</tr>
+<tr>
+<td>+</td>
+<td>time ‘01:00’ + interval ‘3 hours’</td>
+<td>time ‘04:00’</td>
+</tr>
+<tr>
+<td>-</td>
+<td>- interval ‘23 hours’</td>
+<td>interval ‘-23:00’</td>
+</tr>
+<tr>
+<td>-</td>
+<td>date ‘2001-10-01’ - date ‘2001-09-28’</td>
+<td>integer ‘3’</td>
+</tr>
+<tr>
+<td>-</td>
+<td>date ‘2001-10-01’ - integer ‘7’</td>
+<td>date ‘2001-09-24’</td>
+</tr>
+<tr>
+<td>-</td>
+<td>date ‘2001-09-28’ - interval ‘1 hour’</td>
+<td>timestamp ‘2001-09-27 23:00’</td>
+</tr>
+<tr>
+<td>-</td>
+<td>time ‘05:00’ - time ‘03:00’</td>
+<td>interval ‘02:00’</td>
+</tr>
+<tr>
+<td>-</td>
+<td>time ‘05:00’ - interval ‘2 hours’</td>
+<td>time ‘03:00’</td>
+</tr>
+<tr>
+<td>-</td>
+<td>timestamp ‘2001-09-28 23:00’ - interval ‘23 hours’</td>
+<td>timestamp ‘2001-09-28 00:00’</td>
+</tr>
+<tr>
+<td>-</td>
+<td>interval ‘1 day’ - interval ‘1 hour’</td>
+<td>interval ‘23:00’</td>
+</tr>
+<tr>
+<td>-</td>
+<td>timestamp ‘2001-09-29 03:00’ - timestamp ‘2001-09-27 12:00’</td>
+<td>interval ‘1 day 15:00’</td>
+</tr>
+<tr>
+<td>*</td>
+<td>interval ‘1 hour’ * double precision ‘3.5’</td>
+<td>interval ‘03:30’</td>
+</tr>
+<tr>
+<td>/</td>
+<td>interval ‘1 hour’ / double precision ‘1.5’</td>
+<td>interval ‘00:40’</td>
+</tr>
+</tbody></table>
+<h3 id="日期-时间函数"><a href="#日期-时间函数" class="headerlink" title="日期/时间函数"></a>日期/时间函数</h3><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>返回类型</th>
+<th>描述</th>
+<th>例子</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>age(timestamp, timestamp)</td>
+<td>interval</td>
+<td>减去参数，生成一个使用年、月的”符号化”的结果</td>
+<td>age(‘2001-04-10’, timestamp ‘1957-06-13’)</td>
+<td>43 years 9 mons 27 days</td>
+</tr>
+<tr>
+<td>age(timestamp)</td>
+<td>interval</td>
+<td>从current_date减去得到的数值</td>
+<td>age(timestamp ‘1957-06-13’)</td>
+<td>43 years 8 mons 3 days</td>
+</tr>
+<tr>
+<td>current_date</td>
+<td>date</td>
+<td>今天的日期</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>current_time</td>
+<td>time</td>
+<td>现在的时间</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>current_timestamp</td>
+<td>timestamp</td>
+<td>日期和时间</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>date_part(text, timestamp)</td>
+<td>double</td>
+<td>获取子域(等效于extract)</td>
+<td>date_part(‘hour’, timestamp ‘2001-02-16 20:38:40’)</td>
+<td>20</td>
+</tr>
+<tr>
+<td>date_part(text, interval)</td>
+<td>double</td>
+<td>获取子域(等效于extract)[可以获取数据表中某个日期字段的部分日期或时间]</td>
+<td>date_part(‘month’, interval ‘2 years 3 months’)</td>
+<td>3</td>
+</tr>
+<tr>
+<td>date_trunc(text, timestamp)</td>
+<td>timestamp</td>
+<td>截断成指定的精度</td>
+<td>date_trunc(‘hour’, timestamp ‘2001-02-16 20:38:40’)</td>
+<td>2001-02-16 20:00:00+00</td>
+</tr>
+<tr>
+<td>extract(field from timestamp)</td>
+<td>double</td>
+<td>获取子域</td>
+<td>extract(hour from timestamp ‘2001-02-16 20:38:40’)</td>
+<td>20</td>
+</tr>
+<tr>
+<td>extract(field from interval)</td>
+<td>double</td>
+<td>获取子域</td>
+<td>extract(month from interval ‘2 years 3 months’)</td>
+<td>3</td>
+</tr>
+<tr>
+<td>localtime</td>
+<td>time</td>
+<td>今日的时间</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>localtimestamp</td>
+<td>timestamp</td>
+<td>日期和时间</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>now()</td>
+<td>timestamp</td>
+<td>当前的日期和时间(等效于 current_timestamp)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>timeofday()</td>
+<td>text</td>
+<td>当前日期和时间</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="日期-时间差（EXTRACT-date-part-epoch）"><a href="#日期-时间差（EXTRACT-date-part-epoch）" class="headerlink" title="日期/时间差（EXTRACT/date_part/epoch）"></a>日期/时间差（EXTRACT/date_part/epoch）</h3><table>
+<thead>
+<tr>
+<th>域</th>
+<th>描述</th>
+<th>例子</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CENTURY</td>
+<td>世纪</td>
+<td>EXTRACT(CENTURY FROM TIMESTAMP ‘2000-12-16 12:21:13’);</td>
+<td>20</td>
+</tr>
+<tr>
+<td>DAY</td>
+<td>(月分)里的日期域(1-31)</td>
+<td>EXTRACT(DAY from TIMESTAMP ‘2001-02-16 20:38:40’);</td>
+<td>16</td>
+</tr>
+<tr>
+<td>DECADE</td>
+<td>年份域除以10</td>
+<td>EXTRACT(DECADE from TIMESTAMP ‘2001-02-16 20:38:40’);</td>
+<td>200</td>
+</tr>
+<tr>
+<td>DOW</td>
+<td>每周的星期号(0-6；星期天是0) (仅用于timestamp)</td>
+<td>EXTRACT(DOW FROM TIMESTAMP ‘2001-02-16 20:38:40’);</td>
+<td>5</td>
+</tr>
+<tr>
+<td>DOY</td>
+<td>一年的第几天(1 -365/366) (仅用于 timestamp)</td>
+<td>EXTRACT(DOY from TIMESTAMP ‘2001-02-16 20:38:40’);</td>
+<td>47</td>
+</tr>
+<tr>
+<td>HOUR</td>
+<td>小时域(0-23)</td>
+<td>EXTRACT(HOUR from TIMESTAMP ‘2001-02-16 20:38:40’);</td>
+<td>20</td>
+</tr>
+<tr>
+<td>MICROSECONDS</td>
+<td>秒域，包括小数部分，乘以 1,000,000。</td>
+<td>EXTRACT(MICROSECONDS from TIME ‘17:12:28.5’);</td>
+<td>28500000</td>
+</tr>
+<tr>
+<td>MILLENNIUM</td>
+<td>千年</td>
+<td>EXTRACT(MILLENNIUM from TIMESTAMP ‘2001-02-16 20:38:40’);</td>
+<td>3</td>
+</tr>
+<tr>
+<td>MILLISECONDS</td>
+<td>秒域，包括小数部分，乘以 1000。</td>
+<td>EXTRACT(MILLISECONDS from TIME ‘17:12:28.5’);</td>
+<td>28500</td>
+</tr>
+<tr>
+<td>MINUTE</td>
+<td>分钟域(0-59)</td>
+<td>EXTRACT(MINUTE from TIMESTAMP ‘2001-02-16 20:38:40’);</td>
+<td>38</td>
+</tr>
+<tr>
+<td>MONTH</td>
+<td>对于timestamp数值，它是一年里的月份数(1-12)；对于interval数值，它是月的数目，然后对12取模(0-11)</td>
+<td>EXTRACT(MONTH from TIMESTAMP ‘2001-02-16 20:38:40’);</td>
+<td>2</td>
+</tr>
+<tr>
+<td>QUARTER</td>
+<td>该天所在的该年的季度(1-4)(仅用于 timestamp)</td>
+<td>EXTRACT(QUARTER from TIMESTAMP ‘2001-02-16 20:38:40’);</td>
+<td>1</td>
+</tr>
+<tr>
+<td>SECOND</td>
+<td>秒域，包括小数部分(0-59[1])</td>
+<td>EXTRACT(SECOND from TIMESTAMP ‘2001-02-16 20:38:40’);</td>
+<td>40</td>
+</tr>
+<tr>
+<td>WEEK</td>
+<td>该天在所在的年份里是第几周。</td>
+<td>EXTRACT(WEEK from TIMESTAMP ‘2001-02-16 20:38:40’);</td>
+<td>7</td>
+</tr>
+<tr>
+<td>YEAR</td>
+<td>年份域</td>
+<td>EXTRACT(YEAR from TIMESTAMP ‘2001-02-16 20:38:40’);</td>
+<td>2001</td>
+</tr>
+</tbody></table>
+<h4 id="相对时间差–取自域"><a href="#相对时间差–取自域" class="headerlink" title="相对时间差–取自域"></a>相对时间差–取自域</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">EXTRACT</span>(EPOCH <span class="keyword">FROM</span> (<span class="built_in">TIMESTAMP</span> <span class="string">'2022-02-18 16:50:23'</span>- <span class="built_in">TIMESTAMP</span> <span class="string">'2022-02-18 16:49:23'</span>));                 <span class="comment">--60</span></span><br><span class="line"><span class="keyword">SELECT</span> date_part(<span class="string">'MINUTE'</span>,<span class="keyword">cast</span>(<span class="string">'2022-02-18 16:50:23'</span> <span class="keyword">as</span> <span class="built_in">TIMESTAMP</span>)-<span class="keyword">cast</span>(<span class="string">'2022-02-18 16:49:23'</span> <span class="keyword">as</span> <span class="built_in">TIMESTAMP</span>));    <span class="comment">--1 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 日期之差（绝对）</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">round</span>(date_part(<span class="string">'epoch'</span>, <span class="built_in">TIMESTAMP</span>​​​​​​​​​​​​​​ <span class="string">'2020-05-05 11:11:20'</span> - <span class="built_in">TIMESTAMP</span> <span class="string">'2020-05-05 10:10:10'</span>));   <span class="comment">--获取秒差 3670=3600+60+10</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">round</span>(date_part(<span class="string">'epoch'</span>, <span class="built_in">TIMESTAMP</span> <span class="string">'2020-05-05 11:11:20'</span> - <span class="built_in">TIMESTAMP</span> <span class="string">'2020-05-05 10:10:10'</span>)/<span class="number">60</span>);   <span class="comment">--获取分钟差 61=60+1</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">round</span>(date_part(<span class="string">'epoch'</span>, <span class="built_in">TIMESTAMP</span> <span class="string">'2020-05-05 12:11:20'</span> - <span class="built_in">TIMESTAMP</span> <span class="string">'2020-05-05 10:10:10'</span>)/<span class="number">60</span>/<span class="number">60</span>);    <span class="comment">--获取小时差 2</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">Date</span>(<span class="string">'2022-04-02'</span>) - <span class="built_in">Date</span>(<span class="string">'2022-02-01'</span>);    <span class="comment">--获取天数差 60=31+28+1</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">extract</span>(<span class="keyword">year</span> <span class="keyword">from</span> age(<span class="built_in">TIMESTAMP</span> <span class="string">'2022-04-05'</span>,<span class="built_in">TIMESTAMP</span> <span class="string">'2021-02-04'</span>)) * <span class="number">12</span>  + <span class="keyword">extract</span>(<span class="keyword">MONTH</span> <span class="keyword">from</span> age(<span class="built_in">TIMESTAMP</span> <span class="string">'2022-04-05'</span>,<span class="built_in">TIMESTAMP</span> <span class="string">'2021-02-04'</span>));    <span class="comment">--获取月份差 14=12+2</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">extract</span>(<span class="keyword">year</span> <span class="keyword">from</span> age(<span class="built_in">TIMESTAMP</span> <span class="string">'2022-07-08'</span>,<span class="built_in">TIMESTAMP</span> <span class="string">'2014-07-07'</span>));   <span class="comment">--获取年份差  8</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">extract</span>(<span class="keyword">year</span> <span class="keyword">from</span> age(<span class="built_in">TIMESTAMP</span> <span class="string">'2022-07-07'</span>,<span class="built_in">TIMESTAMP</span> <span class="string">'2014-07-07'</span>));   <span class="comment">--获取年份差  8</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">extract</span>(<span class="keyword">year</span> <span class="keyword">from</span> age(<span class="built_in">TIMESTAMP</span> <span class="string">'2022-07-06'</span>,<span class="built_in">TIMESTAMP</span> <span class="string">'2014-07-07'</span>));   <span class="comment">--获取年份差  7</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://blog.csdn.net/lixinkuan328/article/details/107969398" target="_blank" rel="external nofollow noopener noreferrer">原文链接</a></p>
 
       
     </div>
@@ -403,7 +965,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/9/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/167/">167</a><a class="extend next" rel="next" href="/page/11/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/9/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/168/">168</a><a class="extend next" rel="next" href="/page/11/">下一页</a>
     </nav>
   
 
@@ -413,7 +975,7 @@
         <div id="footer-info">
             <div>
                 <!-- <i class="fa fa-copyright"></i> 
-                2016-2022 w-klover -->
+                2016-2023 w-klover -->
 
                 <p><a href="http://beian.miit.gov.cn/" target="_blank" rel="external nofollow noopener noreferrer">浙ICP备20008562号-1</a></p>
                 <div style="width:300px;margin:0 auto; padding:20px 0;">

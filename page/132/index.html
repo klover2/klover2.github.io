@@ -297,11 +297,11 @@
   
 
 
-<article id="post-centos8使用docker安装redis" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-centos8使用docker安装mysql8-0-17" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/centos8%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85redis/" class="article-date">
-      <time datetime="2020-05-20T02:49:11.000Z" itemprop="datePublished">2020-05-20</time>
+      <a href="/centos8%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85mysql8-0-17/" class="article-date">
+      <time datetime="2020-05-20T02:50:06.000Z" itemprop="datePublished">2020-05-20</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/centos8%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85redis/">centos8使用docker安装redis</a>
+      <a class="article-title" href="/centos8%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85mysql8-0-17/">centos8使用docker安装mysql8.0.17</a>
     </h1>
   
 
         
-          <!-- <a href="/centos8%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85redis/" class="archive-article-date">
-      <time datetime="2020-05-20T02:49:11.000Z" itemprop="datePublished">2020-05-20</time>
+          <!-- <a href="/centos8%E4%BD%BF%E7%94%A8docker%E5%AE%89%E8%A3%85mysql8-0-17/" class="archive-article-date">
+      <time datetime="2020-05-20T02:50:06.000Z" itemprop="datePublished">2020-05-20</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">465字</span>
+      <span class="post-count">382字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">2分</span>
+      <span class="post-count">1分</span>
     </span>
   </span>
 </div>
@@ -358,36 +358,24 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>拉取镜像</p>
-<blockquote>
-<p>docker pull redis:5</p>
+        <blockquote>
+<p>拉取镜像<br>docker pull mysql:8.0.17<br>使用 docker images 查看镜像文件</p>
 </blockquote>
+<p>现在自己的服务器上依次创建/data/docker/mysql 文件夹，用于挂载外部配置和数据</p>
 <blockquote>
-<p>$:docker images 你会看到redis的镜像</p>
+<p>启动(注释的代码不要)</p>
 </blockquote>
-<blockquote>
-<p>在/data/docker/redis 文件夹下创建redis.conf(没有/data/docker/redis文件自己创建)<br>在redis.conf写入(注释的不要)<br>port 6379 //开启端口6379<br>bind * //docker内部绑定容器需要使用*号 //不能使用127  127 是相对于母机的如果跨docker没用 docker内部指向不一样（在外部访问不了 就用bind 0.0.0.0）<br>daemonize no<br>pidfile /data/redis/redis.pid<br>appendonly yes<br>写好保存</p>
-</blockquote>
-<blockquote>
-<p>启动redis 执行命令（注释的不要）<br>docker run <br>-p 6379:6379 \ //映射端口 容器内到宿主的127.0.0.1:6379<br>–name redis \ //给容器起名名字叫做redis<br>-v /data/docker/redis/data:/data \ //映射文件夹<br>-v /data/docker/redis/redis.conf:/etc/redis/redis.conf \ //映射文件<br>-d redis:5 \ //使用redis的pull的版本<br>redis-server /etc/redis/redis.conf \ //使用redis配置文件开启redis服务<br>–requirepass “123456” \ //密码<br>–appendonly yes  后台运行<br><img src="https://img-blog.csdnimg.cn/20191213103006284.png" alt="在这里插入图片描述"></p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">-p 127.0.0.1:6379:6379 \</span><br><span class="line">--name redis \</span><br><span class="line">-v /data/docker/redis/data:/data \</span><br><span class="line">-v /data/docker/redis/redis.conf:/etc/redis/redis.conf \</span><br><span class="line">-d redis:5 \</span><br><span class="line">redis-server /etc/redis/redis.conf \</span><br><span class="line">--requirepass <span class="string">"123456"</span> \</span><br><span class="line">--appendonly yes</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --restart=always \ // 开机启动</span><br><span class="line">  -v /data/docker/mysql/data:/var/lib/mysql \ // 将容器的 /var/lib/mysql目录挂载到主机/data/docker/mysql/data目录。</span><br><span class="line">    -v /data/docker/mysql/config/my.cnf:/etc/mysql/conf.d \ //映射配置文件</span><br><span class="line">      -e MYSQL_ROOT_PASSWORD=123456 \ //密码</span><br><span class="line">        -p 3306:3306 \ // 将容器的3306端口映射到主机的3306端口</span><br><span class="line">          --name mysql \ // MySQL容器名称</span><br><span class="line">            mysql:8.0.17 // 后台运行容器</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --restart=always \</span><br><span class="line">-v /data/docker/mysql/data:/var/lib/mysql \</span><br><span class="line">-v /data/docker/mysql/config/my.cnf:/etc/mysql/conf.d \</span><br><span class="line">-e MYSQL_ROOT_PASSWORD=123456 \</span><br><span class="line">-p 3306:3306 \</span><br><span class="line">--name mysql \</span><br><span class="line">mysql:8.0.17</span><br></pre></td></tr></table></figure>
 
+<p>运行成功 会在 /data/docker/mysql 文件夹 创建 config 和data 文件夹 ，里面都有东西</p>
 <blockquote>
-<p>$: docker ps<br><img src="https://img-blog.csdnimg.cn/20191213103112545.png" alt="在这里插入图片描述"></p>
+<p>使用镜像进入mysql<br>$:docker exec -it mysql bash<br>$:mysql -u root -p (会提示输入密码)<br>成功就会进入数据库<br><img src="https://img-blog.csdnimg.cn/20191213144411686.png" alt="在这里插入图片描述"><br>初始化MySQL，不然用 navicat连接不了mysql数据库<br>$:<code>ALTER USER &#39;root&#39;@&#39;%&#39; IDENTIFIED WITH mysql_native_password BY &#39;123456&#39;;</code><br>$:flush privileges;</p>
 </blockquote>
 <blockquote>
-<p>使用redis镜像执行redis-cli命令连接到刚启动的容器<br>$:docker exec -it redis redis-cli<br>//输入密码<br>$: auth 123456<br>测试<br>$:keys *<br><img src="https://img-blog.csdnimg.cn/20191213103341882.png" alt="在这里插入图片描述"><br>说明成功了</p>
+<p>（可选）设置时间<br>$:set global time_zone = ‘+8:00’;<br>set time_zone = ‘+8:00’;<br>flush privileges;<br>select curtime();<br><img src="https://img-blog.csdnimg.cn/20191213144731992.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 </blockquote>
-<blockquote>
-<p>没有安装docker? 请看  <a href="https://blog.csdn.net/weixin_43110609/article/details/103504539" target="_blank" rel="external nofollow noopener noreferrer">centos8 Docker上安装的postgres</a></p>
-</blockquote>
-<p>出现的问题：<br>[root@localhost ~]# docker run -d -p 9000:80 centos:httpd /bin/sh -c /usr/local/bin/start.sh<br>d5b2bd5a7bc4895a973fe61efd051847047d26385f65c278aaa09e4fa31c4d76<br>docker: Error response from daemon: driver failed programming external connectivity on endpoint quirky_allen (6bda693d1143657e46bee0300276aa05820da2b21a3d89441e820d1a274c48b6): (iptables failed: iptables –wait -t nat -A DOCKER -p tcp -d 0/0 –dport 9000 -j DNAT –to-destination 172.17.0.2:80 ! -i docker0: iptables: No chain/target/match by that name.<br>(exit status 1))</p>
-<p>原因:</p>
-<p>docker服务启动时定义的自定义链DOCKER由于某种原因被清掉<br>重启docker服务及可重新生成自定义链DOCKER</p>
-<p>解决:</p>
-<p>重启docker服务后再启动容器<br>systemctl restart docker<br>再次执行那个命令</p>
-<p>其他命令：<br>//启动redis<br>docker start redis</p>
+<h2 id="docker出现错误"><a href="#docker出现错误" class="headerlink" title="docker出现错误"></a>docker出现错误</h2><p> <code>Error response from daemon: driver failed programming external connectivity on endpoint mysql (a29d3409d7b1f5eaf8706050f4aeed7b11fa90415d243239a0c882eeb9fb83be):  (iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 0/0 --dport 3306 -j DNAT --to-destination 172.17.0.5:3306 ! -i docker0: iptables: No chain/target/match by that name.</code><br> Docker容器做端口映射报错，docker服务启动时定义的自定义链DOCKER被清除；重启即可<br> systemctl restart docker</p>
 
       
     </div>
@@ -398,7 +386,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/" rel="tag">mysql</a></li></ul>
     </div>
 
       
@@ -424,7 +412,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/131/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/130/">130</a><a class="page-number" href="/page/131/">131</a><span class="page-number current">132</span><a class="page-number" href="/page/133/">133</a><a class="page-number" href="/page/134/">134</a><span class="space">&hellip;</span><a class="page-number" href="/page/167/">167</a><a class="extend next" rel="next" href="/page/133/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/131/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/130/">130</a><a class="page-number" href="/page/131/">131</a><span class="page-number current">132</span><a class="page-number" href="/page/133/">133</a><a class="page-number" href="/page/134/">134</a><span class="space">&hellip;</span><a class="page-number" href="/page/168/">168</a><a class="extend next" rel="next" href="/page/133/">下一页</a>
     </nav>
   
 
@@ -434,7 +422,7 @@
         <div id="footer-info">
             <div>
                 <!-- <i class="fa fa-copyright"></i> 
-                2016-2022 w-klover -->
+                2016-2023 w-klover -->
 
                 <p><a href="http://beian.miit.gov.cn/" target="_blank" rel="external nofollow noopener noreferrer">浙ICP备20008562号-1</a></p>
                 <div style="width:300px;margin:0 auto; padding:20px 0;">

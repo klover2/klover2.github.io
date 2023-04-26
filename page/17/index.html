@@ -297,11 +297,11 @@
   
 
 
-<article id="post-PostgreSQL中JSONB的使用" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-如何对typescript进行单元测试" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/PostgreSQL%E4%B8%ADJSONB%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
-      <time datetime="2021-12-27T05:23:52.000Z" itemprop="datePublished">2021-12-27</time>
+      <a href="/%E5%A6%82%E4%BD%95%E5%AF%B9typescript%E8%BF%9B%E8%A1%8C%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="article-date">
+      <time datetime="2022-01-06T13:34:18.000Z" itemprop="datePublished">2022-01-06</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/PostgreSQL%E4%B8%ADJSONB%E7%9A%84%E4%BD%BF%E7%94%A8/">PostgreSQL中JSONB的使用</a>
+      <a class="article-title" href="/%E5%A6%82%E4%BD%95%E5%AF%B9typescript%E8%BF%9B%E8%A1%8C%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">如何对typescript进行单元测试</a>
     </h1>
   
 
         
-          <!-- <a href="/PostgreSQL%E4%B8%ADJSONB%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-      <time datetime="2021-12-27T05:23:52.000Z" itemprop="datePublished">2021-12-27</time>
+          <!-- <a href="/%E5%A6%82%E4%BD%95%E5%AF%B9typescript%E8%BF%9B%E8%A1%8C%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="archive-article-date">
+      <time datetime="2022-01-06T13:34:18.000Z" itemprop="datePublished">2022-01-06</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">2.1k字</span>
+      <span class="post-count">87字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">9分</span>
+      <span class="post-count">1分</span>
     </span>
   </span>
 </div>
@@ -358,12 +358,14 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h2 id="json-类型"><a href="#json-类型" class="headerlink" title="json 类型"></a>json 类型</h2><h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>根据 RFC 7159[1]中的说明，JSON 数据类型是用来存储 JSON（JavaScript Object Notation） 数据的。这种数据也可以被存储为 text，但是 JSON 数据类型的 优势在于能强制要求每个被存储的值符合 JSON 规则。也有很多 JSON 相关的函 数和操作符可以用于存储在这些数据类型中的数据</p>
-<p>PostgreSQL 支持两种 JSON 数据类型：json 和 jsonb。它们几乎接受完全相同的值集合作为输入。两者最大的区别是效率。json 数据类型存储输入文本的精准拷贝，处理函数必须在每 次执行时必须重新解析该数据。而 jsonb 数据被存储在一种分解好的二进制格式中，因为需要做附加的转换，它在输入时要稍慢一些。但是 jsonb 在处理时要快很多，因为不需要重新解析。</p>
-<blockquote>
-<p>重点：jsonb 支持索引</p>
-</blockquote>
-          
+        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><code>yarn add -D ts-jest jest @types/jest</code></p>
+<h3 id="全局安装"><a href="#全局安装" class="headerlink" title="全局安装"></a>全局安装</h3><p><code>npm i jest -g</code></p>
+<h2 id="初始化-jest"><a href="#初始化-jest" class="headerlink" title="初始化 jest"></a>初始化 jest</h2><p><code>jest --init</code></p>
+<h2 id="移除生成的-jest-config-js-文件"><a href="#移除生成的-jest-config-js-文件" class="headerlink" title="移除生成的 jest.config.js 文件"></a>移除生成的 jest.config.js 文件</h2><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>在 package.json 中配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"jest"</span>: &#123;</span><br><span class="line">    <span class="string">"moduleFileExtensions"</span>: [</span><br><span class="line">      <span class="string">"js"</span>,</span><br><span class="line">      <span class="string">"json"</span>,</span><br><span class="line">      <span class="string">"ts"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"rootDir"</span>: <span class="string">"."</span>,</span><br><span class="line">    <span class="string">"testRegex"</span>: <span class="string">".spec.ts$"</span>,</span><br><span class="line">    <span class="string">"transform"</span>: &#123;</span><br><span class="line">      <span class="string">"^.+\\.(t|j)s$"</span>: <span class="string">"ts-jest"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"coverageDirectory"</span>: <span class="string">"./coverage"</span>,</span><br><span class="line">    <span class="string">"testEnvironment"</span>: <span class="string">"node"</span>,</span><br><span class="line">    <span class="string">"roots"</span>: [</span><br><span class="line">      <span class="string">"&lt;rootDir&gt;/test/"</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">describe(<span class="string">"test"</span>, () =&gt; &#123;</span><br><span class="line">  beforeAll(<span class="keyword">async</span> () =&gt; &#123;&#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">"test"</span>, () =&gt; &#123;&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -373,13 +375,9 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li></ul>
     </div>
 
-      
-        <p class="article-more-link">
-          <a href="/PostgreSQL%E4%B8%ADJSONB%E7%9A%84%E4%BD%BF%E7%94%A8/#more">阅读全文 >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -403,7 +401,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/16/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/167/">167</a><a class="extend next" rel="next" href="/page/18/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/16/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/168/">168</a><a class="extend next" rel="next" href="/page/18/">下一页</a>
     </nav>
   
 
@@ -413,7 +411,7 @@
         <div id="footer-info">
             <div>
                 <!-- <i class="fa fa-copyright"></i> 
-                2016-2022 w-klover -->
+                2016-2023 w-klover -->
 
                 <p><a href="http://beian.miit.gov.cn/" target="_blank" rel="external nofollow noopener noreferrer">浙ICP备20008562号-1</a></p>
                 <div style="width:300px;margin:0 auto; padding:20px 0;">

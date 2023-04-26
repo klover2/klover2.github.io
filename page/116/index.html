@@ -297,11 +297,11 @@
   
 
 
-<article id="post-node-schedule定时器" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-redis的发布订阅" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/node-schedule%E5%AE%9A%E6%97%B6%E5%99%A8/" class="article-date">
-      <time datetime="2020-05-25T02:02:35.000Z" itemprop="datePublished">2020-05-25</time>
+      <a href="/redis%E7%9A%84%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/" class="article-date">
+      <time datetime="2020-05-25T07:06:54.000Z" itemprop="datePublished">2020-05-25</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/node-schedule%E5%AE%9A%E6%97%B6%E5%99%A8/">node-schedule定时器</a>
+      <a class="article-title" href="/redis%E7%9A%84%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/">redis的发布订阅</a>
     </h1>
   
 
         
-          <!-- <a href="/node-schedule%E5%AE%9A%E6%97%B6%E5%99%A8/" class="archive-article-date">
-      <time datetime="2020-05-25T02:02:35.000Z" itemprop="datePublished">2020-05-25</time>
+          <!-- <a href="/redis%E7%9A%84%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/" class="archive-article-date">
+      <time datetime="2020-05-25T07:06:54.000Z" itemprop="datePublished">2020-05-25</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">500字</span>
+      <span class="post-count">642字</span>
     </span>
   </span>
 
@@ -358,27 +358,24 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>定时导出某些数据、定时发送消息或邮件给用户、定时备份什么类型的文件等等</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>npm install node-schedule</p>
-<h2 id="Cron风格定时器"><a href="#Cron风格定时器" class="headerlink" title="Cron风格定时器"></a>Cron风格定时器</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">通配符解释</span><br><span class="line">*  *  *  *  *  *</span><br><span class="line">┬ ┬ ┬ ┬ ┬ ┬</span><br><span class="line">│ │ │ │ │  |</span><br><span class="line">│ │ │ │ │ └ day of week (0 - 7) (0 or 7 is Sun)</span><br><span class="line">│ │ │ │ └───── month (1 - 12)</span><br><span class="line">│ │ │ └────────── day of month (1 - 31)</span><br><span class="line">│ │ └─────────────── hour (0 - 23)</span><br><span class="line">│ └──────────────────── minute (0 - 59)</span><br><span class="line">└───────────────────────── second (0 - 59, OPTIONAL)</span><br><span class="line"></span><br><span class="line">6个占位符从左到右分别代表：秒、分、时、日、月、周几</span><br><span class="line"></span><br><span class="line"><span class="string">'*'</span>表示通配符，匹配任意，当秒是<span class="string">'*'</span>时，表示任意秒数都触发，其它类推</span><br><span class="line"></span><br><span class="line">下面可以看看以下传入参数分别代表的意思</span><br><span class="line">每分钟的第30秒触发： <span class="string">'30 * * * * *'</span></span><br><span class="line"></span><br><span class="line">每小时的1分30秒触发 ：<span class="string">'30 1 * * * *'</span></span><br><span class="line"></span><br><span class="line">每天的凌晨1点1分30秒触发 ：<span class="string">'30 1 1 * * *'</span></span><br><span class="line"></span><br><span class="line">每月的1日1点1分30秒触发 ：<span class="string">'30 1 1 1 * *'</span></span><br><span class="line"></span><br><span class="line">2016年的1月1日1点1分30秒触发 ：<span class="string">'30 1 1 1 2016 *'</span></span><br><span class="line"></span><br><span class="line">每周1的1点1分30秒触发 ：<span class="string">'30 1 1 * * 1'</span></span><br><span class="line"></span><br><span class="line">    schedule.scheduleJob(<span class="string">'30 * * * * *'</span>, <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        console.log(<span class="string">'scheduleCronstyle:'</span> + new Date());</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="Cron风格定时器-范围触发"><a href="#Cron风格定时器-范围触发" class="headerlink" title="Cron风格定时器-范围触发"></a>Cron风格定时器-范围触发</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">schedule.scheduleJob(<span class="string">'1-10 * * * * *'</span>, <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    console.log(<span class="string">'scheduleCronstyle:'</span> + new Date());</span><br><span class="line">&#125;); </span><br><span class="line">每分钟的1-10秒都会触发</span><br></pre></td></tr></table></figure>
+        <h2 id="什么是发布订阅"><a href="#什么是发布订阅" class="headerlink" title="什么是发布订阅"></a>什么是发布订阅</h2><p>所谓发布订阅，就是消息发布者发布消息及消息订阅者接收消息，二者通过某种媒介关联起来。这类似以前的『订报』，当我们订阅了某种报纸后（比如财经报），每当报纸有新的期刊出版后，就会有邮递员给我们送过来。即，只有定了这种报纸才会收到出版社发布的这种新报纸。</p>
+<p>上述的『某种报纸』就抽象为频道channel，客户端订阅了某channel后，当发布者通过此channel发布消息时，所有订阅者就会收到该频道发布的消息。</p>
+<blockquote>
+<p>发布和订阅机制</p>
+<p>当一个客户端通过 PUBLISH 命令向订阅者发送信息的时候，我们称这个客户端为发布者(publisher)。</p>
+<p>而当一个客户端使用 SUBSCRIBE 或者 PSUBSCRIBE命令接收信息的时候，我们称这个客户端为订阅者(subscriber)。</p>
+<p>为了解耦发布者(publisher)和订阅者(subscriber)之间的关系，Redis 使用了 channel (频道)作为两者的中介<br>—— 发布者将信息直接发布给 channel ，而 channel<br>负责将信息发送给适当的订阅者，发布者和订阅者之间没有相互关系，也不知道对方的存在。</p>
+</blockquote>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>Redis是使用C实现的，通过分析 Redis 源码里的 pubsub.c 文件，了解发布和订阅机制的底层实现，籍此加深对 Redis 的理解。</p>
+<p>Redis 通过 PUBLISH 、SUBSCRIBE 和 PSUBSCRIBE 等命令实现发布和订阅功能。</p>
+<p>通过 SUBSCRIBE 命令订阅某频道后，redis-server 里维护了一个字典，字典的键就是一个个 channel ，而字典的值则是一个链表，链表中保存了所有订阅这个 channel 的客户端。SUBSCRIBE 命令的关键，就是将客户端添加到给定 channel 的订阅链表中。</p>
+<p>通过 PUBLISH 命令向订阅者发送消息，redis-server 会使用给定的频道作为键，在它所维护的 channel 字典中查找记录了订阅这个频道的所有客户端的链表，遍历这个链表，将消息发布给所有订阅者。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>npm install ioredis</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'use strict'</span>;</span><br><span class="line">const Redis = require(<span class="string">'ioredis'</span>);</span><br><span class="line">const conf = &#123;</span><br><span class="line">    <span class="string">'max_clients'</span>: 10,</span><br><span class="line">    <span class="string">'min_clients'</span>: 1,</span><br><span class="line">    <span class="string">'port'</span>: 6379,</span><br><span class="line">    <span class="string">'host'</span>: <span class="string">'127.0.0.1'</span>,</span><br><span class="line">    <span class="string">'password'</span>: <span class="string">'123'</span>,</span><br><span class="line">&#125;;</span><br><span class="line">//</span><br><span class="line">(async () =&gt; &#123;</span><br><span class="line">    const sub = new Redis(conf);</span><br><span class="line">    const pub = new Redis(conf);</span><br><span class="line"></span><br><span class="line">    // 消息推送</span><br><span class="line">    pub.publish(<span class="string">'modules'</span>, JSON.stringify(&#123;</span><br><span class="line">        <span class="string">'key'</span>: <span class="string">'ShortLink2'</span>,</span><br><span class="line">        <span class="string">'message'</span>: <span class="string">'測試'</span>,</span><br><span class="line">    &#125;));</span><br><span class="line"></span><br><span class="line">    // 消息接收</span><br><span class="line">    sub.subscribe([ <span class="string">'modules'</span> ], <span class="keyword">function</span>(err, count) &#123;</span><br><span class="line">        sub.on(<span class="string">'message'</span>, <span class="keyword">function</span>(channel, message) &#123;</span><br><span class="line">            console.log(<span class="string">'channel'</span>, channel);</span><br><span class="line">            console.log(<span class="string">'message'</span>, message);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
 
 
-<h2 id="递归规则定时器"><a href="#递归规则定时器" class="headerlink" title="递归规则定时器"></a>递归规则定时器</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> rule = new schedule.RecurrenceRule();</span><br><span class="line">// rule.dayOfWeek = 2;</span><br><span class="line">// rule.month = 3;</span><br><span class="line">// rule.dayOfMonth = 1;</span><br><span class="line">// rule.hour = 1;</span><br><span class="line">// rule.minute = 42;</span><br><span class="line">rule.second = 0;</span><br><span class="line"></span><br><span class="line"><span class="built_in">let</span> j = schedule.scheduleJob(rule, <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">   console.log(<span class="string">'scheduleRecurrenceRule:'</span> + new Date());</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>每十分钟执行一次</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> rule = new schedule.RecurrenceRule();</span><br><span class="line">rule.minute = [ 0, 10, 20, 30, 40, 59 ];</span><br><span class="line"><span class="built_in">let</span> j = schedule.scheduleJob(rule, <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">  console.log(<span class="string">'scheduleRecurrenceRule:'</span> + new Date());</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.npmjs.com/package/ioredis" target="_blank" rel="external nofollow noopener noreferrer">ioredis</a></p>
 
-<h2 id="进阶用法"><a href="#进阶用法" class="headerlink" title="进阶用法"></a>进阶用法</h2><p><code>rule</code>支持设置的值有<code>second</code>、<code>minute</code>、<code>hour</code>、<code>date</code>、<code>dayOfWeek</code>、<code>month</code>、<code>year</code>等</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const schedule = require(<span class="string">'node-schedule'</span>);</span><br><span class="line"> </span><br><span class="line">// 定义规则</span><br><span class="line"><span class="built_in">let</span> rule = new schedule.RecurrenceRule();</span><br><span class="line">rule.minute = [0, 10, 20, 30, 40, 50]; // 每隔 10 分钟执行一次</span><br><span class="line"> rule.second = 0;</span><br><span class="line"></span><br><span class="line">// 启动任务</span><br><span class="line"><span class="built_in">let</span> job = schedule.scheduleJob(rule, () =&gt; &#123;</span><br><span class="line"> console.log(new Date());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>每小时 30 分执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rule.minute = 30;</span><br><span class="line">rule.second = 0;</span><br></pre></td></tr></table></figure>
-<p>每天 0 点执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rule.hour =0;</span><br><span class="line">rule.minute =0;</span><br><span class="line">rule.second =0;</span><br></pre></td></tr></table></figure>
-<p>每月 1 号的 10 点执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rule.date = 1;</span><br><span class="line">rule.hour = 10;</span><br><span class="line">rule.minute = 0;</span><br><span class="line">rule.second = 0;</span><br></pre></td></tr></table></figure>
-<p>每周一、周三、周五的 0 点和 12 点执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rule.dayOfWeek = [1,3,5];</span><br><span class="line">rule.hour = [0,12];</span><br><span class="line">rule.minute = 0;</span><br><span class="line">rule.second = 0;</span><br></pre></td></tr></table></figure>
-<h2 id="取消定时器"><a href="#取消定时器" class="headerlink" title="取消定时器"></a>取消定时器</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">j.cancel();</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -388,7 +385,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node-schedule/" rel="tag">node-schedule</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li></ul>
     </div>
 
       
@@ -414,7 +411,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/115/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/114/">114</a><a class="page-number" href="/page/115/">115</a><span class="page-number current">116</span><a class="page-number" href="/page/117/">117</a><a class="page-number" href="/page/118/">118</a><span class="space">&hellip;</span><a class="page-number" href="/page/167/">167</a><a class="extend next" rel="next" href="/page/117/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/115/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/114/">114</a><a class="page-number" href="/page/115/">115</a><span class="page-number current">116</span><a class="page-number" href="/page/117/">117</a><a class="page-number" href="/page/118/">118</a><span class="space">&hellip;</span><a class="page-number" href="/page/168/">168</a><a class="extend next" rel="next" href="/page/117/">下一页</a>
     </nav>
   
 
@@ -424,7 +421,7 @@
         <div id="footer-info">
             <div>
                 <!-- <i class="fa fa-copyright"></i> 
-                2016-2022 w-klover -->
+                2016-2023 w-klover -->
 
                 <p><a href="http://beian.miit.gov.cn/" target="_blank" rel="external nofollow noopener noreferrer">浙ICP备20008562号-1</a></p>
                 <div style="width:300px;margin:0 auto; padding:20px 0;">
