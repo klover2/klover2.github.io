@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.wjc66.cn/"/>
-  <updated>2023-04-26T12:43:22.781Z</updated>
+  <updated>2023-05-11T12:04:33.292Z</updated>
   <id>https://blog.wjc66.cn/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>postgresql敏感信息处理</title>
+    <link href="https://blog.wjc66.cn/postgresql%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E5%A4%84%E7%90%86/"/>
+    <id>https://blog.wjc66.cn/postgresql%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E5%A4%84%E7%90%86/</id>
+    <published>2023-05-11T11:55:22.000Z</published>
+    <updated>2023-05-11T12:04:33.292Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>对手机号 和 邮箱进行脱敏处理</p><h2 id="处理方式"><a href="#处理方式" class="headerlink" title="处理方式"></a>处理方式</h2><p>使用数据库<code>regexp_replace</code>函数进行数据处理</p><a id="more"></a><h2 id="regexp-replace函数介绍"><a href="#regexp-replace函数介绍" class="headerlink" title="regexp_replace函数介绍"></a><code>regexp_replace</code>函数介绍</h2><p>regexp_replace(source, pattern, replace_string, occurrence)<br>参数说明：</p><ol><li>source: string 类型，要替换的原始字符串。</li><li>pattern: string 类型常量，要匹配的正则模式，pattern 为空串时抛异常。</li><li>replace_string:string，将匹配的 pattern 替换成的字符串。</li><li>occurrence: bigint 类型常量，必须大于等于 0，<br>大于 0：表示将第几次匹配替换成 replace_string，<br>等于 0：表示替换掉所有的匹配子串。<br>其它类型或小于 0 抛异常。</li></ol><p>返回值：<br>将 source 字符串中匹配 pattern 的子串替换成指定字符串后返回，当输入 source, pattern, occurrence 参数为 NULL 时返回 NULL，若 replace_string 为 NULL 且 pattern 有匹配，返回 NULL，replace_string 为 NULL 但 pattern 不匹配，则返回原串。</p><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> users: User[] = <span class="keyword">await</span> <span class="keyword">this</span>.userRepo</span><br><span class="line">  .createQueryBuilder()</span><br><span class="line">  .select(<span class="string">'"id"'</span>)</span><br><span class="line">  .addSelect(<span class="string">"nickname"</span>)</span><br><span class="line">  .addSelect(<span class="string">`REGEXP_REPLACE(phone, '(^.&#123;3&#125;).*(\\d&#123;4&#125;)$', '\\1**\\2')`</span>, <span class="string">"phone"</span>) <span class="comment">// 格式 +86**4352</span></span><br><span class="line">  .addSelect(<span class="string">`REGEXP_REPLACE(email, '(^.&#123;2&#125;).*@(.*)', '\\1**@\\2')`</span>, <span class="string">"email"</span>) <span class="comment">// 格式 fe**@qq.com</span></span><br><span class="line">  .where(&#123; id: <span class="string">"c66d2386-bcfb-420d-91be-ca6af07415d2"</span> &#125;)</span><br><span class="line">  .getRawMany();</span><br></pre></td></tr></table></figure><p>生成的 sql</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="string">"id"</span>, nickname, REGEXP_REPLACE(phone, <span class="string">'(^.&#123;3&#125;).*(\d&#123;4&#125;)$'</span>, <span class="string">'\1**\2'</span>) <span class="keyword">AS</span> <span class="string">"phone"</span>, REGEXP_REPLACE(email, <span class="string">'(^.&#123;2&#125;).*@(.*)'</span>, <span class="string">'\1**@\2'</span>) <span class="keyword">AS</span> <span class="string">"email"</span> <span class="keyword">FROM</span> <span class="string">"user"</span> <span class="string">"User"</span> <span class="keyword">WHERE</span> ( <span class="string">"User"</span>.<span class="string">"id"</span> = <span class="string">'c66d2386-bcfb-420d-91be-ca6af07415d2'</span> ) <span class="keyword">AND</span> ( <span class="string">"User"</span>.<span class="string">"deleteTime"</span> <span class="keyword">IS</span> <span class="literal">NULL</span> )</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot; title=&quot;需求&quot;&gt;&lt;/a&gt;需求&lt;/h2&gt;&lt;p&gt;对手机号 和 邮箱进行脱敏处理&lt;/p&gt;
+&lt;h2 id=&quot;处理方式&quot;&gt;&lt;a href=&quot;#处理方式&quot; class=&quot;headerlink&quot; title=&quot;处理方式&quot;&gt;&lt;/a&gt;处理方式&lt;/h2&gt;&lt;p&gt;使用数据库&lt;code&gt;regexp_replace&lt;/code&gt;函数进行数据处理&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="typeorm" scheme="https://blog.wjc66.cn/tags/typeorm/"/>
+    
+      <category term="postgresql" scheme="https://blog.wjc66.cn/tags/postgresql/"/>
+    
+  </entry>
   
   <entry>
     <title>国密sm2加密</title>
@@ -41,9 +65,9 @@
     
       <category term="nodejs" scheme="https://blog.wjc66.cn/tags/nodejs/"/>
     
-      <category term="crypto" scheme="https://blog.wjc66.cn/tags/crypto/"/>
-    
       <category term="java" scheme="https://blog.wjc66.cn/tags/java/"/>
+    
+      <category term="crypto" scheme="https://blog.wjc66.cn/tags/crypto/"/>
     
   </entry>
   
@@ -333,9 +357,9 @@
     
     
     
-      <category term="nodejs" scheme="https://blog.wjc66.cn/tags/nodejs/"/>
-    
       <category term="typescript" scheme="https://blog.wjc66.cn/tags/typescript/"/>
+    
+      <category term="nodejs" scheme="https://blog.wjc66.cn/tags/nodejs/"/>
     
   </entry>
   
@@ -361,6 +385,30 @@
   </entry>
   
   <entry>
+    <title>飞书-企业自建应用</title>
+    <link href="https://blog.wjc66.cn/%E9%A3%9E%E4%B9%A6-%E4%BC%81%E4%B8%9A%E8%87%AA%E5%BB%BA%E5%BA%94%E7%94%A8/"/>
+    <id>https://blog.wjc66.cn/%E9%A3%9E%E4%B9%A6-%E4%BC%81%E4%B8%9A%E8%87%AA%E5%BB%BA%E5%BA%94%E7%94%A8/</id>
+    <published>2022-02-21T08:44:36.000Z</published>
+    <updated>2022-02-21T08:55:32.388Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="企业自建应用-嵌入三方网页"><a href="#企业自建应用-嵌入三方网页" class="headerlink" title="企业自建应用 嵌入三方网页"></a>企业自建应用 嵌入三方网页</h1><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol><li><p>进入<code>https://open.feishu.cn/app?lang=zh-CN</code></p></li><li><p>选择创建自建应用-内容随便</p></li><li><p>获取对应的应用凭证<br><img src="https://img-blog.csdnimg.cn/12c92114f8584f10b3a2c2aca6f41ba3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li><li><p>嵌入网页配置<br><img src="https://img-blog.csdnimg.cn/7d733f9fd91a4266ba8ec41391962940.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>手机端和电脑端可以一样</p></li><li><p>在权限关联中授权获取手机号和邮箱<br><img src="https://img-blog.csdnimg.cn/af64c572686147a5a271d6b4298156af.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li></ol><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><ol><li>获取 AppAccessToken<br>文档： <code>https://open.feishu.cn/document/ukTMukTMukTM/ukDNz4SO0MjL5QzM/auth-v3/auth/app_access_token_internal</code></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const res = await request</span><br><span class="line">      .post(<span class="string">'https://open.feishu.cn/open-apis/auth/v3/app_access_token/internal'</span>)</span><br><span class="line">      .<span class="built_in">set</span>(&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/json; charset=utf-8'</span>,</span><br><span class="line">      &#125;)</span><br><span class="line">      .send(&#123;</span><br><span class="line">        app_id: data.client_id,</span><br><span class="line">        app_secret: data.client_secret,</span><br><span class="line">      &#125;);</span><br><span class="line">    const body = res.body;</span><br><span class="line">    <span class="keyword">if</span> (!(body.msg === <span class="string">'ok'</span> &amp;&amp; body.code === 0)) throw new CustomException(-1, <span class="string">'获取app_access_token失败'</span>);</span><br><span class="line">    const &#123; app_access_token, expire &#125; = body;</span><br></pre></td></tr></table></figure><ol start="2"><li>获取用户信息<br>文档<code>https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/authen-v1/authen/access_token</code></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const res = await request</span><br><span class="line">      .post(<span class="string">'https://open.feishu.cn/open-apis/authen/v1/access_token'</span>)</span><br><span class="line">      .<span class="built_in">set</span>(&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/json; charset=utf-8'</span>,</span><br><span class="line">        Authorization: `Bearer <span class="variable">$&#123;data.access_token&#125;</span>`,</span><br><span class="line">      &#125;)</span><br><span class="line">      .send(&#123;</span><br><span class="line">        grant_type: <span class="string">'authorization_code'</span>,</span><br><span class="line">        code: code,</span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;企业自建应用-嵌入三方网页&quot;&gt;&lt;a href=&quot;#企业自建应用-嵌入三方网页&quot; class=&quot;headerlink&quot; title=&quot;企业自建应用 嵌入三方网页&quot;&gt;&lt;/a&gt;企业自建应用 嵌入三方网页&lt;/h1&gt;&lt;h2 id=&quot;配置&quot;&gt;&lt;a href=&quot;#配置&quot; cla
+      
+    
+    </summary>
+    
+    
+    
+      <category term="飞书" scheme="https://blog.wjc66.cn/tags/%E9%A3%9E%E4%B9%A6/"/>
+    
+  </entry>
+  
+  <entry>
     <title>amazon配置邮件推送服务</title>
     <link href="https://blog.wjc66.cn/amazon%E9%85%8D%E7%BD%AE%E9%82%AE%E4%BB%B6%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1/"/>
     <id>https://blog.wjc66.cn/amazon%E9%85%8D%E7%BD%AE%E9%82%AE%E4%BB%B6%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1/</id>
@@ -382,30 +430,6 @@
     
     
       <category term="amazon" scheme="https://blog.wjc66.cn/tags/amazon/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>飞书-企业自建应用</title>
-    <link href="https://blog.wjc66.cn/%E9%A3%9E%E4%B9%A6-%E4%BC%81%E4%B8%9A%E8%87%AA%E5%BB%BA%E5%BA%94%E7%94%A8/"/>
-    <id>https://blog.wjc66.cn/%E9%A3%9E%E4%B9%A6-%E4%BC%81%E4%B8%9A%E8%87%AA%E5%BB%BA%E5%BA%94%E7%94%A8/</id>
-    <published>2022-02-21T08:44:36.000Z</published>
-    <updated>2022-02-21T08:55:32.388Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="企业自建应用-嵌入三方网页"><a href="#企业自建应用-嵌入三方网页" class="headerlink" title="企业自建应用 嵌入三方网页"></a>企业自建应用 嵌入三方网页</h1><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol><li><p>进入<code>https://open.feishu.cn/app?lang=zh-CN</code></p></li><li><p>选择创建自建应用-内容随便</p></li><li><p>获取对应的应用凭证<br><img src="https://img-blog.csdnimg.cn/12c92114f8584f10b3a2c2aca6f41ba3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li><li><p>嵌入网页配置<br><img src="https://img-blog.csdnimg.cn/7d733f9fd91a4266ba8ec41391962940.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>手机端和电脑端可以一样</p></li><li><p>在权限关联中授权获取手机号和邮箱<br><img src="https://img-blog.csdnimg.cn/af64c572686147a5a271d6b4298156af.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li></ol><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><ol><li>获取 AppAccessToken<br>文档： <code>https://open.feishu.cn/document/ukTMukTMukTM/ukDNz4SO0MjL5QzM/auth-v3/auth/app_access_token_internal</code></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const res = await request</span><br><span class="line">      .post(<span class="string">'https://open.feishu.cn/open-apis/auth/v3/app_access_token/internal'</span>)</span><br><span class="line">      .<span class="built_in">set</span>(&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/json; charset=utf-8'</span>,</span><br><span class="line">      &#125;)</span><br><span class="line">      .send(&#123;</span><br><span class="line">        app_id: data.client_id,</span><br><span class="line">        app_secret: data.client_secret,</span><br><span class="line">      &#125;);</span><br><span class="line">    const body = res.body;</span><br><span class="line">    <span class="keyword">if</span> (!(body.msg === <span class="string">'ok'</span> &amp;&amp; body.code === 0)) throw new CustomException(-1, <span class="string">'获取app_access_token失败'</span>);</span><br><span class="line">    const &#123; app_access_token, expire &#125; = body;</span><br></pre></td></tr></table></figure><ol start="2"><li>获取用户信息<br>文档<code>https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/authen-v1/authen/access_token</code></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const res = await request</span><br><span class="line">      .post(<span class="string">'https://open.feishu.cn/open-apis/authen/v1/access_token'</span>)</span><br><span class="line">      .<span class="built_in">set</span>(&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/json; charset=utf-8'</span>,</span><br><span class="line">        Authorization: `Bearer <span class="variable">$&#123;data.access_token&#125;</span>`,</span><br><span class="line">      &#125;)</span><br><span class="line">      .send(&#123;</span><br><span class="line">        grant_type: <span class="string">'authorization_code'</span>,</span><br><span class="line">        code: code,</span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;企业自建应用-嵌入三方网页&quot;&gt;&lt;a href=&quot;#企业自建应用-嵌入三方网页&quot; class=&quot;headerlink&quot; title=&quot;企业自建应用 嵌入三方网页&quot;&gt;&lt;/a&gt;企业自建应用 嵌入三方网页&lt;/h1&gt;&lt;h2 id=&quot;配置&quot;&gt;&lt;a href=&quot;#配置&quot; cla
-      
-    
-    </summary>
-    
-    
-    
-      <category term="飞书" scheme="https://blog.wjc66.cn/tags/%E9%A3%9E%E4%B9%A6/"/>
     
   </entry>
   
@@ -477,31 +501,6 @@
     
     
       <category term="压测工具" scheme="https://blog.wjc66.cn/tags/%E5%8E%8B%E6%B5%8B%E5%B7%A5%E5%85%B7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>git撤销commit中单个文件的修改</title>
-    <link href="https://blog.wjc66.cn/git%E6%92%A4%E9%94%80commit%E4%B8%AD%E5%8D%95%E4%B8%AA%E6%96%87%E4%BB%B6%E7%9A%84%E4%BF%AE%E6%94%B9/"/>
-    <id>https://blog.wjc66.cn/git%E6%92%A4%E9%94%80commit%E4%B8%AD%E5%8D%95%E4%B8%AA%E6%96%87%E4%BB%B6%E7%9A%84%E4%BF%AE%E6%94%B9/</id>
-    <published>2021-12-01T05:28:22.000Z</published>
-    <updated>2021-12-01T05:32:42.307Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>由于不小心提交了了 yarn.lock 文件，后面还 commit 了几次提交。现在只要回退 yarn.lock 的提交。</p><ol><li><p>先查询 yarn.lock 的提交记录<br><code>git log yarn.lock</code></p></li><li><p>找到这个文件的上次 commit id, 并对其进行 reset 操作<br><code>git reset &lt;commit-id&gt; yarn.lock</code></p></li><li><p>再撤销对此文件的修改<br><code>git checkout yarn.lock</code></p></li><li><p>重新 commit 提交就好<br><code>git commit -m &#39;&#39;</code><br><code>git push</code></p></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h2&gt;&lt;p&gt;由于不小心提交了了 yarn.lock 文件，后面还 commit 了几次提交。现在只要回退 yarn.lock 的提交。&lt;/p&gt;
-&lt;ol&gt;
-      
-    
-    </summary>
-    
-    
-    
-      <category term="git" scheme="https://blog.wjc66.cn/tags/git/"/>
     
   </entry>
   

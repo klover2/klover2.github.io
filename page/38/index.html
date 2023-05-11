@@ -297,11 +297,11 @@
   
 
 
-<article id="post-ts中keyof的使用" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-distinct和distinct-on的使用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/ts%E4%B8%ADkeyof%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
-      <time datetime="2021-04-12T01:41:50.000Z" itemprop="datePublished">2021-04-12</time>
+      <a href="/distinct%E5%92%8Cdistinct-on%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
+      <time datetime="2021-04-15T13:03:38.000Z" itemprop="datePublished">2021-04-15</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/ts%E4%B8%ADkeyof%E7%9A%84%E4%BD%BF%E7%94%A8/">ts中keyof的使用</a>
+      <a class="article-title" href="/distinct%E5%92%8Cdistinct-on%E7%9A%84%E4%BD%BF%E7%94%A8/">distinct和distinct-on的使用</a>
     </h1>
   
 
         
-          <!-- <a href="/ts%E4%B8%ADkeyof%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-      <time datetime="2021-04-12T01:41:50.000Z" itemprop="datePublished">2021-04-12</time>
+          <!-- <a href="/distinct%E5%92%8Cdistinct-on%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+      <time datetime="2021-04-15T13:03:38.000Z" itemprop="datePublished">2021-04-15</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">166字</span>
+      <span class="post-count">325字</span>
     </span>
   </span>
 
@@ -358,12 +358,13 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="映射类型"><a href="#映射类型" class="headerlink" title="映射类型"></a>映射类型</h2><p>映射类型允许您通过映射属性类型从现有类型创建新类型。现有类型的每个属性都根据您指定的规则进行转换。然后，转换后的属性构成了新类型。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getProperty</span>&lt;<span class="title">T</span>, <span class="title">K</span> <span class="title">extends</span> <span class="title">keyof</span> <span class="title">T</span>&gt;(<span class="params">obj: T, key: K</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> obj[key];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person: Person = &#123;</span><br><span class="line">  age: <span class="number">21</span>,</span><br><span class="line">  name: <span class="string">"Tobias"</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// name is a property of person</span></span><br><span class="line"><span class="comment">// --&gt; no error</span></span><br><span class="line"><span class="keyword">const</span> name = getProperty(person, <span class="string">"name"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// gender is not a property of person</span></span><br><span class="line"><span class="comment">// --&gt; error</span></span><br><span class="line"><span class="keyword">const</span> gender = getProperty(person, <span class="string">"gender"</span>);</span><br></pre></td></tr></table></figure>
+        <h2 id="去重；关键字-distinct-去重功能-在其他数据库（oracle，mysql）是存在；当然-postgresql-也有这个功能"><a href="#去重；关键字-distinct-去重功能-在其他数据库（oracle，mysql）是存在；当然-postgresql-也有这个功能" class="headerlink" title="去重；关键字 distinct 去重功能 在其他数据库（oracle，mysql）是存在；当然 postgresql 也有这个功能"></a>去重；关键字 distinct 去重功能 在其他数据库（oracle，mysql）是存在；当然 postgresql 也有这个功能</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">[postgres@sdserver40_210 ~]$ psql mydb lottu</span><br><span class="line">psql (9.5.0)</span><br><span class="line">Type <span class="string">"help"</span> <span class="keyword">for</span> <span class="built_in">help</span>.</span><br><span class="line"></span><br><span class="line">mydb=&gt; select * from trade;</span><br><span class="line"> tradeno | accountid  | fee | game_id</span><br><span class="line">---------+------------+-----+---------</span><br><span class="line"> 1000006 | yyb_100001 |  10 |    2555</span><br><span class="line"> 1000011 | yyb_100002 | 100 |    2555</span><br><span class="line"> 1001859 | yyb_100001 |  10 |    2555</span><br><span class="line"> 1001861 | yyb_100003 |  20 |    2555</span><br><span class="line"> 1001854 | yyb_100004 |   6 |    2555</span><br><span class="line"> 1001881 | yyb_100002 | 328 |    2555</span><br><span class="line">(6 rows)</span><br><span class="line"></span><br><span class="line">mydb=&gt; select distinct accountid from trade;</span><br><span class="line"> accountid</span><br><span class="line">------------</span><br><span class="line"> yyb_100001</span><br><span class="line"> yyb_100004</span><br><span class="line"> yyb_100002</span><br><span class="line"> yyb_100003</span><br><span class="line">(4 rows)</span><br><span class="line"></span><br><span class="line">mydb=&gt; select distinct accountid,game_id from trade;</span><br><span class="line"> accountid  | game_id</span><br><span class="line">------------+---------</span><br><span class="line"> yyb_100001 |    2555</span><br><span class="line"> yyb_100003 |    2555</span><br><span class="line"> yyb_100004 |    2555</span><br><span class="line"> yyb_100002 |    2555</span><br><span class="line">(4 rows)</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">type Optional&lt;T&gt; = &#123;</span><br><span class="line">  [K <span class="keyword">in</span> keyof T]?: T[K]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person: Optional&lt;Person&gt; = &#123;</span><br><span class="line">  name: <span class="string">"Tobias"</span></span><br><span class="line">  <span class="comment">// notice how I do not have to specify an age,</span></span><br><span class="line">  <span class="comment">// since age is now of type 'number?' and is therefor optional</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="跟-on-一起用；-使用-DISTINCT-ON-实现用窗口函数实现的取第一名的功能"><a href="#跟-on-一起用；-使用-DISTINCT-ON-实现用窗口函数实现的取第一名的功能" class="headerlink" title="跟 on 一起用； 使用 DISTINCT ON 实现用窗口函数实现的取第一名的功能"></a>跟 on 一起用； 使用 DISTINCT ON 实现用窗口函数实现的取第一名的功能</h2><p>这个功能 oracle，mysql 是没有的；当然它们有其他的分析函数可以替换；顶替；例如 row_number, fisrt_value 等等</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">mydb=&gt; select distinct on (accountid) accountid,fee from trade;</span><br><span class="line"> accountid  | fee</span><br><span class="line">------------+-----</span><br><span class="line"> yyb_100001 |  10</span><br><span class="line"> yyb_100002 | 100</span><br><span class="line"> yyb_100003 |  20</span><br><span class="line"> yyb_100004 |   6</span><br><span class="line">(4 rows)</span><br><span class="line"></span><br><span class="line">mydb=&gt; select distinct on (game_id) accountid,fee from trade;</span><br><span class="line"> accountid  | fee</span><br><span class="line">------------+-----</span><br><span class="line"> yyb_100001 |  10</span><br><span class="line">(1 row)</span><br><span class="line"></span><br><span class="line">mydb=&gt; select distinct on (game_id) accountid,fee from trade order by game_id, fee desc;</span><br><span class="line"> accountid  | fee</span><br><span class="line">------------+-----</span><br><span class="line"> yyb_100002 | 328</span><br><span class="line">(1 row)</span><br><span class="line"></span><br><span class="line">--例如取每个帐号充值最大的一笔</span><br><span class="line">mydb=&gt; select distinct on (accountid) accountid,fee from trade order by accountid, fee desc;</span><br><span class="line"> accountid  | fee</span><br><span class="line">------------+-----</span><br><span class="line"> yyb_100001 |  10</span><br><span class="line"> yyb_100002 | 328</span><br><span class="line"> yyb_100003 |  20</span><br><span class="line"> yyb_100004 |   6</span><br><span class="line">(4 rows)</span><br></pre></td></tr></table></figure>
 
-<p><a href="https://mariusschulz.com/blog/mapped-types-in-typescript#modeling-object-freeze-with-mapped-types" target="_blank" rel="external nofollow noopener noreferrer">映射类型</a></p>
+<p>在 typeorm 中实现</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">    Repository, Between, MoreThanOrEqual, In, LessThan, IsNull, LessThanOrEqual</span><br><span class="line">    &#125; <span class="keyword">from</span> <span class="string">'typeorm'</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span>.transactionRepository</span><br><span class="line">        .createQueryBuilder()</span><br><span class="line">        .select(<span class="string">`DISTINCT ON ("accountId") "accountId"`</span>)</span><br><span class="line">        .addSelect([<span class="string">'"transactionTime"'</span>, <span class="string">'"recipientCost"'</span>])</span><br><span class="line">        .where(&#123;</span><br><span class="line">          status: TransactionStatusEnum.Closed,</span><br><span class="line">          type: TransactionTypeEnum.Deposit,</span><br><span class="line">          accountId: In(_accountIds),</span><br><span class="line">          senderType: IsNull(),</span><br><span class="line">          transactionTime: Between(time[<span class="number">0</span>], time[<span class="number">1</span>]),</span><br><span class="line">        &#125;)</span><br><span class="line">        .orderBy(<span class="string">`"accountId", "transactionTime"`</span>, <span class="string">'ASC'</span>)</span><br><span class="line">        .getRawMany(),</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -374,7 +375,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typeorm/" rel="tag">typeorm</a></li></ul>
     </div>
 
       
@@ -400,7 +401,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/37/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><a class="page-number" href="/page/37/">37</a><span class="page-number current">38</span><a class="page-number" href="/page/39/">39</a><a class="page-number" href="/page/40/">40</a><span class="space">&hellip;</span><a class="page-number" href="/page/168/">168</a><a class="extend next" rel="next" href="/page/39/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/37/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><a class="page-number" href="/page/37/">37</a><span class="page-number current">38</span><a class="page-number" href="/page/39/">39</a><a class="page-number" href="/page/40/">40</a><span class="space">&hellip;</span><a class="page-number" href="/page/169/">169</a><a class="extend next" rel="next" href="/page/39/">下一页</a>
     </nav>
   
 

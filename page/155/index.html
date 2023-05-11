@@ -297,11 +297,11 @@
   
 
 
-<article id="post-把服务器请求映射到本地" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-linux添加删除用户" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/%E6%8A%8A%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%B7%E6%B1%82%E6%98%A0%E5%B0%84%E5%88%B0%E6%9C%AC%E5%9C%B0/" class="article-date">
-      <time datetime="2020-04-23T05:42:03.000Z" itemprop="datePublished">2020-04-23</time>
+      <a href="/linux%E6%B7%BB%E5%8A%A0%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7/" class="article-date">
+      <time datetime="2020-04-23T05:44:51.000Z" itemprop="datePublished">2020-04-23</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/%E6%8A%8A%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%B7%E6%B1%82%E6%98%A0%E5%B0%84%E5%88%B0%E6%9C%AC%E5%9C%B0/">把服务器请求映射到本地</a>
+      <a class="article-title" href="/linux%E6%B7%BB%E5%8A%A0%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7/">linux添加删除用户</a>
     </h1>
   
 
         
-          <!-- <a href="/%E6%8A%8A%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%B7%E6%B1%82%E6%98%A0%E5%B0%84%E5%88%B0%E6%9C%AC%E5%9C%B0/" class="archive-article-date">
-      <time datetime="2020-04-23T05:42:03.000Z" itemprop="datePublished">2020-04-23</time>
+          <!-- <a href="/linux%E6%B7%BB%E5%8A%A0%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7/" class="archive-article-date">
+      <time datetime="2020-04-23T05:44:51.000Z" itemprop="datePublished">2020-04-23</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">41字</span>
+      <span class="post-count">362字</span>
     </span>
   </span>
 
@@ -358,8 +358,11 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>把服务器请求映射到本地<br>ssh -t -C -N -R 80:localhost:80 <a href="mailto:root@88.88.88.88" rel="external nofollow noopener noreferrer" target="_blank">root@88.88.88.88</a> -p 20202<br>80:localhost:80 解释=&gt; 服务器端口:localhost:本地端口</p>
-
+              <p>1、建用户：<br>adduser phpq                             //新建phpq用户<br>passwd phpq                               //给phpq用户设置密码</p>
+<p>2、建工作组<br>groupadd test                          //新建test工作组</p>
+<p>3、新建用户同时增加工作组<br>useradd -g test phpq                      //新建phpq用户并增加到test工作组</p>
+<p>注：：-g 所属组 -d 家目录 -s 所用的SHELL</p>
+          
       
     </div>
     
@@ -372,6 +375,10 @@
         <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a href="/linux%E6%B7%BB%E5%8A%A0%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -395,7 +402,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/154/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/153/">153</a><a class="page-number" href="/page/154/">154</a><span class="page-number current">155</span><a class="page-number" href="/page/156/">156</a><a class="page-number" href="/page/157/">157</a><span class="space">&hellip;</span><a class="page-number" href="/page/168/">168</a><a class="extend next" rel="next" href="/page/156/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/154/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/153/">153</a><a class="page-number" href="/page/154/">154</a><span class="page-number current">155</span><a class="page-number" href="/page/156/">156</a><a class="page-number" href="/page/157/">157</a><span class="space">&hellip;</span><a class="page-number" href="/page/169/">169</a><a class="extend next" rel="next" href="/page/156/">下一页</a>
     </nav>
   
 

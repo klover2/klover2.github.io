@@ -297,11 +297,11 @@
   
 
 
-<article id="post-国密sm2加密" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-postgresql敏感信息处理" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/%E5%9B%BD%E5%AF%86sm2%E5%8A%A0%E5%AF%86/" class="article-date">
-      <time datetime="2023-04-26T12:22:06.000Z" itemprop="datePublished">2023-04-26</time>
+      <a href="/postgresql%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E5%A4%84%E7%90%86/" class="article-date">
+      <time datetime="2023-05-11T11:55:22.000Z" itemprop="datePublished">2023-05-11</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/%E5%9B%BD%E5%AF%86sm2%E5%8A%A0%E5%AF%86/">国密sm2加密</a>
+      <a class="article-title" href="/postgresql%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E5%A4%84%E7%90%86/">postgresql敏感信息处理</a>
     </h1>
   
 
         
-          <!-- <a href="/%E5%9B%BD%E5%AF%86sm2%E5%8A%A0%E5%AF%86/" class="archive-article-date">
-      <time datetime="2023-04-26T12:22:06.000Z" itemprop="datePublished">2023-04-26</time>
+          <!-- <a href="/postgresql%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E5%A4%84%E7%90%86/" class="archive-article-date">
+      <time datetime="2023-05-11T11:55:22.000Z" itemprop="datePublished">2023-05-11</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">547字</span>
+      <span class="post-count">313字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">2分</span>
+      <span class="post-count">1分</span>
     </span>
   </span>
 </div>
@@ -358,13 +358,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h2 id="SM2-国密算法-，加密模式-C1C3C2"><a href="#SM2-国密算法-，加密模式-C1C3C2" class="headerlink" title="SM2(国密算法)，加密模式 C1C3C2"></a>SM2(国密算法)，加密模式 C1C3C2</h2><p>SM2 为非对称加密，基于 ECC。该算法已公开。由于该算法基于 ECC，故其签名速度与秘钥生成速度都快于 RSA。ECC 256 位（SM2 采用的就是 ECC 256 位的一种）安全强度比 RSA 2048 位高，但运算速度快于 RSA。<br>旧标准的加密排序 C1C2C3 新标准 C1C3C2，C1 为 65 字节第 1 字节为压缩标识，这里固定为 0x04，后面 64 字节为 xy 分量各 32 字节。C3 为 32 字节。C2 长度与原文一致。</p>
-<blockquote>
-<p>公钥：049cbf6df92258b385b82844d29039183d98e205726bcecd71b40ded26e717d3ccb9132685432eaafbcb58683c3d303a1e79137447231f8db33226b24893fcd429</p>
-</blockquote>
-<blockquote>
-<p>私钥：6c4a9b2d44704400552b4b90c39c5bca3e5c0ac1b91324e3d0579eebf24830bd</p>
-</blockquote>
+              <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>对手机号 和 邮箱进行脱敏处理</p>
+<h2 id="处理方式"><a href="#处理方式" class="headerlink" title="处理方式"></a>处理方式</h2><p>使用数据库<code>regexp_replace</code>函数进行数据处理</p>
           
       
     </div>
@@ -375,12 +370,12 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/crypto/" rel="tag">crypto</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typeorm/" rel="tag">typeorm</a></li></ul>
     </div>
 
       
         <p class="article-more-link">
-          <a href="/%E5%9B%BD%E5%AF%86sm2%E5%8A%A0%E5%AF%86/#more">阅读全文 >></a>
+          <a href="/postgresql%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E5%A4%84%E7%90%86/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -405,7 +400,7 @@
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/168/">168</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/169/">169</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
     </nav>
   
 

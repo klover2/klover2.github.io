@@ -297,11 +297,11 @@
   
 
 
-<article id="post-如何对typescript进行单元测试" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-amazon配置邮件推送服务" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/%E5%A6%82%E4%BD%95%E5%AF%B9typescript%E8%BF%9B%E8%A1%8C%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="article-date">
-      <time datetime="2022-01-06T13:34:18.000Z" itemprop="datePublished">2022-01-06</time>
+      <a href="/amazon%E9%85%8D%E7%BD%AE%E9%82%AE%E4%BB%B6%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1/" class="article-date">
+      <time datetime="2022-02-21T08:44:36.000Z" itemprop="datePublished">2022-02-21</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/%E5%A6%82%E4%BD%95%E5%AF%B9typescript%E8%BF%9B%E8%A1%8C%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">如何对typescript进行单元测试</a>
+      <a class="article-title" href="/amazon%E9%85%8D%E7%BD%AE%E9%82%AE%E4%BB%B6%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1/">amazon配置邮件推送服务</a>
     </h1>
   
 
         
-          <!-- <a href="/%E5%A6%82%E4%BD%95%E5%AF%B9typescript%E8%BF%9B%E8%A1%8C%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="archive-article-date">
-      <time datetime="2022-01-06T13:34:18.000Z" itemprop="datePublished">2022-01-06</time>
+          <!-- <a href="/amazon%E9%85%8D%E7%BD%AE%E9%82%AE%E4%BB%B6%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1/" class="archive-article-date">
+      <time datetime="2022-02-21T08:44:36.000Z" itemprop="datePublished">2022-02-21</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">87字</span>
+      <span class="post-count">878字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">1分</span>
+      <span class="post-count">4分</span>
     </span>
   </span>
 </div>
@@ -358,13 +358,55 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><code>yarn add -D ts-jest jest @types/jest</code></p>
-<h3 id="全局安装"><a href="#全局安装" class="headerlink" title="全局安装"></a>全局安装</h3><p><code>npm i jest -g</code></p>
-<h2 id="初始化-jest"><a href="#初始化-jest" class="headerlink" title="初始化 jest"></a>初始化 jest</h2><p><code>jest --init</code></p>
-<h2 id="移除生成的-jest-config-js-文件"><a href="#移除生成的-jest-config-js-文件" class="headerlink" title="移除生成的 jest.config.js 文件"></a>移除生成的 jest.config.js 文件</h2><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>在 package.json 中配置</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"jest"</span>: &#123;</span><br><span class="line">    <span class="string">"moduleFileExtensions"</span>: [</span><br><span class="line">      <span class="string">"js"</span>,</span><br><span class="line">      <span class="string">"json"</span>,</span><br><span class="line">      <span class="string">"ts"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"rootDir"</span>: <span class="string">"."</span>,</span><br><span class="line">    <span class="string">"testRegex"</span>: <span class="string">".spec.ts$"</span>,</span><br><span class="line">    <span class="string">"transform"</span>: &#123;</span><br><span class="line">      <span class="string">"^.+\\.(t|j)s$"</span>: <span class="string">"ts-jest"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"coverageDirectory"</span>: <span class="string">"./coverage"</span>,</span><br><span class="line">    <span class="string">"testEnvironment"</span>: <span class="string">"node"</span>,</span><br><span class="line">    <span class="string">"roots"</span>: [</span><br><span class="line">      <span class="string">"&lt;rootDir&gt;/test/"</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="亚马逊邮箱推送配置"><a href="#亚马逊邮箱推送配置" class="headerlink" title="亚马逊邮箱推送配置"></a>亚马逊邮箱推送配置</h2><ol>
+<li><p>进入<code>Amazon Simple Email Service</code>服务<br><img src="https://img-blog.csdnimg.cn/8e02bde958154d65916d263e32f38e09.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+</li>
+<li><p>在 Account dashboard-&gt;Simple Mail Transfer Protocol (SMTP) settings-&gt;create SMTP credentials 创建简单邮件传输协议 (SMTP) - （如果不想设置就用最高账户）<br><img src="https://img-blog.csdnimg.cn/1bc1b69874884f94845ecd07e81b4971.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>记好对应的 smtp user 和 smtp password<br>忘了也没事 可以在<a href="https://console.aws.amazon.com/iamv2/home?#/home" target="_blank" rel="external nofollow noopener noreferrer">IAM 控制面板</a><br><img src="https://img-blog.csdnimg.cn/7591d5ef6a1244fcaa8e686fea95efdc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+</li>
+<li><p>修改对应权限 把 ses 的权限都选中<br><img src="https://img-blog.csdnimg.cn/4777b3b316ac4f2da511f1dbe8046c6b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+</li>
+<li><p>配置域名<br><img src="https://img-blog.csdnimg.cn/59e2e067a59142fa9f2d718e15287bb0.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/3fac5f066fb642f38e958d93992b76d3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/7f747537abd447028d4e5d1ed8a5f995.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+</li>
+<li><p>配置管理集 （例如取名-noreply）<br><img src="https://img-blog.csdnimg.cn/bcc61d0f76254d3ea315daed06c79c1d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="6."></p>
+</li>
+<li><p>获取 Amazon SES SMTP 凭证<br>文档<code>https://docs.aws.amazon.com/zh_cn/ses/latest/dg/smtp-credentials.html</code></p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> crypto <span class="keyword">from</span> <span class="string">"crypto"</span>;</span><br><span class="line"><span class="comment">// The values of the following variables should always stay the same.</span></span><br><span class="line"><span class="keyword">const</span> date = <span class="string">"11111111"</span>;</span><br><span class="line"><span class="keyword">const</span> service = <span class="string">"ses"</span>;</span><br><span class="line"><span class="keyword">const</span> terminal = <span class="string">"aws4_request"</span>;</span><br><span class="line"><span class="keyword">const</span> message = <span class="string">"SendRawEmail"</span>;</span><br><span class="line"><span class="keyword">const</span> version = <span class="string">"04"</span>;</span><br><span class="line"><span class="keyword">const</span> region = <span class="string">"us-west-1"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Modify this variable to include your AWS secret access key</span></span><br><span class="line"><span class="keyword">const</span> key = <span class="string">"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> kDate = HmacSha256(date, Buffer.from(<span class="string">"AWS4"</span> + key, <span class="string">"utf8"</span>));</span><br><span class="line"><span class="keyword">const</span> kRegion = HmacSha256(region, kDate);</span><br><span class="line"><span class="keyword">const</span> kService = HmacSha256(service, kRegion);</span><br><span class="line"><span class="keyword">const</span> kTerminal = HmacSha256(terminal, kService);</span><br><span class="line"><span class="keyword">const</span> kMessage = HmacSha256(message, kTerminal);</span><br><span class="line"><span class="keyword">const</span> signatureAndVersion = Buffer.concat([</span><br><span class="line">  Buffer.from(version, <span class="string">"hex"</span>),</span><br><span class="line">  kMessage,</span><br><span class="line">]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取smtpPassword 以后就可以永久使用了 除非更新了 AWS secret access key</span></span><br><span class="line"><span class="keyword">const</span> smtpPassword = signatureAndVersion.toString(<span class="string">"base64"</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">HmacSha256</span>(<span class="params">data: string, key: Buffer</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> crypto.createHmac(<span class="string">"sha256"</span>, key).update(data).digest();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">describe(<span class="string">"test"</span>, () =&gt; &#123;</span><br><span class="line">  beforeAll(<span class="keyword">async</span> () =&gt; &#123;&#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">"test"</span>, () =&gt; &#123;&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>发送邮件-使用 smtp 发送</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> nodemailer <span class="keyword">from</span> <span class="string">"nodemailer"</span>;</span><br><span class="line"><span class="keyword">const</span> mailer = nodemailer.createTransport(&#123;</span><br><span class="line">  host: <span class="string">"email-smtp.us-west-1.amazonaws.com"</span>,</span><br><span class="line">  port: <span class="string">"465"</span>,</span><br><span class="line">  ignoreTLS: <span class="literal">true</span>,</span><br><span class="line">  secure: <span class="literal">true</span>,</span><br><span class="line">  auth: &#123;</span><br><span class="line">    user: <span class="string">"AWS 访问密钥 ID"</span>,</span><br><span class="line">    pass: smtpPassword,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>发送邮件-使用 npm 包 发送</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mailerService = <span class="keyword">new</span> SES(&#123;</span><br><span class="line">  region: <span class="string">"us-west-1"</span>,</span><br><span class="line">  credentialDefaultProvider: <span class="function">(<span class="params">input: any</span>) =&gt;</span> <span class="function"><span class="params">()</span> =&gt;</span></span><br><span class="line">    <span class="built_in">Promise</span>.resolve(&#123;</span><br><span class="line">      accessKeyId: <span class="string">"AWS 访问密钥 ID"</span>,</span><br><span class="line">      secretAccessKey: <span class="string">"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"</span>, <span class="comment">// secret access key</span></span><br><span class="line">    &#125;),</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">/** 收件人邮箱 */</span></span><br><span class="line"><span class="keyword">const</span> destination = &#123;</span><br><span class="line">  <span class="comment">/** 收件 */</span></span><br><span class="line">  ToAddresses: [<span class="string">"test@qq.com"</span>],</span><br><span class="line">  <span class="comment">/** 抄送 */</span></span><br><span class="line">  <span class="comment">// CcAddresses: [],</span></span><br><span class="line">  <span class="comment">/** 密件抄送 */</span></span><br><span class="line">  <span class="comment">// BccAddresses:[]</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/** 标题 */</span></span><br><span class="line"><span class="keyword">const</span> subject = &#123;</span><br><span class="line">  Data: <span class="string">"test"</span>,</span><br><span class="line">  Charset: <span class="keyword">this</span>.mailInfo.charset,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/** 内容 */</span></span><br><span class="line"><span class="keyword">const</span> body = &#123;</span><br><span class="line">  Html: &#123;</span><br><span class="line">    Data: <span class="string">"&lt;P&gt;test&lt;/P&gt;"</span>,</span><br><span class="line">    Charset: <span class="string">"UTF-8"</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> res = <span class="keyword">await</span> <span class="keyword">this</span>.mailerService.sendEmail(&#123;</span><br><span class="line">  Message: &#123; <span class="attr">Subject</span>: subject, <span class="attr">Body</span>: body &#125;,</span><br><span class="line">  Source: <span class="keyword">from</span>,</span><br><span class="line">  Destination: destination,</span><br><span class="line">  ConfigurationSetName: <span class="string">"noreply"</span>, <span class="comment">// 上面配置的管理集</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>移出 Amazon SES 沙盒<br>文档<code>https://docs.aws.amazon.com/zh_cn/ses/latest/dg/request-production-access.html</code></li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/c390e5d98281496ca0145023d1752295.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/e654d17f7efc409380d7a1e7d073e018.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p><code>注意</code>: 里面内容不用乱写，最好详细介绍你为啥要使用这个，不然容易驳回</p>
+<h2 id="出现的问题"><a href="#出现的问题" class="headerlink" title="出现的问题"></a>出现的问题</h2><ol>
+<li>没有移除邮箱不能随便发送到其他邮箱，可以自己添加对应的邮箱到 amazon ses 中，他会发一封验证邮件 验证通过就可以测试邮件发送了<br><img src="https://img-blog.csdnimg.cn/c9461fa734bf48d9bf94fd8b8e68ecb8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
+<li>关于发送邮件日志的查询<br>还在处理中 文档 <a href="https://aws.amazon.com/cn/premiumsupport/knowledge-center/ses-email-sending-history/" target="_blank" rel="external nofollow noopener noreferrer"> Amazon Simple Email Service（Amazon SES）中查看电子邮件发送历史记录。该如何操作?</a></li>
+</ol>
+<h2 id="邮件接收回调"><a href="#邮件接收回调" class="headerlink" title="邮件接收回调"></a>邮件接收回调</h2><p>由于流记录那种方式没有配置成功，所以还是配置回调来记录接收情况。<br>文档： <a href="https://docs.aws.amazon.com/zh_cn/ses/latest/dg/configure-sns-notifications.html" target="_blank" rel="external nofollow noopener noreferrer">使用 Amazon SES 控制台来配置通知</a></p>
+<ol>
+<li>创建主题 <code>https://us-west-1.console.aws.amazon.com/sns/v3/home?region=us-west-1#/topics</code><br><img src="https://img-blog.csdnimg.cn/77654bdba94541378f4f9ce9e6a35e29.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
+<li>为主题增加订阅<br><img src="https://img-blog.csdnimg.cn/d736fb6c2cc9433d9c8a4b6e79745054.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>选择 https 协议，如果选择邮箱太烦了，这样就会推送到你的服务器上<br><img src="https://img-blog.csdnimg.cn/367594b02ffe4abfa5dfdb6fd6f95fbc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
+<li>服务器接收 - 它是 text/plain 方式请求过来的 拿出里面的<code>SubscribeURL</code></li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> result: string = <span class="keyword">await</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> data = <span class="string">""</span>;</span><br><span class="line">  req.setEncoding(<span class="string">"utf8"</span>);</span><br><span class="line">  req.on(<span class="string">"data"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">chunk</span>) </span>&#123;</span><br><span class="line">    data += chunk;</span><br><span class="line">  &#125;);</span><br><span class="line">  req.on(<span class="string">"end"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    resolve(data);</span><br><span class="line">  &#125;);</span><br><span class="line">  req.on(<span class="string">"error"</span>, (err) =&gt; reject(err));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者直接 req.body</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>使用<code>SubscribeURL</code> 来确认订阅 正常就可以了<br><img src="https://img-blog.csdnimg.cn/f6b6bd56f4c2481fa98768cc20fae886.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></li>
+<li>接入到对应的发送邮件域名中</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/423fce423dfb44d8ab8d4fd40e3c4c99.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>主题选择你自己设置的名称就可以了</p>
+<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://docs.aws.amazon.com/zh_cn/opensearch-service/latest/developerguide/integrations.html" target="_blank" rel="external nofollow noopener noreferrer">Amazon Kinesis Data Firehose 加载流数据</a><br><a href="https://docs.aws.amazon.com/zh_cn/ses/latest/dg/event-publishing-add-event-destination-firehose.html#event-publishing-add-event-destination-firehose-role" target="_blank" rel="external nofollow noopener noreferrer">为 Amazon SES 事件发布设置 Kinesis Data Firehose 事件目的地</a><br><a href="https://us-west-1.console.aws.amazon.com/firehose/home?region=us-west-1#/streams" target="_blank" rel="external nofollow noopener noreferrer">流控制台</a><br><a href="https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html" target="_blank" rel="external nofollow noopener noreferrer">监控您的 Amazon SES 发送活动</a><br><a href="https://docs.aws.amazon.com/ses/latest/dg/configure-sns-notifications.html" target="_blank" rel="external nofollow noopener noreferrer">为 Amazon SES 配置 Amazon SNS 通知</a><br><a href="https://aws.amazon.com/cn/premiumsupport/knowledge-center/ses-email-sending-history/" target="_blank" rel="external nofollow noopener noreferrer"> Amazon Simple Email Service（Amazon SES）中查看电子邮件发送历史记录。该如何操作?</a><br><a href="https://docs.aws.amazon.com/zh_cn/ses/latest/dg/request-production-access.html" target="_blank" rel="external nofollow noopener noreferrer">关于移除沙盒</a></p>
 
       
     </div>
@@ -375,7 +417,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/amazon/" rel="tag">amazon</a></li></ul>
     </div>
 
       
@@ -401,7 +443,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/16/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/168/">168</a><a class="extend next" rel="next" href="/page/18/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/16/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/169/">169</a><a class="extend next" rel="next" href="/page/18/">下一页</a>
     </nav>
   
 

@@ -297,11 +297,11 @@
   
 
 
-<article id="post-centos7安装GitLab" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-centos7安装和配置nginx" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/centos7%E5%AE%89%E8%A3%85GitLab/" class="article-date">
-      <time datetime="2020-05-20T02:51:35.000Z" itemprop="datePublished">2020-05-20</time>
+      <a href="/centos7%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AEnginx/" class="article-date">
+      <time datetime="2020-05-20T02:53:50.000Z" itemprop="datePublished">2020-05-20</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/centos7%E5%AE%89%E8%A3%85GitLab/">centos7安装GitLab</a>
+      <a class="article-title" href="/centos7%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AEnginx/">centos7安装和配置nginx</a>
     </h1>
   
 
         
-          <!-- <a href="/centos7%E5%AE%89%E8%A3%85GitLab/" class="archive-article-date">
-      <time datetime="2020-05-20T02:51:35.000Z" itemprop="datePublished">2020-05-20</time>
+          <!-- <a href="/centos7%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AEnginx/" class="archive-article-date">
+      <time datetime="2020-05-20T02:53:50.000Z" itemprop="datePublished">2020-05-20</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">1.1k字</span>
+      <span class="post-count">1.2k字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">4分</span>
+      <span class="post-count">5分</span>
     </span>
   </span>
 </div>
@@ -358,58 +358,59 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong><em>一、 安装并配置必要的依赖关系</em></strong></p>
+        <p> <strong><em>安装</em></strong></p>
 <blockquote>
-<p>1.在CentOS系统上安装所需的依赖：ssh，防火墙,postfix(用于邮件通知) ，wget，以下这些命令也会打开系统防火墙中的HTTP和SSH端口访问<br>sudo yum install -y curl policycoreutils-pythonopenssh-server</p>
+<p>1:添加Nginx存储库<br>  sudo yum -y install epel-release</p>
 </blockquote>
 <blockquote>
-<p>2.将SSH服务设置成开机自启动，安装命令：sudo systemctl enable sshd  </p>
+<p>2.安装nginx<br>  sudo yum -y install nginx</p>
 </blockquote>
 <blockquote>
-<p>3.启动SSH服务，安装命令：sudo systemctl start sshd</p>
+<p>3.启动Nginx<br>  sudo systemctl start nginx</p>
 </blockquote>
 <blockquote>
-<p>4.添加http服务到firewalld,pemmanent表示永久生效，若不加–permanent系统下次启动后就会失效<br>sudo firewall-cmd –permanent –add-service=http<br>(<br>如果系统没有firewall防火墙就安装一个<br>查看防火墙状态<br>firewall-cmd –state<br>安装<br>yum install firewalld systemd -y<br>开启防火墙，命令：service firewalld  start<br>)</p>
+<p>4.如果想在系统启动时启用Nginx，也可以不设置<br>  sudo systemctl enable nginx</p>
 </blockquote>
 <blockquote>
-<p>5.重启防火墙，安装命令：sudo systemctl reload firewalld</p>
+<p>5.设置防火墙<br>  允许http通信<br>  <code>sudo firewall-cmd --permanent --zone=public --add-service=http</code><br>  允许https通信<br>  <code>sudo firewall-cmd --permanent --zone=public --add-service=https</code></p>
 </blockquote>
+<p>  开发80 443<br>  <code>firewall-cmd --zone=public --add-port=80/tcp --permanent</code><br>  <code>firewall-cmd --zone=public --add-port=443/tcp --permanent</code></p>
 <blockquote>
-<p>6.接下来，安装Postfix以发送通知邮件，安装命令：sudo yum install postfix</p>
+<p>6.重启防火墙<br>  <code>sudo firewall-cmd --reload</code><br>  注（如果你是在阿里云买的服务器，还要进入控制台开放80 和443端口，不然还是访问不了）</p>
 </blockquote>
+<p><strong><em>测试</em></strong><br>在浏览器输入你服务器的ip出现下图，说明成功了<br><img src="https://img-blog.csdnimg.cn/20191217160758840.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><strong><em>域名配置</em></strong><br>我是在阿里云买的域名，5块一年，用来测试还挺好(这个域名要在阿里云上配置，映射到服务器的ip)</p>
+<p>进入<br>cd /etc/nginx<br>ls<br>下图所有文件都会自动生成，处理cert文件夹，是自己创建的用于放ssl证书的（下面会说怎么配置ssl）<br><img src="https://img-blog.csdnimg.cn/20191217161008843.png" alt="在这里插入图片描述"><br>一般服务器都是80 22 443这个三个端口开放，我这里的配置也是一样，其他的端口请求都是通过80，和443端口来转发。</p>
+<p>先修改nginx.conf 如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">user nginx;</span><br><span class="line">worker_processes auto;</span><br><span class="line">error_log /var/<span class="built_in">log</span>/nginx/error.log;</span><br><span class="line">pid /run/nginx.pid;</span><br><span class="line">include /usr/share/nginx/modules/*.conf;</span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections 1024;</span><br><span class="line">&#125;</span><br><span class="line">http &#123;</span><br><span class="line">    log_format  main  <span class="string">'$remote_addr - $remote_user [$time_local] "$request" '</span></span><br><span class="line">                      <span class="string">'$status $body_bytes_sent "$http_referer" '</span></span><br><span class="line">                      <span class="string">'"$http_user_agent" "$http_x_forwarded_for"'</span>;</span><br><span class="line">    access_log  /var/<span class="built_in">log</span>/nginx/access.log  main;</span><br><span class="line">    <span class="comment"># 开启gzip</span></span><br><span class="line">    gzip on;</span><br><span class="line">    <span class="comment"># 启用gzip压缩的最小文件，小于设置值的文件将不会压缩</span></span><br><span class="line">    gzip_min_length 256k;</span><br><span class="line">    <span class="comment"># gzip 压缩级别，1-9，数字越大压缩的越好，也越占用CPU时间，后面会有详细说明</span></span><br><span class="line">    gzip_comp_level 6;</span><br><span class="line">    sendfile            on;</span><br><span class="line">    tcp_nopush          on;</span><br><span class="line">    tcp_nodelay         on;</span><br><span class="line">    keepalive_timeout   65;</span><br><span class="line">    types_hash_max_size 2048;</span><br><span class="line">    include             /etc/nginx/mime.types;</span><br><span class="line">    default_type        application/octet-stream;</span><br><span class="line">    <span class="comment"># Load modular configuration files from the /etc/nginx/conf.d directory.</span></span><br><span class="line">    <span class="comment"># See http://nginx.org/en/docs/ngx_core_module.html#include</span></span><br><span class="line">    <span class="comment"># for more information.</span></span><br><span class="line">    include /etc/nginx/conf.d/*.conf;</span><br><span class="line">    include /usr/<span class="built_in">local</span>/nginx/conf/include/*;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>进入conf.d文件夹<br>创建一文件 xxx.conf<br>没有ssl证书的配置如下 这个是通过代理方式把4080端口弄到80端口上，这样4080端口就不对外开放，也访问不了。<br>在服务器中请求接口 比如是===&gt; ip:4080/user<br>在浏览器 要写成===&gt; 域名/test/user 就可以访问了<br>多个端口同理 多增加upstream，和下面名字对应的location 就可以了，这样你就不用购买多个域名了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">upstream <span class="built_in">test</span>&#123;</span><br><span class="line">    server 127.0.0.1:4080;</span><br><span class="line">    keepalive 64;</span><br><span class="line">&#125;</span><br><span class="line">upstream test2&#123;</span><br><span class="line">    server 127.0.0.1:4081;</span><br><span class="line">    keepalive 64;</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">    <span class="comment"># Load configuration files for the default server block.</span></span><br><span class="line">    include /etc/nginx/default.d/*.conf;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name 域名;</span><br><span class="line">    location /output/ &#123;</span><br><span class="line">	    <span class="built_in">alias</span>    /data/www/html/;</span><br><span class="line">	    index <span class="literal">false</span>;</span><br><span class="line">        autoindex on;</span><br><span class="line">    &#125;</span><br><span class="line">    location /<span class="built_in">test</span>/ &#123;</span><br><span class="line">        proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;   </span><br><span class="line">        proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        proxy_set_header Host  <span class="variable">$http_host</span>;</span><br><span class="line">        proxy_set_header X-Nginx-Proxy <span class="literal">true</span>;</span><br><span class="line">        proxy_set_header Connection <span class="string">""</span>;</span><br><span class="line">        proxy_http_version 1.1;</span><br><span class="line">        proxy_set_header Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">        proxy_set_header Connection <span class="string">"Upgrade"</span>;</span><br><span class="line">        proxy_pass      http://<span class="built_in">test</span>/;</span><br><span class="line">    &#125; </span><br><span class="line">     location /test2/ &#123;</span><br><span class="line">        proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;   </span><br><span class="line">        proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        proxy_set_header Host  <span class="variable">$http_host</span>;</span><br><span class="line">        proxy_set_header X-Nginx-Proxy <span class="literal">true</span>;</span><br><span class="line">        proxy_set_header Connection <span class="string">""</span>;</span><br><span class="line">        proxy_http_version 1.1;</span><br><span class="line">        proxy_set_header Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">        proxy_set_header Connection <span class="string">"Upgrade"</span>;</span><br><span class="line">        proxy_pass      http://test2/;</span><br><span class="line">    &#125; </span><br><span class="line">   error_page  404     /404.json; </span><br><span class="line">   location = /404.json &#123;</span><br><span class="line">        default_type application/json;</span><br><span class="line">        root /usr/share/nginx/html/404.json;</span><br><span class="line">    &#125;</span><br><span class="line">    error_page 500 502 503 504 /50x.json;</span><br><span class="line">    location = /50x.json &#123;</span><br><span class="line">	default_type application/json;</span><br><span class="line">    	root /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当你有ssl证书时（可以在阿里云上购买一个免费的）</p>
 <blockquote>
-<p>7.将postfix服务设置成开机自启动，安装命令：sudo systemctl enable postfix</p>
+<p>购买流程 点击你购买的域名<br><img src="https://img-blog.csdnimg.cn/20191217162833834.png" alt="在这里插入图片描述"><br>在点击ssl证书<br><img src="https://img-blog.csdnimg.cn/20191217162926557.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>直接申请 选择个人免费版<br><img src="https://img-blog.csdnimg.cn/20191217163007343.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>买好之后进入ssl证书管理<br><img src="https://img-blog.csdnimg.cn/20191217163120308.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>审核过了，点击下载，下载nginx版本的证书，解压会有两个文件，一个.key和.pem,把这两个文件放到/etc/nginx/cert下</p>
 </blockquote>
+<p>现在来说ssl 和nginx怎么配置 这个和上面那个配置有冲突，请选择一种<br>进入conf.d文件夹<br>创建一文件 xxx.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">upstream <span class="built_in">test</span>&#123;</span><br><span class="line">    server 127.0.0.1:4080;</span><br><span class="line">    keepalive 64;</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name 域名;</span><br><span class="line">    <span class="comment">#http请求指向https</span></span><br><span class="line">    rewrite ^(.*) https://<span class="variable">$server_name</span><span class="variable">$1</span> permanent;</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">    listen       443 ssl http2;</span><br><span class="line">    listen       [::]:443 ssl http2;</span><br><span class="line">    server_name  域名;</span><br><span class="line">    ssl_certificate <span class="string">"/etc/nginx/cert/.pem文件"</span>;</span><br><span class="line">    ssl_certificate_key <span class="string">"/etc/nginx/cert/.key文件"</span>;</span><br><span class="line">    ssl_session_cache shared:SSL:1m;</span><br><span class="line">    ssl_session_timeout  10m;</span><br><span class="line">    ssl_ciphers HIGH:!aNULL:!MD5;</span><br><span class="line">    ssl_prefer_server_ciphers on;</span><br><span class="line">    <span class="comment"># Load configuration files for the default server block.</span></span><br><span class="line">    include /etc/nginx/default.d/*.conf;</span><br><span class="line">    location /output/ &#123;</span><br><span class="line">	    <span class="built_in">alias</span>    /data/www/html/;</span><br><span class="line">	    index <span class="literal">false</span>;</span><br><span class="line">        autoindex on;</span><br><span class="line">    &#125;</span><br><span class="line">    location /<span class="built_in">test</span>/ &#123;</span><br><span class="line">        proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;   </span><br><span class="line">        proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        proxy_set_header Host  <span class="variable">$http_host</span>;</span><br><span class="line">        proxy_set_header X-Nginx-Proxy <span class="literal">true</span>;</span><br><span class="line">        proxy_set_header Connection <span class="string">""</span>;</span><br><span class="line">        proxy_http_version 1.1;</span><br><span class="line">        proxy_set_header Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">        proxy_set_header Connection <span class="string">"Upgrade"</span>;</span><br><span class="line">        proxy_pass      http://<span class="built_in">test</span>/;</span><br><span class="line">    &#125; </span><br><span class="line">   error_page  404     /404.json; </span><br><span class="line">   location = /404.json &#123;</span><br><span class="line">        default_type application/json;</span><br><span class="line">        root /usr/share/nginx/html/404.json;</span><br><span class="line">    &#125;</span><br><span class="line">    error_page 500 502 503 504 /50x.json;</span><br><span class="line">    location = /50x.json &#123;</span><br><span class="line">	default_type application/json;</span><br><span class="line">    	root /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <blockquote>
-<p>8.启动postfix，安装命令：sudo systemctl start postfix<br>（在安装Postfix期间，可能会出现配置屏幕。选择“Internet Site”并按enter键。使用您的服务器的外部DNS以“mail name”并按enter。如果出现额外的屏幕，继续按enter键接受默认值。）</p>
+<p>重启nginx<br>nginx -s reload<br>查看nginx配置是否有问题<br>nginx -t</p>
 </blockquote>
-<p><strong><em>二、添加GitLab镜像源并安装gitlab服务器</em></strong></p>
+<p>检查nginx是否启动</p>
 <blockquote>
-<p>1.添加gitlab镜像<br>wget <a href="https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/yum/el7/gitlab-ce-10.0.0-ce.0.el7.x86_64.rpm" target="_blank" rel="external nofollow noopener noreferrer">https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/yum/el7/gitlab-ce-10.0.0-ce.0.el7.x86_64.rpm</a><br>（wget 没有就安装一个yum -y install wget）</p>
+<p>netstat -anput | grep nginx<br>ps -ef | grep nginx<br><img src="https://img-blog.csdnimg.cn/20200320104600587.png" alt="在这里插入图片描述"><br>查询80端口是否绑定nginx<br>netstat -ntlp<br><img src="https://img-blog.csdnimg.cn/20200320104744712.png" alt="在这里插入图片描述"></p>
 </blockquote>
+<p>停止nginx</p>
 <blockquote>
-<p>2.yum install policycoreutils-python（不然会提示 error: Failed dependencies:<br>        policycoreutils-python is needed by gitlab-ce-10.0.0-ce.0.el7.x86_64.rpm）</p>
+<p>nginx pkill -9 nginx</p>
 </blockquote>
+<p>查看nginx 运行日志</p>
 <blockquote>
-<p>3.安装gitlab 安装命令：rpm -i gitlab-ce-10.0.0-ce.0.el7.x86_64.rpm（出现下图表示成功）<br><img src="https://img-blog.csdnimg.cn/20191216145903219.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>tail -f /var/log/nginx/error.log -n 100</p>
 </blockquote>
-<blockquote>
-<p>4.修改gitlab配置文件指定服务器ip和自定义端口：<a href="http://localhost:8090" target="_blank" rel="external nofollow noopener noreferrer">http://localhost:8090</a><br>vim  /etc/gitlab/gitlab.rb（最好不要用8080端口，容易被占用, 没有vim:yum install vim -y）<br><img src="https://img-blog.csdnimg.cn/2019121614594215.png" alt="在这里插入图片描述"><br>:wq 保存</p>
-</blockquote>
-<blockquote>
-<p>5.重置并启动GitLab<br>执行：<br>gitlab-ctl reconfigure<br>gitlab-ctl restart （出现ok: run: 表示执行成功）</p>
-</blockquote>
-<blockquote>
-<p>6.在服务器上测试 curl <a href="http://127.0.0.1:8090" target="_blank" rel="external nofollow noopener noreferrer">http://127.0.0.1:8090</a> (出现下面一样就表示成功，如果报502错误，可能端口被占用，或者系统内存不够，执行 gitlab-ctl tail unicorn 出现<br>E, [2015-02-11T17:27:57.818492 #26687] ERROR – : adding listener failed addr=127.0.0.1:8080 (in use)<br>E, [2015-02-11T17:27:57.818621 #26687] ERROR – : retrying in 0.5 seconds (4 tries left)<br>E, [2015-02-11T17:27:58.318902 #26687] ERROR – : adding listener failed addr=127.0.0.1:8080 (in use)<br>E, [2015-02-11T17:27:58.318998 #26687] ERROR – : retrying in 0.5 seconds (3 tries left)<br>E, [2015-02-11T17:27:58.819309 #26687] ERROR – : adding listener failed addr=127.0.0.1:8080 (in use)<br>E, [2015-02-11T17:27:58.819423 #26687] ERROR – : retrying in 0.5 seconds (2 tries left)<br>E, [2015-02-11T17:27:59.319954 #26687] ERROR – : adding listener failed addr=127.0.0.1:8080 (in use)<br>E, [2015-02-11T17:27:59.320076 #26687] ERROR – : retrying in 0.5 seconds (1 tries left)<br>表示端口被占用，换个端口号,如果不是，请等待1分钟左右，因为在单核服务器上，可能最多需要一分钟才能重新启动Unicorn和Sidekiq，还不行手动执行sudo gitlab-ctl restart sidekiq  sudo gitlab-ctl hup unicorn这两个命令<br>) 这个表示成功：<br><img src="https://img-blog.csdnimg.cn/20191216135009393.png" alt="在这里插入图片描述"></p>
-</blockquote>
-<blockquote>
-<p>7.在浏览器范围会发现访问不了，是因为你没有给这个端口开放访问的权限，<br>（<br>1、开放端口<br>firewall-cmd –zone=public –add-port=5672/tcp –permanent   # 开放5672端口<br>firewall-cmd –zone=public –remove-port=5672/tcp –permanent  #关闭5672端口<br>firewall-cmd –reload   # 配置立即生效<br>2、查看防火墙所有开放的端口<br>firewall-cmd –zone=public –list-ports<br>3.、关闭防火墙<br>如果要开放的端口太多，嫌麻烦，可以关闭防火墙，安全性自行评估<br>systemctl stop firewalld.service<br>4、查看防火墙状态<br> firewall-cmd –state<br> 5、查看监听的端口<br>netstat -lnpt<br>centos7默认没有 netstat 命令，需要安装 net-tools 工具，yum install -y net-tools<br>6、检查端口被哪个进程占用<br>netstat -lnpt |grep 8090<br> ）</p>
-</blockquote>
-<blockquote>
-<p>在网页上访问<a href="http://45.76.185.64:8090" target="_blank" rel="external nofollow noopener noreferrer">http://45.76.185.64:8090</a> 会进入改密码页面<br> <img src="https://img-blog.csdnimg.cn/20191216135845731.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> （我发现改密码时间有点长，一直没有反应，后来我关闭请求在刷新一下，就好了就会让你绑定邮箱，可能是我电脑卡了）</p>
-</blockquote>
-<p> 登录进去就可以了 （账号是root,密码是你设置的新密码）</p>
-<p>gitlab 安装出现其他问题查看<a href="https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/README.md" target="_blank" rel="external nofollow noopener noreferrer">https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/README.md</a></p>
 
       
     </div>
@@ -420,7 +421,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitLab/" rel="tag">GitLab</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li></ul>
     </div>
 
       
@@ -446,7 +447,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/130/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/129/">129</a><a class="page-number" href="/page/130/">130</a><span class="page-number current">131</span><a class="page-number" href="/page/132/">132</a><a class="page-number" href="/page/133/">133</a><span class="space">&hellip;</span><a class="page-number" href="/page/168/">168</a><a class="extend next" rel="next" href="/page/132/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/130/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/129/">129</a><a class="page-number" href="/page/130/">130</a><span class="page-number current">131</span><a class="page-number" href="/page/132/">132</a><a class="page-number" href="/page/133/">133</a><span class="space">&hellip;</span><a class="page-number" href="/page/169/">169</a><a class="extend next" rel="next" href="/page/132/">下一页</a>
     </nav>
   
 
