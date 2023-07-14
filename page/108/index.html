@@ -297,11 +297,11 @@
   
 
 
-<article id="post-web-view业务域名配置" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-vue的一些方法使用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/web-view%E4%B8%9A%E5%8A%A1%E5%9F%9F%E5%90%8D%E9%85%8D%E7%BD%AE/" class="article-date">
-      <time datetime="2020-06-24T02:59:25.000Z" itemprop="datePublished">2020-06-24</time>
+      <a href="/vue%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8/" class="article-date">
+      <time datetime="2020-06-24T06:44:37.000Z" itemprop="datePublished">2020-06-24</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/web-view%E4%B8%9A%E5%8A%A1%E5%9F%9F%E5%90%8D%E9%85%8D%E7%BD%AE/">web-view业务域名配置</a>
+      <a class="article-title" href="/vue%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8/">vue的一些方法使用</a>
     </h1>
   
 
         
-          <!-- <a href="/web-view%E4%B8%9A%E5%8A%A1%E5%9F%9F%E5%90%8D%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-      <time datetime="2020-06-24T02:59:25.000Z" itemprop="datePublished">2020-06-24</time>
+          <!-- <a href="/vue%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+      <time datetime="2020-06-24T06:44:37.000Z" itemprop="datePublished">2020-06-24</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">256字</span>
+      <span class="post-count">459字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">1分</span>
+      <span class="post-count">2分</span>
     </span>
   </span>
 </div>
@@ -358,31 +358,19 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>在小程序中使用网页</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;web-view src=<span class="string">"https://127.0.0.1/boboteacher/user/page/7c87568acd8488467df1592377030008"</span>&gt;&lt;/web-view&gt;</span><br></pre></td></tr></table></figure>
-
-<p>需要在小程序中业务页面中配置当前域名127.0.0.1</p>
-<p>在 开发-&gt; 开发设置 -&gt; 业务域名中配置</p>
-<p><img src="https://img-blog.csdnimg.cn/20200624110335335.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>这样需要下载那个校验文件，并且放在服务器上，通过访问127.0.0.1能够读取到当前文件内容</p>
-<p>我是通过nginx 配置的<br>两种方式 </p>
-<ol>
-<li>通过nginx 指向文件</li>
+        <ol>
+<li>this.$nextTick()的使用</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">      <span class="built_in">alias</span> /data/www/html/; <span class="comment"># 文件放在的位置</span></span><br><span class="line">      index P7Rckhx9o2.txt; <span class="comment"># 文件的名称</span></span><br><span class="line">        autoindex on;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>this.$nextTick()将回调延迟到下次 DOM 更新循环之后执行。在修改数据之后立即使用它，然后等待 DOM 更新。它跟全局方法 Vue.nextTick 一样，不同的是回调的 this 自动绑定到调用它的实例上。<br>假设我们更改了某个dom元素内部的文本，而这时候我们想直接打印出这个被改变后的文本是需要dom更新之后才会实现的，也就好比我们将打印输出的代码放在setTimeout(fn, 0)中；</p>
+<p>通过this.$nextTick()获取到的值为dom更新之后的值</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;section&gt;</span><br><span class="line">    &lt;h1 ref=<span class="string">"hello"</span>&gt;&#123;&#123; value &#125;&#125;&lt;/h1&gt;</span><br><span class="line">    &lt;el-button <span class="built_in">type</span>=<span class="string">"danger"</span> @click=<span class="string">"get"</span>&gt;点击&lt;/el-button&gt;</span><br><span class="line">  &lt;/section&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="built_in">export</span> default &#123;</span><br><span class="line">    <span class="function"><span class="title">data</span></span>() &#123;</span><br><span class="line">      <span class="built_in">return</span> &#123;</span><br><span class="line">        value: <span class="string">'Hello World ~'</span></span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      <span class="function"><span class="title">get</span></span>() &#123;</span><br><span class="line">        this.value = <span class="string">'你好啊'</span>;</span><br><span class="line">        console.log(this.<span class="variable">$refs</span>[<span class="string">'hello'</span>].innerText);</span><br><span class="line">        this.<span class="variable">$nextTick</span>(() =&gt; &#123;</span><br><span class="line">          console.log(this.<span class="variable">$refs</span>[<span class="string">'hello'</span>].innerText);</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">mounted</span></span>() &#123;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">created</span></span>() &#123;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
 <ol start="2">
-<li>nginx返回字符串内容</li>
+<li>this.$set的用法</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">        default_type text/html;</span><br><span class="line">       <span class="built_in">return</span> 200 <span class="string">"11111"</span>; <span class="comment"># P7Rckhx9o2.txt 文件中的内容</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>配置好重启nginx </p>
-<blockquote>
-<p>nginx -s reload</p>
-</blockquote>
-<p>就可以把域名写在业务域名中 配置好提交</p>
-<p>注意: 配置web-view 跳转路径 最好不用#<a href="https://www.cnblogs.com/it-xiong/p/13529817.html" target="_blank" rel="external nofollow noopener noreferrer">问题介绍</a></p>
-<p>或者 在网页中加入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta HTTP-EQUIV=<span class="string">"pragma"</span> CONTENT=<span class="string">"no-cache"</span>&gt;</span><br><span class="line">&lt;meta HTTP-EQUIV=<span class="string">"Cache-Control"</span> CONTENT=<span class="string">"no-cache, must-revalidate"</span>&gt;</span><br><span class="line">&lt;meta HTTP-EQUIV=<span class="string">"expires"</span> CONTENT=<span class="string">"0"</span>&gt;</span><br></pre></td></tr></table></figure>
-
+<p>当你发现你给对象加了一个属性，在控制台能打印出来，但是却没有更新到视图上时，也许这个时候就需要用到this.$set（）这个方法了，简单来说this.$set的功能就是解决这个问题的啦。官方解释：向响应式对象中添加一个属性，并确保这个新属性同样是响应式的，且触发视图更新。它必须用于向响应式对象上添加新属性，因为 Vue 无法探测普通的新增属性 (比如 this.myObject.newProperty = ‘hi’)</p>
+<p>调用方法：this.$set( target, key, value )</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="built_in">export</span> default &#123;</span><br><span class="line">    <span class="function"><span class="title">data</span></span>() &#123;</span><br><span class="line">      <span class="built_in">return</span> &#123;</span><br><span class="line">        list: [&#123;value: 1&#125;]</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      <span class="function"><span class="title">get</span></span>() &#123;</span><br><span class="line">        this.<span class="variable">$set</span>(this.list, 0, &#123;value: 2&#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">mounted</span></span>() &#123;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">created</span></span>() &#123;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -392,7 +380,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
     </div>
 
       
@@ -418,7 +406,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/107/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/106/">106</a><a class="page-number" href="/page/107/">107</a><span class="page-number current">108</span><a class="page-number" href="/page/109/">109</a><a class="page-number" href="/page/110/">110</a><span class="space">&hellip;</span><a class="page-number" href="/page/169/">169</a><a class="extend next" rel="next" href="/page/109/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/107/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/106/">106</a><a class="page-number" href="/page/107/">107</a><span class="page-number current">108</span><a class="page-number" href="/page/109/">109</a><a class="page-number" href="/page/110/">110</a><span class="space">&hellip;</span><a class="page-number" href="/page/170/">170</a><a class="extend next" rel="next" href="/page/109/">下一页</a>
     </nav>
   
 

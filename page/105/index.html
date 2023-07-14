@@ -297,11 +297,11 @@
   
 
 
-<article id="post-nodejs新增其他类型永久素材（微信公众号）" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-自定义微信公众号菜单栏" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/nodejs%E6%96%B0%E5%A2%9E%E5%85%B6%E4%BB%96%E7%B1%BB%E5%9E%8B%E6%B0%B8%E4%B9%85%E7%B4%A0%E6%9D%90%EF%BC%88%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%EF%BC%89/" class="article-date">
-      <time datetime="2020-07-06T05:45:01.000Z" itemprop="datePublished">2020-07-06</time>
+      <a href="/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E8%8F%9C%E5%8D%95%E6%A0%8F/" class="article-date">
+      <time datetime="2020-07-06T05:52:35.000Z" itemprop="datePublished">2020-07-06</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/nodejs%E6%96%B0%E5%A2%9E%E5%85%B6%E4%BB%96%E7%B1%BB%E5%9E%8B%E6%B0%B8%E4%B9%85%E7%B4%A0%E6%9D%90%EF%BC%88%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%EF%BC%89/">nodejs新增其他类型永久素材（微信公众号）</a>
+      <a class="article-title" href="/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E8%8F%9C%E5%8D%95%E6%A0%8F/">自定义微信公众号菜单栏</a>
     </h1>
   
 
         
-          <!-- <a href="/nodejs%E6%96%B0%E5%A2%9E%E5%85%B6%E4%BB%96%E7%B1%BB%E5%9E%8B%E6%B0%B8%E4%B9%85%E7%B4%A0%E6%9D%90%EF%BC%88%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%EF%BC%89/" class="archive-article-date">
-      <time datetime="2020-07-06T05:45:01.000Z" itemprop="datePublished">2020-07-06</time>
+          <!-- <a href="/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E8%8F%9C%E5%8D%95%E6%A0%8F/" class="archive-article-date">
+      <time datetime="2020-07-06T05:52:35.000Z" itemprop="datePublished">2020-07-06</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">287字</span>
+      <span class="post-count">222字</span>
     </span>
   </span>
 
@@ -358,19 +358,9 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>上传方式有两种：</p>
-<ol>
-<li>curl 上传<br>注： access_token是获取的公众号token<br>/e/workspace/workspace_koa/bobo/Applets/boboTeacher/lADPD4PvKHkueE_NBTXNA3o_890_1333.jpg 是当前图片所在的位置</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl <span class="string">"https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=access_token&amp;type=image"</span> -F media=@/e/workspace/workspace_koa/bobo/Applets/boboTeacher/lADPD4PvKHkueE_NBTXNA3o_890_1333.jpg</span><br></pre></td></tr></table></figure>
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">const fs = require(<span class="string">'fs'</span>);</span><br><span class="line">const superagent = require(<span class="string">'superagent'</span>);</span><br><span class="line">(async () =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">let</span> accessTokenInfo = await superagent.get(`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=<span class="variable">$&#123;web_appid&#125;</span>&amp;secret=<span class="variable">$&#123;web_appsecret&#125;</span>`).<span class="built_in">set</span>(<span class="string">'accept'</span>, <span class="string">'json'</span>);</span><br><span class="line">    <span class="built_in">let</span> &#123; access_token = <span class="string">''</span>, errcode, errmsg &#125; = accessTokenInfo.body || &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    console.log(<span class="string">'access_token========&gt;'</span>, access_token);</span><br><span class="line"></span><br><span class="line">    // // 配置菜单</span><br><span class="line">    <span class="built_in">let</span> button = [&#123;</span><br><span class="line">        <span class="string">'name'</span>: <span class="string">'我是老师'</span>,</span><br><span class="line">        <span class="string">'type'</span>: <span class="string">'miniprogram'</span>,</span><br><span class="line">        <span class="string">'url'</span>: <span class="string">'http://mp.weixin.qq.com'</span>,</span><br><span class="line">        <span class="string">'appid'</span>: <span class="string">''</span>,// 小程序appid</span><br><span class="line">        <span class="string">'pagepath'</span>: <span class="string">'pages/course/course'</span>,// 打开小程序页面</span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        <span class="string">'name'</span>: <span class="string">'更多服务'</span>,</span><br><span class="line">        <span class="string">'sub_button'</span>: [&#123;</span><br><span class="line">            <span class="string">'name'</span>: <span class="string">'新手教程'</span>,</span><br><span class="line">            <span class="string">'type'</span>: <span class="string">'view'</span>,// 打开网页 必须是公众号网页</span><br><span class="line">            <span class="string">'url'</span>: <span class="string">'https://mp.weixin.qq.com/s?__biz=MzIzNjYzNjU2Ng==&amp;mid=2247484035&amp;idx=1&amp;sn=4722bd94c29971726601fa963d3f9ec5&amp;chksm=e8d5927adfa21b6c16d4139d255460fc2ddd19289637ac93f5bf1027bd9266c7d3586965ced2&amp;token=1327323395&amp;lang=zh_CN#rd'</span>,</span><br><span class="line">        &#125;, &#123;</span><br><span class="line">            <span class="string">'name'</span>: <span class="string">'人工客服'</span>,</span><br><span class="line">            <span class="string">'type'</span>: <span class="string">'media_id'</span>,// 发送素材图片</span><br><span class="line">            <span class="string">'media_id'</span>: <span class="string">'fxh1-aKLF1mBk4FWP4OgCdhRNZsck96l_rRaPN-SB08'</span>,</span><br><span class="line">        &#125;],</span><br><span class="line">    &#125;];</span><br><span class="line">    <span class="built_in">let</span> url = `https://api.weixin.qq.com/cgi-bin/menu/create?access_token=<span class="variable">$&#123;access_token&#125;</span>`;</span><br><span class="line">    <span class="built_in">let</span> result = await superagent.post(url).send(&#123; button &#125;).<span class="built_in">set</span>(<span class="string">'Accept-Encoding'</span>, <span class="string">'gzip,sdch'</span>);</span><br><span class="line"></span><br><span class="line">    console.log(<span class="string">'result==========&gt;'</span>, result.body);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
 
-<ol start="2">
-<li>使用代码上传<br>如下图： 需要上传的格式是form-data,就是要像前端一样使用form 表单上传图片，格式multipart/form-data，由于superagent  的attach会自动设置，所以这里就不用了<br><img src="https://img-blog.csdnimg.cn/20200702164705863.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const superagent = require(<span class="string">'superagent'</span>);</span><br><span class="line">const fs = require(<span class="string">'fs'</span>);</span><br><span class="line">(async () =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">let</span> appid = <span class="string">''</span>, // 公众号appid</span><br><span class="line">        appsecret = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">let</span> accessTokenInfo = await superagent.get(`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=<span class="variable">$&#123;appid&#125;</span>&amp;secret=<span class="variable">$&#123;appsecret&#125;</span>`).<span class="built_in">set</span>(<span class="string">'accept'</span>, <span class="string">'json'</span>);</span><br><span class="line">    <span class="built_in">let</span> &#123; access_token = <span class="string">''</span>, errcode, errmsg &#125; = accessTokenInfo.body || &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    console.log(<span class="string">'access_token========&gt;'</span>, access_token);</span><br><span class="line">    // 上传素材</span><br><span class="line">    <span class="built_in">let</span> uploadUrl = `https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=<span class="variable">$&#123;access_token&#125;</span>&amp;<span class="built_in">type</span>=image`;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">let</span> result = await superagent.post(uploadUrl).attach(<span class="string">'media'</span>, fs.createReadStream(<span class="string">'./lADPD4PvKHkueE_NBTXNA3o_890_1333.jpg'</span>));</span><br><span class="line"></span><br><span class="line">    console.log(<span class="string">'result======&gt;'</span>, result.text);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// 获取素材列表</span><br><span class="line">// <span class="built_in">let</span> xcUrl = `https://api.weixin.qq.com/cgi-bin/material/batchget_material?access_token=<span class="variable">$&#123;access_token&#125;</span>`;</span><br><span class="line">// <span class="built_in">let</span> result = await superagent.post(xcUrl).send(&#123;</span><br><span class="line">//     <span class="string">'type'</span>: <span class="string">'image'</span>,</span><br><span class="line">//     <span class="string">'offset'</span>: 0,</span><br><span class="line">//     <span class="string">'count'</span>: 20,</span><br><span class="line">// &#125;).<span class="built_in">set</span>(<span class="string">'Accept-Encoding'</span>, <span class="string">'gzip,sdch'</span>);</span><br><span class="line"></span><br><span class="line">// console.log(result);</span><br></pre></td></tr></table></figure>
-<p>我图片的位置：<br><img src="https://img-blog.csdnimg.cn/20200702165059501.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200702165600227.png" alt="在这里插入图片描述"></p>
-<p>文档：<br><a href="http://visionmedia.github.io/superagent/#retrying-requests" target="_blank" rel="external nofollow noopener noreferrer">superagent</a><br><a href="https://developers.weixin.qq.com/doc/offiaccount/Asset_Management/Adding_Permanent_Assets.html" target="_blank" rel="external nofollow noopener noreferrer">新增其他类型永久素材</a></p>
+<p>文档：<br><a href="https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Creating_Custom-Defined_Menu.html" target="_blank" rel="external nofollow noopener noreferrer">自定义菜单栏</a><br><a href="https://blog.wjc66.cn/nodejs%E6%96%B0%E5%A2%9E%E5%85%B6%E4%BB%96%E7%B1%BB%E5%9E%8B%E6%B0%B8%E4%B9%85%E7%B4%A0%E6%9D%90%EF%BC%88%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%EF%BC%89/">自定义上传素材获取 media_id</a></p>
 
       
     </div>
@@ -407,7 +397,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/104/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/103/">103</a><a class="page-number" href="/page/104/">104</a><span class="page-number current">105</span><a class="page-number" href="/page/106/">106</a><a class="page-number" href="/page/107/">107</a><span class="space">&hellip;</span><a class="page-number" href="/page/169/">169</a><a class="extend next" rel="next" href="/page/106/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/104/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/103/">103</a><a class="page-number" href="/page/104/">104</a><span class="page-number current">105</span><a class="page-number" href="/page/106/">106</a><a class="page-number" href="/page/107/">107</a><span class="space">&hellip;</span><a class="page-number" href="/page/170/">170</a><a class="extend next" rel="next" href="/page/106/">下一页</a>
     </nav>
   
 

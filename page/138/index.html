@@ -297,11 +297,11 @@
   
 
 
-<article id="post-windows10激活" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-koa2解析请求头信息" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/windows10%E6%BF%80%E6%B4%BB/" class="article-date">
-      <time datetime="2020-05-20T02:40:44.000Z" itemprop="datePublished">2020-05-20</time>
+      <a href="/koa2%E8%A7%A3%E6%9E%90%E8%AF%B7%E6%B1%82%E5%A4%B4%E4%BF%A1%E6%81%AF/" class="article-date">
+      <time datetime="2020-05-20T02:41:27.000Z" itemprop="datePublished">2020-05-20</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/windows10%E6%BF%80%E6%B4%BB/">windows10激活</a>
+      <a class="article-title" href="/koa2%E8%A7%A3%E6%9E%90%E8%AF%B7%E6%B1%82%E5%A4%B4%E4%BF%A1%E6%81%AF/">koa2解析请求头信息</a>
     </h1>
   
 
         
-          <!-- <a href="/windows10%E6%BF%80%E6%B4%BB/" class="archive-article-date">
-      <time datetime="2020-05-20T02:40:44.000Z" itemprop="datePublished">2020-05-20</time>
+          <!-- <a href="/koa2%E8%A7%A3%E6%9E%90%E8%AF%B7%E6%B1%82%E5%A4%B4%E4%BF%A1%E6%81%AF/" class="archive-article-date">
+      <time datetime="2020-05-20T02:41:27.000Z" itemprop="datePublished">2020-05-20</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">193字</span>
+      <span class="post-count">337字</span>
     </span>
   </span>
 
@@ -358,16 +358,49 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>1.右击左下角选择Windows PowerShell(管理员)身份启动;<br>2.此时将“以管理员身份”打开“MSDOS”窗口，在此界面中，依次输出以下命令：</p>
-<p>slmgr.vbs /upk</p>
-<p>复制以上命令，并在MSDOW窗口中右击以粘贴此命令，按回车进行确定。</p>
-<p>此时弹出窗口显未“已成功卸载了产品密钥”。<br>3.接着输入以下命令：</p>
-<p>slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX</p>
-<p>弹出窗口提示：“成功的安装了产品密钥”。<br>4.继续输入以下命令：</p>
-<p>slmgr /skms zh.us.to</p>
-<p>弹出窗口提示：“密钥管理服务计算机名成功的设置为zh.us.to”。<br>5.接下来输入以下命令：</p>
-<p>slmgr /ato</p>
-<p>此时将弹出窗口提示：“成功的激活了产品”。</p>
+        <blockquote>
+<p>推荐使用ua-parser-js<br>npm i ua-parser-js –save</p>
+</blockquote>
+<p>eg:<br>       const parser = require(‘ua-parser-js’);<br>       let ua = ctx.headers[‘user-agent’];<br>        let ua_parser = new parser(ua);</p>
+<pre><code>// 自己检查一些不常用的浏览器
+if (/99Browser/.test(ua)) { // 久久浏览器
+    let myOwnRegex = [[ /(99Browser)\/([\w\.]+)/i ], [ parser.BROWSER.NAME, parser.BROWSER.VERSION ]];
+    let myParser = new parser({ &apos;browser&apos;: myOwnRegex });
+    ua_parser = myParser.setUA(ua);
+} else if (/LieBaoFast/.test(ua)) { // 猎豹浏览器
+    let myOwnRegex = [[ /(LieBaoFast)\/([\w\.]+)/i ], [ parser.BROWSER.NAME, parser.BROWSER.VERSION ]];
+    let myParser = new parser({ &apos;browser&apos;: myOwnRegex });
+    ua_parser = myParser.setUA(ua);
+} else if (/2345Browser/.test(ua)) { // 2345浏览器
+    let myOwnRegex = [[ /(2345Browser)\/([\w\.]+)/i ], [ parser.BROWSER.NAME, parser.BROWSER.VERSION ]];
+    let myParser = new parser({ &apos;browser&apos;: myOwnRegex });
+    ua_parser = myParser.setUA(ua);
+} else if (/SogouMobileBrowser/.test(ua)) { // 搜狗浏览器
+    let myOwnRegex = [[ /(SogouMobileBrowser)\/([\w\.]+)/i ], [ parser.BROWSER.NAME, parser.BROWSER.VERSION ]];
+    let myParser = new parser({ &apos;browser&apos;: myOwnRegex });
+    ua_parser = myParser.setUA(ua);
+} else if (/MZBrowser/.test(ua)) { // 魅族浏览器
+    let myOwnRegex = [[ /(MZBrowser)\/([\w\.]+)/i ], [ parser.BROWSER.NAME, parser.BROWSER.VERSION ]];
+    let myParser = new parser({ &apos;browser&apos;: myOwnRegex });
+    ua_parser = myParser.setUA(ua);
+}
+
+const client_type = ua_parser.getResult();
+
+let getBrowser = ua_parser.getBrowser();
+let browser_name = getBrowser.name || &apos;其他&apos;; // 浏览器名称
+let browser_version = getBrowser.version; // 浏览器版本
+
+let getOS = ua_parser.getOS();
+let os_name = getOS.name || &apos;其他&apos;; // 操作系统名称
+let os_version = getOS.version; // 操作系统版本
+
+let getDevice = ua_parser.getDevice();
+let platform_type = getDevice.type || &apos;desktop&apos;;// 判断是什么平台
+
+let getEngine = ua_parser.getEngine();
+let engine_name = getEngine.name || &apos;其他&apos;; // 判断是什么引擎</code></pre><p>如果不需要太多信息，只是简单使用 推荐使用 bowser<br>npm i bowser –save</p>
+<p>eg:<br>     const Bowser = require(‘bowser’);<br>     const client_type = Bowser.parse(ctx.headers[‘user-agent’]);</p>
 
       
     </div>
@@ -378,7 +411,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows10/" rel="tag">windows10</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/koa/" rel="tag">koa</a></li></ul>
     </div>
 
       
@@ -404,7 +437,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/137/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/136/">136</a><a class="page-number" href="/page/137/">137</a><span class="page-number current">138</span><a class="page-number" href="/page/139/">139</a><a class="page-number" href="/page/140/">140</a><span class="space">&hellip;</span><a class="page-number" href="/page/169/">169</a><a class="extend next" rel="next" href="/page/139/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/137/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/136/">136</a><a class="page-number" href="/page/137/">137</a><span class="page-number current">138</span><a class="page-number" href="/page/139/">139</a><a class="page-number" href="/page/140/">140</a><span class="space">&hellip;</span><a class="page-number" href="/page/170/">170</a><a class="extend next" rel="next" href="/page/139/">下一页</a>
     </nav>
   
 

@@ -297,11 +297,11 @@
   
 
 
-<article id="post-windows10手动配置ip" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-windows10激活" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/windows10%E6%89%8B%E5%8A%A8%E9%85%8D%E7%BD%AEip/" class="article-date">
-      <time datetime="2020-05-20T02:39:06.000Z" itemprop="datePublished">2020-05-20</time>
+      <a href="/windows10%E6%BF%80%E6%B4%BB/" class="article-date">
+      <time datetime="2020-05-20T02:40:44.000Z" itemprop="datePublished">2020-05-20</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/windows10%E6%89%8B%E5%8A%A8%E9%85%8D%E7%BD%AEip/">windows10手动配置ip</a>
+      <a class="article-title" href="/windows10%E6%BF%80%E6%B4%BB/">windows10激活</a>
     </h1>
   
 
         
-          <!-- <a href="/windows10%E6%89%8B%E5%8A%A8%E9%85%8D%E7%BD%AEip/" class="archive-article-date">
-      <time datetime="2020-05-20T02:39:06.000Z" itemprop="datePublished">2020-05-20</time>
+          <!-- <a href="/windows10%E6%BF%80%E6%B4%BB/" class="archive-article-date">
+      <time datetime="2020-05-20T02:40:44.000Z" itemprop="datePublished">2020-05-20</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">103字</span>
+      <span class="post-count">193字</span>
     </span>
   </span>
 
@@ -358,15 +358,16 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <blockquote>
-<p>// 获取可用ip -&gt;cmd<br>$ipconfig/all<br><img src="https://img-blog.csdnimg.cn/20190909161045633.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-</blockquote>
-<blockquote>
-<p><strong><em>第一种</em></strong>：<br>在点击电脑图标<br><img src="https://img-blog.csdnimg.cn/20190909161138941.png" alt="在这里插入图片描述"><br>点击更改适配器选项<br><img src="https://img-blog.csdnimg.cn/20190909161227893.png" alt="在这里插入图片描述"><br>在右击下图选择属性<br><img src="https://img-blog.csdnimg.cn/20190909161331156.png" alt="在这里插入图片描述"><br>选择如下图<br><img src="https://img-blog.csdnimg.cn/2019090916144922.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>点击属性 进入如下页面<br><img src="https://img-blog.csdnimg.cn/20190909161534709.png" alt="在这里插入图片描述"><br>属性配置是最上获取的，对上配置填入就好了，没有的就不填 如备用DNS</p>
-</blockquote>
-<blockquote>
-<p><strong><em>第二种</em></strong><br>点击电脑图标<br><img src="https://img-blog.csdnimg.cn/20190909161138941.png" alt="在这里插入图片描述"><br>点击下图<br><img src="https://img-blog.csdnimg.cn/20190910105121961.png" alt="在这里插入图片描述"><br>或者在IP设置中修改<br><img src="https://img-blog.csdnimg.cn/20190910102513875.png" alt="在这里插入图片描述"></p>
-</blockquote>
+        <p>1.右击左下角选择Windows PowerShell(管理员)身份启动;<br>2.此时将“以管理员身份”打开“MSDOS”窗口，在此界面中，依次输出以下命令：</p>
+<p>slmgr.vbs /upk</p>
+<p>复制以上命令，并在MSDOW窗口中右击以粘贴此命令，按回车进行确定。</p>
+<p>此时弹出窗口显未“已成功卸载了产品密钥”。<br>3.接着输入以下命令：</p>
+<p>slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX</p>
+<p>弹出窗口提示：“成功的安装了产品密钥”。<br>4.继续输入以下命令：</p>
+<p>slmgr /skms zh.us.to</p>
+<p>弹出窗口提示：“密钥管理服务计算机名成功的设置为zh.us.to”。<br>5.接下来输入以下命令：</p>
+<p>slmgr /ato</p>
+<p>此时将弹出窗口提示：“成功的激活了产品”。</p>
 
       
     </div>
@@ -403,7 +404,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/138/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/137/">137</a><a class="page-number" href="/page/138/">138</a><span class="page-number current">139</span><a class="page-number" href="/page/140/">140</a><a class="page-number" href="/page/141/">141</a><span class="space">&hellip;</span><a class="page-number" href="/page/169/">169</a><a class="extend next" rel="next" href="/page/140/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/138/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/137/">137</a><a class="page-number" href="/page/138/">138</a><span class="page-number current">139</span><a class="page-number" href="/page/140/">140</a><a class="page-number" href="/page/141/">141</a><span class="space">&hellip;</span><a class="page-number" href="/page/170/">170</a><a class="extend next" rel="next" href="/page/140/">下一页</a>
     </nav>
   
 
