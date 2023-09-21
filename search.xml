@@ -4,6 +4,69 @@
   
     
     <entry>
+      <title>nodejs中google授权登录</title>
+      <link href="nodejs%E4%B8%ADgoogle%E6%8E%88%E6%9D%83%E7%99%BB%E5%BD%95/"/>
+      <url>nodejs%E4%B8%ADgoogle%E6%8E%88%E6%9D%83%E7%99%BB%E5%BD%95/</url>
+      
+        <content type="html"><![CDATA[<h2 id="google-授权配置"><a href="#google-授权配置" class="headerlink" title="google 授权配置"></a>google 授权配置</h2><p>创建项目 &gt;&gt; 在凭据页面创建 OAuth 2.0 客户端 ID &gt;&gt; 配置 (已获授权的重定向 URI) &gt;&gt; 测试完成 在 OAuth 同意屏幕 发布正式版</p><h2 id="授权跳转连接"><a href="#授权跳转连接" class="headerlink" title="授权跳转连接"></a>授权跳转连接</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> url = <span class="string">`https://accounts.google.com/o/oauth2/v2/auth?scope=<span class="subst">$&#123;<span class="built_in">encodeURIComponent</span>(</span></span></span><br><span class="line"><span class="string"><span class="subst">  <span class="string">"https://www.googleapis.com/auth/userinfo.email"</span></span></span></span><br><span class="line"><span class="string"><span class="subst">)&#125;</span>&amp;include_granted_scopes=true&amp;</span></span><br><span class="line"><span class="string">response_type=token&amp;state=1234&amp;redirect_uri=<span class="subst">$&#123;<span class="built_in">encodeURIComponent</span>(</span></span></span><br><span class="line"><span class="string"><span class="subst">  <span class="string">"&lt;跳转连接 需要在谷歌配置&gt;"</span></span></span></span><br><span class="line"><span class="string"><span class="subst">)&#125;</span>&amp;client_id=client_id`</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(url);</span><br></pre></td></tr></table></figure><h2 id="授权成功后跳转链接如下"><a href="#授权成功后跳转链接如下" class="headerlink" title="授权成功后跳转链接如下"></a>授权成功后跳转链接如下</h2><blockquote><p>&lt;跳转连接 需要在谷歌配置&gt;#state=1234&amp;access_token=<access_token>&amp;token_type=Bearer&amp;expires_in=3599&amp;scope=email%20<a href="https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/drive.metadata.readonly%20openid&amp;authuser=0&amp;prompt=none" target="_blank" rel="external nofollow noopener noreferrer">https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/drive.metadata.readonly%20openid&amp;authuser=0&amp;prompt=none</a></access_token></p></blockquote><h2 id="获取用户信息"><a href="#获取用户信息" class="headerlink" title="获取用户信息"></a>获取用户信息</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> superagent <span class="keyword">from</span> <span class="string">"superagent"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="string">`https://www.googleapis.com/oauth2/v1/userinfo`</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> superagent.get(url, &#123; access_token: token &#125;).set(&#123;</span><br><span class="line">    <span class="string">"Content-Type"</span>: <span class="string">"application/json"</span>,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 获取客户邮箱 和id 头像</span></span><br><span class="line">  <span class="keyword">return</span> res.body;</span><br><span class="line">&#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://developers.google.cn/identity/protocols/oauth2/javascript-implicit-flow?hl=zh-cn" target="_blank" rel="external nofollow noopener noreferrer">适用于客户端 Web 应用的 OAuth 2.0</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> nodejs </tag>
+            
+            <tag> google </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>nodejs中google-authenticator使用</title>
+      <link href="nodejs%E4%B8%ADgoogle-authenticator%E4%BD%BF%E7%94%A8/"/>
+      <url>nodejs%E4%B8%ADgoogle-authenticator%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h2 id="GA-6-为验证码"><a href="#GA-6-为验证码" class="headerlink" title="GA 6 为验证码"></a>GA 6 为验证码</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; authenticator &#125; <span class="keyword">from</span> <span class="string">"otplib"</span>;</span><br><span class="line"></span><br><span class="line">authenticator.options = &#123;</span><br><span class="line">  epoch: <span class="built_in">Date</span>.now() - <span class="number">30</span> * <span class="number">1000</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> secret_key = authenticator.generateSecret();</span><br><span class="line"><span class="built_in">console</span>.log(authenticator.generate(secret_key));</span><br></pre></td></tr></table></figure><h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://github.com/google/google-authenticator/wiki/Key-Uri-Format" target="_blank" rel="external nofollow noopener noreferrer">google-authenticator</a><br><a href="https://www.5axxw.com/wiki/content/6cwktj" target="_blank" rel="external nofollow noopener noreferrer">Otplib</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> nodejs </tag>
+            
+            <tag> google </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>node版本管理工具nvm</title>
+      <link href="node%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7nvm/"/>
+      <url>node%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7nvm/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Linux-Centos-8-环境下安装-nvm"><a href="#Linux-Centos-8-环境下安装-nvm" class="headerlink" title="Linux Centos 8 环境下安装 nvm"></a>Linux Centos 8 环境下安装 nvm</h2><p>官网：<a href="https://github.com/nvm-sh/nvm" target="_blank" rel="external nofollow noopener noreferrer">https://github.com/nvm-sh/nvm</a></p><h3 id="下载-nvm-sh-文件"><a href="#下载-nvm-sh-文件" class="headerlink" title="下载 nvm.sh 文件"></a>下载 nvm.sh 文件</h3><p>方式一：命令行工具输入，通过 curl 工具下载</p><blockquote><p>curl -o- <a href="https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh" target="_blank" rel="external nofollow noopener noreferrer">https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh</a> | bash</p></blockquote><p>方式二：命令行工具输入，通过 wget 工具下载</p><blockquote><p>wget -qO- <a href="https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh" target="_blank" rel="external nofollow noopener noreferrer">https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh</a> | bash</p></blockquote><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>这将在主目录下创建一个.nvm 目录。nvm 保留自己的二进制文件和所有其他所需文件。然后在用户.bashrc 文件中设置环境。您需要通过运行以下命令来加载此环境以设置所需的配置：</p><blockquote><p>source ~/.bashrc</p></blockquote><h2 id="windows-环境下安装-nvm"><a href="#windows-环境下安装-nvm" class="headerlink" title="windows 环境下安装 nvm"></a>windows 环境下安装 nvm</h2><h3 id="下载指定版本安装包"><a href="#下载指定版本安装包" class="headerlink" title="下载指定版本安装包"></a>下载指定版本安装包</h3><blockquote><p><a href="https://github.com/nvm-sh/nvm/releases" target="_blank" rel="external nofollow noopener noreferrer">https://github.com/nvm-sh/nvm/releases</a></p></blockquote><h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://yuencode.cn/2023/01/03/Linux-Centos-8-%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%AE%89%E8%A3%85nvm/" target="_blank" rel="external nofollow noopener noreferrer">Linux Centos 8 环境下安装 nvm</a><br><a href="https://blog.csdn.net/baidu_30506559/article/details/127379924" target="_blank" rel="external nofollow noopener noreferrer">nvm 安装及基础命令</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> nodejs </tag>
+            
+            <tag> nvm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>IDEA:java:无效的源发行版：14</title>
       <link href="IDEA-java-%E6%97%A0%E6%95%88%E7%9A%84%E6%BA%90%E5%8F%91%E8%A1%8C%E7%89%88%EF%BC%9A14/"/>
       <url>IDEA-java-%E6%97%A0%E6%95%88%E7%9A%84%E6%BA%90%E5%8F%91%E8%A1%8C%E7%89%88%EF%BC%9A14/</url>
@@ -33,9 +96,9 @@
       
         <tags>
             
-            <tag> typeorm </tag>
-            
             <tag> postgresql </tag>
+            
+            <tag> typeorm </tag>
             
         </tags>
       
@@ -56,9 +119,9 @@
             
             <tag> nodejs </tag>
             
-            <tag> java </tag>
-            
             <tag> crypto </tag>
+            
+            <tag> java </tag>
             
         </tags>
       
@@ -286,9 +349,9 @@
       
         <tags>
             
-            <tag> typescript </tag>
-            
             <tag> nodejs </tag>
+            
+            <tag> typescript </tag>
             
         </tags>
       
@@ -316,25 +379,6 @@
     
     
     <entry>
-      <title>飞书-企业自建应用</title>
-      <link href="%E9%A3%9E%E4%B9%A6-%E4%BC%81%E4%B8%9A%E8%87%AA%E5%BB%BA%E5%BA%94%E7%94%A8/"/>
-      <url>%E9%A3%9E%E4%B9%A6-%E4%BC%81%E4%B8%9A%E8%87%AA%E5%BB%BA%E5%BA%94%E7%94%A8/</url>
-      
-        <content type="html"><![CDATA[<h1 id="企业自建应用-嵌入三方网页"><a href="#企业自建应用-嵌入三方网页" class="headerlink" title="企业自建应用 嵌入三方网页"></a>企业自建应用 嵌入三方网页</h1><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol><li><p>进入<code>https://open.feishu.cn/app?lang=zh-CN</code></p></li><li><p>选择创建自建应用-内容随便</p></li><li><p>获取对应的应用凭证<br><img src="https://img-blog.csdnimg.cn/12c92114f8584f10b3a2c2aca6f41ba3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li><li><p>嵌入网页配置<br><img src="https://img-blog.csdnimg.cn/7d733f9fd91a4266ba8ec41391962940.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>手机端和电脑端可以一样</p></li><li><p>在权限关联中授权获取手机号和邮箱<br><img src="https://img-blog.csdnimg.cn/af64c572686147a5a271d6b4298156af.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li></ol><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><ol><li>获取 AppAccessToken<br>文档： <code>https://open.feishu.cn/document/ukTMukTMukTM/ukDNz4SO0MjL5QzM/auth-v3/auth/app_access_token_internal</code></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const res = await request</span><br><span class="line">      .post(<span class="string">'https://open.feishu.cn/open-apis/auth/v3/app_access_token/internal'</span>)</span><br><span class="line">      .<span class="built_in">set</span>(&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/json; charset=utf-8'</span>,</span><br><span class="line">      &#125;)</span><br><span class="line">      .send(&#123;</span><br><span class="line">        app_id: data.client_id,</span><br><span class="line">        app_secret: data.client_secret,</span><br><span class="line">      &#125;);</span><br><span class="line">    const body = res.body;</span><br><span class="line">    <span class="keyword">if</span> (!(body.msg === <span class="string">'ok'</span> &amp;&amp; body.code === 0)) throw new CustomException(-1, <span class="string">'获取app_access_token失败'</span>);</span><br><span class="line">    const &#123; app_access_token, expire &#125; = body;</span><br></pre></td></tr></table></figure><ol start="2"><li>获取用户信息<br>文档<code>https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/authen-v1/authen/access_token</code></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const res = await request</span><br><span class="line">      .post(<span class="string">'https://open.feishu.cn/open-apis/authen/v1/access_token'</span>)</span><br><span class="line">      .<span class="built_in">set</span>(&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/json; charset=utf-8'</span>,</span><br><span class="line">        Authorization: `Bearer <span class="variable">$&#123;data.access_token&#125;</span>`,</span><br><span class="line">      &#125;)</span><br><span class="line">      .send(&#123;</span><br><span class="line">        grant_type: <span class="string">'authorization_code'</span>,</span><br><span class="line">        code: code,</span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 飞书 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>amazon配置邮件推送服务</title>
       <link href="amazon%E9%85%8D%E7%BD%AE%E9%82%AE%E4%BB%B6%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1/"/>
       <url>amazon%E9%85%8D%E7%BD%AE%E9%82%AE%E4%BB%B6%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1/</url>
@@ -346,6 +390,25 @@
         <tags>
             
             <tag> amazon </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>飞书-企业自建应用</title>
+      <link href="%E9%A3%9E%E4%B9%A6-%E4%BC%81%E4%B8%9A%E8%87%AA%E5%BB%BA%E5%BA%94%E7%94%A8/"/>
+      <url>%E9%A3%9E%E4%B9%A6-%E4%BC%81%E4%B8%9A%E8%87%AA%E5%BB%BA%E5%BA%94%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="企业自建应用-嵌入三方网页"><a href="#企业自建应用-嵌入三方网页" class="headerlink" title="企业自建应用 嵌入三方网页"></a>企业自建应用 嵌入三方网页</h1><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol><li><p>进入<code>https://open.feishu.cn/app?lang=zh-CN</code></p></li><li><p>选择创建自建应用-内容随便</p></li><li><p>获取对应的应用凭证<br><img src="https://img-blog.csdnimg.cn/12c92114f8584f10b3a2c2aca6f41ba3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li><li><p>嵌入网页配置<br><img src="https://img-blog.csdnimg.cn/7d733f9fd91a4266ba8ec41391962940.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>手机端和电脑端可以一样</p></li><li><p>在权限关联中授权获取手机号和邮箱<br><img src="https://img-blog.csdnimg.cn/af64c572686147a5a271d6b4298156af.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li></ol><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><ol><li>获取 AppAccessToken<br>文档： <code>https://open.feishu.cn/document/ukTMukTMukTM/ukDNz4SO0MjL5QzM/auth-v3/auth/app_access_token_internal</code></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const res = await request</span><br><span class="line">      .post(<span class="string">'https://open.feishu.cn/open-apis/auth/v3/app_access_token/internal'</span>)</span><br><span class="line">      .<span class="built_in">set</span>(&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/json; charset=utf-8'</span>,</span><br><span class="line">      &#125;)</span><br><span class="line">      .send(&#123;</span><br><span class="line">        app_id: data.client_id,</span><br><span class="line">        app_secret: data.client_secret,</span><br><span class="line">      &#125;);</span><br><span class="line">    const body = res.body;</span><br><span class="line">    <span class="keyword">if</span> (!(body.msg === <span class="string">'ok'</span> &amp;&amp; body.code === 0)) throw new CustomException(-1, <span class="string">'获取app_access_token失败'</span>);</span><br><span class="line">    const &#123; app_access_token, expire &#125; = body;</span><br></pre></td></tr></table></figure><ol start="2"><li>获取用户信息<br>文档<code>https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/authen-v1/authen/access_token</code></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const res = await request</span><br><span class="line">      .post(<span class="string">'https://open.feishu.cn/open-apis/authen/v1/access_token'</span>)</span><br><span class="line">      .<span class="built_in">set</span>(&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/json; charset=utf-8'</span>,</span><br><span class="line">        Authorization: `Bearer <span class="variable">$&#123;data.access_token&#125;</span>`,</span><br><span class="line">      &#125;)</span><br><span class="line">      .send(&#123;</span><br><span class="line">        grant_type: <span class="string">'authorization_code'</span>,</span><br><span class="line">        code: code,</span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 飞书 </tag>
             
         </tags>
       
@@ -556,9 +619,9 @@
       
         <tags>
             
-            <tag> request </tag>
-            
             <tag> nodejs </tag>
+            
+            <tag> request </tag>
             
         </tags>
       
@@ -756,9 +819,9 @@
       
         <tags>
             
-            <tag> typeorm </tag>
-            
             <tag> postgresql </tag>
+            
+            <tag> typeorm </tag>
             
         </tags>
       
@@ -817,9 +880,9 @@
       
         <tags>
             
-            <tag> typescript </tag>
-            
             <tag> vue </tag>
+            
+            <tag> typescript </tag>
             
         </tags>
       
@@ -895,9 +958,9 @@
       
         <tags>
             
-            <tag> 内网穿透 </tag>
-            
             <tag> linux </tag>
+            
+            <tag> 内网穿透 </tag>
             
         </tags>
       
@@ -1076,9 +1139,9 @@
             
             <tag> nodejs </tag>
             
-            <tag> java </tag>
-            
             <tag> crypto </tag>
+            
+            <tag> java </tag>
             
         </tags>
       
