@@ -4,11 +4,70 @@
   
     
     <entry>
+      <title>使用STS临时访问凭证访问OSS</title>
+      <link href="%E4%BD%BF%E7%94%A8STS%E4%B8%B4%E6%97%B6%E8%AE%BF%E9%97%AE%E5%87%AD%E8%AF%81%E8%AE%BF%E9%97%AEOSS/"/>
+      <url>%E4%BD%BF%E7%94%A8STS%E4%B8%B4%E6%97%B6%E8%AE%BF%E9%97%AE%E5%87%AD%E8%AF%81%E8%AE%BF%E9%97%AEOSS/</url>
+      
+        <content type="html"><![CDATA[<p>todo</p><h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://help.aliyun.com/zh/oss/developer-reference/use-temporary-access-credentials-provided-by-sts-to-access-oss?spm=a2c4g.11186623.4.1.3baf297alQfiKs&scm=20140722.H_100624._.ID_100624-OR_rec-V_1" target="_blank" rel="external nofollow noopener noreferrer">STS 临时访问凭证访问 OSS</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> nodejs </tag>
+            
+            <tag> STS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>注册美区苹果账号</title>
+      <link href="%E6%B3%A8%E5%86%8C%E7%BE%8E%E5%8C%BA%E8%8B%B9%E6%9E%9C%E8%B4%A6%E5%8F%B7/"/>
+      <url>%E6%B3%A8%E5%86%8C%E7%BE%8E%E5%8C%BA%E8%8B%B9%E6%9E%9C%E8%B4%A6%E5%8F%B7/</url>
+      
+        <content type="html"><![CDATA[<p>链接 &gt; <a href="https://github.com/getlantern/lantern/wiki/%E5%A6%82%E4%BD%95%E6%B3%A8%E5%86%8C%E7%BE%8E%E5%8C%BA%E8%8B%B9%E6%9E%9C%E8%B4%A6%E5%8F%B7" target="_blank" rel="external nofollow noopener noreferrer">https://github.com/getlantern/lantern/wiki/%E5%A6%82%E4%BD%95%E6%B3%A8%E5%86%8C%E7%BE%8E%E5%8C%BA%E8%8B%B9%E6%9E%9C%E8%B4%A6%E5%8F%B7</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> other </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>在PostgreSQL中创建只读用户</title>
+      <link href="%E5%9C%A8PostgreSQL%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%8F%AA%E8%AF%BB%E7%94%A8%E6%88%B7/"/>
+      <url>%E5%9C%A8PostgreSQL%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%8F%AA%E8%AF%BB%E7%94%A8%E6%88%B7/</url>
+      
+        <content type="html"><![CDATA[<h2 id="创建只读用户"><a href="#创建只读用户" class="headerlink" title="创建只读用户"></a>创建只读用户</h2><blockquote><p>CREATE USER readonly_user WITH PASSWORD ‘password’;</p></blockquote><p>这条命令会创建一个名为 readonly_user 的用户，并设置用户的密码为 ‘password’。请务必将 ‘password’ 替换为实际的密码。</p><h2 id="进入你需要赋予权限的数据库-授予只读权限"><a href="#进入你需要赋予权限的数据库-授予只读权限" class="headerlink" title="进入你需要赋予权限的数据库 授予只读权限"></a>进入你需要赋予权限的数据库 授予只读权限</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">CONNECT</span> <span class="keyword">ON</span> <span class="keyword">DATABASE</span> <span class="keyword">database</span> <span class="keyword">TO</span> readonly_user;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">USAGE</span> <span class="keyword">ON</span> <span class="keyword">SCHEMA</span> <span class="keyword">public</span> <span class="keyword">TO</span> readonly_user;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">SELECT</span> <span class="keyword">ON</span> <span class="keyword">ALL</span> <span class="keyword">TABLES</span> <span class="keyword">IN</span> <span class="keyword">SCHEMA</span> <span class="keyword">public</span> <span class="keyword">TO</span> readonly_user;</span><br></pre></td></tr></table></figure><p>其中，database 是要授予权限的数据库名称。</p><p>第一条命令 GRANT CONNECT ON DATABASE database TO readonly_user; 授予用户连接数据库的权限。</p><p>第二条命令 GRANT USAGE ON SCHEMA public TO readonly_user; 授予用户对数据库中公共模式的使用权限。</p><p>第三条命令 GRANT SELECT ON ALL TABLES IN SCHEMA public TO readonly_user; 授予用户对数据库中公共模式下所有表的只读权限。</p><h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://deepinout.com/sqlite/sqlite-questions/89_postgresql_how_do_you_create_a_readonly_user_in_postgresql.html" target="_blank" rel="external nofollow noopener noreferrer">PostgreSQL 如何在 PostgreSQL 中创建只读用户</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> postgresql </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>nodejs中google授权登录</title>
       <link href="nodejs%E4%B8%ADgoogle%E6%8E%88%E6%9D%83%E7%99%BB%E5%BD%95/"/>
       <url>nodejs%E4%B8%ADgoogle%E6%8E%88%E6%9D%83%E7%99%BB%E5%BD%95/</url>
       
-        <content type="html"><![CDATA[<h2 id="google-授权配置"><a href="#google-授权配置" class="headerlink" title="google 授权配置"></a>google 授权配置</h2><p>创建项目 &gt;&gt; 在凭据页面创建 OAuth 2.0 客户端 ID &gt;&gt; 配置 (已获授权的重定向 URI) &gt;&gt; 测试完成 在 OAuth 同意屏幕 发布正式版</p><h2 id="授权跳转连接"><a href="#授权跳转连接" class="headerlink" title="授权跳转连接"></a>授权跳转连接</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> url = <span class="string">`https://accounts.google.com/o/oauth2/v2/auth?scope=<span class="subst">$&#123;<span class="built_in">encodeURIComponent</span>(</span></span></span><br><span class="line"><span class="string"><span class="subst">  <span class="string">"https://www.googleapis.com/auth/userinfo.email"</span></span></span></span><br><span class="line"><span class="string"><span class="subst">)&#125;</span>&amp;include_granted_scopes=true&amp;</span></span><br><span class="line"><span class="string">response_type=token&amp;state=1234&amp;redirect_uri=<span class="subst">$&#123;<span class="built_in">encodeURIComponent</span>(</span></span></span><br><span class="line"><span class="string"><span class="subst">  <span class="string">"&lt;跳转连接 需要在谷歌配置&gt;"</span></span></span></span><br><span class="line"><span class="string"><span class="subst">)&#125;</span>&amp;client_id=client_id`</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(url);</span><br></pre></td></tr></table></figure><h2 id="授权成功后跳转链接如下"><a href="#授权成功后跳转链接如下" class="headerlink" title="授权成功后跳转链接如下"></a>授权成功后跳转链接如下</h2><blockquote><p>&lt;跳转连接 需要在谷歌配置&gt;#state=1234&amp;access_token=<access_token>&amp;token_type=Bearer&amp;expires_in=3599&amp;scope=email%20<a href="https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/drive.metadata.readonly%20openid&amp;authuser=0&amp;prompt=none" target="_blank" rel="external nofollow noopener noreferrer">https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/drive.metadata.readonly%20openid&amp;authuser=0&amp;prompt=none</a></access_token></p></blockquote><h2 id="获取用户信息"><a href="#获取用户信息" class="headerlink" title="获取用户信息"></a>获取用户信息</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> superagent <span class="keyword">from</span> <span class="string">"superagent"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="string">`https://www.googleapis.com/oauth2/v1/userinfo`</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> superagent.get(url, &#123; access_token: token &#125;).set(&#123;</span><br><span class="line">    <span class="string">"Content-Type"</span>: <span class="string">"application/json"</span>,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 获取客户邮箱 和id 头像</span></span><br><span class="line">  <span class="keyword">return</span> res.body;</span><br><span class="line">&#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://developers.google.cn/identity/protocols/oauth2/javascript-implicit-flow?hl=zh-cn" target="_blank" rel="external nofollow noopener noreferrer">适用于客户端 Web 应用的 OAuth 2.0</a></p>]]></content>
+        <content type="html"><![CDATA[<h2 id="google-授权配置"><a href="#google-授权配置" class="headerlink" title="google 授权配置"></a>google 授权配置</h2><p>创建项目 &gt;&gt; 在凭据页面创建 OAuth 2.0 客户端 ID &gt;&gt; 配置 (已获授权的重定向 URI) &gt;&gt; 测试完成 在 OAuth 同意屏幕 发布正式版</p><h2 id="授权跳转连接"><a href="#授权跳转连接" class="headerlink" title="授权跳转连接"></a>授权跳转连接</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> url = <span class="string">`https://accounts.google.com/o/oauth2/v2/auth?scope=<span class="subst">$&#123;<span class="built_in">encodeURIComponent</span>(</span></span></span><br><span class="line"><span class="string"><span class="subst">  <span class="string">"https://www.googleapis.com/auth/userinfo.email"</span></span></span></span><br><span class="line"><span class="string"><span class="subst">)&#125;</span>&amp;include_granted_scopes=true&amp;</span></span><br><span class="line"><span class="string">response_type=token&amp;state=1234&amp;redirect_uri=<span class="subst">$&#123;<span class="built_in">encodeURIComponent</span>(</span></span></span><br><span class="line"><span class="string"><span class="subst">  <span class="string">"&lt;跳转连接 需要在谷歌配置&gt;"</span></span></span></span><br><span class="line"><span class="string"><span class="subst">)&#125;</span>&amp;client_id=client_id`</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(url);</span><br></pre></td></tr></table></figure><h2 id="授权成功后跳转链接如下"><a href="#授权成功后跳转链接如下" class="headerlink" title="授权成功后跳转链接如下"></a>授权成功后跳转链接如下</h2><blockquote><p>(跳转连接 需要在谷歌配置)#state=1234&amp;access_token=<access_token>&amp;token_type=Bearer&amp;expires_in=3599&amp;scope=email%20<a href="https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/drive.metadata.readonly%20openid&amp;authuser=0&amp;prompt=none" target="_blank" rel="external nofollow noopener noreferrer">https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/drive.metadata.readonly%20openid&amp;authuser=0&amp;prompt=none</a></access_token></p></blockquote><h2 id="获取用户信息"><a href="#获取用户信息" class="headerlink" title="获取用户信息"></a>获取用户信息</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> superagent <span class="keyword">from</span> <span class="string">"superagent"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="string">`https://www.googleapis.com/oauth2/v1/userinfo`</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> superagent.get(url, &#123; access_token: token &#125;).set(&#123;</span><br><span class="line">    <span class="string">"Content-Type"</span>: <span class="string">"application/json"</span>,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 获取客户邮箱 和id 头像</span></span><br><span class="line">  <span class="keyword">return</span> res.body;</span><br><span class="line">&#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://developers.google.cn/identity/protocols/oauth2/javascript-implicit-flow?hl=zh-cn" target="_blank" rel="external nofollow noopener noreferrer">适用于客户端 Web 应用的 OAuth 2.0</a></p>]]></content>
       
       
       
