@@ -297,11 +297,11 @@
   
 
 
-<article id="post-node版本管理工具nvm" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-nodejs中google-authenticator使用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/node%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7nvm/" class="article-date">
-      <time datetime="2023-09-21T07:12:16.000Z" itemprop="datePublished">2023-09-21</time>
+      <a href="/nodejs%E4%B8%ADgoogle-authenticator%E4%BD%BF%E7%94%A8/" class="article-date">
+      <time datetime="2023-09-21T07:19:28.000Z" itemprop="datePublished">2023-09-21</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/node%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7nvm/">node版本管理工具nvm</a>
+      <a class="article-title" href="/nodejs%E4%B8%ADgoogle-authenticator%E4%BD%BF%E7%94%A8/">nodejs中google-authenticator使用</a>
     </h1>
   
 
         
-          <!-- <a href="/node%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7nvm/" class="archive-article-date">
-      <time datetime="2023-09-21T07:12:16.000Z" itemprop="datePublished">2023-09-21</time>
+          <!-- <a href="/nodejs%E4%B8%ADgoogle-authenticator%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+      <time datetime="2023-09-21T07:19:28.000Z" itemprop="datePublished">2023-09-21</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">204字</span>
+      <span class="post-count">34字</span>
     </span>
   </span>
 
@@ -358,23 +358,9 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="Linux-Centos-8-环境下安装-nvm"><a href="#Linux-Centos-8-环境下安装-nvm" class="headerlink" title="Linux Centos 8 环境下安装 nvm"></a>Linux Centos 8 环境下安装 nvm</h2><p>官网：<a href="https://github.com/nvm-sh/nvm" target="_blank" rel="external nofollow noopener noreferrer">https://github.com/nvm-sh/nvm</a></p>
-<h3 id="下载-nvm-sh-文件"><a href="#下载-nvm-sh-文件" class="headerlink" title="下载 nvm.sh 文件"></a>下载 nvm.sh 文件</h3><p>方式一：命令行工具输入，通过 curl 工具下载</p>
-<blockquote>
-<p>curl -o- <a href="https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh" target="_blank" rel="external nofollow noopener noreferrer">https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh</a> | bash</p>
-</blockquote>
-<p>方式二：命令行工具输入，通过 wget 工具下载</p>
-<blockquote>
-<p>wget -qO- <a href="https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh" target="_blank" rel="external nofollow noopener noreferrer">https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh</a> | bash</p>
-</blockquote>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>这将在主目录下创建一个.nvm 目录。nvm 保留自己的二进制文件和所有其他所需文件。然后在用户.bashrc 文件中设置环境。您需要通过运行以下命令来加载此环境以设置所需的配置：</p>
-<blockquote>
-<p>source ~/.bashrc</p>
-</blockquote>
-<h2 id="windows-环境下安装-nvm"><a href="#windows-环境下安装-nvm" class="headerlink" title="windows 环境下安装 nvm"></a>windows 环境下安装 nvm</h2><h3 id="下载指定版本安装包"><a href="#下载指定版本安装包" class="headerlink" title="下载指定版本安装包"></a>下载指定版本安装包</h3><blockquote>
-<p><a href="https://github.com/nvm-sh/nvm/releases" target="_blank" rel="external nofollow noopener noreferrer">https://github.com/nvm-sh/nvm/releases</a></p>
-</blockquote>
-<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://yuencode.cn/2023/01/03/Linux-Centos-8-%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%AE%89%E8%A3%85nvm/" target="_blank" rel="external nofollow noopener noreferrer">Linux Centos 8 环境下安装 nvm</a><br><a href="https://blog.csdn.net/baidu_30506559/article/details/127379924" target="_blank" rel="external nofollow noopener noreferrer">nvm 安装及基础命令</a></p>
+        <h2 id="GA-6-为验证码"><a href="#GA-6-为验证码" class="headerlink" title="GA 6 为验证码"></a>GA 6 为验证码</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; authenticator &#125; <span class="keyword">from</span> <span class="string">"otplib"</span>;</span><br><span class="line"></span><br><span class="line">authenticator.options = &#123;</span><br><span class="line">  epoch: <span class="built_in">Date</span>.now() - <span class="number">30</span> * <span class="number">1000</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> secret_key = authenticator.generateSecret();</span><br><span class="line"><span class="built_in">console</span>.log(authenticator.generate(secret_key));</span><br></pre></td></tr></table></figure>
+
+<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://github.com/google/google-authenticator/wiki/Key-Uri-Format" target="_blank" rel="external nofollow noopener noreferrer">google-authenticator</a><br><a href="https://www.5axxw.com/wiki/content/6cwktj" target="_blank" rel="external nofollow noopener noreferrer">Otplib</a></p>
 
       
     </div>
@@ -385,7 +371,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nvm/" rel="tag">nvm</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/google/" rel="tag">google</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li></ul>
     </div>
 
       
@@ -411,7 +397,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/9/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/180/">180</a><a class="extend next" rel="next" href="/page/11/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/9/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/181/">181</a><a class="extend next" rel="next" href="/page/11/">下一页</a>
     </nav>
   
 

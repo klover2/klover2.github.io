@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.wjc66.cn/"/>
-  <updated>2024-03-20T08:48:19.735Z</updated>
+  <updated>2024-03-20T09:20:55.305Z</updated>
   <id>https://blog.wjc66.cn/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>java序列化进行参数脱敏</title>
+    <link href="https://blog.wjc66.cn/java%E5%BA%8F%E5%88%97%E5%8C%96%E8%BF%9B%E8%A1%8C%E5%8F%82%E6%95%B0%E8%84%B1%E6%95%8F/"/>
+    <id>https://blog.wjc66.cn/java%E5%BA%8F%E5%88%97%E5%8C%96%E8%BF%9B%E8%A1%8C%E5%8F%82%E6%95%B0%E8%84%B1%E6%95%8F/</id>
+    <published>2024-03-20T09:20:30.000Z</published>
+    <updated>2024-03-20T09:20:55.305Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="JsonSerializer"><a href="#JsonSerializer" class="headerlink" title="JsonSerializer"></a>JsonSerializer</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CardNumberSerialize</span> <span class="keyword">extends</span> <span class="title">JsonSerializer</span>&lt;<span class="title">String</span>&gt; </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">serialize</span><span class="params">(String s, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        jsonGenerator.writeString(Objects.equals(s, <span class="string">""</span>) ? s : s.replaceAll(<span class="string">"(\\d&#123;6&#125;)\\d&#123;6&#125;(\\d&#123;4&#125;)"</span>, <span class="string">"$1******$2"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Student student = <span class="keyword">new</span> Student();</span><br><span class="line">        student.setName(<span class="string">"张三"</span>);</span><br><span class="line">        student.setCardNumber(<span class="string">"1111111111111111"</span>);</span><br><span class="line">        student.setAddress(<span class="string">"beijing"</span>);</span><br><span class="line">        System.out.println(JsonUtil.toJSONString(student));</span><br><span class="line">        <span class="comment">// ======&gt; &#123;"name":"张三","cardNumber":"111111******1111","address":"***"&#125;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Data</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span></span>&#123;</span><br><span class="line">        <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@JsonSerialize</span>(using = CardNumberSerialize<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">        <span class="title">private</span> <span class="title">String</span> <span class="title">cardNumber</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@JsonSerialize</span>(using = CompleteDesensitizationSerialize<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">        <span class="title">private</span> <span class="title">String</span> <span class="title">address</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><a href="https://github.com/klover2/java-demo/blob/master/serialize-demo/src/main/java/com/klover/serialize/Demo.java" target="_blank" rel="external nofollow noopener noreferrer">代码示例</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;JsonSerializer&quot;&gt;&lt;a href=&quot;#JsonSerializer&quot; class=&quot;headerlink&quot; title=&quot;JsonSerializer&quot;&gt;&lt;/a&gt;JsonSerializer&lt;/h3&gt;&lt;figure class=&quot;highlight 
+      
+    
+    </summary>
+    
+    
+    
+      <category term="java" scheme="https://blog.wjc66.cn/tags/java/"/>
+    
+  </entry>
   
   <entry>
     <title>上传日志到aws日志服务</title>
@@ -496,29 +520,6 @@
     
     
       <category term="postgresql" scheme="https://blog.wjc66.cn/tags/postgresql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用pm2启动node项目，内存直接暴增,原因是高IO读写</title>
-    <link href="https://blog.wjc66.cn/%E4%BD%BF%E7%94%A8pm2%E5%90%AF%E5%8A%A8node%E9%A1%B9%E7%9B%AE%EF%BC%8C%E5%86%85%E5%AD%98%E7%9B%B4%E6%8E%A5%E6%9A%B4%E5%A2%9E,%E5%8E%9F%E5%9B%A0%E6%98%AF%E9%AB%98IO%E8%AF%BB%E5%86%99/"/>
-    <id>https://blog.wjc66.cn/%E4%BD%BF%E7%94%A8pm2%E5%90%AF%E5%8A%A8node%E9%A1%B9%E7%9B%AE%EF%BC%8C%E5%86%85%E5%AD%98%E7%9B%B4%E6%8E%A5%E6%9A%B4%E5%A2%9E,%E5%8E%9F%E5%9B%A0%E6%98%AF%E9%AB%98IO%E8%AF%BB%E5%86%99/</id>
-    <published>2022-09-08T07:36:07.000Z</published>
-    <updated>2022-09-09T02:40:44.973Z</updated>
-    
-    <content type="html"><![CDATA[<ol><li>出现原因介绍<br>因为我们使用了神策埋点，正好神策过期了，没有及时关闭配置，导致日志上传不了，一直保存在本地，存了上百M的日志，在代码发布的时候需要重启，导致pm2的内容直接超过8G,把服务器直接卡死，等了半个小时了之后 内存慢慢下降，刚开始以为是代码太多，打包内存不够用，升级了服务器内存，还是出现了同样的问题，排查了几天都没有发现。后面使用<code>node-tick</code>才发现原因是神策在上传日志，他里面写的是foreach循环一起上传所有日志，由于有上传不了，又保存在本地。</li></ol><a id="more"></a><ol start="2"><li><p>问题排查<br>安装node-tick方式<code>sudo npm -g install tick</code><br>使用启用的配置文件运行您的应用程序<code>node --prof app.js</code><br>在 CPU 100% 使用一段时间后停止您的应用程序<br>您可以在您的应用目录中看到 v8.log，现在您可以使用 <code>node-tick-processor isolate-0x5138fd0-15431-v8.log</code> 读取它,直接看。但是不方便，推荐直接第3步，存入文件看</p></li><li><p>解析到文件中，查看堆栈信息</p><blockquote><p><code>node --prof-process isolate-0x102884000-14025-v8.log &gt; 11.txt</code></p></blockquote></li></ol><ol start="4"><li>实例 创建一个app.js文件<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line">(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        ++i</span><br><span class="line">        <span class="built_in">console</span>.log(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></li></ol><p>执行当前文件 <code>node --prof app.js</code> 跑到cpu特别高的时候 关闭，就会生成一个日志文件<code>isolate-0x102884000-14025-v8.log</code>(文件名字会不一样)；</p><p>解析到文件中 <code>node --prof-process isolate-0x102884000-14025-v8.log &gt; 11.txt</code>;</p><p>查看文件 找到对应的执行的地方</p><p><img src="https://img-blog.csdnimg.cn/5aa3fa4721b146c8a6bb4878b708b7ff.png" alt="在这里插入图片描述"></p><h2 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h2><p>感谢梁老师让我学习到如果排查此问题！！！</p><h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="http://t.zoukankan.com/flydean-p-14376230.html" target="_blank" rel="external nofollow noopener noreferrer">使用V8和node轻松profile分析nodejs应用程序</a></p><p><a href="https://itecnote.com/tecnote/r-how-to-debug-node-js-causing-100-cpu-usage/" target="_blank" rel="external nofollow noopener noreferrer">Node.js – how to debug node.js causing 100% cpu usage</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ol&gt;
-&lt;li&gt;出现原因介绍&lt;br&gt;因为我们使用了神策埋点，正好神策过期了，没有及时关闭配置，导致日志上传不了，一直保存在本地，存了上百M的日志，在代码发布的时候需要重启，导致pm2的内容直接超过8G,把服务器直接卡死，等了半个小时了之后 内存慢慢下降，刚开始以为是代码太多，打包内存不够用，升级了服务器内存，还是出现了同样的问题，排查了几天都没有发现。后面使用&lt;code&gt;node-tick&lt;/code&gt;才发现原因是神策在上传日志，他里面写的是foreach循环一起上传所有日志，由于有上传不了，又保存在本地。&lt;/li&gt;
-&lt;/ol&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="nodejs" scheme="https://blog.wjc66.cn/tags/nodejs/"/>
     
   </entry>
   

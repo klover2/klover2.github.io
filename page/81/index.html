@@ -297,11 +297,11 @@
   
 
 
-<article id="post-OSS配置跨域访问" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-mps给上传到oss的视频截取关键帧" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/OSS%E9%85%8D%E7%BD%AE%E8%B7%A8%E5%9F%9F%E8%AE%BF%E9%97%AE/" class="article-date">
-      <time datetime="2020-10-09T02:02:26.000Z" itemprop="datePublished">2020-10-09</time>
+      <a href="/mps%E7%BB%99%E4%B8%8A%E4%BC%A0%E5%88%B0oss%E7%9A%84%E8%A7%86%E9%A2%91%E6%88%AA%E5%8F%96%E5%85%B3%E9%94%AE%E5%B8%A7/" class="article-date">
+      <time datetime="2020-10-09T02:03:26.000Z" itemprop="datePublished">2020-10-09</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/OSS%E9%85%8D%E7%BD%AE%E8%B7%A8%E5%9F%9F%E8%AE%BF%E9%97%AE/">OSS配置跨域访问</a>
+      <a class="article-title" href="/mps%E7%BB%99%E4%B8%8A%E4%BC%A0%E5%88%B0oss%E7%9A%84%E8%A7%86%E9%A2%91%E6%88%AA%E5%8F%96%E5%85%B3%E9%94%AE%E5%B8%A7/">mps给上传到oss的视频截取关键帧</a>
     </h1>
   
 
         
-          <!-- <a href="/OSS%E9%85%8D%E7%BD%AE%E8%B7%A8%E5%9F%9F%E8%AE%BF%E9%97%AE/" class="archive-article-date">
-      <time datetime="2020-10-09T02:02:26.000Z" itemprop="datePublished">2020-10-09</time>
+          <!-- <a href="/mps%E7%BB%99%E4%B8%8A%E4%BC%A0%E5%88%B0oss%E7%9A%84%E8%A7%86%E9%A2%91%E6%88%AA%E5%8F%96%E5%85%B3%E9%94%AE%E5%B8%A7/" class="archive-article-date">
+      <time datetime="2020-10-09T02:03:26.000Z" itemprop="datePublished">2020-10-09</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">209字</span>
+      <span class="post-count">132字</span>
     </span>
   </span>
 
@@ -358,21 +358,20 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>如果没有配置，网页控制台会报（如果出现以下错误):<br>Access to XMLHttpRequest at ‘<a href="https://xxx.oss-cn-hangzhou.aliyuncs.com/" target="_blank" rel="external nofollow noopener noreferrer">https://xxx.oss-cn-hangzhou.aliyuncs.com/</a> ’ from origin ‘null’ has been blocked by CORS policy: No ‘Access-Control-Allow-Origin’ header is present on the requested resource.</p>
-<p>1.进入bucket 管理后台 （<a href="https://oss.console.aliyun.com/bucket）" target="_blank" rel="external nofollow noopener noreferrer">https://oss.console.aliyun.com/bucket）</a><br>2. 点击需要配置的bucket<br><img src="https://img-blog.csdnimg.cn/20200929162018457.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200929162149945.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>保存就可以上传图片了</p>
-<p>如果在自己后台中访问图片出现403 可以在html中加入</p>
-<meta name="referrer" content="no-referrer">
-这是oss配置了防盗链 所以不要带上referrer
-
-
-<p>注意：<br>oss 需要配置域名，不然访问是下载<br>配置一个域名（必须备案）</p>
+        <p><a href="https://help.aliyun.com/document_detail/29207.html?spm=a2c4g.11186623.6.543.55b25529tkkA0j" target="_blank" rel="external nofollow noopener noreferrer">mps介绍文档</a></p>
 <ol>
-<li><p>在域名解析中通过CANME 映射到oss分配的外网bucket地址</p>
+<li><p>先创建好两个bucket ,配置好跨域等</p>
 </li>
-<li><p>进入oss管理后台 点击你要配置的bucket<br><img src="https://img-blog.csdnimg.cn/20200929175702675.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<li><p>把两个bucket加入到媒体bucket(<a href="https://mps.console.aliyun.com/bucket" target="_blank" rel="external nofollow noopener noreferrer">https://mps.console.aliyun.com/bucket</a>)<br>一个输入 一个输出<br><img src="https://img-blog.csdnimg.cn/20200929174010447.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 </li>
-<li><p>如果需要https 访问 就需要上传证书（申请一个免费证书即可）<br><img src="https://img-blog.csdnimg.cn/20200929175820876.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<li><p>添加工作流（<a href="https://mps.console.aliyun.com/workflow/list）" target="_blank" rel="external nofollow noopener noreferrer">https://mps.console.aliyun.com/workflow/list）</a><br><img src="https://img-blog.csdnimg.cn/20200929174216834.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 </li>
+<li><p>配置工作流<br><img src="https://img-blog.csdnimg.cn/2020092917443418.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>输入<br><img src="https://img-blog.csdnimg.cn/20200929174500470.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>转码<br><img src="https://img-blog.csdnimg.cn/20200929174551756.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200929174701726.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+</li>
+</ol>
+<p>截图<br><img src="https://img-blog.csdnimg.cn/20200929174627847.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>输出<br><img src="https://img-blog.csdnimg.cn/2020092917471764.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>保存就好了</p>
+<ol start="5">
+<li>使用 通过输入的bucket 上传视频，视频和截屏处理好后会自动同步的输出的bucket中<br>在输入bucket只会有一个视频<br><img src="https://img-blog.csdnimg.cn/20200929175100146.png#pic_center" alt="在这里插入图片描述"><br>在输出的bucket会有一个视频和一个图片（路径相同）<br><img src="https://img-blog.csdnimg.cn/20200929175151244.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></li>
 </ol>
 
       
@@ -410,7 +409,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/80/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/79/">79</a><a class="page-number" href="/page/80/">80</a><span class="page-number current">81</span><a class="page-number" href="/page/82/">82</a><a class="page-number" href="/page/83/">83</a><span class="space">&hellip;</span><a class="page-number" href="/page/180/">180</a><a class="extend next" rel="next" href="/page/82/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/80/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/79/">79</a><a class="page-number" href="/page/80/">80</a><span class="page-number current">81</span><a class="page-number" href="/page/82/">82</a><a class="page-number" href="/page/83/">83</a><span class="space">&hellip;</span><a class="page-number" href="/page/181/">181</a><a class="extend next" rel="next" href="/page/82/">下一页</a>
     </nav>
   
 
