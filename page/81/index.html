@@ -297,11 +297,11 @@
   
 
 
-<article id="post-小程序插件" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-OSS配置跨域访问" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8F%92%E4%BB%B6/" class="article-date">
-      <time datetime="2020-09-17T05:51:57.000Z" itemprop="datePublished">2020-09-17</time>
+      <a href="/OSS%E9%85%8D%E7%BD%AE%E8%B7%A8%E5%9F%9F%E8%AE%BF%E9%97%AE/" class="article-date">
+      <time datetime="2020-10-09T02:02:26.000Z" itemprop="datePublished">2020-10-09</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8F%92%E4%BB%B6/">小程序插件</a>
+      <a class="article-title" href="/OSS%E9%85%8D%E7%BD%AE%E8%B7%A8%E5%9F%9F%E8%AE%BF%E9%97%AE/">OSS配置跨域访问</a>
     </h1>
   
 
         
-          <!-- <a href="/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8F%92%E4%BB%B6/" class="archive-article-date">
-      <time datetime="2020-09-17T05:51:57.000Z" itemprop="datePublished">2020-09-17</time>
+          <!-- <a href="/OSS%E9%85%8D%E7%BD%AE%E8%B7%A8%E5%9F%9F%E8%AE%BF%E9%97%AE/" class="archive-article-date">
+      <time datetime="2020-10-09T02:02:26.000Z" itemprop="datePublished">2020-10-09</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">244字</span>
+      <span class="post-count">209字</span>
     </span>
   </span>
 
@@ -358,13 +358,22 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="直播"><a href="#直播" class="headerlink" title="直播"></a>直播</h2><p>在设置-&gt;第三方设置-&gt;插件管理中添加插件 通过(    wx2b03c6e691cd7370)搜索添加</p>
-<h2 id="腾讯视频（由于小程序视频不支持外部视频，需要证书）"><a href="#腾讯视频（由于小程序视频不支持外部视频，需要证书）" class="headerlink" title="腾讯视频（由于小程序视频不支持外部视频，需要证书）"></a>腾讯视频（由于小程序视频不支持外部视频，需要证书）</h2><p>在设置-&gt;第三方设置-&gt;插件管理中添加插件 通过(wxa75efa648b60994b)搜索添加</p>
-<h2 id="ocr"><a href="#ocr" class="headerlink" title="ocr"></a>ocr</h2><p>在设置-&gt;第三方设置-&gt;插件管理中添加插件 通过(wx4418e3e031e551be)搜索添加<br><a href="https://developers.weixin.qq.com/community/servicemarket/detail/000ce4cec24ca026d37900ed551415" target="_blank" rel="external nofollow noopener noreferrer">需要购买</a></p>
-<p>在服务端使用ocr(下面是通过img方式是把，使用img_url就不用img)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">const superagent = require(<span class="string">'superagent'</span>);</span><br><span class="line">const fs = require(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line">(async () =&gt; &#123;</span><br><span class="line">    // https://api.weixin.qq.com/cv/ocr/idcard?<span class="built_in">type</span>=MODE&amp;img_url=ENCODE_URL&amp;access_token=ACCESS_TOCKEN</span><br><span class="line"></span><br><span class="line">    <span class="built_in">let</span> appid = <span class="string">''</span>, // 小程序appid</span><br><span class="line">        appsecret = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">let</span> accessTokenInfo = await superagent.get(`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=<span class="variable">$&#123;appid&#125;</span>&amp;secret=<span class="variable">$&#123;appsecret&#125;</span>`);</span><br><span class="line">    <span class="built_in">let</span> &#123; access_token = <span class="string">''</span>, errcode, errmsg &#125; = accessTokenInfo.body || &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    console.log(<span class="string">'access_token========&gt;'</span>, access_token);</span><br><span class="line">    // 上传素材</span><br><span class="line">    <span class="built_in">let</span> uploadUrl = `https://api.weixin.qq.com/cv/ocr/idcard?<span class="built_in">type</span>=MODE&amp;access_token=<span class="variable">$&#123;access_token&#125;</span>`;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">let</span> result = await superagent.post(uploadUrl).attach(<span class="string">'img'</span>, fs.createReadStream(<span class="string">'./anq52fdebqianq52fdebqi.jpg'</span>));</span><br><span class="line"></span><br><span class="line">    console.log(<span class="string">'result======&gt;'</span>, result.body);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+        <p>如果没有配置，网页控制台会报（如果出现以下错误):<br>Access to XMLHttpRequest at ‘<a href="https://xxx.oss-cn-hangzhou.aliyuncs.com/" target="_blank" rel="external nofollow noopener noreferrer">https://xxx.oss-cn-hangzhou.aliyuncs.com/</a> ’ from origin ‘null’ has been blocked by CORS policy: No ‘Access-Control-Allow-Origin’ header is present on the requested resource.</p>
+<p>1.进入bucket 管理后台 （<a href="https://oss.console.aliyun.com/bucket）" target="_blank" rel="external nofollow noopener noreferrer">https://oss.console.aliyun.com/bucket）</a><br>2. 点击需要配置的bucket<br><img src="https://img-blog.csdnimg.cn/20200929162018457.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200929162149945.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>保存就可以上传图片了</p>
+<p>如果在自己后台中访问图片出现403 可以在html中加入</p>
+<meta name="referrer" content="no-referrer">
+这是oss配置了防盗链 所以不要带上referrer
 
-<p><img src="https://img-blog.csdnimg.cn/20200917134243964.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+
+<p>注意：<br>oss 需要配置域名，不然访问是下载<br>配置一个域名（必须备案）</p>
+<ol>
+<li><p>在域名解析中通过CANME 映射到oss分配的外网bucket地址</p>
+</li>
+<li><p>进入oss管理后台 点击你要配置的bucket<br><img src="https://img-blog.csdnimg.cn/20200929175702675.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+</li>
+<li><p>如果需要https 访问 就需要上传证书（申请一个免费证书即可）<br><img src="https://img-blog.csdnimg.cn/20200929175820876.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+</li>
+</ol>
 
       
     </div>
@@ -375,7 +384,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oss/" rel="tag">oss</a></li></ul>
     </div>
 
       
@@ -401,7 +410,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/80/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/79/">79</a><a class="page-number" href="/page/80/">80</a><span class="page-number current">81</span><a class="page-number" href="/page/82/">82</a><a class="page-number" href="/page/83/">83</a><span class="space">&hellip;</span><a class="page-number" href="/page/179/">179</a><a class="extend next" rel="next" href="/page/82/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/80/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/79/">79</a><a class="page-number" href="/page/80/">80</a><span class="page-number current">81</span><a class="page-number" href="/page/82/">82</a><a class="page-number" href="/page/83/">83</a><span class="space">&hellip;</span><a class="page-number" href="/page/180/">180</a><a class="extend next" rel="next" href="/page/82/">下一页</a>
     </nav>
   
 

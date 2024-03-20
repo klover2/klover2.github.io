@@ -297,11 +297,11 @@
   
 
 
-<article id="post-scp的用法" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-postgreSQL日期函数Extract" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/scp%E7%9A%84%E7%94%A8%E6%B3%95/" class="article-date">
-      <time datetime="2020-07-20T07:16:16.000Z" itemprop="datePublished">2020-07-20</time>
+      <a href="/postgreSQL%E6%97%A5%E6%9C%9F%E5%87%BD%E6%95%B0Extract/" class="article-date">
+      <time datetime="2020-07-21T02:28:54.000Z" itemprop="datePublished">2020-07-21</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/scp%E7%9A%84%E7%94%A8%E6%B3%95/">scp的用法</a>
+      <a class="article-title" href="/postgreSQL%E6%97%A5%E6%9C%9F%E5%87%BD%E6%95%B0Extract/">postgreSQL日期函数Extract</a>
     </h1>
   
 
         
-          <!-- <a href="/scp%E7%9A%84%E7%94%A8%E6%B3%95/" class="archive-article-date">
-      <time datetime="2020-07-20T07:16:16.000Z" itemprop="datePublished">2020-07-20</time>
+          <!-- <a href="/postgreSQL%E6%97%A5%E6%9C%9F%E5%87%BD%E6%95%B0Extract/" class="archive-article-date">
+      <time datetime="2020-07-21T02:28:54.000Z" itemprop="datePublished">2020-07-21</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">534字</span>
+      <span class="post-count">225字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">2分</span>
+      <span class="post-count">1分</span>
     </span>
   </span>
 </div>
@@ -358,18 +358,12 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h2 id="scp的上传下载文件"><a href="#scp的上传下载文件" class="headerlink" title="scp的上传下载文件"></a>scp的上传下载文件</h2><ol>
-<li>scp命令参数</li>
-</ol>
-<p>-1 强制scp命令使用协议ssh1</p>
-<p>-2 强制scp命令使用协议ssh2</p>
-<p>-4 强制scp命令只使用IPv4寻址</p>
-<p>-6 强制scp命令只使用IPv6寻址</p>
-<p>-B 使用批处理模式（传输过程中不询问传输口令或短语）</p>
-<p>-C 允许压缩。（将-C标志传递给ssh，从而打开压缩功能）</p>
-<p>-p 留原文件的修改时间，访问时间和访问权限。</p>
-<p>-q 不显示传输进度条。</p>
-          
+        <p>Extract 属于 SQL 的 DML（即数据库管理语言）函数，同样，InterBase 也支持 Extract，它主要用于从一个日期或时间型的字段内抽取年、月、日、时、分、秒数据，因此，它支持其关健字 YEAR、MONTH、DAY、HOUR、MINUTE、SECOND、WEEKDAY、YEARDAY。</p>
+<h2 id="sql-例子"><a href="#sql-例子" class="headerlink" title="sql 例子"></a>sql 例子</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">SELECT EXTRACT(YEAR FROM INTIME) FROM RK 从INTIME字段中提取年份</span><br><span class="line"></span><br><span class="line">SELECT EXTRACT(MONTH FROM INTIME) FROM RK 从INTIME字段中提取月份</span><br><span class="line"></span><br><span class="line">SELECT EXTRACT(DAY FROM INTIME) FROM RK 从INTIME字段中提取日</span><br><span class="line"></span><br><span class="line">SELECT EXTRACT(HOUR FROM INTIME) FROM RK 从INTIME字段中提取时</span><br><span class="line"></span><br><span class="line">SELECT EXTRACT(MINUTE FROM INTIME) FROM RK 从INTIME字段中提取分</span><br><span class="line"></span><br><span class="line">SELECT EXTRACT(SECOND FROM INTIME) FROM RK 从INTIME字段中提取秒</span><br></pre></td></tr></table></figure>
+<h2 id="在sequelize中写法"><a href="#在sequelize中写法" class="headerlink" title="在sequelize中写法"></a>在sequelize中写法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'use strict'</span>;</span><br><span class="line">const sequelize = require(<span class="string">'sequelize'</span>);</span><br><span class="line">const StudentModel = require(<span class="string">'./app/models'</span>).Student;</span><br><span class="line"></span><br><span class="line">(async () =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">let</span> list = await StudentModel.findAll(&#123;</span><br><span class="line">        <span class="string">'attributes'</span>: [[ sequelize.literal(<span class="string">'EXTRACT (YEAR from "createdAt")'</span>), <span class="string">'year'</span> ]],</span><br><span class="line">        <span class="string">'raw'</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    console.log(list);</span><br><span class="line"></span><br><span class="line">    打印出===》 [ &#123; year: 2020 &#125;, &#123; year: 2020 &#125;, &#123; year: 2020 &#125;, &#123; year: 2020 &#125; ]</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>文档：<br><a href="http://www.postgres.cn/docs/10/index.html" target="_blank" rel="external nofollow noopener noreferrer">PostgreSQL 10.1 手册</a></p>
+
       
     </div>
     
@@ -379,13 +373,9 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a></li></ul>
     </div>
 
-      
-        <p class="article-more-link">
-          <a href="/scp%E7%9A%84%E7%94%A8%E6%B3%95/#more">阅读全文 >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -409,7 +399,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/106/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/105/">105</a><a class="page-number" href="/page/106/">106</a><span class="page-number current">107</span><a class="page-number" href="/page/108/">108</a><a class="page-number" href="/page/109/">109</a><span class="space">&hellip;</span><a class="page-number" href="/page/179/">179</a><a class="extend next" rel="next" href="/page/108/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/106/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/105/">105</a><a class="page-number" href="/page/106/">106</a><span class="page-number current">107</span><a class="page-number" href="/page/108/">108</a><a class="page-number" href="/page/109/">109</a><span class="space">&hellip;</span><a class="page-number" href="/page/180/">180</a><a class="extend next" rel="next" href="/page/108/">下一页</a>
     </nav>
   
 

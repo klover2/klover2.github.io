@@ -297,11 +297,11 @@
   
 
 
-<article id="post-sessionStorage和localStorage的使用" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="centos7-解决Docker拉取镜像慢的问题" class="article article-type-centos7" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/sessionStorage%E5%92%8ClocalStorage%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
-      <time datetime="2020-11-23T01:53:06.000Z" itemprop="datePublished">2020-11-23</time>
+      <a href="/%E8%A7%A3%E5%86%B3Docker%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
+      <time datetime="2020-12-07T10:29:16.000Z" itemprop="datePublished">2020-12-07</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/sessionStorage%E5%92%8ClocalStorage%E7%9A%84%E4%BD%BF%E7%94%A8/">sessionStorage和localStorage的使用</a>
+      <a class="article-title" href="/%E8%A7%A3%E5%86%B3Docker%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/">解决Docker拉取镜像慢的问题</a>
     </h1>
   
 
         
-          <!-- <a href="/sessionStorage%E5%92%8ClocalStorage%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-      <time datetime="2020-11-23T01:53:06.000Z" itemprop="datePublished">2020-11-23</time>
+          <!-- <a href="/%E8%A7%A3%E5%86%B3Docker%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
+      <time datetime="2020-12-07T10:29:16.000Z" itemprop="datePublished">2020-12-07</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">307字</span>
+      <span class="post-count">157字</span>
     </span>
   </span>
 
@@ -358,16 +358,26 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p><code>sessionStorage 浏览器关闭时自动销毁</code></p>
-<p><code>localStorage 存储在浏览器中，无期限</code></p>
-<h2 id="sessionStorage用法-一般用于浏览器刷新缓存vuex"><a href="#sessionStorage用法-一般用于浏览器刷新缓存vuex" class="headerlink" title="sessionStorage用法 (一般用于浏览器刷新缓存vuex)"></a>sessionStorage用法 (一般用于浏览器刷新缓存vuex)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 保存或设置数据到sessionStorage</span><br><span class="line">    sessionStorage.setItem(<span class="string">'key'</span>,<span class="string">'value'</span>)</span><br><span class="line">    </span><br><span class="line">// 获取某个sessionStorage</span><br><span class="line">    sessionStorage.getItem(<span class="string">'key'</span>)</span><br><span class="line">    </span><br><span class="line">// 从sessionStorage删除某个保存的数据</span><br><span class="line">    sessionStorage.removeItem(<span class="string">'key'</span>)</span><br><span class="line">    </span><br><span class="line">// 从sessionStorage删除所有保存的数据</span><br><span class="line">    sessionStorage.clear();</span><br></pre></td></tr></table></figure>
+        <p>配置阿里云加速<br><code>https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors</code><br>点击镜像中心的镜像加速器</p>
+<p>加速地址为 <code>https://quk9x0kt.mirror.aliyuncs.com</code> 或者也可以使用网易的<code>http://hub-mirror.c.163.com</code></p>
+<h2 id="centos配置"><a href="#centos配置" class="headerlink" title="centos配置"></a>centos配置</h2><ol>
+<li><code>vim /etc/docker/daemon.json</code></li>
+<li>在配置文件中加入<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> &#123;</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://quk9x0kt.mirror.aliyuncs.com"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>重启服务<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
 
-<h2 id="localStorage用法"><a href="#localStorage用法" class="headerlink" title="localStorage用法"></a>localStorage用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 保存或设置数据到localStorage</span><br><span class="line">    localStorage.setItem(<span class="string">'key'</span>,<span class="string">'value'</span>)</span><br><span class="line">    </span><br><span class="line">// 获取某个localStorage</span><br><span class="line">    localStorage.getItem(<span class="string">'key'</span>)</span><br><span class="line">    </span><br><span class="line">// 从localStorage删除某个保存的数据</span><br><span class="line">    localStorage.removeItem(<span class="string">'key'</span>)</span><br><span class="line">    </span><br><span class="line">// 从localStorage删除所有保存的数据</span><br><span class="line">    localStorage.clear();</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="mac配置"><a href="#mac配置" class="headerlink" title="mac配置"></a>mac配置</h2><ol>
+<li>安装docker<br><code>brew cask install docker</code></li>
+<li>点击启动 -&gt;右上角有图片-&gt;点击选择Preferences -&gt; 选择Docker Engine<br>加入配置<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"registry-mirrors"</span>: [</span><br><span class="line">    <span class="string">"http://hub-mirror.c.163.com"</span></span><br><span class="line">  ]</span><br></pre></td></tr></table></figure>
 
+</li>
+</ol>
+<p>整体如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"experimental"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="string">"debug"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [</span><br><span class="line">    <span class="string">"http://hub-mirror.c.163.com"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><p>docker info</p>
 
-<p>vuex在页面刷新后，store中的状态将被重新初始化，赋值的数据丢失, 所以在页面刷新或离开之前将store中的数据保存到sessionStorage 或 localStorage中，在页面重新加载后再将数据取出，通过vuex的$store.replaceState 将数据替换到store中</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">app.vue:</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">created</span></span> () &#123;</span><br><span class="line"> </span><br><span class="line">     //在页面加载时读取sessionStorage里的状态信息</span><br><span class="line">     <span class="keyword">if</span> (sessionStorage.getItem(<span class="string">"storedata"</span>) ) &#123;</span><br><span class="line">         this.<span class="variable">$store</span>.replaceState(Object.assign(&#123;&#125;, this.<span class="variable">$store</span>.state,JSON.parse(sessionStorage.getItem(<span class="string">"storedata"</span>))))</span><br><span class="line">     &#125;</span><br><span class="line">    //在页面刷新时将vuex里的信息保存到sessionStorage里</span><br><span class="line">    window.addEventListener(<span class="string">"beforeunload"</span>,()=&gt;&#123;</span><br><span class="line">        sessionStorage.setItem(<span class="string">"storedata"</span>,JSON.stringify(this.<span class="variable">$store</span>.state))</span><br><span class="line">    &#125;);     // 兼容iphone手机</span><br><span class="line">    window.addEventListener(<span class="string">"pagehide"</span>,()=&gt;&#123;</span><br><span class="line">         sessionStorage.setItem(<span class="string">"storedata"</span>,JSON.stringify(this.<span class="variable">$store</span>.state))</span><br><span class="line">    &#125;);</span><br><span class="line">   &#125;,</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -377,7 +387,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
     </div>
 
       
@@ -403,7 +413,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/68/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/67/">67</a><a class="page-number" href="/page/68/">68</a><span class="page-number current">69</span><a class="page-number" href="/page/70/">70</a><a class="page-number" href="/page/71/">71</a><span class="space">&hellip;</span><a class="page-number" href="/page/179/">179</a><a class="extend next" rel="next" href="/page/70/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/68/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/67/">67</a><a class="page-number" href="/page/68/">68</a><span class="page-number current">69</span><a class="page-number" href="/page/70/">70</a><a class="page-number" href="/page/71/">71</a><span class="space">&hellip;</span><a class="page-number" href="/page/180/">180</a><a class="extend next" rel="next" href="/page/70/">下一页</a>
     </nav>
   
 

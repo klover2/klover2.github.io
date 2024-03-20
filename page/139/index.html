@@ -297,11 +297,11 @@
   
 
 
-<article id="post-CentOS6-CentOS7防火墙的使用与配置" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-centos7防火墙常用命令" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/CentOS6-CentOS7%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E9%85%8D%E7%BD%AE/" class="article-date">
-      <time datetime="2020-05-20T02:56:32.000Z" itemprop="datePublished">2020-05-20</time>
+      <a href="/centos7%E9%98%B2%E7%81%AB%E5%A2%99%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="article-date">
+      <time datetime="2020-05-20T03:01:07.000Z" itemprop="datePublished">2020-05-20</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/CentOS6-CentOS7%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E9%85%8D%E7%BD%AE/">CentOS6,CentOS7防火墙的使用与配置</a>
+      <a class="article-title" href="/centos7%E9%98%B2%E7%81%AB%E5%A2%99%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">centos7防火墙常用命令</a>
     </h1>
   
 
         
-          <!-- <a href="/CentOS6-CentOS7%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-      <time datetime="2020-05-20T02:56:32.000Z" itemprop="datePublished">2020-05-20</time>
+          <!-- <a href="/centos7%E9%98%B2%E7%81%AB%E5%A2%99%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="archive-article-date">
+      <time datetime="2020-05-20T03:01:07.000Z" itemprop="datePublished">2020-05-20</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">1.3k字</span>
+      <span class="post-count">168字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">5分</span>
+      <span class="post-count">1分</span>
     </span>
   </span>
 </div>
@@ -358,28 +358,21 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><strong><em>Centos 7 firewall ：</em></strong></p>
-<p>1.firewalld的基本使用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">启动： systemctl start firewalld</span><br><span class="line">关闭： systemctl stop firewalld</span><br><span class="line">查看状态： systemctl status firewalld </span><br><span class="line">开机禁用  ： systemctl <span class="built_in">disable</span> firewalld</span><br><span class="line">开机启用  ： systemctl <span class="built_in">enable</span> firewalld</span><br></pre></td></tr></table></figure>
-
-<p>2.systemctl是CentOS7的服务管理工具中主要的工具，它融合之前service和chkconfig的功能于一体。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">启动一个服务：systemctl start firewalld.service</span><br><span class="line">关闭一个服务：systemctl stop firewalld.service</span><br><span class="line">重启一个服务：systemctl restart firewalld.service</span><br><span class="line">显示一个服务的状态：systemctl status firewalld.service</span><br><span class="line">在开机时启用一个服务：systemctl <span class="built_in">enable</span> firewalld.service</span><br><span class="line">在开机时禁用一个服务：systemctl <span class="built_in">disable</span> firewalld.service</span><br><span class="line">查看服务是否开机启动：systemctl is-enabled firewalld.service</span><br><span class="line">查看已启动的服务列表：systemctl list-unit-files|grep enabled</span><br><span class="line">查看启动失败的服务列表：systemctl --failed</span><br></pre></td></tr></table></figure>
-
-<p>3.配置firewalld-cmd</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">查看版本： firewall-cmd --version</span><br><span class="line">查看帮助： firewall-cmd --<span class="built_in">help</span></span><br><span class="line">显示状态： firewall-cmd --state</span><br><span class="line">查看所有打开的端口： firewall-cmd --zone=public --list-ports</span><br><span class="line">更新防火墙规则： firewall-cmd --reload</span><br><span class="line">查看区域信息:  firewall-cmd --get-active-zones</span><br><span class="line">查看指定接口所属区域： firewall-cmd --get-zone-of-interface=eth0</span><br><span class="line">拒绝所有包：firewall-cmd --panic-on</span><br><span class="line">取消拒绝状态： firewall-cmd --panic-off</span><br><span class="line">查看是否拒绝： firewall-cmd --query-panic</span><br><span class="line"> </span><br><span class="line">那怎么开启一个端口呢</span><br><span class="line">添加</span><br><span class="line">firewall-cmd --zone=public --add-port=80/tcp --permanent    （--permanent永久生效，没有此参数重启后失效）</span><br><span class="line">重新载入</span><br><span class="line">firewall-cmd --reload</span><br><span class="line">查看</span><br><span class="line">firewall-cmd --zone= public --query-port=80/tcp</span><br><span class="line">删除</span><br><span class="line">firewall-cmd --zone= public --remove-port=80/tcp --permanent</span><br><span class="line"> </span><br><span class="line">调整默认策略（默认拒绝所有访问，改成允许所有访问）：</span><br><span class="line">firewall-cmd --permanent --zone=public --<span class="built_in">set</span>-target=ACCEPT</span><br><span class="line">firewall-cmd --reload</span><br><span class="line">对某个IP开放多个端口：</span><br><span class="line">firewall-cmd --permanent --add-rich-rule=<span class="string">"rule family="</span>ipv4<span class="string">" source address="</span>10.159.60.29<span class="string">" port protocol="</span>tcp<span class="string">" port="</span>1:65535<span class="string">" accept"</span></span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
-
-
-<p><strong><em>CentOS6<br>CentOS 6 iptable：</em></strong><br>1.iptables的基本使用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">启动： service iptables start</span><br><span class="line">关闭： service iptables stop</span><br><span class="line">查看状态： service iptables status</span><br><span class="line">开机禁用  ： chkconfig iptables off</span><br><span class="line">开机启用  ： chkconfig iptables on</span><br></pre></td></tr></table></figure>
-
-<p>2.开放指定的端口</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-A和-I参数分别为添加到规则末尾和规则最前面。</span><br><span class="line"></span><br><span class="line"><span class="comment">#允许本地回环接口(即运行本机访问本机)</span></span><br><span class="line">iptables -A INPUT -i lo -j ACCEPT</span><br><span class="line"><span class="comment">#允许已建立的或相关连的通行</span></span><br><span class="line">iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</span><br><span class="line"><span class="comment">#允许所有本机向外的访问</span></span><br><span class="line">iptables -P INPUT ACCEPT</span><br><span class="line">iptables -A OUTPUT -j ACCEPT</span><br><span class="line"><span class="comment">#允许访问22端口</span></span><br><span class="line">iptables -A INPUT -p tcp --dport 22 -j ACCEPT</span><br><span class="line">iptables -A INPUT -p tcp -s 10.159.1.0/24 --dport 22 -j ACCEPT   </span><br><span class="line">注：-s后可以跟IP段或指定IP地址</span><br><span class="line"><span class="comment">#允许访问80端口</span></span><br><span class="line">iptables -A INPUT -p tcp --dport 80 -j ACCEPT</span><br><span class="line"><span class="comment">#允许FTP服务的21和20端口</span></span><br><span class="line">iptables -A INPUT -p tcp --dport 21 -j ACCEPT</span><br><span class="line">iptables -A INPUT -p tcp --dport 20 -j ACCEPT</span><br><span class="line"><span class="comment">#如果有其他端口的话，规则也类似，稍微修改上述语句就行</span></span><br><span class="line"><span class="comment">#允许ping</span></span><br><span class="line">iptables -A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT</span><br><span class="line"><span class="comment">#禁止其他未允许的规则访问</span></span><br><span class="line">iptables -A INPUT -j REJECT  <span class="comment">#（注意：如果22端口未加入允许规则，SSH链接会直接断开。）</span></span><br><span class="line">iptables -A FORWARD -j REJECT</span><br></pre></td></tr></table></figure>
-
-<p>3.屏蔽IP</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#如果只是想屏蔽IP的话 “3、开放指定的端口” 可以直接跳过。</span></span><br><span class="line"><span class="comment">#屏蔽单个IP的命令是</span></span><br><span class="line">iptables -I INPUT -s 123.45.6.7 -j DROP</span><br><span class="line"><span class="comment">#封整个段即从123.0.0.1到123.255.255.254的命令</span></span><br><span class="line">iptables -I INPUT -s 123.0.0.0/8 -j DROP</span><br><span class="line"><span class="comment">#封IP段即从123.45.0.1到123.45.255.254的命令</span></span><br><span class="line">iptables -I INPUT -s 124.45.0.0/16 -j DROP</span><br><span class="line"><span class="comment">#封IP段即从123.45.6.1到123.45.6.254的命令是</span></span><br><span class="line">iptables -I INPUT -s 123.45.6.0/24 -j DROP</span><br></pre></td></tr></table></figure>
-
-<p>4.查看已经添加的iptables的规则ptables -L -n</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">N：只显示IP地址和端口号，不将IP解析为域名</span><br><span class="line">删除已添加的iptables的规则</span><br><span class="line">将所有iptables以序号标记显示，执行：</span><br><span class="line"></span><br><span class="line">iptables -L -n --line-numbers</span><br><span class="line"></span><br><span class="line">比如要删除INPUT里序号为8的规则，执行：</span><br><span class="line"></span><br><span class="line">iptables -D INPUT 8</span><br><span class="line">5.也可以直接 编辑配置文件，添加iptables防火墙规则：</span><br><span class="line">iptables的配置文件为/ etc / sysconfig / iptables</span><br><span class="line"></span><br><span class="line">编辑配置文件：</span><br><span class="line"></span><br><span class="line">vi /etc/sysconfig/iptables</span><br><span class="line"></span><br><span class="line">文件中的配置规则与通过的iptables命令配置，语法相似：</span><br><span class="line"></span><br><span class="line">如，通过iptables的命令配置，允许访问80端口：</span><br><span class="line"></span><br><span class="line">iptables -A INPUT -p tcp --dport 80 -j ACCEPT</span><br><span class="line"></span><br><span class="line">那么，在文件中配置，只需要去掉句首的iptables，添加如下内容：</span><br><span class="line"></span><br><span class="line">-A INPUT -p tcp --dport 80 -j ACCEPT</span><br><span class="line"></span><br><span class="line">保存退出。</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">有两种方式添加规则</span><br><span class="line"></span><br><span class="line">iptables -A 和iptables -I</span><br><span class="line"></span><br><span class="line">iptables -A 添加的规则是添加在最后面。如针对INPUT链增加一条规则，接收从eth0口进入且源地址为192.168.0.0/16网段发往本机的数据。</span><br><span class="line"></span><br><span class="line">[root@localhost ~]<span class="comment"># iptables -A INPUT -i eth0 -s 192.168.0.0/16 -j ACCEPT</span></span><br><span class="line"></span><br><span class="line">iptables -I 添加的规则默认添加至第一条。</span><br><span class="line"></span><br><span class="line">如果要指定插入规则的位置，则使用iptables -I 时指定位置序号即可。</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">删除规则</span><br><span class="line"></span><br><span class="line">如果删除指定则，使用iptables -D命令，命令后可接序号。效果请对比上图。</span><br><span class="line"></span><br><span class="line">或iptables -D 接详细定义；</span><br><span class="line"></span><br><span class="line">如果想把所有规则都清除掉，可使用iptables -F。</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">备份iptabes rules</span><br><span class="line"></span><br><span class="line">使用iptables-save命令，如：</span><br><span class="line"></span><br><span class="line">[root@localhost ~]<span class="comment"># iptables-save &gt; /etc/sysconfig/iptables.save</span></span><br><span class="line"></span><br><span class="line">恢复iptables rules</span><br><span class="line"></span><br><span class="line">使用iptables命令，如：</span><br><span class="line"></span><br><span class="line">[root@localhost ~]<span class="comment"># iptables-restore &lt; /etc/sysconfig/iptables.save</span></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">iptables 配置保存</span><br><span class="line"></span><br><span class="line">以上做的配置修改，在设备重启后，配置将丢失。可使用service iptables save进行保存。</span><br><span class="line"></span><br><span class="line">[root@localhost ~]<span class="comment"># service iptables save</span></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">重启iptables的服务使其生效：</span><br><span class="line"></span><br><span class="line">service iptables save   添加规则后保存重启生效。</span><br><span class="line"></span><br><span class="line">service iptables restart</span><br></pre></td></tr></table></figure>
+        <blockquote>
+<p>查看防火墙状态<br>firewall-cmd –state<br>没有就安装一个<br>yum install firewalld systemd -y<br>开启防火墙，命令：service firewalld  start<br>重启防火墙sudo systemctl reload firewalld</p>
+</blockquote>
+<blockquote>
+<p>开放端口<br><code>firewall-cmd --zone=public --add-port=5672/tcp --permanent</code>   # 开放5672端口<br><code>firewall-cmd --reload</code>   # 配置立即生效</p>
+</blockquote>
+<blockquote>
+<p>查看防火墙所有开放的端口<br><code>firewall-cmd --zone=public --list-ports</code></p>
+</blockquote>
+<blockquote>
+<p>关闭防火墙<br>如果要开放的端口太多，嫌麻烦，可以关闭防火墙，安全性自行评估<br>systemctl stop firewalld.service</p>
+</blockquote>
+<blockquote>
+<p>添加http,https服务到firewalld,pemmanent表示永久生效，若不加–permanent系统下次启动后就会失效<br><code>sudo firewall-cmd --permanent --add-service=http</code><br><code>sudo firewall-cmd --permanent --add-service=https</code><br><code>firewall-cmd --reload</code>   # 配置立即生效</p>
+</blockquote>
 
       
     </div>
@@ -416,7 +409,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/138/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/137/">137</a><a class="page-number" href="/page/138/">138</a><span class="page-number current">139</span><a class="page-number" href="/page/140/">140</a><a class="page-number" href="/page/141/">141</a><span class="space">&hellip;</span><a class="page-number" href="/page/179/">179</a><a class="extend next" rel="next" href="/page/140/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/138/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/137/">137</a><a class="page-number" href="/page/138/">138</a><span class="page-number current">139</span><a class="page-number" href="/page/140/">140</a><a class="page-number" href="/page/141/">141</a><span class="space">&hellip;</span><a class="page-number" href="/page/180/">180</a><a class="extend next" rel="next" href="/page/140/">下一页</a>
     </nav>
   
 

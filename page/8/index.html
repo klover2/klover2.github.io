@@ -297,11 +297,11 @@
   
 
 
-<article id="post-nodejs中google-authenticator使用" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-nodejs中google授权登录" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/nodejs%E4%B8%ADgoogle-authenticator%E4%BD%BF%E7%94%A8/" class="article-date">
-      <time datetime="2023-09-21T07:19:28.000Z" itemprop="datePublished">2023-09-21</time>
+      <a href="/nodejs%E4%B8%ADgoogle%E6%8E%88%E6%9D%83%E7%99%BB%E5%BD%95/" class="article-date">
+      <time datetime="2023-09-21T07:26:17.000Z" itemprop="datePublished">2023-09-21</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/nodejs%E4%B8%ADgoogle-authenticator%E4%BD%BF%E7%94%A8/">nodejs中google-authenticator使用</a>
+      <a class="article-title" href="/nodejs%E4%B8%ADgoogle%E6%8E%88%E6%9D%83%E7%99%BB%E5%BD%95/">nodejs中google授权登录</a>
     </h1>
   
 
         
-          <!-- <a href="/nodejs%E4%B8%ADgoogle-authenticator%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-      <time datetime="2023-09-21T07:19:28.000Z" itemprop="datePublished">2023-09-21</time>
+          <!-- <a href="/nodejs%E4%B8%ADgoogle%E6%8E%88%E6%9D%83%E7%99%BB%E5%BD%95/" class="archive-article-date">
+      <time datetime="2023-09-21T07:26:17.000Z" itemprop="datePublished">2023-09-21</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">34字</span>
+      <span class="post-count">247字</span>
     </span>
   </span>
 
@@ -358,9 +358,15 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="GA-6-为验证码"><a href="#GA-6-为验证码" class="headerlink" title="GA 6 为验证码"></a>GA 6 为验证码</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; authenticator &#125; <span class="keyword">from</span> <span class="string">"otplib"</span>;</span><br><span class="line"></span><br><span class="line">authenticator.options = &#123;</span><br><span class="line">  epoch: <span class="built_in">Date</span>.now() - <span class="number">30</span> * <span class="number">1000</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> secret_key = authenticator.generateSecret();</span><br><span class="line"><span class="built_in">console</span>.log(authenticator.generate(secret_key));</span><br></pre></td></tr></table></figure>
+        <h2 id="google-授权配置"><a href="#google-授权配置" class="headerlink" title="google 授权配置"></a>google 授权配置</h2><p>创建项目 &gt;&gt; 在凭据页面创建 OAuth 2.0 客户端 ID &gt;&gt; 配置 (已获授权的重定向 URI) &gt;&gt; 测试完成 在 OAuth 同意屏幕 发布正式版</p>
+<h2 id="授权跳转连接"><a href="#授权跳转连接" class="headerlink" title="授权跳转连接"></a>授权跳转连接</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> url = <span class="string">`https://accounts.google.com/o/oauth2/v2/auth?scope=<span class="subst">$&#123;<span class="built_in">encodeURIComponent</span>(</span></span></span><br><span class="line"><span class="string"><span class="subst">  <span class="string">"https://www.googleapis.com/auth/userinfo.email"</span></span></span></span><br><span class="line"><span class="string"><span class="subst">)&#125;</span>&amp;include_granted_scopes=true&amp;</span></span><br><span class="line"><span class="string">response_type=token&amp;state=1234&amp;redirect_uri=<span class="subst">$&#123;<span class="built_in">encodeURIComponent</span>(</span></span></span><br><span class="line"><span class="string"><span class="subst">  <span class="string">"&lt;跳转连接 需要在谷歌配置&gt;"</span></span></span></span><br><span class="line"><span class="string"><span class="subst">)&#125;</span>&amp;client_id=client_id`</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(url);</span><br></pre></td></tr></table></figure>
 
-<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://github.com/google/google-authenticator/wiki/Key-Uri-Format" target="_blank" rel="external nofollow noopener noreferrer">google-authenticator</a><br><a href="https://www.5axxw.com/wiki/content/6cwktj" target="_blank" rel="external nofollow noopener noreferrer">Otplib</a></p>
+<h2 id="授权成功后跳转链接如下"><a href="#授权成功后跳转链接如下" class="headerlink" title="授权成功后跳转链接如下"></a>授权成功后跳转链接如下</h2><blockquote>
+<p>(跳转连接 需要在谷歌配置)#state=1234&amp;access_token=<access_token>&amp;token_type=Bearer&amp;expires_in=3599&amp;scope=email%20<a href="https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/drive.metadata.readonly%20openid&amp;authuser=0&amp;prompt=none" target="_blank" rel="external nofollow noopener noreferrer">https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/drive.metadata.readonly%20openid&amp;authuser=0&amp;prompt=none</a></access_token></p>
+</blockquote>
+<h2 id="获取用户信息"><a href="#获取用户信息" class="headerlink" title="获取用户信息"></a>获取用户信息</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> superagent <span class="keyword">from</span> <span class="string">"superagent"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="string">`https://www.googleapis.com/oauth2/v1/userinfo`</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> superagent.get(url, &#123; access_token: token &#125;).set(&#123;</span><br><span class="line">    <span class="string">"Content-Type"</span>: <span class="string">"application/json"</span>,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 获取客户邮箱 和id 头像</span></span><br><span class="line">  <span class="keyword">return</span> res.body;</span><br><span class="line">&#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://developers.google.cn/identity/protocols/oauth2/javascript-implicit-flow?hl=zh-cn" target="_blank" rel="external nofollow noopener noreferrer">适用于客户端 Web 应用的 OAuth 2.0</a></p>
 
       
     </div>
@@ -397,7 +403,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/7/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/179/">179</a><a class="extend next" rel="next" href="/page/9/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/7/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/180/">180</a><a class="extend next" rel="next" href="/page/9/">下一页</a>
     </nav>
   
 

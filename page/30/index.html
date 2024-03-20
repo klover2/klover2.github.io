@@ -297,11 +297,11 @@
   
 
 
-<article id="post-压测工具使用" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-PostgreSQL中JSONB的使用" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/%E5%8E%8B%E6%B5%8B%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" class="article-date">
-      <time datetime="2021-12-16T09:34:43.000Z" itemprop="datePublished">2021-12-16</time>
+      <a href="/PostgreSQL%E4%B8%ADJSONB%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
+      <time datetime="2021-12-27T05:23:52.000Z" itemprop="datePublished">2021-12-27</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/%E5%8E%8B%E6%B5%8B%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">压测工具使用</a>
+      <a class="article-title" href="/PostgreSQL%E4%B8%ADJSONB%E7%9A%84%E4%BD%BF%E7%94%A8/">PostgreSQL中JSONB的使用</a>
     </h1>
   
 
         
-          <!-- <a href="/%E5%8E%8B%E6%B5%8B%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-      <time datetime="2021-12-16T09:34:43.000Z" itemprop="datePublished">2021-12-16</time>
+          <!-- <a href="/PostgreSQL%E4%B8%ADJSONB%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+      <time datetime="2021-12-27T05:23:52.000Z" itemprop="datePublished">2021-12-27</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">1.6k字</span>
+      <span class="post-count">2.1k字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">6分</span>
+      <span class="post-count">9分</span>
     </span>
   </span>
 </div>
@@ -358,7 +358,11 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <h2 id="Apache-Bench"><a href="#Apache-Bench" class="headerlink" title="Apache Bench"></a>Apache Bench</h2><p>Apache Bench 简介<br>ApacheBench 是 Apache 服务器自带的一个 web 压力测试工具，简称 ab。ab 又是一个命令行工具，对发起负载的本机要求很低，根据 ab 命令可以创建很多的并发访问线程，模拟多个访问者同时对某一 URL 地址进行访问，因此可以用来测试目标服务器的负载压力。总的来说 ab 工具小巧简单，上手学习较快，可以提供需要的基本性能指标，但是没有图形化结果，不能监控。</p>
+              <h2 id="json-类型"><a href="#json-类型" class="headerlink" title="json 类型"></a>json 类型</h2><h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>根据 RFC 7159[1]中的说明，JSON 数据类型是用来存储 JSON（JavaScript Object Notation） 数据的。这种数据也可以被存储为 text，但是 JSON 数据类型的 优势在于能强制要求每个被存储的值符合 JSON 规则。也有很多 JSON 相关的函 数和操作符可以用于存储在这些数据类型中的数据</p>
+<p>PostgreSQL 支持两种 JSON 数据类型：json 和 jsonb。它们几乎接受完全相同的值集合作为输入。两者最大的区别是效率。json 数据类型存储输入文本的精准拷贝，处理函数必须在每 次执行时必须重新解析该数据。而 jsonb 数据被存储在一种分解好的二进制格式中，因为需要做附加的转换，它在输入时要稍慢一些。但是 jsonb 在处理时要快很多，因为不需要重新解析。</p>
+<blockquote>
+<p>重点：jsonb 支持索引</p>
+</blockquote>
           
       
     </div>
@@ -369,12 +373,12 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8E%8B%E6%B5%8B%E5%B7%A5%E5%85%B7/" rel="tag">压测工具</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a></li></ul>
     </div>
 
       
         <p class="article-more-link">
-          <a href="/%E5%8E%8B%E6%B5%8B%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/#more">阅读全文 >></a>
+          <a href="/PostgreSQL%E4%B8%ADJSONB%E7%9A%84%E4%BD%BF%E7%94%A8/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -399,7 +403,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/29/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="page-number" href="/page/29/">29</a><span class="page-number current">30</span><a class="page-number" href="/page/31/">31</a><a class="page-number" href="/page/32/">32</a><span class="space">&hellip;</span><a class="page-number" href="/page/179/">179</a><a class="extend next" rel="next" href="/page/31/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/29/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="page-number" href="/page/29/">29</a><span class="page-number current">30</span><a class="page-number" href="/page/31/">31</a><a class="page-number" href="/page/32/">32</a><span class="space">&hellip;</span><a class="page-number" href="/page/180/">180</a><a class="extend next" rel="next" href="/page/31/">下一页</a>
     </nav>
   
 

@@ -297,11 +297,11 @@
   
 
 
-<article id="post-SSH命令行使用方法" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-scp的用法" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/SSH%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" class="article-date">
-      <time datetime="2020-07-20T07:01:37.000Z" itemprop="datePublished">2020-07-20</time>
+      <a href="/scp%E7%9A%84%E7%94%A8%E6%B3%95/" class="article-date">
+      <time datetime="2020-07-20T07:16:16.000Z" itemprop="datePublished">2020-07-20</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/SSH%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">SSH命令行使用方法</a>
+      <a class="article-title" href="/scp%E7%9A%84%E7%94%A8%E6%B3%95/">scp的用法</a>
     </h1>
   
 
         
-          <!-- <a href="/SSH%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" class="archive-article-date">
-      <time datetime="2020-07-20T07:01:37.000Z" itemprop="datePublished">2020-07-20</time>
+          <!-- <a href="/scp%E7%9A%84%E7%94%A8%E6%B3%95/" class="archive-article-date">
+      <time datetime="2020-07-20T07:16:16.000Z" itemprop="datePublished">2020-07-20</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">279字</span>
+      <span class="post-count">534字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">1分</span>
+      <span class="post-count">2分</span>
     </span>
   </span>
 </div>
@@ -358,11 +358,18 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="什么是SSH"><a href="#什么是SSH" class="headerlink" title="什么是SSH"></a>什么是SSH</h2><p>简单说，SSH是一种网络协议，用于计算机之间的加密登录。如果一个用户从本地计算机，使用SSH协议登录另一台远程计算机，我们就可以认为，这种登录是安全的，即使被中途截获，密码也不会泄露。最早的时候，互联网通信都是明文通信，一旦被截获，内容就暴露无疑。1995年，芬兰学者Tatu Ylonen设计了SSH协议，将登录信息全部加密，成为互联网安全的一个基本解决方案，迅速在全世界获得推广，目前已经成为Linux系统的标准配置。</p>
-<p>连接过程是这样的：（1）远程主机收到用户的登录请求，把自己的公钥发给用户。（2）用户使用这个公钥，将登录密码加密后，发送回来。（3）远程主机用自己的私钥，解密登录密码，如果密码正确，就同意用户登录。</p>
-<h2 id="登陆远程服务器"><a href="#登陆远程服务器" class="headerlink" title="登陆远程服务器"></a>登陆远程服务器</h2><p>ssh -p 22 root@ip</p>
-<p>设置免密登录<br>ssh-copy-id root@ip</p>
-
+              <h2 id="scp的上传下载文件"><a href="#scp的上传下载文件" class="headerlink" title="scp的上传下载文件"></a>scp的上传下载文件</h2><ol>
+<li>scp命令参数</li>
+</ol>
+<p>-1 强制scp命令使用协议ssh1</p>
+<p>-2 强制scp命令使用协议ssh2</p>
+<p>-4 强制scp命令只使用IPv4寻址</p>
+<p>-6 强制scp命令只使用IPv6寻址</p>
+<p>-B 使用批处理模式（传输过程中不询问传输口令或短语）</p>
+<p>-C 允许压缩。（将-C标志传递给ssh，从而打开压缩功能）</p>
+<p>-p 留原文件的修改时间，访问时间和访问权限。</p>
+<p>-q 不显示传输进度条。</p>
+          
       
     </div>
     
@@ -375,6 +382,10 @@
         <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a href="/scp%E7%9A%84%E7%94%A8%E6%B3%95/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -398,7 +409,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/107/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/106/">106</a><a class="page-number" href="/page/107/">107</a><span class="page-number current">108</span><a class="page-number" href="/page/109/">109</a><a class="page-number" href="/page/110/">110</a><span class="space">&hellip;</span><a class="page-number" href="/page/179/">179</a><a class="extend next" rel="next" href="/page/109/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/107/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/106/">106</a><a class="page-number" href="/page/107/">107</a><span class="page-number current">108</span><a class="page-number" href="/page/109/">109</a><a class="page-number" href="/page/110/">110</a><span class="space">&hellip;</span><a class="page-number" href="/page/180/">180</a><a class="extend next" rel="next" href="/page/109/">下一页</a>
     </nav>
   
 
