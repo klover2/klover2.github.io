@@ -297,11 +297,11 @@
   
 
 
-<article id="post-重载和重写的区别及在typescript中的使用" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-代理服务器" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/%E9%87%8D%E8%BD%BD%E5%92%8C%E9%87%8D%E5%86%99%E7%9A%84%E5%8C%BA%E5%88%AB%E5%8F%8A%E5%9C%A8typescript%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
-      <time datetime="2020-12-28T03:38:50.000Z" itemprop="datePublished">2020-12-28</time>
+      <a href="/%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="article-date">
+      <time datetime="2020-12-30T03:57:38.000Z" itemprop="datePublished">2020-12-30</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/%E9%87%8D%E8%BD%BD%E5%92%8C%E9%87%8D%E5%86%99%E7%9A%84%E5%8C%BA%E5%88%AB%E5%8F%8A%E5%9C%A8typescript%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/">重载和重写的区别及在typescript中的使用</a>
+      <a class="article-title" href="/%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/">代理服务器</a>
     </h1>
   
 
         
-          <!-- <a href="/%E9%87%8D%E8%BD%BD%E5%92%8C%E9%87%8D%E5%86%99%E7%9A%84%E5%8C%BA%E5%88%AB%E5%8F%8A%E5%9C%A8typescript%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-      <time datetime="2020-12-28T03:38:50.000Z" itemprop="datePublished">2020-12-28</time>
+          <!-- <a href="/%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="archive-article-date">
+      <time datetime="2020-12-30T03:57:38.000Z" itemprop="datePublished">2020-12-30</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">643字</span>
+      <span class="post-count">335字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">2分</span>
+      <span class="post-count">1分</span>
     </span>
   </span>
 </div>
@@ -358,18 +358,29 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="重写-Override"><a href="#重写-Override" class="headerlink" title="重写(Override)"></a>重写(Override)</h2><p>从字面上看，重写就是 重新写一遍的意思。其实就是在子类中把父类本身有的方法重新写一遍。子类继承了父类原有的方法，但有时子类并不想原封不动的继承父类中的某个方法，所以在方法名，参数列表，返回类型(除过子类中方法的返回值是父类中方法返回值的子类时)都相同的情况下， 对方法体进行修改或重写，这就是重写。但要注意子类函数的访问修饰权限不能小于父类的。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Animal &#123;</span><br><span class="line">    public <span class="function"><span class="title">eat</span></span>() &#123;</span><br><span class="line">        console.log(<span class="string">"这是一个吃的方法"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Dog extends Animal &#123;</span><br><span class="line">    public <span class="function"><span class="title">eat</span></span>() &#123;</span><br><span class="line">        console.log(<span class="string">"这是一个小狗吃的方法"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">let</span> dog: Dog = new Dog()</span><br><span class="line">dog.eat()</span><br></pre></td></tr></table></figure>
-<p>重写 总结：</p>
-<ul>
-<li>发生在父类与子类之间</li>
-<li>方法名，参数列表，返回类型（除过子类中方法的返回类型是父类中返回类型的子类）必须相同</li>
-<li>访问修饰符的限制一定要大于被重写方法的访问修饰符（public&gt;protected&gt;private)</li>
-</ul>
-<h2 id="重载-Overload"><a href="#重载-Overload" class="headerlink" title="重载(Overload)"></a>重载(Overload)</h2><p>在一个类中，同名的方法如果有不同的参数列表（<code>参数类型不同、参数个数不同甚至是参数顺序不同</code>）则视为重载。同时，重载对返回类型没有要求，可以相同也可以不同，但<code>不能通过返回类型是否相同来判断重载</code>。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'use strict'</span>;</span><br><span class="line">class Demo &#123;</span><br><span class="line">  // 重载</span><br><span class="line">  public <span class="built_in">log</span>(): void;</span><br><span class="line">  public <span class="built_in">log</span>(arg1: string): void;</span><br><span class="line">  public <span class="built_in">log</span>(arg1: number, arg2: number): void;</span><br><span class="line">  public <span class="built_in">log</span>(arg1: string, arg2: string): void;</span><br><span class="line">  // 实现</span><br><span class="line">  <span class="built_in">log</span>(arg1?: string | number, arg2?: string | number) &#123;</span><br><span class="line">    console.log(arg1, arg2);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">export</span> = Demo;</span><br></pre></td></tr></table></figure>
+        <h1 id="新建一个目录"><a href="#新建一个目录" class="headerlink" title="新建一个目录"></a>新建一个目录</h1><p>shadowsocks</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>npm install shadowsocks</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>安装后修改对应的config.json配置文件，修改端口和密码等。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"server"</span>:<span class="string">"0.0.0.0"</span>, // 我用的是腾讯云，这里修改成了0.0.0.0</span><br><span class="line">    <span class="string">"server_port"</span>:3333,//此处修改为自己的端口</span><br><span class="line">    <span class="string">"local_address"</span>:<span class="string">"127.0.0.1"</span>,</span><br><span class="line">    <span class="string">"local_port"</span>:1080,</span><br><span class="line">    <span class="string">"password"</span>:<span class="string">"woshimima"</span>,//修改你自己的密码</span><br><span class="line">    <span class="string">"timeout"</span>:600,</span><br><span class="line">    <span class="string">"method"</span>:<span class="string">"aes-256-cfb"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>面试题：重载（Overload）和重写（Override）的区别？<br>答：方法的重载和重写都是实现多态的方式，区别在于前者实现的是编译时的多态性，而后者实现的是运行时的多态性。重载发生在一个类中，同名的方法如果有不同的参数列表（参数类型不同、参数个数不同或者二者都不同）则视为重载；重写发生在子类与父类之间，重写要求子类被重写方法与父类被重写方法有相同的参数列表，有兼容的返回类型，比父类被重写方法更好访问，不能比父类被重写方法声明更多的异常（里氏代换原则）。重载对返回类型没有特殊的要求，不能根据返回类型进行区分。</p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>./bin/ssserver</p>
+<h1 id="也可以安装在全局"><a href="#也可以安装在全局" class="headerlink" title="也可以安装在全局"></a>也可以安装在全局</h1><ol>
+<li>centos7以上<br><code>yum install python-setuptools &amp;&amp; easy_install pip</code><br><code>pip install shadowsocks</code></li>
+<li>Debian / Ubuntu:<br><code>apt-get install python-pip</code><br><code>pip install shadowsocks</code></li>
+</ol>
+<p>在/etc 下创建文件config.json</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"server"</span>:<span class="string">"0.0.0.0"</span>, // 我用的是腾讯云，这里修改成了0.0.0.0</span><br><span class="line">    <span class="string">"server_port"</span>:3333,//此处修改为自己的端口</span><br><span class="line">    <span class="string">"local_address"</span>:<span class="string">"127.0.0.1"</span>,</span><br><span class="line">    <span class="string">"local_port"</span>:1080,</span><br><span class="line">    <span class="string">"password"</span>:<span class="string">"woshimima"</span>,//修改你自己的密码</span><br><span class="line">    <span class="string">"timeout"</span>:600,</span><br><span class="line">    <span class="string">"method"</span>:<span class="string">"aes-256-cfb"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行 <code>ssserver -c /etc/shadowsocks.json</code></p>
+<p>后台运行: </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ssserver -c /etc/shadowsocks.json -d start</span><br><span class="line">ssserver -c /etc/shadowsocks.json -d stop</span><br><span class="line"><span class="comment">#重启</span></span><br><span class="line">ssserver -c /etc/shadowsocks.json -d restart</span><br></pre></td></tr></table></figure>
+
+<p>配置自启动<br>新建启动脚本文件<code>/etc/systemd/system/shadowsocks.service</code>，内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Shadowsocks</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">TimeoutStartSec=0</span><br><span class="line">ExecStart=/usr/bin/ssserver -c /etc/shadowsocks.json</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p>启动<br><code>systemctl enable shadowsocks</code><br><code>systemctl start shadowsocks</code><br>启动后可以查看服务状态<br><code>systemctl status shadowsocks -l</code></p>
+<p>注意 centos7用的firewalld 需要配置端口开放<br><code>firewall-cmd --permanent --add-port=3333/tcp</code><br><code>firewall-cmd --reload</code></p>
+<h2 id="连接工具下在-windows-https-github-com-shadowsocks-shadowsocks-windows-releases"><a href="#连接工具下在-windows-https-github-com-shadowsocks-shadowsocks-windows-releases" class="headerlink" title="连接工具下在 windows https://github.com/shadowsocks/shadowsocks-windows/releases"></a>连接工具下在 windows <a href="https://github.com/shadowsocks/shadowsocks-windows/releases" target="_blank" rel="external nofollow noopener noreferrer">https://github.com/shadowsocks/shadowsocks-windows/releases</a></h2><p>文档<br><a href="https://zengwu.com.cn/p/5eceab18.html" target="_blank" rel="external nofollow noopener noreferrer">CentOS7 下搭建shadowsocks</a></p>
 
       
     </div>
@@ -380,7 +391,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shadowsocks/" rel="tag">shadowsocks</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BF%BB%E5%A2%99/" rel="tag">翻墙</a></li></ul>
     </div>
 
       
@@ -406,7 +417,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/64/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/63/">63</a><a class="page-number" href="/page/64/">64</a><span class="page-number current">65</span><a class="page-number" href="/page/66/">66</a><a class="page-number" href="/page/67/">67</a><span class="space">&hellip;</span><a class="page-number" href="/page/181/">181</a><a class="extend next" rel="next" href="/page/66/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/64/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/63/">63</a><a class="page-number" href="/page/64/">64</a><span class="page-number current">65</span><a class="page-number" href="/page/66/">66</a><a class="page-number" href="/page/67/">67</a><span class="space">&hellip;</span><a class="page-number" href="/page/182/">182</a><a class="extend next" rel="next" href="/page/66/">下一页</a>
     </nav>
   
 

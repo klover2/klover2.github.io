@@ -297,11 +297,11 @@
   
 
 
-<article id="post-使用STS临时访问凭证访问OSS" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-pgp加解密和生成密钥" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/%E4%BD%BF%E7%94%A8STS%E4%B8%B4%E6%97%B6%E8%AE%BF%E9%97%AE%E5%87%AD%E8%AF%81%E8%AE%BF%E9%97%AEOSS/" class="article-date">
-      <time datetime="2023-09-21T08:30:47.000Z" itemprop="datePublished">2023-09-21</time>
+      <a href="/pgp%E5%8A%A0%E8%A7%A3%E5%AF%86%E5%92%8C%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5/" class="article-date">
+      <time datetime="2024-03-14T09:22:43.000Z" itemprop="datePublished">2024-03-14</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/%E4%BD%BF%E7%94%A8STS%E4%B8%B4%E6%97%B6%E8%AE%BF%E9%97%AE%E5%87%AD%E8%AF%81%E8%AE%BF%E9%97%AEOSS/">使用STS临时访问凭证访问OSS</a>
+      <a class="article-title" href="/pgp%E5%8A%A0%E8%A7%A3%E5%AF%86%E5%92%8C%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5/">pgp加解密和生成密钥</a>
     </h1>
   
 
         
-          <!-- <a href="/%E4%BD%BF%E7%94%A8STS%E4%B8%B4%E6%97%B6%E8%AE%BF%E9%97%AE%E5%87%AD%E8%AF%81%E8%AE%BF%E9%97%AEOSS/" class="archive-article-date">
-      <time datetime="2023-09-21T08:30:47.000Z" itemprop="datePublished">2023-09-21</time>
+          <!-- <a href="/pgp%E5%8A%A0%E8%A7%A3%E5%AF%86%E5%92%8C%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5/" class="archive-article-date">
+      <time datetime="2024-03-14T09:22:43.000Z" itemprop="datePublished">2024-03-14</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">13字</span>
+      <span class="post-count">187字</span>
     </span>
   </span>
 
@@ -358,8 +358,13 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>todo</p>
-<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://help.aliyun.com/zh/oss/developer-reference/use-temporary-access-credentials-provided-by-sts-to-access-oss?spm=a2c4g.11186623.4.1.3baf297alQfiKs&scm=20140722.H_100624._.ID_100624-OR_rec-V_1" target="_blank" rel="external nofollow noopener noreferrer">STS 临时访问凭证访问 OSS</a></p>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>GPG, 或 GnuPG (GNU Privacy Guard) 是一个遵照 OpenPGP 协议的用于加密、数字签名以及认证的软件。它与 PGP (Pretty Good Privacy) 的区别是它是开源的，而 PGP 则是 Symantec 公司的专有软件。</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.bouncycastle<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>bcpg-jdk18on<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.77<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-io<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-io<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.11.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="代码使用"><a href="#代码使用" class="headerlink" title="代码使用"></a>代码使用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生成公私钥</span></span><br><span class="line">PgpKeyDTO generate = PgpUtil.generate(<span class="string">"123456"</span>, <span class="string">"123@qq.com"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加密</span></span><br><span class="line"> String testMessage = PgpUtil.encrypt(<span class="string">"test message"</span>, <span class="keyword">this</span>.publicKey);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 解密</span></span><br><span class="line">  String decrypt = PgpUtil.decrypt(message, <span class="keyword">this</span>.privateKey, <span class="keyword">this</span>.passphrase);</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/klover2/java-demo/blob/master/pgp-demo/src/test/java/com/klover/pgp/PgpUtilTest.java" target="_blank" rel="external nofollow noopener noreferrer">代码示例</a></p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://medium.com/@kthsingh.ms/encrypt-and-decrypt-anything-bytes-files-streams-with-pgp-using-bouncy-castle-and-java-ad335ae9f747" target="_blank" rel="external nofollow noopener noreferrer">Encrypt and decrypt anything (bytes/files/streams) with PGP using bouncy castle and java</a></p>
 
       
     </div>
@@ -370,7 +375,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/STS/" rel="tag">STS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/crypto/" rel="tag">crypto</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pgp/" rel="tag">pgp</a></li></ul>
     </div>
 
       
@@ -396,7 +401,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/5/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/181/">181</a><a class="extend next" rel="next" href="/page/7/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/5/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/182/">182</a><a class="extend next" rel="next" href="/page/7/">下一页</a>
     </nav>
   
 

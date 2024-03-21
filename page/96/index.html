@@ -297,11 +297,11 @@
   
 
 
-<article id="post-zip和unzip命令" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-HTTP与TCP-IP20连问" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/zip%E5%92%8Cunzip%E5%91%BD%E4%BB%A4/" class="article-date">
-      <time datetime="2020-07-28T03:28:25.000Z" itemprop="datePublished">2020-07-28</time>
+      <a href="/HTTP%E4%B8%8ETCP-IP20%E8%BF%9E%E9%97%AE/" class="article-date">
+      <time datetime="2020-07-29T01:48:43.000Z" itemprop="datePublished">2020-07-29</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/zip%E5%92%8Cunzip%E5%91%BD%E4%BB%A4/">zip和unzip命令</a>
+      <a class="article-title" href="/HTTP%E4%B8%8ETCP-IP20%E8%BF%9E%E9%97%AE/">HTTP与TCP/IP20连问</a>
     </h1>
   
 
         
-          <!-- <a href="/zip%E5%92%8Cunzip%E5%91%BD%E4%BB%A4/" class="archive-article-date">
-      <time datetime="2020-07-28T03:28:25.000Z" itemprop="datePublished">2020-07-28</time>
+          <!-- <a href="/HTTP%E4%B8%8ETCP-IP20%E8%BF%9E%E9%97%AE/" class="archive-article-date">
+      <time datetime="2020-07-29T01:48:43.000Z" itemprop="datePublished">2020-07-29</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">114字</span>
+      <span class="post-count">6.1k字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">1分</span>
+      <span class="post-count">21分</span>
     </span>
   </span>
 </div>
@@ -358,42 +358,13 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="zip命令"><a href="#zip命令" class="headerlink" title="zip命令"></a>zip命令</h2><ol>
-<li><p>压缩一个文件，并且指定一个新的文件名。</p>
-<blockquote>
-<p>zip [new_name].zip [file_path]</p>
-</blockquote>
-</li>
-<li><p>压缩一个目录下的所有文件，并且指定一个新的文件名。</p>
-<blockquote>
-<p>zip -r [new_name].zip [dir_path]</p>
-</blockquote>
-</li>
-<li><p>加密压缩。</p>
-<blockquote>
-<p>zip -rP [password] [new_name].zip [file_path]</p>
-</blockquote>
-</li>
+              <h2 id="Session-和-cookie-的区别"><a href="#Session-和-cookie-的区别" class="headerlink" title="Session 和 cookie 的区别"></a>Session 和 cookie 的区别</h2><ol>
+<li>cookie保存在客户端，未设置存储时间的cookie,关闭浏览器会话cookie就会被删除；设置了存储时间的cookie会保存在用户设备的磁盘中直到过期，同时cookie在客户端可以伪造，不是十分安全，敏感数据不容易保存。session保存在服务器端，存在在IIS的进程开辟的内存中，而session会过多消耗服务器资源，所以尽量少使用session。</li>
+<li>session是服务器用来跟踪用户的一种手段，每个session都有一个唯一标识sessionID。当服务器端生成一个session时就会向客户端发送一个cookie保存到客户端。这个cookie保存的是session的sessionID,这样才能保证客户端发起请求后，用户能够与服务器端成千上万的session进行匹配，同时也保证了不同的页面之间传值的正确性。</li>
+<li>存储数据类型不同：session能够存储任意的java对象，cookie只能存储string类型的对象。</li>
+<li>大于10k的数据，不要用到cookies</li>
 </ol>
-<h2 id="unzip命令"><a href="#unzip命令" class="headerlink" title="unzip命令"></a>unzip命令</h2><ol>
-<li><p>解压文件到当前文件夹。</p>
-<blockquote>
-<p>unzip [file_name].zip</p>
-</blockquote>
-</li>
-<li><p>解压文件到指定目录下。</p>
-<blockquote>
-<p>unzip -d [dir_path] [file_name].zip</p>
-</blockquote>
-</li>
-<li><p>解压加密文件。</p>
-<blockquote>
-<p>unzip -P [password] [file_name].zip</p>
-</blockquote>
-</li>
-</ol>
-<p>注：<br>-r 递归  -v 查看 -P  密码</p>
-
+          
       
     </div>
     
@@ -403,9 +374,13 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a href="/HTTP%E4%B8%8ETCP-IP20%E8%BF%9E%E9%97%AE/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -429,7 +404,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/95/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/94/">94</a><a class="page-number" href="/page/95/">95</a><span class="page-number current">96</span><a class="page-number" href="/page/97/">97</a><a class="page-number" href="/page/98/">98</a><span class="space">&hellip;</span><a class="page-number" href="/page/181/">181</a><a class="extend next" rel="next" href="/page/97/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/95/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/94/">94</a><a class="page-number" href="/page/95/">95</a><span class="page-number current">96</span><a class="page-number" href="/page/97/">97</a><a class="page-number" href="/page/98/">98</a><span class="space">&hellip;</span><a class="page-number" href="/page/182/">182</a><a class="extend next" rel="next" href="/page/97/">下一页</a>
     </nav>
   
 

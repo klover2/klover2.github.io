@@ -297,11 +297,11 @@
   
 
 
-<article id="post-微信小程序订阅消息推送" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-nodej-ocr识别图片中的文字" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%A2%E9%98%85%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/" class="article-date">
-      <time datetime="2020-05-11T09:52:35.000Z" itemprop="datePublished">2020-05-11</time>
+      <a href="/nodej-ocr%E8%AF%86%E5%88%AB%E5%9B%BE%E7%89%87%E4%B8%AD%E7%9A%84%E6%96%87%E5%AD%97/" class="article-date">
+      <time datetime="2020-05-11T09:56:08.000Z" itemprop="datePublished">2020-05-11</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%A2%E9%98%85%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/">微信小程序订阅消息推送</a>
+      <a class="article-title" href="/nodej-ocr%E8%AF%86%E5%88%AB%E5%9B%BE%E7%89%87%E4%B8%AD%E7%9A%84%E6%96%87%E5%AD%97/">nodej,ocr识别图片中的文字</a>
     </h1>
   
 
         
-          <!-- <a href="/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%A2%E9%98%85%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/" class="archive-article-date">
-      <time datetime="2020-05-11T09:52:35.000Z" itemprop="datePublished">2020-05-11</time>
+          <!-- <a href="/nodej-ocr%E8%AF%86%E5%88%AB%E5%9B%BE%E7%89%87%E4%B8%AD%E7%9A%84%E6%96%87%E5%AD%97/" class="archive-article-date">
+      <time datetime="2020-05-11T09:56:08.000Z" itemprop="datePublished">2020-05-11</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">323字</span>
+      <span class="post-count">650字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">1分</span>
+      <span class="post-count">3分</span>
     </span>
   </span>
 </div>
@@ -358,10 +358,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'use strict'</span>;</span><br><span class="line">const request = require(<span class="string">'superagent'</span>);</span><br><span class="line">const moment = require(<span class="string">'moment'</span>);</span><br><span class="line"></span><br><span class="line">// 文档 https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/uniform-message/uniformMessage.send.html</span><br><span class="line">// 由于小程序订阅消息只支持一次性订阅（一个特殊服务才支持永久订阅）只能使用服务号来进行消息推送</span><br><span class="line">(async () =&gt; &#123;</span><br><span class="line">    <span class="built_in">let</span> openid = <span class="string">''</span>; // 用户openid 登录获取</span><br><span class="line">    <span class="built_in">let</span> appid = <span class="string">''</span>; // 小程序的appid</span><br><span class="line">    <span class="built_in">let</span> appsecret = <span class="string">''</span>; // 小程序secret</span><br><span class="line">    <span class="built_in">let</span> template_id = <span class="string">''</span>; // 模板id</span><br><span class="line"></span><br><span class="line">    <span class="built_in">let</span> data = &#123;</span><br><span class="line">        <span class="string">'first'</span>: &#123;</span><br><span class="line">            <span class="string">'value'</span>: <span class="string">'你有一条新订单'</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">'keyword1'</span>: &#123;</span><br><span class="line">            <span class="string">'value'</span>: <span class="string">'科目1'</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">'keyword2'</span>: &#123;</span><br><span class="line">            <span class="string">'value'</span>: moment().format(<span class="string">'YYYY-MM-DD HH:mm:ss'</span>),</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">'remark'</span>: &#123;</span><br><span class="line">            <span class="string">'value'</span>: <span class="string">'请尽快处理！'</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    // 获取需要推送的小程序的access_token</span><br><span class="line">    <span class="built_in">let</span> accessTokenInfo = await request.get(`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=<span class="variable">$&#123;appid&#125;</span>&amp;secret=<span class="variable">$&#123;appsecret&#125;</span>`).<span class="built_in">set</span>(<span class="string">'accept'</span>, <span class="string">'json'</span>);</span><br><span class="line">    <span class="built_in">let</span> &#123; access_token = <span class="string">''</span>, errcode, errmsg &#125; = accessTokenInfo.body || &#123;&#125;;</span><br><span class="line">    <span class="keyword">if</span> (errcode) throw errmsg;</span><br><span class="line">    <span class="built_in">let</span> url = `https://api.weixin.qq.com/cgi-bin/message/wxopen/template/uniform_send?access_token=<span class="variable">$&#123;access_token&#125;</span>`;</span><br><span class="line">    <span class="built_in">let</span> body = &#123;</span><br><span class="line">        <span class="string">'touser'</span>: openid,</span><br><span class="line">        <span class="string">'access_token'</span>: access_token,</span><br><span class="line">        <span class="string">'mp_template_msg'</span>: &#123;</span><br><span class="line">            <span class="string">'appid'</span>: <span class="string">''</span>, // 公众号模板的appid</span><br><span class="line">            <span class="string">'template_id'</span>: template_id, // 与data对应</span><br><span class="line">            <span class="string">'miniprogram'</span>: &#123;</span><br><span class="line">                <span class="string">'appid'</span>: appid, // 小程序的appid</span><br><span class="line">                // <span class="string">'pagepath'</span>: <span class="string">'index?foo=bar'</span>, // 进入小程序路径 不填默认主页</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="string">'data'</span>: data, // 与template_id对应</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">let</span> result = await request.post(url).send(body).<span class="built_in">set</span>(<span class="string">'accept'</span>, <span class="string">'json'</span>);</span><br><span class="line"></span><br><span class="line">    console.log(result);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20200511181711383.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">参数格式：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;first.DATA&#125;&#125;</span><br><span class="line">内容：&#123;&#123;keyword1.DATA&#125;&#125;</span><br><span class="line">时间：&#123;&#123;keyword2.DATA&#125;&#125;</span><br><span class="line">&#123;&#123;remark.DATA&#125;&#125;</span><br></pre></td></tr></table></figure>
-
+              <p>使用的是<a href="https://help.aliyun.com/document_detail/63004.html?spm=a2c4g.11186623.6.606.5c8c2cddMnMKqQ" target="_blank" rel="external nofollow noopener noreferrer">阿里云文档</a></p>
+          
       
     </div>
     
@@ -371,9 +369,13 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/superagent/" rel="tag">superagent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/crypto/" rel="tag">crypto</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ocr/" rel="tag">ocr</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag">阿里云</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a href="/nodej-ocr%E8%AF%86%E5%88%AB%E5%9B%BE%E7%89%87%E4%B8%AD%E7%9A%84%E6%96%87%E5%AD%97/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -397,7 +399,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/159/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/158/">158</a><a class="page-number" href="/page/159/">159</a><span class="page-number current">160</span><a class="page-number" href="/page/161/">161</a><a class="page-number" href="/page/162/">162</a><span class="space">&hellip;</span><a class="page-number" href="/page/181/">181</a><a class="extend next" rel="next" href="/page/161/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/159/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/158/">158</a><a class="page-number" href="/page/159/">159</a><span class="page-number current">160</span><a class="page-number" href="/page/161/">161</a><a class="page-number" href="/page/162/">162</a><span class="space">&hellip;</span><a class="page-number" href="/page/182/">182</a><a class="extend next" rel="next" href="/page/161/">下一页</a>
     </nav>
   
 

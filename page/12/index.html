@@ -297,11 +297,11 @@
   
 
 
-<article id="post-IDEA-java-无效的源发行版：14" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-node版本管理工具nvm" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/IDEA-java-%E6%97%A0%E6%95%88%E7%9A%84%E6%BA%90%E5%8F%91%E8%A1%8C%E7%89%88%EF%BC%9A14/" class="article-date">
-      <time datetime="2023-07-14T03:41:00.000Z" itemprop="datePublished">2023-07-14</time>
+      <a href="/node%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7nvm/" class="article-date">
+      <time datetime="2023-09-21T07:12:16.000Z" itemprop="datePublished">2023-09-21</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/IDEA-java-%E6%97%A0%E6%95%88%E7%9A%84%E6%BA%90%E5%8F%91%E8%A1%8C%E7%89%88%EF%BC%9A14/">IDEA:java:无效的源发行版：14</a>
+      <a class="article-title" href="/node%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7nvm/">node版本管理工具nvm</a>
     </h1>
   
 
         
-          <!-- <a href="/IDEA-java-%E6%97%A0%E6%95%88%E7%9A%84%E6%BA%90%E5%8F%91%E8%A1%8C%E7%89%88%EF%BC%9A14/" class="archive-article-date">
-      <time datetime="2023-07-14T03:41:00.000Z" itemprop="datePublished">2023-07-14</time>
+          <!-- <a href="/node%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7nvm/" class="archive-article-date">
+      <time datetime="2023-09-21T07:12:16.000Z" itemprop="datePublished">2023-09-21</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">152字</span>
+      <span class="post-count">204字</span>
     </span>
   </span>
 
@@ -358,16 +358,23 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h2><p>用 IDEA 编写 sdk 代码运行后报如下错误：<br><code>警告: 源发行版 14 需要目标发行版 14</code></p>
-<h2 id="问题原因："><a href="#问题原因：" class="headerlink" title="问题原因："></a>问题原因：</h2><p>出现该问题的原因是项目 Project 当中的 jdk 与电脑当中的 jdk 版本不一致造成的。</p>
-<h2 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h2><p>修改 IDEA 当中的 Project 项目的 jdk 版本</p>
-<ol>
-<li>修改 Project 的 SDK 版本<br><img src="https://img-blog.csdnimg.cn/c7c4e3084a3348bfadeab5bd23b5a010.png" alt="在这里插入图片描述"></li>
-<li>修改 Module 模块的 Language Level<br><img src="https://img-blog.csdnimg.cn/baf4d6b24a454decbe98c5a860783a2b.png" alt="在这里插入图片描述"></li>
-<li>修改 Module 模块中的 Module SDK<br><img src="https://img-blog.csdnimg.cn/12cf70053f044e1e9ba6133776459ca2.png" alt></li>
-<li>设置 plaform settings Sdks<br><img src="https://img-blog.csdnimg.cn/0bf3e0671c5c499b9da89c7e3773691d.png" alt="在这里插入图片描述"></li>
-<li>找到 Java Complier，修改 byte code version，使其版本与 sdk 版本保持一致<br><img src="https://img-blog.csdnimg.cn/a480b77b9e774f1891bd335b0385703c.png" alt="在这里插入图片描述"><br>修改过后，再次编译运行就没有问题了！</li>
-</ol>
+        <h2 id="Linux-Centos-8-环境下安装-nvm"><a href="#Linux-Centos-8-环境下安装-nvm" class="headerlink" title="Linux Centos 8 环境下安装 nvm"></a>Linux Centos 8 环境下安装 nvm</h2><p>官网：<a href="https://github.com/nvm-sh/nvm" target="_blank" rel="external nofollow noopener noreferrer">https://github.com/nvm-sh/nvm</a></p>
+<h3 id="下载-nvm-sh-文件"><a href="#下载-nvm-sh-文件" class="headerlink" title="下载 nvm.sh 文件"></a>下载 nvm.sh 文件</h3><p>方式一：命令行工具输入，通过 curl 工具下载</p>
+<blockquote>
+<p>curl -o- <a href="https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh" target="_blank" rel="external nofollow noopener noreferrer">https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh</a> | bash</p>
+</blockquote>
+<p>方式二：命令行工具输入，通过 wget 工具下载</p>
+<blockquote>
+<p>wget -qO- <a href="https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh" target="_blank" rel="external nofollow noopener noreferrer">https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh</a> | bash</p>
+</blockquote>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>这将在主目录下创建一个.nvm 目录。nvm 保留自己的二进制文件和所有其他所需文件。然后在用户.bashrc 文件中设置环境。您需要通过运行以下命令来加载此环境以设置所需的配置：</p>
+<blockquote>
+<p>source ~/.bashrc</p>
+</blockquote>
+<h2 id="windows-环境下安装-nvm"><a href="#windows-环境下安装-nvm" class="headerlink" title="windows 环境下安装 nvm"></a>windows 环境下安装 nvm</h2><h3 id="下载指定版本安装包"><a href="#下载指定版本安装包" class="headerlink" title="下载指定版本安装包"></a>下载指定版本安装包</h3><blockquote>
+<p><a href="https://github.com/nvm-sh/nvm/releases" target="_blank" rel="external nofollow noopener noreferrer">https://github.com/nvm-sh/nvm/releases</a></p>
+</blockquote>
+<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://yuencode.cn/2023/01/03/Linux-Centos-8-%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%AE%89%E8%A3%85nvm/" target="_blank" rel="external nofollow noopener noreferrer">Linux Centos 8 环境下安装 nvm</a><br><a href="https://blog.csdn.net/baidu_30506559/article/details/127379924" target="_blank" rel="external nofollow noopener noreferrer">nvm 安装及基础命令</a></p>
 
       
     </div>
@@ -378,7 +385,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nvm/" rel="tag">nvm</a></li></ul>
     </div>
 
       
@@ -404,7 +411,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/11/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/181/">181</a><a class="extend next" rel="next" href="/page/13/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/11/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/182/">182</a><a class="extend next" rel="next" href="/page/13/">下一页</a>
     </nav>
   
 

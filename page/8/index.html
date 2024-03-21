@@ -297,11 +297,11 @@
   
 
 
-<article id="post-在PostgreSQL中创建只读用户" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-注册美区苹果账号" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/%E5%9C%A8PostgreSQL%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%8F%AA%E8%AF%BB%E7%94%A8%E6%88%B7/" class="article-date">
-      <time datetime="2023-09-21T08:25:08.000Z" itemprop="datePublished">2023-09-21</time>
+      <a href="/%E6%B3%A8%E5%86%8C%E7%BE%8E%E5%8C%BA%E8%8B%B9%E6%9E%9C%E8%B4%A6%E5%8F%B7/" class="article-date">
+      <time datetime="2023-09-21T08:29:24.000Z" itemprop="datePublished">2023-09-21</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/%E5%9C%A8PostgreSQL%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%8F%AA%E8%AF%BB%E7%94%A8%E6%88%B7/">在PostgreSQL中创建只读用户</a>
+      <a class="article-title" href="/%E6%B3%A8%E5%86%8C%E7%BE%8E%E5%8C%BA%E8%8B%B9%E6%9E%9C%E8%B4%A6%E5%8F%B7/">注册美区苹果账号</a>
     </h1>
   
 
         
-          <!-- <a href="/%E5%9C%A8PostgreSQL%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%8F%AA%E8%AF%BB%E7%94%A8%E6%88%B7/" class="archive-article-date">
-      <time datetime="2023-09-21T08:25:08.000Z" itemprop="datePublished">2023-09-21</time>
+          <!-- <a href="/%E6%B3%A8%E5%86%8C%E7%BE%8E%E5%8C%BA%E8%8B%B9%E6%9E%9C%E8%B4%A6%E5%8F%B7/" class="archive-article-date">
+      <time datetime="2023-09-21T08:29:24.000Z" itemprop="datePublished">2023-09-21</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">213字</span>
+      <span class="post-count">39字</span>
     </span>
   </span>
 
@@ -358,17 +358,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="创建只读用户"><a href="#创建只读用户" class="headerlink" title="创建只读用户"></a>创建只读用户</h2><blockquote>
-<p>CREATE USER readonly_user WITH PASSWORD ‘password’;</p>
-</blockquote>
-<p>这条命令会创建一个名为 readonly_user 的用户，并设置用户的密码为 ‘password’。请务必将 ‘password’ 替换为实际的密码。</p>
-<h2 id="进入你需要赋予权限的数据库-授予只读权限"><a href="#进入你需要赋予权限的数据库-授予只读权限" class="headerlink" title="进入你需要赋予权限的数据库 授予只读权限"></a>进入你需要赋予权限的数据库 授予只读权限</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">CONNECT</span> <span class="keyword">ON</span> <span class="keyword">DATABASE</span> <span class="keyword">database</span> <span class="keyword">TO</span> readonly_user;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">USAGE</span> <span class="keyword">ON</span> <span class="keyword">SCHEMA</span> <span class="keyword">public</span> <span class="keyword">TO</span> readonly_user;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">SELECT</span> <span class="keyword">ON</span> <span class="keyword">ALL</span> <span class="keyword">TABLES</span> <span class="keyword">IN</span> <span class="keyword">SCHEMA</span> <span class="keyword">public</span> <span class="keyword">TO</span> readonly_user;</span><br></pre></td></tr></table></figure>
-
-<p>其中，database 是要授予权限的数据库名称。</p>
-<p>第一条命令 GRANT CONNECT ON DATABASE database TO readonly_user; 授予用户连接数据库的权限。</p>
-<p>第二条命令 GRANT USAGE ON SCHEMA public TO readonly_user; 授予用户对数据库中公共模式的使用权限。</p>
-<p>第三条命令 GRANT SELECT ON ALL TABLES IN SCHEMA public TO readonly_user; 授予用户对数据库中公共模式下所有表的只读权限。</p>
-<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://deepinout.com/sqlite/sqlite-questions/89_postgresql_how_do_you_create_a_readonly_user_in_postgresql.html" target="_blank" rel="external nofollow noopener noreferrer">PostgreSQL 如何在 PostgreSQL 中创建只读用户</a></p>
+        <p>链接 &gt; <a href="https://github.com/getlantern/lantern/wiki/%E5%A6%82%E4%BD%95%E6%B3%A8%E5%86%8C%E7%BE%8E%E5%8C%BA%E8%8B%B9%E6%9E%9C%E8%B4%A6%E5%8F%B7" target="_blank" rel="external nofollow noopener noreferrer">https://github.com/getlantern/lantern/wiki/%E5%A6%82%E4%BD%95%E6%B3%A8%E5%86%8C%E7%BE%8E%E5%8C%BA%E8%8B%B9%E6%9E%9C%E8%B4%A6%E5%8F%B7</a></p>
 
       
     </div>
@@ -379,7 +369,7 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/other/" rel="tag">other</a></li></ul>
     </div>
 
       
@@ -405,7 +395,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/7/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/181/">181</a><a class="extend next" rel="next" href="/page/9/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/7/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/182/">182</a><a class="extend next" rel="next" href="/page/9/">下一页</a>
     </nav>
   
 

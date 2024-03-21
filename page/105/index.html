@@ -297,11 +297,11 @@
   
 
 
-<article id="post-docker安装与卸载" class="article article-type-post" itemscope itemprop="blogPost">
+<article id="post-linux服务器内存不足排查" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/" class="article-date">
-      <time datetime="2020-07-21T05:53:35.000Z" itemprop="datePublished">2020-07-21</time>
+      <a href="/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3%E6%8E%92%E6%9F%A5/" class="article-date">
+      <time datetime="2020-07-21T05:56:49.000Z" itemprop="datePublished">2020-07-21</time>
 </a>
 
 
@@ -316,13 +316,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/">docker安装与卸载</a>
+      <a class="article-title" href="/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3%E6%8E%92%E6%9F%A5/">linux服务器内存不足排查</a>
     </h1>
   
 
         
-          <!-- <a href="/docker%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/" class="archive-article-date">
-      <time datetime="2020-07-21T05:53:35.000Z" itemprop="datePublished">2020-07-21</time>
+          <!-- <a href="/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3%E6%8E%92%E6%9F%A5/" class="archive-article-date">
+      <time datetime="2020-07-21T05:56:49.000Z" itemprop="datePublished">2020-07-21</time>
 </a>
 
  -->
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">149字</span>
+      <span class="post-count">309字</span>
     </span>
   </span>
 
@@ -358,50 +358,13 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>我用的是centos8服务器</p>
-<p>centos8 安装 docker</p>
-<blockquote>
+              <p>// 查找大于1G的文件 查找opt下大于1g的文件 输出日志保存在/dev/null中<br>// find /opt/ -size +1G 2&gt;/dev/null</p>
 <ol>
-<li>下载docker-ce的repo<br>curl <a href="https://download.docker.com/linux/centos/docker-ce.repo" target="_blank" rel="external nofollow noopener noreferrer">https://download.docker.com/linux/centos/docker-ce.repo</a> -o /etc/yum.repos.d/docker-ce.repo</li>
+<li>使用df -h发现磁盘占满99%</li>
 </ol>
-</blockquote>
-<blockquote>
-<ol start="2">
-<li>安装依赖(七 不用这一步)<br>yum install <a href="https://download.docker.com/linux/fedora/30/x86_64/stable/Packages/containerd.io-1.2.6-3.3.fc30.x86_64.rpm" target="_blank" rel="external nofollow noopener noreferrer">https://download.docker.com/linux/fedora/30/x86_64/stable/Packages/containerd.io-1.2.6-3.3.fc30.x86_64.rpm</a></li>
-</ol>
-</blockquote>
-<blockquote>
-<ol start="3">
-<li>安装docker-ce<br>yum install docker-ce</li>
-</ol>
-</blockquote>
-<blockquote>
-<ol start="4">
-<li>启动docker<br>systemctl start docker</li>
-</ol>
-</blockquote>
-<h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><blockquote>
-<ol>
-<li>查询安装过的包<br>$:yum list installed | grep docker<br><img src="https://img-blog.csdnimg.cn/20191212161911517.png" alt="在这里插入图片描述"></li>
-</ol>
-</blockquote>
-<blockquote>
-<ol start="2">
-<li>删除安装的软件包<br>$:yum -y remove docker-ce.x86_64<br>$:yum -y remove docker-ce-cli.x86_64</li>
-</ol>
-</blockquote>
-<blockquote>
-<ol start="3">
-<li>删除镜像/容器等<br>$:rm -rf /var/lib/docker/</li>
-</ol>
-</blockquote>
-<blockquote>
-<ol start="4">
-<li>输入docker或docker –version验证是否卸载<br>$:<code>docker --version</code></li>
-</ol>
-<p>-bash: /usr/bin/docker: No such file or directory</p>
-</blockquote>
-
+<p>看到是/var/lib/docker/containers/**里面占用了 超大的数据</p>
+<p>怀疑是docker的镜像日志造成删除镜像日志<br>docker system prune <a href="http://localhost:4000/docker%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" target="_blank" rel="external nofollow noopener noreferrer">命令介绍</a><br>发现删除之后仍然占存很大</p>
+          
       
     </div>
     
@@ -411,9 +374,13 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a href="/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3%E6%8E%92%E6%9F%A5/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -437,7 +404,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/104/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/103/">103</a><a class="page-number" href="/page/104/">104</a><span class="page-number current">105</span><a class="page-number" href="/page/106/">106</a><a class="page-number" href="/page/107/">107</a><span class="space">&hellip;</span><a class="page-number" href="/page/181/">181</a><a class="extend next" rel="next" href="/page/106/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/104/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/103/">103</a><a class="page-number" href="/page/104/">104</a><span class="page-number current">105</span><a class="page-number" href="/page/106/">106</a><a class="page-number" href="/page/107/">107</a><span class="space">&hellip;</span><a class="page-number" href="/page/182/">182</a><a class="extend next" rel="next" href="/page/106/">下一页</a>
     </nav>
   
 
