@@ -4,11 +4,34 @@
   
     
     <entry>
+      <title>记一次springboot3中swagger服务启动失败</title>
+      <link href="%E8%AE%B0%E4%B8%80%E6%AC%A1springboot3%E4%B8%ADswagger%E6%9C%8D%E5%8A%A1%E5%90%AF%E5%8A%A8%E5%A4%B1%E8%B4%A5/"/>
+      <url>%E8%AE%B0%E4%B8%80%E6%AC%A1springboot3%E4%B8%ADswagger%E6%9C%8D%E5%8A%A1%E5%90%AF%E5%8A%A8%E5%A4%B1%E8%B4%A5/</url>
+      
+        <content type="html"><![CDATA[<p>项目开始进行升级，jDk 使用 21，springboot 使用 3 导致引入的 swagger jar 包无效，后来发现，springboot3 已经替换了支持的 jar 包。</p><p>把老 jar 包</p><p><code>&lt;dependency&gt;&lt;groupId&gt;org.springdoc&lt;/groupId&gt;&lt;artifactId&gt;springdoc-openapi-ui&lt;/artifactId&gt;&lt;version&gt;1.6.14&lt;/version&gt;&lt;/dependency&gt;</code></p><p>替换成</p><p><code>&lt;dependency&gt;&lt;groupId&gt;org.springdoc&lt;/groupId&gt; &lt;artifactId&gt;springdoc-openapi-starter-webmvc-ui&lt;/artifactId&gt;&lt;version&gt;2.3.0&lt;/version&gt;&lt;/dependency&gt;</code></p><h2 id="在-application-yml-配置"><a href="#在-application-yml-配置" class="headerlink" title="在 application.yml 配置"></a>在 application.yml 配置</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">springdoc:</span><br><span class="line">  swagger-ui:</span><br><span class="line">    enabled: <span class="keyword">true</span></span><br><span class="line">  api-docs:</span><br><span class="line">    groups:</span><br><span class="line">      enabled: <span class="keyword">true</span></span><br><span class="line">  group-configs:</span><br><span class="line">    - group: admin</span><br><span class="line">      display-name: 管理后台</span><br><span class="line">      paths-to-match: /admin<span class="comment">/**</span></span><br></pre></td></tr></table></figure><h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://springdoc.org/#getting-started" target="_blank" rel="external nofollow noopener noreferrer">springdoc-openapi-starter-webmvc-ui</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> springboot </tag>
+            
+            <tag> swagger </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>postgresql异步创建索引或者删除索引</title>
       <link href="postgresql%E5%BC%82%E6%AD%A5%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E6%88%96%E8%80%85%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95/"/>
       <url>postgresql%E5%BC%82%E6%AD%A5%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E6%88%96%E8%80%85%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95/</url>
       
-        <content type="html"><![CDATA[<p>在 PostgreSQL 中，可以通过使用 CREATE INDEX 命令来异步创建索引。PostgreSQL 会将创建索引的任务放入后台进程进行处理，不会阻塞当前的数据库操作。</p><p>要创建一个异步索引，可以使用 CONCURRENTLY 关键字。这允许你在不锁定表的情况下创建索引，这在创建大型索引时特别有用，因为它可以减少对正常数据库操作的影响。</p><p>以下是一个创建异步索引的示例代码：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> CONCURRENTLY index_name <span class="keyword">ON</span> table_name (column_name);</span><br></pre></td></tr></table></figure><ol><li><p>删除索引 DROP INDEX CONCURRENTLY “public”.”IDX_e29aa01138f7e5dbe59261e52c”;</p></li><li><p>创建索引</p></li></ol><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> <span class="string">"IDX_25db9e4a7d54a460f256c567b2"</span> <span class="keyword">ON</span> <span class="string">"public"</span>.<span class="string">"attachment"</span> <span class="keyword">USING</span> btree (</span><br><span class="line">  <span class="string">"mediaId"</span> <span class="keyword">COLLATE</span> <span class="string">"pg_catalog"</span>.<span class="string">"default"</span> <span class="string">"pg_catalog"</span>.<span class="string">"text_ops"</span> <span class="keyword">ASC</span> <span class="keyword">NULLS</span> <span class="keyword">LAST</span>,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<p>在 PostgreSQL 中，可以通过使用 CREATE INDEX 命令来异步创建索引。PostgreSQL 会将创建索引的任务放入后台进程进行处理，不会阻塞当前的数据库操作。</p><p>要创建一个异步索引，可以使用 CONCURRENTLY 关键字。这允许你在不锁定表的情况下创建索引，这在创建大型索引时特别有用，因为它可以减少对正常数据库操作的影响。</p><p>以下是一个创建异步索引的示例代码：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> CONCURRENTLY index_name <span class="keyword">ON</span> table_name (column_name);</span><br></pre></td></tr></table></figure><ol><li><p>删除索引 DROP INDEX CONCURRENTLY “public”.”IDX_e29aa01138f7e5dbe59261e52c”;</p></li><li><p>创建索引</p></li></ol><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span>  CONCURRENTLY <span class="string">"IDX_25db9e4a7d54a460f256c567b2"</span> <span class="keyword">ON</span> <span class="string">"public"</span>.<span class="string">"attachment"</span> <span class="keyword">USING</span> btree (</span><br><span class="line">  <span class="string">"mediaId"</span> <span class="keyword">COLLATE</span> <span class="string">"pg_catalog"</span>.<span class="string">"default"</span> <span class="string">"pg_catalog"</span>.<span class="string">"text_ops"</span> <span class="keyword">ASC</span> <span class="keyword">NULLS</span> <span class="keyword">LAST</span>,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>]]></content>
       
       
       
@@ -560,25 +583,6 @@
     
     
     <entry>
-      <title>飞书-企业自建应用</title>
-      <link href="%E9%A3%9E%E4%B9%A6-%E4%BC%81%E4%B8%9A%E8%87%AA%E5%BB%BA%E5%BA%94%E7%94%A8/"/>
-      <url>%E9%A3%9E%E4%B9%A6-%E4%BC%81%E4%B8%9A%E8%87%AA%E5%BB%BA%E5%BA%94%E7%94%A8/</url>
-      
-        <content type="html"><![CDATA[<h1 id="企业自建应用-嵌入三方网页"><a href="#企业自建应用-嵌入三方网页" class="headerlink" title="企业自建应用 嵌入三方网页"></a>企业自建应用 嵌入三方网页</h1><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol><li><p>进入<code>https://open.feishu.cn/app?lang=zh-CN</code></p></li><li><p>选择创建自建应用-内容随便</p></li><li><p>获取对应的应用凭证<br><img src="https://img-blog.csdnimg.cn/12c92114f8584f10b3a2c2aca6f41ba3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li><li><p>嵌入网页配置<br><img src="https://img-blog.csdnimg.cn/7d733f9fd91a4266ba8ec41391962940.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>手机端和电脑端可以一样</p></li><li><p>在权限关联中授权获取手机号和邮箱<br><img src="https://img-blog.csdnimg.cn/af64c572686147a5a271d6b4298156af.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li></ol><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><ol><li>获取 AppAccessToken<br>文档： <code>https://open.feishu.cn/document/ukTMukTMukTM/ukDNz4SO0MjL5QzM/auth-v3/auth/app_access_token_internal</code></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const res = await request</span><br><span class="line">      .post(<span class="string">'https://open.feishu.cn/open-apis/auth/v3/app_access_token/internal'</span>)</span><br><span class="line">      .<span class="built_in">set</span>(&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/json; charset=utf-8'</span>,</span><br><span class="line">      &#125;)</span><br><span class="line">      .send(&#123;</span><br><span class="line">        app_id: data.client_id,</span><br><span class="line">        app_secret: data.client_secret,</span><br><span class="line">      &#125;);</span><br><span class="line">    const body = res.body;</span><br><span class="line">    <span class="keyword">if</span> (!(body.msg === <span class="string">'ok'</span> &amp;&amp; body.code === 0)) throw new CustomException(-1, <span class="string">'获取app_access_token失败'</span>);</span><br><span class="line">    const &#123; app_access_token, expire &#125; = body;</span><br></pre></td></tr></table></figure><ol start="2"><li>获取用户信息<br>文档<code>https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/authen-v1/authen/access_token</code></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const res = await request</span><br><span class="line">      .post(<span class="string">'https://open.feishu.cn/open-apis/authen/v1/access_token'</span>)</span><br><span class="line">      .<span class="built_in">set</span>(&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/json; charset=utf-8'</span>,</span><br><span class="line">        Authorization: `Bearer <span class="variable">$&#123;data.access_token&#125;</span>`,</span><br><span class="line">      &#125;)</span><br><span class="line">      .send(&#123;</span><br><span class="line">        grant_type: <span class="string">'authorization_code'</span>,</span><br><span class="line">        code: code,</span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 飞书 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>amazon配置邮件推送服务</title>
       <link href="amazon%E9%85%8D%E7%BD%AE%E9%82%AE%E4%BB%B6%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1/"/>
       <url>amazon%E9%85%8D%E7%BD%AE%E9%82%AE%E4%BB%B6%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1/</url>
@@ -590,6 +594,25 @@
         <tags>
             
             <tag> amazon </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>飞书-企业自建应用</title>
+      <link href="%E9%A3%9E%E4%B9%A6-%E4%BC%81%E4%B8%9A%E8%87%AA%E5%BB%BA%E5%BA%94%E7%94%A8/"/>
+      <url>%E9%A3%9E%E4%B9%A6-%E4%BC%81%E4%B8%9A%E8%87%AA%E5%BB%BA%E5%BA%94%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="企业自建应用-嵌入三方网页"><a href="#企业自建应用-嵌入三方网页" class="headerlink" title="企业自建应用 嵌入三方网页"></a>企业自建应用 嵌入三方网页</h1><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol><li><p>进入<code>https://open.feishu.cn/app?lang=zh-CN</code></p></li><li><p>选择创建自建应用-内容随便</p></li><li><p>获取对应的应用凭证<br><img src="https://img-blog.csdnimg.cn/12c92114f8584f10b3a2c2aca6f41ba3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li><li><p>嵌入网页配置<br><img src="https://img-blog.csdnimg.cn/7d733f9fd91a4266ba8ec41391962940.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>手机端和电脑端可以一样</p></li><li><p>在权限关联中授权获取手机号和邮箱<br><img src="https://img-blog.csdnimg.cn/af64c572686147a5a271d6b4298156af.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p></li></ol><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><ol><li>获取 AppAccessToken<br>文档： <code>https://open.feishu.cn/document/ukTMukTMukTM/ukDNz4SO0MjL5QzM/auth-v3/auth/app_access_token_internal</code></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const res = await request</span><br><span class="line">      .post(<span class="string">'https://open.feishu.cn/open-apis/auth/v3/app_access_token/internal'</span>)</span><br><span class="line">      .<span class="built_in">set</span>(&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/json; charset=utf-8'</span>,</span><br><span class="line">      &#125;)</span><br><span class="line">      .send(&#123;</span><br><span class="line">        app_id: data.client_id,</span><br><span class="line">        app_secret: data.client_secret,</span><br><span class="line">      &#125;);</span><br><span class="line">    const body = res.body;</span><br><span class="line">    <span class="keyword">if</span> (!(body.msg === <span class="string">'ok'</span> &amp;&amp; body.code === 0)) throw new CustomException(-1, <span class="string">'获取app_access_token失败'</span>);</span><br><span class="line">    const &#123; app_access_token, expire &#125; = body;</span><br></pre></td></tr></table></figure><ol start="2"><li>获取用户信息<br>文档<code>https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/authen-v1/authen/access_token</code></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const res = await request</span><br><span class="line">      .post(<span class="string">'https://open.feishu.cn/open-apis/authen/v1/access_token'</span>)</span><br><span class="line">      .<span class="built_in">set</span>(&#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/json; charset=utf-8'</span>,</span><br><span class="line">        Authorization: `Bearer <span class="variable">$&#123;data.access_token&#125;</span>`,</span><br><span class="line">      &#125;)</span><br><span class="line">      .send(&#123;</span><br><span class="line">        grant_type: <span class="string">'authorization_code'</span>,</span><br><span class="line">        code: code,</span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 飞书 </tag>
             
         </tags>
       
@@ -960,9 +983,9 @@
       
         <tags>
             
-            <tag> nestjs </tag>
-            
             <tag> typeorm </tag>
+            
+            <tag> nestjs </tag>
             
         </tags>
       
@@ -1040,9 +1063,9 @@
       
         <tags>
             
-            <tag> nestjs </tag>
-            
             <tag> typeorm </tag>
+            
+            <tag> nestjs </tag>
             
         </tags>
       
@@ -1674,9 +1697,9 @@
       
         <tags>
             
-            <tag> 微信公众号 </tag>
-            
             <tag> 微信小程序 </tag>
+            
+            <tag> 微信公众号 </tag>
             
         </tags>
       
@@ -2389,9 +2412,9 @@
       
         <tags>
             
-            <tag> 微信公众号 </tag>
-            
             <tag> 微信小程序 </tag>
+            
+            <tag> 微信公众号 </tag>
             
             <tag> crypto </tag>
             
@@ -2911,9 +2934,9 @@
       
         <tags>
             
-            <tag> postgresql </tag>
-            
             <tag> docker </tag>
+            
+            <tag> postgresql </tag>
             
         </tags>
       
@@ -3153,11 +3176,11 @@
       
         <tags>
             
-            <tag> 阿里云 </tag>
+            <tag> crypto </tag>
             
             <tag> ocr </tag>
             
-            <tag> crypto </tag>
+            <tag> 阿里云 </tag>
             
         </tags>
       

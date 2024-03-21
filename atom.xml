@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.wjc66.cn/"/>
-  <updated>2024-03-21T02:10:08.742Z</updated>
+  <updated>2024-03-21T02:44:05.645Z</updated>
   <id>https://blog.wjc66.cn/</id>
   
   <author>
@@ -17,13 +17,43 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>记一次springboot3中swagger服务启动失败</title>
+    <link href="https://blog.wjc66.cn/%E8%AE%B0%E4%B8%80%E6%AC%A1springboot3%E4%B8%ADswagger%E6%9C%8D%E5%8A%A1%E5%90%AF%E5%8A%A8%E5%A4%B1%E8%B4%A5/"/>
+    <id>https://blog.wjc66.cn/%E8%AE%B0%E4%B8%80%E6%AC%A1springboot3%E4%B8%ADswagger%E6%9C%8D%E5%8A%A1%E5%90%AF%E5%8A%A8%E5%A4%B1%E8%B4%A5/</id>
+    <published>2024-03-21T02:34:59.000Z</published>
+    <updated>2024-03-21T02:44:05.645Z</updated>
+    
+    <content type="html"><![CDATA[<p>项目开始进行升级，jDk 使用 21，springboot 使用 3 导致引入的 swagger jar 包无效，后来发现，springboot3 已经替换了支持的 jar 包。</p><p>把老 jar 包</p><p><code>&lt;dependency&gt;&lt;groupId&gt;org.springdoc&lt;/groupId&gt;&lt;artifactId&gt;springdoc-openapi-ui&lt;/artifactId&gt;&lt;version&gt;1.6.14&lt;/version&gt;&lt;/dependency&gt;</code></p><p>替换成</p><p><code>&lt;dependency&gt;&lt;groupId&gt;org.springdoc&lt;/groupId&gt; &lt;artifactId&gt;springdoc-openapi-starter-webmvc-ui&lt;/artifactId&gt;&lt;version&gt;2.3.0&lt;/version&gt;&lt;/dependency&gt;</code></p><h2 id="在-application-yml-配置"><a href="#在-application-yml-配置" class="headerlink" title="在 application.yml 配置"></a>在 application.yml 配置</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">springdoc:</span><br><span class="line">  swagger-ui:</span><br><span class="line">    enabled: <span class="keyword">true</span></span><br><span class="line">  api-docs:</span><br><span class="line">    groups:</span><br><span class="line">      enabled: <span class="keyword">true</span></span><br><span class="line">  group-configs:</span><br><span class="line">    - group: admin</span><br><span class="line">      display-name: 管理后台</span><br><span class="line">      paths-to-match: /admin<span class="comment">/**</span></span><br></pre></td></tr></table></figure><h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p><a href="https://springdoc.org/#getting-started" target="_blank" rel="external nofollow noopener noreferrer">springdoc-openapi-starter-webmvc-ui</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;项目开始进行升级，jDk 使用 21，springboot 使用 3 导致引入的 swagger jar 包无效，后来发现，springboot3 已经替换了支持的 jar 包。&lt;/p&gt;
+&lt;p&gt;把老 jar 包&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;dependency&amp;gt;
+      
+    
+    </summary>
+    
+    
+    
+      <category term="java" scheme="https://blog.wjc66.cn/tags/java/"/>
+    
+      <category term="springboot" scheme="https://blog.wjc66.cn/tags/springboot/"/>
+    
+      <category term="swagger" scheme="https://blog.wjc66.cn/tags/swagger/"/>
+    
+  </entry>
+  
+  <entry>
     <title>postgresql异步创建索引或者删除索引</title>
     <link href="https://blog.wjc66.cn/postgresql%E5%BC%82%E6%AD%A5%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E6%88%96%E8%80%85%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95/"/>
     <id>https://blog.wjc66.cn/postgresql%E5%BC%82%E6%AD%A5%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E6%88%96%E8%80%85%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95/</id>
     <published>2024-03-21T02:07:59.000Z</published>
-    <updated>2024-03-21T02:10:08.742Z</updated>
+    <updated>2024-03-21T02:11:00.337Z</updated>
     
-    <content type="html"><![CDATA[<p>在 PostgreSQL 中，可以通过使用 CREATE INDEX 命令来异步创建索引。PostgreSQL 会将创建索引的任务放入后台进程进行处理，不会阻塞当前的数据库操作。</p><p>要创建一个异步索引，可以使用 CONCURRENTLY 关键字。这允许你在不锁定表的情况下创建索引，这在创建大型索引时特别有用，因为它可以减少对正常数据库操作的影响。</p><p>以下是一个创建异步索引的示例代码：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> CONCURRENTLY index_name <span class="keyword">ON</span> table_name (column_name);</span><br></pre></td></tr></table></figure><ol><li><p>删除索引 DROP INDEX CONCURRENTLY “public”.”IDX_e29aa01138f7e5dbe59261e52c”;</p></li><li><p>创建索引</p></li></ol><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> <span class="string">"IDX_25db9e4a7d54a460f256c567b2"</span> <span class="keyword">ON</span> <span class="string">"public"</span>.<span class="string">"attachment"</span> <span class="keyword">USING</span> btree (</span><br><span class="line">  <span class="string">"mediaId"</span> <span class="keyword">COLLATE</span> <span class="string">"pg_catalog"</span>.<span class="string">"default"</span> <span class="string">"pg_catalog"</span>.<span class="string">"text_ops"</span> <span class="keyword">ASC</span> <span class="keyword">NULLS</span> <span class="keyword">LAST</span>,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>在 PostgreSQL 中，可以通过使用 CREATE INDEX 命令来异步创建索引。PostgreSQL 会将创建索引的任务放入后台进程进行处理，不会阻塞当前的数据库操作。</p><p>要创建一个异步索引，可以使用 CONCURRENTLY 关键字。这允许你在不锁定表的情况下创建索引，这在创建大型索引时特别有用，因为它可以减少对正常数据库操作的影响。</p><p>以下是一个创建异步索引的示例代码：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> CONCURRENTLY index_name <span class="keyword">ON</span> table_name (column_name);</span><br></pre></td></tr></table></figure><ol><li><p>删除索引 DROP INDEX CONCURRENTLY “public”.”IDX_e29aa01138f7e5dbe59261e52c”;</p></li><li><p>创建索引</p></li></ol><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span>  CONCURRENTLY <span class="string">"IDX_25db9e4a7d54a460f256c567b2"</span> <span class="keyword">ON</span> <span class="string">"public"</span>.<span class="string">"attachment"</span> <span class="keyword">USING</span> btree (</span><br><span class="line">  <span class="string">"mediaId"</span> <span class="keyword">COLLATE</span> <span class="string">"pg_catalog"</span>.<span class="string">"default"</span> <span class="string">"pg_catalog"</span>.<span class="string">"text_ops"</span> <span class="keyword">ASC</span> <span class="keyword">NULLS</span> <span class="keyword">LAST</span>,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
@@ -503,27 +533,6 @@
     
     
       <category term="java" scheme="https://blog.wjc66.cn/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>记一次使用redis的keys命令导致redis雪崩的生产事故</title>
-    <link href="https://blog.wjc66.cn/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BD%BF%E7%94%A8redis%E7%9A%84keys%E5%91%BD%E4%BB%A4%E5%AF%BC%E8%87%B4redis%E9%9B%AA%E5%B4%A9%E7%9A%84%E7%94%9F%E4%BA%A7%E4%BA%8B%E6%95%85/"/>
-    <id>https://blog.wjc66.cn/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BD%BF%E7%94%A8redis%E7%9A%84keys%E5%91%BD%E4%BB%A4%E5%AF%BC%E8%87%B4redis%E9%9B%AA%E5%B4%A9%E7%9A%84%E7%94%9F%E4%BA%A7%E4%BA%8B%E6%95%85/</id>
-    <published>2022-09-08T09:00:31.000Z</published>
-    <updated>2022-09-08T09:15:31.269Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="出现原因"><a href="#出现原因" class="headerlink" title="出现原因"></a>出现原因</h2><p>由于需要每时每刻监听三方报错超过十次发送机器人警告，所以每次报错我这边就存入一个（key+时间），同时过期时间为1小时，所以查询当前的一个小时内错误次数，使用 <code>keys key*</code>查询key的数量，就知道错误次数，本来一直没有问题，跑了大半年了，突然有一天redis的cpu100%，直接雪崩，导致客户无法登录，后面排查原因是有个三方一直报错，代码又重试，由于需要机器人提醒(这个时候我们redis key已经超过80w个key),导致一秒钟查上千次询<code>keys</code>命令，最后redis直接爆炸。</p><a id="more"></a><h2 id="官方对keys这个命令的说明"><a href="#官方对keys这个命令的说明" class="headerlink" title="官方对keys这个命令的说明"></a>官方对keys这个命令的说明</h2><p>keys的时间复杂度是O(N)，N为执行该命令下的数据库的key的数量，常数。<br>redis扫描key的速度很快，在入门笔记本大约是40毫秒100w个。<br>警告⚠️：keys用在生产环境只能以极低频率执行。 在大数据库执行时会出现灾难性的性能。如果需要查询某些key，考虑使用SCAN或者sets。</p><h2 id="keys命令为什么会这么慢呢？"><a href="#keys命令为什么会这么慢呢？" class="headerlink" title="keys命令为什么会这么慢呢？"></a>keys命令为什么会这么慢呢？</h2><p>(1) Redis是NoSQL型数据库，以hash数据结构存储的，所以才能实现高效的数据查询。而hash结构对于精确查找是非常快的，对于模糊查询，则无能为力。<br>(2) Redis的命令执行是单线程的，同一时间只能执行单个命令。单一长时间命令会堵塞后续。(可以通过debug sleep 0.1100ms 模拟执行长时间命令)<br>以上两点造成了KEYS进行key查询需要遍历当前db的所有数据，以及当该命令执行完成的时候后续命令都会被堵塞。<br>因此在redis中执行的命令，尽量避免长时间堵塞命令。</p><h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>后面实在没有办法退而求其次，把所有的<code>keys</code>命令移除了，只是简单记录次数了，一直自己自增，半个小时自动过期。还有一种方法就是保存数据库，每进来一条错误日志，就保存一次，按照时间查询这样也可以达到上面的效果，每天或者每月去清理之前的旧数据，防止数据太多。</p><p>看网上推荐使用<code>Scan</code>来替换<code>keys</code>，它是增量地迭代 ，它们每次执行都只会返回少量元素，不会阻塞服务器， 所以这些命令可以用于生产环境， 而不会出现像 KEYS 命令、 SMEMBERS 命令带来的问题。但是会出现.同一个元素可能会被返回多次，所以就没有使用。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;出现原因&quot;&gt;&lt;a href=&quot;#出现原因&quot; class=&quot;headerlink&quot; title=&quot;出现原因&quot;&gt;&lt;/a&gt;出现原因&lt;/h2&gt;&lt;p&gt;由于需要每时每刻监听三方报错超过十次发送机器人警告，所以每次报错我这边就存入一个（key+时间），同时过期时间为1小时，所以查询当前的一个小时内错误次数，使用 &lt;code&gt;keys key*&lt;/code&gt;查询key的数量，就知道错误次数，本来一直没有问题，跑了大半年了，突然有一天redis的cpu100%，直接雪崩，导致客户无法登录，后面排查原因是有个三方一直报错，代码又重试，由于需要机器人提醒(这个时候我们redis key已经超过80w个key),导致一秒钟查上千次询&lt;code&gt;keys&lt;/code&gt;命令，最后redis直接爆炸。&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="redis" scheme="https://blog.wjc66.cn/tags/redis/"/>
     
   </entry>
   
