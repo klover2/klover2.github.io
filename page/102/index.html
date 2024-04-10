@@ -283,7 +283,7 @@
     #homeImgUrl{
       width: 100%;
       height: 460px;
-      background-image: url('https://img-blog.csdnimg.cn/64932e6096a843b281183460be7ac89a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16');
+      background-image: url('https://oss.wjc66.cn/blog/000822BHnls.jpg');
       background-size: cover;
       /* background-attachment:fixed; */
     }
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">6.1k字</span>
+      <span class="post-count">6.2k字</span>
     </span>
   </span>
 
@@ -343,7 +343,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-hourglass-half"></i>
       <span class="post-meta-item-text">  阅读时长: </span>
-      <span class="post-count">21分</span>
+      <span class="post-count">22分</span>
     </span>
   </span>
 </div>
@@ -359,10 +359,10 @@
       
           
               <h2 id="Session-和-cookie-的区别"><a href="#Session-和-cookie-的区别" class="headerlink" title="Session 和 cookie 的区别"></a>Session 和 cookie 的区别</h2><ol>
-<li>cookie保存在客户端，未设置存储时间的cookie,关闭浏览器会话cookie就会被删除；设置了存储时间的cookie会保存在用户设备的磁盘中直到过期，同时cookie在客户端可以伪造，不是十分安全，敏感数据不容易保存。session保存在服务器端，存在在IIS的进程开辟的内存中，而session会过多消耗服务器资源，所以尽量少使用session。</li>
-<li>session是服务器用来跟踪用户的一种手段，每个session都有一个唯一标识sessionID。当服务器端生成一个session时就会向客户端发送一个cookie保存到客户端。这个cookie保存的是session的sessionID,这样才能保证客户端发起请求后，用户能够与服务器端成千上万的session进行匹配，同时也保证了不同的页面之间传值的正确性。</li>
-<li>存储数据类型不同：session能够存储任意的java对象，cookie只能存储string类型的对象。</li>
-<li>大于10k的数据，不要用到cookies</li>
+<li>cookie 保存在客户端，未设置存储时间的 cookie,关闭浏览器会话 cookie 就会被删除；设置了存储时间的 cookie 会保存在用户设备的磁盘中直到过期，同时 cookie 在客户端可以伪造，不是十分安全，敏感数据不容易保存。session 保存在服务器端，存在在 IIS 的进程开辟的内存中，而 session 会过多消耗服务器资源，所以尽量少使用 session。</li>
+<li>session 是服务器用来跟踪用户的一种手段，每个 session 都有一个唯一标识 sessionID。当服务器端生成一个 session 时就会向客户端发送一个 cookie 保存到客户端。这个 cookie 保存的是 session 的 sessionID,这样才能保证客户端发起请求后，用户能够与服务器端成千上万的 session 进行匹配，同时也保证了不同的页面之间传值的正确性。</li>
+<li>存储数据类型不同：session 能够存储任意的 java 对象，cookie 只能存储 string 类型的对象。</li>
+<li>大于 10k 的数据，不要用到 cookies</li>
 </ol>
           
       

@@ -283,7 +283,7 @@
     #homeImgUrl{
       width: 100%;
       height: 460px;
-      background-image: url('https://img-blog.csdnimg.cn/64932e6096a843b281183460be7ac89a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16');
+      background-image: url('https://oss.wjc66.cn/blog/000822BHnls.jpg');
       background-size: cover;
       /* background-attachment:fixed; */
     }
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">382字</span>
+      <span class="post-count">384字</span>
     </span>
   </span>
 
@@ -366,16 +366,17 @@
 <p>启动(注释的代码不要)</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --restart=always \ // 开机启动</span><br><span class="line">  -v /data/docker/mysql/data:/var/lib/mysql \ // 将容器的 /var/lib/mysql目录挂载到主机/data/docker/mysql/data目录。</span><br><span class="line">    -v /data/docker/mysql/config/my.cnf:/etc/mysql/conf.d \ //映射配置文件</span><br><span class="line">      -e MYSQL_ROOT_PASSWORD=123456 \ //密码</span><br><span class="line">        -p 3306:3306 \ // 将容器的3306端口映射到主机的3306端口</span><br><span class="line">          --name mysql \ // MySQL容器名称</span><br><span class="line">            mysql:8.0.17 // 后台运行容器</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --restart=always \</span><br><span class="line">-v /data/docker/mysql/data:/var/lib/mysql \</span><br><span class="line">-v /data/docker/mysql/config/my.cnf:/etc/mysql/conf.d \</span><br><span class="line">-e MYSQL_ROOT_PASSWORD=123456 \</span><br><span class="line">-p 3306:3306 \</span><br><span class="line">--name mysql \</span><br><span class="line">mysql:8.0.17</span><br></pre></td></tr></table></figure>
 
-<p>运行成功 会在 /data/docker/mysql 文件夹 创建 config 和data 文件夹 ，里面都有东西</p>
+<p>运行成功 会在 /data/docker/mysql 文件夹 创建 config 和 data 文件夹 ，里面都有东西</p>
 <blockquote>
-<p>使用镜像进入mysql<br>$:docker exec -it mysql bash<br>$:mysql -u root -p (会提示输入密码)<br>成功就会进入数据库<br><img src="https://img-blog.csdnimg.cn/20191213144411686.png" alt="在这里插入图片描述"><br>初始化MySQL，不然用 navicat连接不了mysql数据库<br>$:<code>ALTER USER &#39;root&#39;@&#39;%&#39; IDENTIFIED WITH mysql_native_password BY &#39;123456&#39;;</code><br>$:flush privileges;</p>
+<p>使用镜像进入 mysql<br>$:docker exec -it mysql bash<br>$:mysql -u root -p (会提示输入密码)<br>成功就会进入数据库<br><img src="https://oss.wjc66.cn/blog/2020/20191213144411686.png" alt="在这里插入图片描述"><br>初始化 MySQL，不然用 navicat 连接不了 mysql 数据库<br>$:<code>ALTER USER &#39;root&#39;@&#39;%&#39; IDENTIFIED WITH mysql_native_password BY &#39;123456&#39;;</code><br>$:flush privileges;</p>
 </blockquote>
 <blockquote>
-<p>（可选）设置时间<br>$:set global time_zone = ‘+8:00’;<br>set time_zone = ‘+8:00’;<br>flush privileges;<br>select curtime();<br><img src="https://img-blog.csdnimg.cn/20191213144731992.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>（可选）设置时间<br>$:set global time_zone = ‘+8:00’;<br>set time_zone = ‘+8:00’;<br>flush privileges;<br>select curtime();<br><img src="https://oss.wjc66.cn/blog/2020/20191213144731992.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 </blockquote>
-<h2 id="docker出现错误"><a href="#docker出现错误" class="headerlink" title="docker出现错误"></a>docker出现错误</h2><p> <code>Error response from daemon: driver failed programming external connectivity on endpoint mysql (a29d3409d7b1f5eaf8706050f4aeed7b11fa90415d243239a0c882eeb9fb83be):  (iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 0/0 --dport 3306 -j DNAT --to-destination 172.17.0.5:3306 ! -i docker0: iptables: No chain/target/match by that name.</code><br> Docker容器做端口映射报错，docker服务启动时定义的自定义链DOCKER被清除；重启即可<br> systemctl restart docker</p>
+<h2 id="docker-出现错误"><a href="#docker-出现错误" class="headerlink" title="docker 出现错误"></a>docker 出现错误</h2><p><code>Error response from daemon: driver failed programming external connectivity on endpoint mysql (a29d3409d7b1f5eaf8706050f4aeed7b11fa90415d243239a0c882eeb9fb83be):  (iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 0/0 --dport 3306 -j DNAT --to-destination 172.17.0.5:3306 ! -i docker0: iptables: No chain/target/match by that name.</code><br>Docker 容器做端口映射报错，docker 服务启动时定义的自定义链 DOCKER 被清除；重启即可<br>systemctl restart docker</p>
 
       
     </div>

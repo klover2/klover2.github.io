@@ -283,7 +283,7 @@
     #homeImgUrl{
       width: 100%;
       height: 460px;
-      background-image: url('https://img-blog.csdnimg.cn/64932e6096a843b281183460be7ac89a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16');
+      background-image: url('https://oss.wjc66.cn/blog/000822BHnls.jpg');
       background-size: cover;
       /* background-attachment:fixed; */
     }
@@ -385,7 +385,7 @@
 <p>docker pull postgres:12</p>
 </blockquote>
 <blockquote>
-<p>查看镜像 $: docker images<br><img src="https://img-blog.csdnimg.cn/2019121210374053.png" alt="在这里插入图片描述"></p>
+<p>查看镜像 $: docker images<br><img src="https://oss.wjc66.cn/blog/2020/2019121210374053.png" alt="在这里插入图片描述"></p>
 </blockquote>
 <ol>
 <li>先创建一个 postgresql.conf 文件 写在 /data/docker/postgres/下，没有目录就创建</li>
@@ -407,12 +407,12 @@
   //将docker镜像内部文件/etc/postgresql/postgresql.conf映射绑定到服务器文件夹/data/docker/postgres/postgresql.conf
    -d postgres:12 \
     -c &apos;config_file=/etc/postgresql/postgresql.conf&apos;
-    //指定 postgres使用的配置文件为 /etc/postgresql/postgresql.conf 即上文映射的服务器文件/data/docker/postgres10/postgresql.conf</code></pre><p><img src="https://img-blog.csdnimg.cn/20191212152118302.png" alt="在这里插入图片描述"></p>
+    //指定 postgres使用的配置文件为 /etc/postgresql/postgresql.conf 即上文映射的服务器文件/data/docker/postgres10/postgresql.conf</code></pre><p><img src="https://oss.wjc66.cn/blog/2020/20191212152118302.png" alt="在这里插入图片描述"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker run --name postgres \</span><br><span class="line">-e POSTGRES_PASSWORD=123456 \</span><br><span class="line">-p 5432:5432 \</span><br><span class="line">-v /data/docker/postgres/data:/var/lib/postgresql/data \</span><br><span class="line">-v /data/docker/postgres/buckup:/var/lib/postgresql/buckup \</span><br><span class="line">-v /data/docker/postgres/postgresql.conf:/etc/postgresql/postgresql.conf \</span><br><span class="line">-d postgres:12 \</span><br><span class="line">-c <span class="string">'config_file=/etc/postgresql/postgresql.conf'</span></span><br></pre></td></tr></table></figure>
 
 <p>执行命令。在/data/docker/postgres 下会生成 buckup 和 data 文件夹</p>
 <blockquote>
-<p>查看 docker ps<br><img src="https://img-blog.csdnimg.cn/20191212152446534.png" alt="在这里插入图片描述"><br>说明安装成功。</p>
+<p>查看 docker ps<br><img src="https://oss.wjc66.cn/blog/2020/20191212152446534.png" alt="在这里插入图片描述"><br>说明安装成功。</p>
 </blockquote>
 <blockquote>
 <p>进入数据库<br>$: docker exec -it postgres bash  (这个postgres 你上面命名的镜像名字)<br>//切换用户<br>$: su postgres<br>//进入数据库指定端口为 5432<br>$: psql -p 5432</p>
@@ -422,19 +422,19 @@
 <p>$postgres: SELECT pg_reload_conf();</p>
 </blockquote>
 <blockquote>
-<p>查看所有的数据库：\l<br>会显示数据库就成功了 可以用了<br>查看当前时区设置：SELECT current_setting(‘timezone’) AS timezone;<br><img src="https://img-blog.csdnimg.cn/20191212162912172.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>查看所有的数据库：\l<br>会显示数据库就成功了 可以用了<br>查看当前时区设置：SELECT current_setting(‘timezone’) AS timezone;<br><img src="https://oss.wjc66.cn/blog/2020/20191212162912172.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 </blockquote>
 <p>本地连接数据库 我用的是 Navicat Premium 12（官网上直接下载，傻瓜式安装就好）</p>
 <blockquote>
-<p>1.第一种方式 关闭服务器上的防火墙 就可以直接连接<br>//查看防火墙运行状态<br>$:firewall-cmd –state<br>关闭防火墙：<br>systemctl stop firewalld.service #停止 firewall<br>systemctl disable firewalld.service #禁止 firewall 开机启动<br>启动一个服务：systemctl start firewalld.service<br>关闭一个服务：systemctl stop firewalld.service<br>重启一个服务：systemctl restart firewalld.service<br>显示一个服务的状态：systemctl status firewalld.service<br>在开机时启用一个服务：systemctl enable firewalld.service<br>在开机时禁用一个服务：systemctl disable firewalld.service<br>查看服务是否开机启动：systemctl is-enabled firewalld.service<br>查看已启动的服务列表：systemctl list-unit-files|grep enabled<br><img src="https://img-blog.csdnimg.cn/20191212175510111.png" alt="在这里插入图片描述"><br>连接方式<br><img src="https://img-blog.csdnimg.cn/20191212175801443.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>1.第一种方式 关闭服务器上的防火墙 就可以直接连接<br>//查看防火墙运行状态<br>$:firewall-cmd –state<br>关闭防火墙：<br>systemctl stop firewalld.service #停止 firewall<br>systemctl disable firewalld.service #禁止 firewall 开机启动<br>启动一个服务：systemctl start firewalld.service<br>关闭一个服务：systemctl stop firewalld.service<br>重启一个服务：systemctl restart firewalld.service<br>显示一个服务的状态：systemctl status firewalld.service<br>在开机时启用一个服务：systemctl enable firewalld.service<br>在开机时禁用一个服务：systemctl disable firewalld.service<br>查看服务是否开机启动：systemctl is-enabled firewalld.service<br>查看已启动的服务列表：systemctl list-unit-files|grep enabled<br><img src="https://oss.wjc66.cn/blog/2020/20191212175510111.png" alt="在这里插入图片描述"><br>连接方式<br><img src="https://oss.wjc66.cn/blog/2020/20191212175801443.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 </blockquote>
 <blockquote>
-<p>第二种 用 ssh 通道方式，防火墙就不要开启<br>这里的密码是你的数据库密码<br><img src="https://img-blog.csdnimg.cn/2019121217593670.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="这里的密码是你的数据库密码"> &gt; <img src="https://img-blog.csdnimg.cn/20191212180052878.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="这里的密码是服务器密码"><br>这里的密码是服务器密码</p>
+<p>第二种 用 ssh 通道方式，防火墙就不要开启<br>这里的密码是你的数据库密码<br><img src="https://oss.wjc66.cn/blog/2020/2019121217593670.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="这里的密码是你的数据库密码"> &gt; <img src="https://oss.wjc66.cn/blog/2020/20191212180052878.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="这里的密码是服务器密码"><br>这里的密码是服务器密码</p>
 </blockquote>
 <p>删除 docker</p>
 <blockquote>
 <ol>
-<li>查询安装过的包<br>$:yum list installed | grep docker<br><img src="https://img-blog.csdnimg.cn/20191212161911517.png" alt="在这里插入图片描述"></li>
+<li>查询安装过的包<br>$:yum list installed | grep docker<br><img src="https://oss.wjc66.cn/blog/2020/20191212161911517.png" alt="在这里插入图片描述"></li>
 </ol>
 </blockquote>
 <blockquote>

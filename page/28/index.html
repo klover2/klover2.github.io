@@ -283,7 +283,7 @@
     #homeImgUrl{
       width: 100%;
       height: 460px;
-      background-image: url('https://img-blog.csdnimg.cn/64932e6096a843b281183460be7ac89a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16');
+      background-image: url('https://oss.wjc66.cn/blog/000822BHnls.jpg');
       background-size: cover;
       /* background-attachment:fixed; */
     }
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">464字</span>
+      <span class="post-count">470字</span>
     </span>
   </span>
 
@@ -359,7 +359,7 @@
       
           
               <ol>
-<li>出现原因介绍<br>因为我们使用了神策埋点，正好神策过期了，没有及时关闭配置，导致日志上传不了，一直保存在本地，存了上百M的日志，在代码发布的时候需要重启，导致pm2的内容直接超过8G,把服务器直接卡死，等了半个小时了之后 内存慢慢下降，刚开始以为是代码太多，打包内存不够用，升级了服务器内存，还是出现了同样的问题，排查了几天都没有发现。后面使用<code>node-tick</code>才发现原因是神策在上传日志，他里面写的是foreach循环一起上传所有日志，由于有上传不了，又保存在本地。</li>
+<li>出现原因介绍<br>因为我们使用了神策埋点，正好神策过期了，没有及时关闭配置，导致日志上传不了，一直保存在本地，存了上百 M 的日志，在代码发布的时候需要重启，导致 pm2 的内容直接超过 8G,把服务器直接卡死，等了半个小时了之后 内存慢慢下降，刚开始以为是代码太多，打包内存不够用，升级了服务器内存，还是出现了同样的问题，排查了几天都没有发现。后面使用<code>node-tick</code>才发现原因是神策在上传日志，他里面写的是 foreach 循环一起上传所有日志，由于有上传不了，又保存在本地。</li>
 </ol>
           
       

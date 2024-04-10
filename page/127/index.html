@@ -283,7 +283,7 @@
     #homeImgUrl{
       width: 100%;
       height: 460px;
-      background-image: url('https://img-blog.csdnimg.cn/64932e6096a843b281183460be7ac89a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16');
+      background-image: url('https://oss.wjc66.cn/blog/000822BHnls.jpg');
       background-size: cover;
       /* background-attachment:fixed; */
     }
@@ -361,25 +361,27 @@
         <p>在小程序中使用网页</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;web-view src=<span class="string">"https://127.0.0.1/boboteacher/user/page/7c87568acd8488467df1592377030008"</span>&gt;&lt;/web-view&gt;</span><br></pre></td></tr></table></figure>
 
-<p>需要在小程序中业务页面中配置当前域名127.0.0.1</p>
+<p>需要在小程序中业务页面中配置当前域名 127.0.0.1</p>
 <p>在 开发-&gt; 开发设置 -&gt; 业务域名中配置</p>
-<p><img src="https://img-blog.csdnimg.cn/20200624110335335.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>这样需要下载那个校验文件，并且放在服务器上，通过访问127.0.0.1能够读取到当前文件内容</p>
-<p>我是通过nginx 配置的<br>两种方式 </p>
+<p><img src="https://oss.wjc66.cn/blog/2020/20200624110335335.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>这样需要下载那个校验文件，并且放在服务器上，通过访问 127.0.0.1 能够读取到当前文件内容</p>
+<p>我是通过 nginx 配置的<br>两种方式</p>
 <ol>
-<li>通过nginx 指向文件</li>
+<li>通过 nginx 指向文件</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">      <span class="built_in">alias</span> /data/www/html/; <span class="comment"># 文件放在的位置</span></span><br><span class="line">      index P7Rckhx9o2.txt; <span class="comment"># 文件的名称</span></span><br><span class="line">        autoindex on;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
 <ol start="2">
-<li>nginx返回字符串内容</li>
+<li>nginx 返回字符串内容</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">        default_type text/html;</span><br><span class="line">       <span class="built_in">return</span> 200 <span class="string">"11111"</span>; <span class="comment"># P7Rckhx9o2.txt 文件中的内容</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>配置好重启nginx </p>
+
+<p>配置好重启 nginx</p>
 <blockquote>
 <p>nginx -s reload</p>
 </blockquote>
 <p>就可以把域名写在业务域名中 配置好提交</p>
-<p>注意: 配置web-view 跳转路径 最好不用#<a href="https://www.cnblogs.com/it-xiong/p/13529817.html" target="_blank" rel="external nofollow noopener noreferrer">问题介绍</a></p>
+<p>注意: 配置 web-view 跳转路径 最好不用#<a href="https://www.cnblogs.com/it-xiong/p/13529817.html" target="_blank" rel="external nofollow noopener noreferrer">问题介绍</a></p>
 <p>或者 在网页中加入</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta HTTP-EQUIV=<span class="string">"pragma"</span> CONTENT=<span class="string">"no-cache"</span>&gt;</span><br><span class="line">&lt;meta HTTP-EQUIV=<span class="string">"Cache-Control"</span> CONTENT=<span class="string">"no-cache, must-revalidate"</span>&gt;</span><br><span class="line">&lt;meta HTTP-EQUIV=<span class="string">"expires"</span> CONTENT=<span class="string">"0"</span>&gt;</span><br></pre></td></tr></table></figure>
 

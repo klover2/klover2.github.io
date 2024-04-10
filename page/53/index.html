@@ -283,7 +283,7 @@
     #homeImgUrl{
       width: 100%;
       height: 460px;
-      background-image: url('https://img-blog.csdnimg.cn/64932e6096a843b281183460be7ac89a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16');
+      background-image: url('https://oss.wjc66.cn/blog/000822BHnls.jpg');
       background-size: cover;
       /* background-attachment:fixed; */
     }
@@ -373,10 +373,10 @@
 
 <p>-p  指定容器暴露的端口<br>    9200 作为 Http 协议，主要用于外部通讯；<br>    9300 指定容器暴露的端口</p>
 <p>在浏览器访问 http://你的服务器 ip:9200 如下 说明启动成功</p>
-<p><img src="https://img-blog.csdnimg.cn/2021041814472763.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://oss.wjc66.cn/blog/2021/2021041814472763.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <h2 id="安装-ik-分词器我也是用-7-9-0-版本的"><a href="#安装-ik-分词器我也是用-7-9-0-版本的" class="headerlink" title="安装 ik 分词器我也是用 7.9.0 版本的"></a>安装 ik 分词器我也是用 7.9.0 版本的</h2><p>下载地址<a href="https://github.com/medcl/elasticsearch-analysis-ik/releases" target="_blank" rel="external nofollow noopener noreferrer">https://github.com/medcl/elasticsearch-analysis-ik/releases</a><br>找到 7.9.0 版本 并且下载下来放到服务器上</p>
 <h3 id="进入-es-的容器里"><a href="#进入-es-的容器里" class="headerlink" title="进入 es 的容器里"></a>进入 es 的容器里</h3><p><code>docker exec -it elasticsearch /bin/bash</code></p>
-<p><img src="https://img-blog.csdnimg.cn/20210418145051498.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://oss.wjc66.cn/blog/2021/20210418145051498.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <p>在 plugins 目录下创建 ik 文件夹：<br><code>mkdir /usr/share/elasticsearch/plugins/ik</code></p>
 <p>退出容器：<code>exit</code></p>
 <p>拷贝下载好的 ik 分词器压缩包到 ik 文件夹中：</p>
@@ -387,7 +387,7 @@
 <p>退出容器 重启<br><code>docker restart elasticsearch</code></p>
 <p>查看 ik 分词器是否安装成功 可已经进去 es 容器里的 bin 目录下</p>
 <p><code>elasticsearch-plugin list</code></p>
-<p><img src="https://img-blog.csdnimg.cn/2021041814545176.png" alt="在这里插入图片描述"></p>
+<p><img src="https://oss.wjc66.cn/blog/2021/2021041814545176.png" alt="在这里插入图片描述"></p>
 <p>修改配置，解决跨域访问问题</p>
 <p>首先进入到容器中，然后进入到指定目录修改 elasticsearch.yml 文件。<br><code>docker exec -it elasticsearch</code><br><code>vi elasticsearch.yml</code><br>在 elasticsearch.yml 的文件末尾加上:<br><code>http.cors.enabled: true</code><br><code>http.cors.allow-origin: &quot;\*&quot;</code><br>修改配置后重启容器即可。<br><code>docker restart elasticsearch</code></p>
 <h2 id="Kibana-7-可视化工具"><a href="#Kibana-7-可视化工具" class="headerlink" title="Kibana 7 可视化工具"></a>Kibana 7 可视化工具</h2><p><code>docker pull kibana:7.9.0</code></p>
@@ -396,15 +396,15 @@
 <li>如果报错 <code>kibana报错Unable to revive connection: http://172.16.23.126:9200/</code></li>
 </ol>
 <p><code>docker inspect elasticsearch</code> 查看 ES 容器暴露出来的 ip</p>
-<p><img src="https://img-blog.csdnimg.cn/20210421094333915.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://oss.wjc66.cn/blog/2021/20210421094333915.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <p>查询配置文件<br><code>find / -name kibana.yml</code></p>
-<p>写入对应 ip<br><img src="https://img-blog.csdnimg.cn/20210421095241497.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>写入对应 ip<br><img src="https://oss.wjc66.cn/blog/2021/20210421095241497.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <p>重启<br>docker restart kibana</p>
 <ol start="2">
 <li>kibana 启动报 server is not ready yet <code>https://www.jianshu.com/p/a698eddb6cec</code></li>
 </ol>
 <p>kibana 对应的索引已经在 es 中创建 需要 删除对应索引</p>
-<p><img src="https://img-blog.csdnimg.cn/20210421095628154.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://oss.wjc66.cn/blog/2021/20210421095628154.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <ol start="3">
 <li>查看内存 <code>free -h</code> 启动失败还有可能是内存不够</li>
 </ol>

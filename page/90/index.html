@@ -283,7 +283,7 @@
     #homeImgUrl{
       width: 100%;
       height: 460px;
-      background-image: url('https://img-blog.csdnimg.cn/64932e6096a843b281183460be7ac89a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16');
+      background-image: url('https://oss.wjc66.cn/blog/000822BHnls.jpg');
       background-size: cover;
       /* background-attachment:fixed; */
     }
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">244字</span>
+      <span class="post-count">245字</span>
     </span>
   </span>
 
@@ -358,13 +358,13 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="直播"><a href="#直播" class="headerlink" title="直播"></a>直播</h2><p>在设置-&gt;第三方设置-&gt;插件管理中添加插件 通过(    wx2b03c6e691cd7370)搜索添加</p>
+        <h2 id="直播"><a href="#直播" class="headerlink" title="直播"></a>直播</h2><p>在设置-&gt;第三方设置-&gt;插件管理中添加插件 通过( wx2b03c6e691cd7370)搜索添加</p>
 <h2 id="腾讯视频（由于小程序视频不支持外部视频，需要证书）"><a href="#腾讯视频（由于小程序视频不支持外部视频，需要证书）" class="headerlink" title="腾讯视频（由于小程序视频不支持外部视频，需要证书）"></a>腾讯视频（由于小程序视频不支持外部视频，需要证书）</h2><p>在设置-&gt;第三方设置-&gt;插件管理中添加插件 通过(wxa75efa648b60994b)搜索添加</p>
 <h2 id="ocr"><a href="#ocr" class="headerlink" title="ocr"></a>ocr</h2><p>在设置-&gt;第三方设置-&gt;插件管理中添加插件 通过(wx4418e3e031e551be)搜索添加<br><a href="https://developers.weixin.qq.com/community/servicemarket/detail/000ce4cec24ca026d37900ed551415" target="_blank" rel="external nofollow noopener noreferrer">需要购买</a></p>
-<p>在服务端使用ocr(下面是通过img方式是把，使用img_url就不用img)</p>
+<p>在服务端使用 ocr(下面是通过 img 方式是把，使用 img_url 就不用 img)</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">const superagent = require(<span class="string">'superagent'</span>);</span><br><span class="line">const fs = require(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line">(async () =&gt; &#123;</span><br><span class="line">    // https://api.weixin.qq.com/cv/ocr/idcard?<span class="built_in">type</span>=MODE&amp;img_url=ENCODE_URL&amp;access_token=ACCESS_TOCKEN</span><br><span class="line"></span><br><span class="line">    <span class="built_in">let</span> appid = <span class="string">''</span>, // 小程序appid</span><br><span class="line">        appsecret = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">let</span> accessTokenInfo = await superagent.get(`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=<span class="variable">$&#123;appid&#125;</span>&amp;secret=<span class="variable">$&#123;appsecret&#125;</span>`);</span><br><span class="line">    <span class="built_in">let</span> &#123; access_token = <span class="string">''</span>, errcode, errmsg &#125; = accessTokenInfo.body || &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    console.log(<span class="string">'access_token========&gt;'</span>, access_token);</span><br><span class="line">    // 上传素材</span><br><span class="line">    <span class="built_in">let</span> uploadUrl = `https://api.weixin.qq.com/cv/ocr/idcard?<span class="built_in">type</span>=MODE&amp;access_token=<span class="variable">$&#123;access_token&#125;</span>`;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">let</span> result = await superagent.post(uploadUrl).attach(<span class="string">'img'</span>, fs.createReadStream(<span class="string">'./anq52fdebqianq52fdebqi.jpg'</span>));</span><br><span class="line"></span><br><span class="line">    console.log(<span class="string">'result======&gt;'</span>, result.body);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://img-blog.csdnimg.cn/20200917134243964.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://oss.wjc66.cn/blog/2020/20200917134243964.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 
       
     </div>

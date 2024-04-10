@@ -283,7 +283,7 @@
     #homeImgUrl{
       width: 100%;
       height: 460px;
-      background-image: url('https://img-blog.csdnimg.cn/64932e6096a843b281183460be7ac89a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16');
+      background-image: url('https://oss.wjc66.cn/blog/000822BHnls.jpg');
       background-size: cover;
       /* background-attachment:fixed; */
     }
@@ -334,7 +334,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-keyboard-o"></i>
       <span class="post-meta-item-text">  字数统计: </span>
-      <span class="post-count">974字</span>
+      <span class="post-count">976字</span>
     </span>
   </span>
 
@@ -358,8 +358,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>配置回调函数<br>我们在微信客户端访问第三方网页（即我们自己的网页）的时候，我们可以通过微信网页授权机制，我们不仅要有前面获取到的appid和appsecret还需要有当用户授权之后，回调的域名设置，即用户授权后，页面会跳转到哪里。具体的配置如下：</p>
-<p>在开发-&gt;接口权限中配置<br><img src="https://img-blog.csdnimg.cn/20200729150845785.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+        <p>配置回调函数<br>我们在微信客户端访问第三方网页（即我们自己的网页）的时候，我们可以通过微信网页授权机制，我们不仅要有前面获取到的 appid 和 appsecret 还需要有当用户授权之后，回调的域名设置，即用户授权后，页面会跳转到哪里。具体的配置如下：</p>
+<p>在开发-&gt;接口权限中配置<br><img src="https://oss.wjc66.cn/blog/2020/20200729150845785.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzExMDYwOQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <p>请求授权页面的构造方式：</p>
 <blockquote>
 <p><a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&amp;redirect_uri=REDIRECT_URI&amp;response_type=code&amp;scope=SCOPE&amp;state=STATE#wechat_redirect" target="_blank" rel="external nofollow noopener noreferrer">https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&amp;redirect_uri=REDIRECT_URI&amp;response_type=code&amp;scope=SCOPE&amp;state=STATE#wechat_redirect</a></p>
@@ -385,37 +385,35 @@
 <tr>
 <td>response_type</td>
 <td>是</td>
-<td>返回类型，请填写code</td>
+<td>返回类型，请填写 code</td>
 </tr>
 <tr>
 <td>scope</td>
 <td>是</td>
-<td>应用授权作用域，snsapi_base （不弹出授权页面，直接跳转，只能获取用户openid），snsapi_userinfo （弹出授权页面，可通过openid拿到昵称、性别、所在地。并且，即使在未关注的情况下，只要用户授权，也能获取其信息）</td>
+<td>应用授权作用域，snsapi_base （不弹出授权页面，直接跳转，只能获取用户 openid），snsapi_userinfo （弹出授权页面，可通过 openid 拿到昵称、性别、所在地。并且，即使在未关注的情况下，只要用户授权，也能获取其信息）</td>
 </tr>
 <tr>
 <td>state</td>
 <td>否</td>
-<td>重定向后会带上state参数，开发者可以填写a-zA-Z0-9的参数值，最多128字节，该值会被微信原样返回，我们可以将其进行比对，防止别人的攻击。</td>
+<td>重定向后会带上 state 参数，开发者可以填写 a-zA-Z0-9 的参数值，最多 128 字节，该值会被微信原样返回，我们可以将其进行比对，防止别人的攻击。</td>
 </tr>
 <tr>
 <td>#wechat_redirect</td>
 <td>否</td>
-<td>直接在微信打开链接，可以不填此参数。做页面302重定向时候，必须带此参数</td>
+<td>直接在微信打开链接，可以不填此参数。做页面 302 重定向时候，必须带此参数</td>
 </tr>
 </tbody></table>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">应用授权作用域：由于snsapi_base只能获取到openid，意义不大，所以我们使用snsapi_userinfo。</span><br><span class="line"></span><br><span class="line">参考链接如下：（域名是你配置的回调函数域名）</span><br><span class="line">&gt;https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3d0b47a2e9037&amp;redirect_uri=https://域名/wechattransfer.html&amp;response_type=code&amp;scope=snsapi_userinfo&amp;state=https://域名/index.html<span class="comment">#wechat_redirect</span></span><br><span class="line"></span><br><span class="line">`https://域名/wechattransfer.html`是授权后会跳转的地址,在这个页面中会解析路径参入从而进入`https://域名/index.html`（[wechattransfer下载链接](https://github.com/klover2/wechattransfer)）</span><br><span class="line"></span><br><span class="line">下载wechattransfer.html之后配置在你的服务器上，在微信授权下的域名能够访问到</span><br><span class="line">`https://域名/index.html`是要进入的页面</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">使用微信开发工具访问上面参考链接，最后会进入下面链接，同时带上code</span><br><span class="line">https://域名/index.html?code=0014rK302cHWcV0w7K502IhK3024rK3u</span><br></pre></td></tr></table></figure>
 
-
-<p>把当前code发送给服务器</p>
+<p>把当前 code 发送给服务器</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const got = require(<span class="string">'got'</span>);</span><br><span class="line">(async()=&gt;&#123;</span><br><span class="line">    <span class="built_in">let</span> appid= <span class="string">''</span>; // 公众号appid</span><br><span class="line">    <span class="built_in">let</span> appsecret=<span class="string">''</span>;// 公众号appsecret</span><br><span class="line"></span><br><span class="line"><span class="built_in">let</span> WxLoginInfo = (await got.get(`https://api.weixin.qq.com/sns/oauth2/access_token?appid=<span class="variable">$&#123;appid&#125;</span>&amp;secret=<span class="variable">$&#123;appsecret&#125;</span>&amp;code=<span class="variable">$&#123;code&#125;</span>&amp;grant_type=authorization_code`, &#123; <span class="string">'json'</span>: <span class="literal">true</span> &#125;)).body;</span><br><span class="line">        // 获取微信中的用户信息</span><br><span class="line"><span class="built_in">let</span> &#123; access_token, openid &#125; = WxLoginInfo || &#123;&#125;;</span><br><span class="line">        // 通过微信获取用户信息</span><br><span class="line"><span class="built_in">let</span> wxUserInfo = (await got.get(`https://api.weixin.qq.com/sns/userinfo?access_token=<span class="variable">$&#123;access_token&#125;</span>&amp;openid=<span class="variable">$&#123;openid&#125;</span>`, &#123; <span class="string">'json'</span>: <span class="literal">true</span> &#125;)).body;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
 
-
 <p>注意：</p>
-<p>使用微信调试工具调试必须得有当前公众号开发者权限<br>在开发-&gt;开发者工具-&gt;点击web开发者工具<br><a href="https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Web_Developer_Tools.html" target="_blank" rel="external nofollow noopener noreferrer">如何添加</a></p>
-<p>UnionID机制的作用说明：如果开发者拥有多个移动应用、网站应用和公众帐号，可通过获取用户基本信息中的unionid来区分用户的唯一性，因为同一用户，对同一个微信开放平台下的不同应用（移动应用、网站应用和公众帐号），unionid是相同的。</p>
+<p>使用微信调试工具调试必须得有当前公众号开发者权限<br>在开发-&gt;开发者工具-&gt;点击 web 开发者工具<br><a href="https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Web_Developer_Tools.html" target="_blank" rel="external nofollow noopener noreferrer">如何添加</a></p>
+<p>UnionID 机制的作用说明：如果开发者拥有多个移动应用、网站应用和公众帐号，可通过获取用户基本信息中的 unionid 来区分用户的唯一性，因为同一用户，对同一个微信开放平台下的不同应用（移动应用、网站应用和公众帐号），unionid 是相同的。</p>
 <p><a href="https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html" target="_blank" rel="external nofollow noopener noreferrer">微信网页授权文档</a></p>
-<p>通过开发者ID及密码调用获取access_token接口时，需要设置访问来源IP为白名单<br>在开发-&gt;基本配置中配置</p>
-<p>JS接口安全域名配置<br>在设置-&gt;公众号设置-&gt;功能设置</p>
+<p>通过开发者 ID 及密码调用获取 access_token 接口时，需要设置访问来源 IP 为白名单<br>在开发-&gt;基本配置中配置</p>
+<p>JS 接口安全域名配置<br>在设置-&gt;公众号设置-&gt;功能设置</p>
 <p>特别说下<br>有些功能在个人订阅号中是开通不了的，订阅号微信认证需要企业帮忙<br>服务号是必须是有营业执照才能注册,个人只能注册订阅号,但是个人如果想要服务号的话,可以先办一个营业执照,再申请服务号就可以了。</p>
 
       

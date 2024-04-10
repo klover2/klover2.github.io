@@ -283,7 +283,7 @@
     #homeImgUrl{
       width: 100%;
       height: 460px;
-      background-image: url('https://img-blog.csdnimg.cn/64932e6096a843b281183460be7ac89a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAdy1rbG92ZXI=,size_20,color_FFFFFF,t_70,g_se,x_16');
+      background-image: url('https://oss.wjc66.cn/blog/000822BHnls.jpg');
       background-size: cover;
       /* background-attachment:fixed; */
     }
@@ -362,11 +362,11 @@
 <li>创建主题&gt;使用标准&gt;自定义名称&gt;其他默认 点击创建即可</li>
 <li>创建订阅</li>
 </ol>
-<p><img src="https://img-blog.csdnimg.cn/direct/df95806c8ca941bcb8476d2a1b6db436.jpeg" alt="请添加图片描述"></p>
+<p><img src="https://oss.wjc66.cn/blog/2024-03-28/df95806c8ca941bcb8476d2a1b6db436.jpeg" alt="请添加图片描述"></p>
 <ol start="3">
 <li>订阅策略配置（不配置，会推送给多个人，除非你每个都创建主题）</li>
 </ol>
-<p><img src="https://img-blog.csdnimg.cn/direct/fde882fc1ff8453080b0f8e49c5854cd.jpeg" alt="请添加图片描述"></p>
+<p><img src="https://oss.wjc66.cn/blog/2024-03-28/fde882fc1ff8453080b0f8e49c5854cd.jpeg" alt="请添加图片描述"></p>
 <p><code>注意：</code> 可以你可以随便写，后面的值只能是对象，不然会报错</p>
 <ol start="4">
 <li>创建好订阅，会给你配置的链接推送请求（post 请求，text/plain 格式）</li>
@@ -377,11 +377,11 @@
 <ol start="5">
 <li>确认订阅<br>（1）使用浏览器直接访问 SubscribeURL（第四步返回的 url）<br>（2）使用页面订阅 在下面输入框输入 SubscribeURL（第四步返回的 url）</li>
 </ol>
-<p><img src="https://img-blog.csdnimg.cn/direct/2d29a5bf1ac74a308fd77944e3880bed.jpeg" alt="请添加图片描述"></p>
+<p><img src="https://oss.wjc66.cn/blog/2024-03-28/2d29a5bf1ac74a308fd77944e3880bed.jpeg" alt="请添加图片描述"></p>
 <ol start="6">
 <li>如果没有接收到确认订阅 可以选择再次发送</li>
 </ol>
-<p><img src="https://img-blog.csdnimg.cn/direct/53c40b78feb441068bbb9a0365b4a015.jpeg" alt="请添加图片描述"></p>
+<p><img src="https://oss.wjc66.cn/blog/2024-03-28/53c40b78feb441068bbb9a0365b4a015.jpeg" alt="请添加图片描述"></p>
 <h2 id="安装-java-jar-包"><a href="#安装-java-jar-包" class="headerlink" title="安装 java jar 包"></a>安装 java jar 包</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>software.amazon.awssdk<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>sns<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.16.60<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 推送</span></span><br><span class="line">String message = <span class="string">"&#123;\"test\":1,\"name\":\"klover\"&#125;"</span>;</span><br><span class="line">Sns.pubTopic(message);</span><br><span class="line"><span class="comment">// 使用代码订阅</span></span><br><span class="line">Sns.subscribe(<span class="string">"https://www.xxx.cn/api"</span>, <span class="string">"https"</span>);</span><br></pre></td></tr></table></figure>
